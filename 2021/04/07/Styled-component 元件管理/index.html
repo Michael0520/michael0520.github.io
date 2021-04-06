@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="React 以輕量化 Library 自居，因此 React 在樣式刻畫、狀態管理、網頁互動上充滿靈活、自由的樣貌，相同的問題，有各式各樣的解決方案！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Styled-component 元件管理">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="React 以輕量化 Library 自居，因此 React 在樣式刻畫、狀態管理、網頁互動上充滿靈活、自由的樣貌，相同的問題，有各式各樣的解決方案！">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-04-06T17:57:45.839Z">
+<meta property="article:modified_time" content="2021-04-06T18:23:13.547Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>Styled-component 元件管理 | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Styled-component 元件管理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:45 / Modified: 02:23:13" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:45+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/Styled-component 元件管理/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">React 以輕量化 Library 自居，因此 React 在樣式刻畫、狀態管理、網頁互動上充滿靈活、自由的樣貌，相同的問題，有各式各樣的解決方案！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Styled-component-元件管理"><a href="#Styled-component-元件管理" class="headerlink" title="Styled-component 元件管理"></a>Styled-component 元件管理</h1><p>React 以輕量化 Library 自居，因此 React 在樣式刻畫、狀態管理、網頁互動上充滿靈活、自由的樣貌，相同的問題，有各式各樣的解決方案！</p>
+<blockquote>
+<p>前言</p>
+<p>如何根據狀態(state)來動態改變 Web 的 CSS 樣式呢？大家透過各自的經驗及想法提出了許多不同的方案，包含：Styled Components, CSS module, Styled JS, Emotion, JSS, Glamor, Radium, Aphrodite 等…。在 CSS 2019 當中，CSS in JS 篇章裡 Styled Components 在 關注度、感興趣程度及滿意度 綜合評比中獲得非常不錯的總體評價。</p>
+</blockquote>
+<hr>
+<p>styled-components 能在 JSX 當中 基於已刻畫好的元件中，透過 template literals ，在其中撰寫 CSS 樣式。使我們可以更專注、聚焦在每個元件之下，為使用者提供更好的體驗及視覺呈現。</p>
+<h3 id="styled-components-的特點"><a href="#styled-components-的特點" class="headerlink" title="styled-components 的特點"></a>styled-components 的特點</h3><ol>
+<li><p><code>Automatic critical CSS: styled-components</code> 持續追蹤頁面上顯示的元件，並在其中注入樣式，完全自動化，可讓開發者 代碼分割(code splitting)，同時替使用者提供更好的體驗。（不載入未使用的冗余程式碼，提升載入速度）</p>
+</li>
+<li><p><code>No class name bugs: styled-components</code> 自動替你的樣式，產生 class 名稱，不必再擔心命名的衝撞、想不到名字的窘境、拼錯字、重複使用等…。</p>
+</li>
+<li><p><code>Easier deletion of CSS:</code> 傳統的程式碼在檔案之前，很難辨別某個 class name 在哪些地方被使用過了， styled-components 使元件結構與樣式的關聯，顯而易見，每份樣式都專注對應在某個元件上。假如這個元件沒被使用、想刪除了，這個樣式很容易跟著被一起刪除。</p>
+</li>
+<li><p><code>Simple dynamic styling:</code> 當你需要根據某個 props 或是 global theme 來動態改變樣式時，styled-components 使這件事變得容易，不用手動管理無數的 css classes。</p>
+</li>
+<li><p><code>Painless maintenance:</code> 不用再跨檔案去尋找你的樣式與結構，你可以在同一份檔案之中，替你的元件上結構及樣式。在維護上，就算未來你的 codebase 變更大了，也不會變得能以掌控。</p>
+</li>
+<li><p><code>Automatic vendor prefixin:</code> 依照當前的標準來撰寫你的 CSS，讓 styled-components 替你完成其他任務，不用再思考不同瀏覽器間的前綴字，可以更專注在開發樣式上。<br>`</p>
+</li>
+</ol>
+<p>-webkit- (Chrome, Safari, iOS Safari / iOS WebView, Android)<br>-moz- (Firefox)<br>-ms- (Edge, Internet Explorer)<br>-o- (Opera, Opera Mini)<br>CSS Vendor Prefixes<br>`</p>
+<hr>
+<ol>
+<li>直接在 styled 預設提供的 HTML 元件，寫入 css 樣式</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button = styled.button<span class="string">`</span></span><br><span class="line"><span class="string">  background: blue;</span></span><br><span class="line"><span class="string">  color: white;</span></span><br><span class="line"><span class="string">  &amp;:hover &#123;</span></span><br><span class="line"><span class="string">    background: gray;</span></span><br><span class="line"><span class="string">    color: black;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line">render(<span class="xml"><span class="tag">&lt;<span class="name">Button</span>&gt;</span> 點我！<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span>);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>透過 props 動態改變 styled-components 的元件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button = styled.button&lt;&#123; primary?: boolean &#125;&gt;<span class="string">`</span></span><br><span class="line"><span class="string">  background: <span class="subst">$&#123;props =&gt; (props.primary ? <span class="string">&#x27;pink&#x27;</span> : <span class="string">&#x27;blue&#x27;</span>)&#125;</span>;</span></span><br><span class="line"><span class="string">  color: <span class="subst">$&#123;props =&gt; (props.primary ? <span class="string">&#x27;white&#x27;</span> : <span class="string">&#x27;green&#x27;</span>)&#125;</span>;</span></span><br><span class="line"><span class="string">  &amp;:hover &#123;</span></span><br><span class="line"><span class="string">    background: gray;</span></span><br><span class="line"><span class="string">    color: black;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line">render(</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;Button&gt; 點我！&lt;/Button&gt;</span><br><span class="line">    &lt;Button primary&gt; 點我！&lt;/Button&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
+<li><p>基於某個 styled-components 之上，創造新的元件</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button = styled.button<span class="string">`</span></span><br><span class="line"><span class="string">  background: blue;</span></span><br><span class="line"><span class="string">  color: white;</span></span><br><span class="line"><span class="string">  &amp;:hover &#123;</span></span><br><span class="line"><span class="string">    background: gray;</span></span><br><span class="line"><span class="string">    color: black;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"><span class="keyword">const</span> CoolButton = styled(Button)<span class="string">`</span></span><br><span class="line"><span class="string">  background: yellow;</span></span><br><span class="line"><span class="string">  color: pink;</span></span><br><span class="line"><span class="string">  &amp;:hover &#123;</span></span><br><span class="line"><span class="string">    background: pink;</span></span><br><span class="line"><span class="string">    color: yellow;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line">render(</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;Button&gt; 點我！&lt;/Button&gt;</span><br><span class="line">    &lt;CoolButton&gt; 點我！&lt;/CoolButton&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>如此可知，我們便可以修改某些其他人寫好的 styled-components 了</p>
+<p>如 MATERIAL-UI, Ant Design 等等，<br>目前都有支援 styled-components 互動了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Button <span class="keyword">from</span> <span class="string">&#x27;@material-ui/core/Button&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> ChillButton = styled(Button)<span class="string">`</span></span><br><span class="line"><span class="string">  font-weight: 900;</span></span><br><span class="line"><span class="string">  text-transform: inherit;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line">render(</span><br><span class="line">  &lt;ChillButton variant=<span class="string">&quot;contained&quot;</span> color=<span class="string">&quot;primary&quot;</span>&gt;</span><br><span class="line">    Yoyoyo 點我！</span><br><span class="line">  &lt;/ChillButton&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>題外話，與有支援的第三方套件互動？！(以 MATERIAL-UI 為例) 期待其他大大分享如 Ant Design 等相關經驗。</p>
+<p>有時候，我們會需要修改、覆寫到第三方套件預設的樣式，難不成要用到兇殘的 !important？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Button <span class="keyword">from</span> <span class="string">&#x27;@material-ui/core/Button&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> ChillButton = styled(Button)<span class="string">`</span></span><br><span class="line"><span class="string">  color: blue !important;</span></span><br><span class="line"><span class="string">  font-weight: 900;</span></span><br><span class="line"><span class="string">  text-transform: inherit;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line">render(</span><br><span class="line">  &lt;ChillButton variant=<span class="string">&quot;contained&quot;</span> color=<span class="string">&quot;primary&quot;</span>&gt;</span><br><span class="line">    Yoyoyo 點我！</span><br><span class="line">  &lt;/ChillButton&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+<p>也許你還有其他種解法，就是 MATERIAL-UI 提供改變注入樣式的優先順序的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; StylesProvider &#125; <span class="keyword">from</span> <span class="string">&#x27;@material-ui/core/styles&#x27;</span>;</span><br><span class="line">render(</span><br><span class="line">  &lt;StylesProvider injectFirst&gt;</span><br><span class="line">    &lt;App /&gt;</span><br><span class="line">  &lt;/StylesProvider&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+<ol start="4">
+<li>如何與其他無支援 styled-components 的元件互動及修改樣式呢？ （含其他第三方、自己的元件）</li>
+</ol>
+<p>透過綁定 className 使 styled-components 能注入樣式，此範例來自官網 styling-any-component</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// from official document https://styled-components.com/docs/basics#styling-any-component</span></span><br><span class="line"><span class="comment">// This could be react-router-dom&#x27;s Link for example</span></span><br><span class="line"><span class="keyword">const</span> Link = <span class="function">(<span class="params">&#123; className, children &#125;</span>) =&gt;</span> (</span><br><span class="line">  &lt;a className=&#123;className&#125;&gt;&#123;children&#125;&lt;/a&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> StyledLink = styled(Link)<span class="string">`</span></span><br><span class="line"><span class="string">  color: palevioletred;</span></span><br><span class="line"><span class="string">  font-weight: bold;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line">render(</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;Link&gt;Unstyled, boring Link&lt;/Link&gt;</span><br><span class="line">    &lt;br /&gt;</span><br><span class="line">    &lt;StyledLink&gt;Styled, exciting Link&lt;/StyledLink&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="進階"><a href="#進階" class="headerlink" title="進階"></a><strong>進階</strong></h2><ol start="5">
+<li>參考其他元件，在元件樣式中使用 css 選擇器，選取其子元件</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">註解：&amp; 代表 當下的這個元件，於是我們可以使用 &amp;:hover,&amp; &gt; $&#123;SomeComponent&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> StyledTitle = styled.h2<span class="string">`</span></span><br><span class="line"><span class="string">  font-weight: 800;</span></span><br><span class="line"><span class="string">  font-size: 20px;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"><span class="keyword">const</span> StyledSection = styled.div<span class="string">`</span></span><br><span class="line"><span class="string">  display: flex;</span></span><br><span class="line"><span class="string">  align-items: center;</span></span><br><span class="line"><span class="string">  &amp; &gt; <span class="subst">$&#123;StyledTitle&#125;</span> &#123;</span></span><br><span class="line"><span class="string">    margin-right: 20px;</span></span><br><span class="line"><span class="string">    padding: 50px;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line">render(</span><br><span class="line">  &lt;StyledSection&gt;</span><br><span class="line">    &lt;StyledTitle&gt;You<span class="string">&#x27;re the best!&lt;/StyledTitle&gt;</span></span><br><span class="line"><span class="string">  &lt;/StyledSection&gt;</span></span><br><span class="line"><span class="string">);</span></span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>參考其他元件，在元件樣式偵測上面，父元件的狀態</li>
+</ol>
+<p>Icon 包在 Button 底下，有時我們會希望當 Button 被 hover 到時，Icon 的樣式也能一起動態改變樣式</p>
+<p>參考文獻：<br>&lt;React. 7 tricks to work with Styled Components&gt;<br>&lt;Official Doc [Referring to other components]&gt;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Button = styled.button&lt;&#123; primary?: boolean &#125;&gt;<span class="string">`</span></span><br><span class="line"><span class="string">  background: <span class="subst">$&#123;props =&gt; (props.primary ? <span class="string">&#x27;pink&#x27;</span> : <span class="string">&#x27;blue&#x27;</span>)&#125;</span>;</span></span><br><span class="line"><span class="string">  color: <span class="subst">$&#123;props =&gt; (props.primary ? <span class="string">&#x27;white&#x27;</span> : <span class="string">&#x27;green&#x27;</span>)&#125;</span>;</span></span><br><span class="line"><span class="string">  &amp;:hover &#123;</span></span><br><span class="line"><span class="string">    background: gray;</span></span><br><span class="line"><span class="string">    color: black;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"><span class="keyword">const</span> Icon = styled.i<span class="string">`</span></span><br><span class="line"><span class="string">  color: white;</span></span><br><span class="line"><span class="string">  background-color: orange;</span></span><br><span class="line"><span class="string">  font-size: 1.5 rem;</span></span><br><span class="line"><span class="string">  <span class="subst">$&#123;Button&#125;</span>:hover &amp; &#123;</span></span><br><span class="line"><span class="string">    color: black;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line">render(</span><br><span class="line">  &lt;Button&gt;</span><br><span class="line">    Click me&lt;Icon&gt;icon &lt;/Icon&gt;</span><br><span class="line">  &lt;/Button&gt;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Speak%20Number%20Guessing%20Game/" rel="prev" title="Speak Number Guessing Game">
+      <i class="fa fa-chevron-left"></i> Speak Number Guessing Game
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Typing%20Game/" rel="next" title="Typing Game">
+      Typing Game <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Styled-component-%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Styled-component 元件管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#styled-components-%E7%9A%84%E7%89%B9%E9%BB%9E"><span class="nav-number">1.0.1.</span> <span class="nav-text">styled-components 的特點</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%B2%E9%9A%8E"><span class="nav-number">1.1.</span> <span class="nav-text">進階</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/";
+    this.page.identifier = "2021/04/07/Styled-component 元件管理/";
+    this.page.title = "Styled-component 元件管理";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

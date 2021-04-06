@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="實作打字遊戲，在有限時間內輸入一模一樣文字，每過一道關卡增加難易度！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Typing Game">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/Typing%20Game/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="實作打字遊戲，在有限時間內輸入一模一樣文字，每過一道關卡增加難易度！">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/sgDI5K6.png">
+<meta property="og:image" content="https://i.imgur.com/gCRNKAs.png">
+<meta property="og:image" content="https://i.imgur.com/J5YEqBg.png">
+<meta property="article:published_time" content="2021-04-06T17:57:45.994Z">
+<meta property="article:modified_time" content="2021-04-06T18:21:49.635Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="作品集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/sgDI5K6.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/Typing%20Game/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>Typing Game | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/Typing%20Game/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Typing Game
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:45 / Modified: 02:21:49" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:45+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/%E4%BD%9C%E5%93%81%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">作品集</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/Typing%20Game/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/Typing Game/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">實作打字遊戲，在有限時間內輸入一模一樣文字，每過一道關卡增加難易度！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Typing-Game"><a href="#Typing-Game" class="headerlink" title="Typing Game"></a>Typing Game</h1><h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><ul>
+<li><code>&lt;input autocomplete=&quot;off&quot;&gt;</code><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3></li>
+<li><code>display:none</code><h3 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h3></li>
+<li><code>Math.length()</code></li>
+<li><code>Math.floor()</code></li>
+<li><code>setInterval()</code></li>
+</ul>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p><strong>打字遊戲</strong></p>
+<blockquote>
+<p>有限時間內輸入一模一樣文字</p>
+</blockquote>
+<p> <img src="https://i.imgur.com/sgDI5K6.png"></p>
+<p> <a href="https://michael0520.github.io/Typing_Game/index.html">Demo</a></p>
+<h2 id="HTML-1"><a href="#HTML-1" class="headerlink" title="HTML"></a>HTML</h2><p><img src="https://i.imgur.com/gCRNKAs.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;button id&#x3D;&quot;settings-btn&quot; class&#x3D;&quot;settings-btn&quot;&gt;</span><br><span class="line">     &lt;i class&#x3D;&quot;fas fa-cog&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">   &lt;&#x2F;button&gt;</span><br><span class="line"></span><br><span class="line">   &lt;div id&#x3D;&quot;settings&quot; class&#x3D;&quot;settings&quot;&gt;</span><br><span class="line">     &lt;form id&#x3D;&quot;settings-form&quot;&gt;</span><br><span class="line">       &lt;div&gt;</span><br><span class="line">         &lt;label for&#x3D;&quot;difficulty&quot;&gt;Difficulty&lt;&#x2F;label&gt;</span><br><span class="line">         &lt;select id&#x3D;&quot;difficulty&quot;&gt;</span><br><span class="line">           &lt;option value&#x3D;&quot;easy&quot;&gt;Easy&lt;&#x2F;option&gt;</span><br><span class="line">           &lt;option value&#x3D;&quot;medium&quot;&gt;Medium&lt;&#x2F;option&gt;</span><br><span class="line">           &lt;option value&#x3D;&quot;hard&quot;&gt;Hard&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;&#x2F;select&gt;</span><br><span class="line">       &lt;&#x2F;div&gt;</span><br><span class="line">     &lt;&#x2F;form&gt;</span><br><span class="line">   &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">   &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">     &lt;h2&gt;⌨️ Speed Typer ⌨️&lt;&#x2F;h2&gt;</span><br><span class="line">     &lt;small&gt;Type the following:&lt;&#x2F;small&gt;</span><br><span class="line"></span><br><span class="line">     &lt;h1 id&#x3D;&quot;word&quot;&gt;&lt;&#x2F;h1&gt;</span><br><span class="line">     &lt;input</span><br><span class="line">       type&#x3D;&quot;text&quot;</span><br><span class="line">       id&#x3D;&quot;text&quot;</span><br><span class="line">       autocomplete&#x3D;&quot;off&quot;</span><br><span class="line">       placeholder&#x3D;&quot;Type the word here...&quot;</span><br><span class="line">     &#x2F;&gt;</span><br><span class="line">     &lt;p class&#x3D;&quot;time-container&quot;&gt;</span><br><span class="line">       Time left:</span><br><span class="line">       &lt;span id&#x3D;&quot;time&quot;&gt;10s&lt;&#x2F;span&gt;</span><br><span class="line">     &lt;&#x2F;p&gt;</span><br><span class="line">     &lt;p class&#x3D;&quot;score-container&quot;&gt;</span><br><span class="line">       Score:</span><br><span class="line">       &lt;span id&#x3D;&quot;score&quot;&gt;0&lt;&#x2F;span&gt;</span><br><span class="line">     &lt;&#x2F;p&gt;</span><br><span class="line">     &lt;div id&#x3D;&quot;end-game-container&quot; class&#x3D;&quot;end-game-container&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">   &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>autocomplete = &#39;off&#39;</code></li>
+</ul>
+<p>意思為不開啟自動提示輸入的預設功能</p>
+<h2 id="CSS-1"><a href="#CSS-1" class="headerlink" title="CSS"></a>CSS</h2><ul>
+<li>-webkit- 私有前綴</li>
+<li>-webkit-appearance: none，去除瀏覽器的預設樣式。</li>
+<li>-moz-appearance: none，去除瀏覽器的預設樣式。</li>
+</ul>
+<h3 id="起手式"><a href="#起手式" class="headerlink" title="起手式"></a>起手式</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: Verdana, Geneva, Tahoma, sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>完整 Code :</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#2c3e50</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: Verdana, Geneva, Tahoma, sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">button</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span> <span class="number">15px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">select &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span>;</span><br><span class="line">    appearance: none;</span><br><span class="line">    -webkit-appearance: none;</span><br><span class="line">    -moz-appearance: none;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#a7c5e3</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">select<span class="selector-pseudo">:focus</span>, <span class="selector-tag">button</span><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">    <span class="attribute">outline</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.settings-btn</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">bottom</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.settings</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.3</span>);</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="attribute">transition</span>: transform <span class="number">0.3s</span> ease-in-out;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.settings</span><span class="selector-class">.hide</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-<span class="number">100%</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#34495e</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">3px</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.3</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">500px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-tag">h2</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.3</span>);</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">8px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">40px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">input</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">4px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">    <span class="attribute">font-weight</span>: bolder;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">12px</span> <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.score-container</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">60px</span>;</span><br><span class="line">    <span class="attribute">right</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.time-container</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">60px</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.end-game-container</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: inherit;</span><br><span class="line">    <span class="attribute">display</span>: none;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="JS-1"><a href="#JS-1" class="headerlink" title="JS"></a>JS</h2><h3 id="宣告變數"><a href="#宣告變數" class="headerlink" title="宣告變數"></a>宣告變數</h3><blockquote>
+<p>JS</p>
+</blockquote>
+<p>這邊使用陣列儲存測驗單字。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> word = <span class="built_in">document</span>.getElementById(<span class="string">&quot;word&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> text = <span class="built_in">document</span>.getElementById(<span class="string">&quot;text&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> scoreEl = <span class="built_in">document</span>.getElementById(<span class="string">&quot;score&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> timeEl = <span class="built_in">document</span>.getElementById(<span class="string">&quot;time&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> endgameEl = <span class="built_in">document</span>.getElementById(<span class="string">&quot;end-game-container&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> settingsBtn = <span class="built_in">document</span>.getElementById(<span class="string">&quot;settings-btn&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> settings = <span class="built_in">document</span>.getElementById(<span class="string">&quot;settings&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> settingsForm = <span class="built_in">document</span>.getElementById(<span class="string">&quot;settings-form&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> difficultySelect = <span class="built_in">document</span>.getElementById(<span class="string">&quot;difficulty&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// List of words for game</span></span><br><span class="line"><span class="keyword">const</span> words = [</span><br><span class="line">  <span class="string">&quot;sigh&quot;</span>,</span><br><span class="line">  <span class="string">&quot;tense&quot;</span>,</span><br><span class="line">  <span class="string">&quot;airplane&quot;</span>,</span><br><span class="line">  <span class="string">&quot;ball&quot;</span>,</span><br><span class="line">  <span class="string">&quot;pies&quot;</span>,</span><br><span class="line">  <span class="string">&quot;juice&quot;</span>,</span><br><span class="line">  <span class="string">&quot;warlike&quot;</span>,</span><br><span class="line">  <span class="string">&quot;bad&quot;</span>,</span><br><span class="line">  <span class="string">&quot;north&quot;</span>,</span><br><span class="line">  <span class="string">&quot;dependent&quot;</span>,</span><br><span class="line">  <span class="string">&quot;steer&quot;</span>,</span><br><span class="line">  <span class="string">&quot;silver&quot;</span>,</span><br><span class="line">  <span class="string">&quot;highfalutin&quot;</span>,</span><br><span class="line">  <span class="string">&quot;superficial&quot;</span>,</span><br><span class="line">  <span class="string">&quot;quince&quot;</span>,</span><br><span class="line">  <span class="string">&quot;eight&quot;</span>,</span><br><span class="line">  <span class="string">&quot;feeble&quot;</span>,</span><br><span class="line">  <span class="string">&quot;admit&quot;</span>,</span><br><span class="line">  <span class="string">&quot;drag&quot;</span>,</span><br><span class="line">  <span class="string">&quot;loving&quot;</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Init word</span></span><br><span class="line"><span class="keyword">let</span> randomWord;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Init score</span></span><br><span class="line"><span class="keyword">let</span> score = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Init time</span></span><br><span class="line"><span class="keyword">let</span> time = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<p>選擇器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;#word&quot;</span>)</span><br><span class="line">$(<span class="string">&quot;#text&quot;</span>)</span><br><span class="line">$(<span class="string">&quot;#score&quot;</span>)</span><br><span class="line">$(<span class="string">&quot;#time&quot;</span>)</span><br><span class="line">$(<span class="string">&quot;#end-game-container&quot;</span>)</span><br><span class="line">$(<span class="string">&quot;#settings-btn&quot;</span>)</span><br><span class="line">$(<span class="string">&quot;#settings&quot;</span>)</span><br><span class="line">$(<span class="string">&quot;#settings-form&quot;</span>)</span><br><span class="line">$(<span class="string">&quot;#difficulty&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="隨機挑選陣列裡的單字，加到元素的-div-裡"><a href="#隨機挑選陣列裡的單字，加到元素的-div-裡" class="headerlink" title="隨機挑選陣列裡的單字，加到元素的 div 裡"></a>隨機挑選陣列裡的單字，加到元素的 div 裡</h3><ul>
+<li><code>getRandomWord()</code> 隨機產生預設陣列裡的單字</li>
+<li><code>addWordToDOM()</code> 新增文字到選擇器裏</li>
+</ul>
+<blockquote>
+<p>JS</p>
+</blockquote>
+<ul>
+<li><code>Math.random()</code>函式：會<strong>隨機產生</strong>出 0~1 之間的小數，出來的值永遠不會大於 1 。</li>
+<li><code>Math.floor()</code>函式：會<strong>無條件捨去</strong>到比自身小的最大整數。 Ex: 4.6213 回傳 4</li>
+<li><code>words.length</code> ：總預設單字量是 20 ，乘上隨機 0-1 之間的數，<strong>再取整數</strong>。</li>
+</ul>
+<p><img src="https://i.imgur.com/J5YEqBg.png"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Generate random word from array</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomWord</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//回傳隨機的字</span></span><br><span class="line">  <span class="keyword">return</span> words[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * words.length)];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//Add word to DOM 將取得的字，放到#word裡。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addWordToDOM</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  randomWord = getRandomWord();</span><br><span class="line">  word.innerHTML = randomWord;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addWordToDOM();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<p> JS 是用打好的陣列，再去取得測驗字。</p>
+<ol>
+<li>這裡使用實作無限滾動頁面取的 API 的方法(搜尋<a target="_blank" rel="noopener" href="https://random-word-api.herokuapp.com/home"> random word api </a>)，得到測驗字串。</li>
+<li>再直接將得到的字串放入#word裡。</li>
+</ol>
+<blockquote>
+<p>使用<code>$.ajax</code>方法。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomWord</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $.ajax(&#123;</span><br><span class="line">    url: <span class="string">&quot;https://random-word-api.herokuapp.com/word?number=1&quot;</span>,</span><br><span class="line">    method: <span class="string">&quot;get&quot;</span>,</span><br><span class="line">    dataType: <span class="string">&quot;json&quot;</span>,</span><br><span class="line">    success: <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">      $(<span class="string">&quot;#word&quot;</span>).text(data);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="更新成績，判斷輸入的字是否符合出現的字"><a href="#更新成績，判斷輸入的字是否符合出現的字" class="headerlink" title="更新成績，判斷輸入的字是否符合出現的字"></a>更新成績，判斷輸入的字是否符合出現的字</h3><ul>
+<li>updateScore() 更新成績</li>
+<li>addEventListener的 input 不需要按下 Enter 就會直接輸入。</li>
+</ul>
+<p>判斷輸入是正確後，會直接清空輸入框。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Update score 更新成績</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateScore</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  score++;</span><br><span class="line">  scoreEl.innerHTML = score;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">addWordToDOM();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Event listeners</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Typing</span></span><br><span class="line">text.addEventListener(<span class="string">&quot;input&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//取得輸入的值</span></span><br><span class="line">  <span class="keyword">const</span> insertedText = e.target.value;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">//如果輸入的值與隨機單字相同</span></span><br><span class="line">  <span class="keyword">if</span> (insertedText === randomWord) &#123;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">//更新成績+更換下一個隨機單字，更新成績</span></span><br><span class="line">    addWordToDOM();</span><br><span class="line">    updateScore();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Clear</span></span><br><span class="line">    <span class="comment">//輸入正確，自動清空輸入框，增加體驗</span></span><br><span class="line">    e.target.value = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<ul>
+<li><code>.innerHTML</code> = 轉成 <code>.html</code></li>
+<li><code>text.addEventListener(&quot;input&quot;</code>轉成 <code>$(&quot;#text&quot;).on(&quot;input&quot;</code></li>
+<li><code>e.target.value </code>轉成 <code>$(this).val()</code></li>
+<li><code>e.target.value = &quot;&quot;</code> 轉成 <code>$(this).val(&quot;&quot;)</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateScore</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  score++;</span><br><span class="line">  $(<span class="string">&quot;#score&quot;</span>).html(score);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;#text&quot;</span>).on(<span class="string">&quot;input&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> insertedText = $(<span class="built_in">this</span>).val();</span><br><span class="line">  <span class="keyword">const</span> randomWord = $(<span class="string">&quot;#word&quot;</span>).text();</span><br><span class="line">  <span class="keyword">if</span> (insertedText === randomWord) &#123;</span><br><span class="line">    updateScore();</span><br><span class="line">    getRandomWord();</span><br><span class="line">    $(<span class="built_in">this</span>).val(<span class="string">&quot;&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="此畫面渲染成功時，將提示注意到-input-輸入框"><a href="#此畫面渲染成功時，將提示注意到-input-輸入框" class="headerlink" title="此畫面渲染成功時，將提示注意到 input 輸入框"></a>此畫面渲染成功時，將提示注意到 input 輸入框</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Focus on text on start</span></span><br><span class="line">text.focus();</span><br></pre></td></tr></table></figure>
+<h3 id="每秒更新倒數狀態，倒數到0時，出現-gameOver-Panel"><a href="#每秒更新倒數狀態，倒數到0時，出現-gameOver-Panel" class="headerlink" title="每秒更新倒數狀態，倒數到0時，出現 gameOver Panel"></a>每秒更新倒數狀態，倒數到0時，出現 gameOver Panel</h3><blockquote>
+<p>JS</p>
+</blockquote>
+<ul>
+<li><code>updateTime()</code></li>
+<li><code>gameOver()</code></li>
+</ul>
+<ol>
+<li><code>setInterval()</code>固定延遲了某段時間之後，才去執行對應的程式碼，然後「不斷循環」。</li>
+<li>使用<code>setInterval()</code>才會開始倒數，少了這一行，time 變數就不會更動。</li>
+<li>秒數歸 0 時，在 css 預先寫好的 style，讓他出現<code>(display:flex)</code>，預設為(display:none)。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Start counting down</span></span><br><span class="line"><span class="keyword">const</span> timeInterval = <span class="built_in">setInterval</span>(updateTime, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Update time</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateTime</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  time--;</span><br><span class="line">  timeEl.innerHTML = time + <span class="string">&quot;s&quot;</span>;</span><br><span class="line">  <span class="comment">// 等於0時，呼叫gameOevr()</span></span><br><span class="line">  <span class="keyword">if</span> (time === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(time);</span><br><span class="line">    <span class="comment">//end the game</span></span><br><span class="line">    gameOver();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Game over,show end screen</span></span><br><span class="line"><span class="comment">// 顯示GameOver的Panel</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gameOver</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  endgameEl.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;h1&gt;Time ran out&lt;/h1&gt;</span></span><br><span class="line"><span class="string">  &lt;p&gt;Your final score is <span class="subst">$&#123;score&#125;</span>&lt;/p&gt;</span></span><br><span class="line"><span class="string">  &lt;button onclick=&quot;location.reload()&quot;&gt;Reload&lt;/button&gt;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line"></span><br><span class="line">  endgameEl.style.display = <span class="string">&quot;flex&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<ul>
+<li><code>.style.display =</code>轉成 <code>.css(&quot;display&quot;, &quot;flex&quot;)</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> timeInterval = <span class="built_in">setInterval</span>(updateTime, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateTime</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> timeEl = $(<span class="string">&quot;#time&quot;</span>);</span><br><span class="line">  time--;</span><br><span class="line">  timeEl.html(time + <span class="string">&quot;s&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> (time === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="built_in">clearInterval</span>(time);</span><br><span class="line">    gameOver();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gameOver</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> endgameEl = $(<span class="string">&quot;#end-game-container&quot;</span>);</span><br><span class="line">  endgameEl.html(<span class="string">`</span></span><br><span class="line"><span class="string">  &lt;h1&gt;Time ran out&lt;/h1&gt;</span></span><br><span class="line"><span class="string">  &lt;p&gt;Your final score is <span class="subst">$&#123;score&#125;</span>&lt;/p&gt;</span></span><br><span class="line"><span class="string">  &lt;button onclick=&quot;location.reload()&quot;&gt;Reload&lt;/button&gt;</span></span><br><span class="line"><span class="string">  `</span>);</span><br><span class="line"></span><br><span class="line">  endgameEl.css(<span class="string">&quot;display&quot;</span>, <span class="string">&quot;flex&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="用-Localstorge-去設定與判斷使用者選的難度"><a href="#用-Localstorge-去設定與判斷使用者選的難度" class="headerlink" title="用 Localstorge 去設定與判斷使用者選的難度"></a>用 Localstorge 去設定與判斷使用者選的難度</h3><blockquote>
+<p>JS</p>
+</blockquote>
+<ul>
+<li>宣告 difficulty 變數，並且做判斷。如果困難度為空，就從 localStorage 取得值，如果沒有值，就預設 medium。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Set difficulty to value in localStorage or medium</span></span><br><span class="line"><span class="keyword">let</span> difficulty =</span><br><span class="line">  <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;difficulty&quot;</span>) !== <span class="literal">null</span></span><br><span class="line">    ? <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;difficulty&quot;</span>)</span><br><span class="line">    : <span class="string">&quot;medium&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Set difficulty select value</span></span><br><span class="line">difficultySelect.value =</span><br><span class="line">  <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;difficulty&quot;</span>) !== <span class="literal">null</span></span><br><span class="line">    ? <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;difficulty&quot;</span>)</span><br><span class="line">    : <span class="string">&quot;medium&quot;</span>;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 依照不同的困難度，增加不同的時間。</span></span><br><span class="line"><span class="keyword">if</span> (difficulty == <span class="string">&quot;hard&quot;</span>) &#123;</span><br><span class="line">  time += <span class="number">3</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (difficulty == <span class="string">&quot;medium&quot;</span>) &#123;</span><br><span class="line">  time += <span class="number">4</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  time += <span class="number">6</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">updateTime();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<ul>
+<li>.value = 轉成 .val()</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> difficulty =</span><br><span class="line">  <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;difficulty&quot;</span>) !== <span class="literal">null</span></span><br><span class="line">    ? <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;difficulty&quot;</span>)</span><br><span class="line">    : <span class="string">&quot;medium&quot;</span>;</span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;#difficulty&quot;</span>).val(</span><br><span class="line">  <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;difficulty&quot;</span>) !== <span class="literal">null</span></span><br><span class="line">    ? <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;difficulty&quot;</span>)</span><br><span class="line">    : <span class="string">&quot;medium&quot;</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (difficulty == <span class="string">&quot;hard&quot;</span>) &#123;</span><br><span class="line">      time += <span class="number">3</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (difficulty == <span class="string">&quot;medium&quot;</span>) &#123;</span><br><span class="line">      time += <span class="number">6</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      time += <span class="number">8</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    updateTime();</span><br></pre></td></tr></table></figure>
+
+<h3 id="設定與下拉選單的事件監聽"><a href="#設定與下拉選單的事件監聽" class="headerlink" title="設定與下拉選單的事件監聽"></a>設定與下拉選單的事件監聽</h3><blockquote>
+<p>JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Settings btn click</span></span><br><span class="line"><span class="comment">// 按下左下角的齒輪，可以收合settings面板。</span></span><br><span class="line">settingsBtn.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> settings.classList.toggle(<span class="string">&quot;hide&quot;</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Settings select</span></span><br><span class="line"><span class="comment">// 下拉式選單改變時，將值儲存在localStorage</span></span><br><span class="line">settingsForm.addEventListener(<span class="string">&quot;change&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  difficulty = e.target.value;</span><br><span class="line">  <span class="built_in">localStorage</span>.setItem(<span class="string">&quot;difficulty&quot;</span>, difficulty);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<ul>
+<li><code>.classList.toggle()</code> 轉成 <code>.toggleClass()</code></li>
+<li><code>.target.value</code> 轉成 <code>.val()</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;#settings-btn&quot;</span>).on(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">&quot;#settings&quot;</span>).toggleClass(<span class="string">&quot;hide&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;#settings-form&quot;</span>).on(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  difficulty = $(<span class="string">&quot;#difficulty&quot;</span>).val();</span><br><span class="line">  <span class="built_in">localStorage</span>.setItem(<span class="string">&quot;difficulty&quot;</span>, difficulty);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>補充：(增加使用者體驗)<br>最後使用了 settimeout 增加 0.2 秒判斷，輸入單字是否正確時產生的渲染，<br>讓關卡到達下一關時有一點點的時間差去休息。</p>
+</blockquote>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><p><a target="_blank" rel="noopener" href="https://kuro.tw/posts/2019/02/23/%E8%AB%87%E8%AB%87-JavaScript-%E7%9A%84-setTimeout-%E8%88%87-setInterval/">談談 JavaScript 的 setTimeout 與 setInterval</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/%E4%BD%9C%E5%93%81%E9%9B%86/" rel="tag"># 作品集</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/" rel="prev" title="Styled-component 元件管理">
+      <i class="fa fa-chevron-left"></i> Styled-component 元件管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Underscore.js%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E7%B8%BD%E7%B5%90/" rel="next" title="Underscore.js 常用方法總結">
+      Underscore.js 常用方法總結 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Typing-Game"><span class="nav-number">1.</span> <span class="nav-text">Typing Game</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AD%98%E9%BB%9E"><span class="nav-number">1.1.</span> <span class="nav-text">學習到的知識點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML"><span class="nav-number">1.1.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS"><span class="nav-number">1.1.2.</span> <span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS"><span class="nav-number">1.1.3.</span> <span class="nav-text">JS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.2.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-1"><span class="nav-number">1.3.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-1"><span class="nav-number">1.4.</span> <span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%B7%E6%89%8B%E5%BC%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">起手式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-1"><span class="nav-number">1.5.</span> <span class="nav-text">JS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A3%E5%91%8A%E8%AE%8A%E6%95%B8"><span class="nav-number">1.5.1.</span> <span class="nav-text">宣告變數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%A8%E6%A9%9F%E6%8C%91%E9%81%B8%E9%99%A3%E5%88%97%E8%A3%A1%E7%9A%84%E5%96%AE%E5%AD%97%EF%BC%8C%E5%8A%A0%E5%88%B0%E5%85%83%E7%B4%A0%E7%9A%84-div-%E8%A3%A1"><span class="nav-number">1.5.2.</span> <span class="nav-text">隨機挑選陣列裡的單字，加到元素的 div 裡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%88%90%E7%B8%BE%EF%BC%8C%E5%88%A4%E6%96%B7%E8%BC%B8%E5%85%A5%E7%9A%84%E5%AD%97%E6%98%AF%E5%90%A6%E7%AC%A6%E5%90%88%E5%87%BA%E7%8F%BE%E7%9A%84%E5%AD%97"><span class="nav-number">1.5.3.</span> <span class="nav-text">更新成績，判斷輸入的字是否符合出現的字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A4%E7%95%AB%E9%9D%A2%E6%B8%B2%E6%9F%93%E6%88%90%E5%8A%9F%E6%99%82%EF%BC%8C%E5%B0%87%E6%8F%90%E7%A4%BA%E6%B3%A8%E6%84%8F%E5%88%B0-input-%E8%BC%B8%E5%85%A5%E6%A1%86"><span class="nav-number">1.5.4.</span> <span class="nav-text">此畫面渲染成功時，將提示注意到 input 輸入框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%8F%E7%A7%92%E6%9B%B4%E6%96%B0%E5%80%92%E6%95%B8%E7%8B%80%E6%85%8B%EF%BC%8C%E5%80%92%E6%95%B8%E5%88%B00%E6%99%82%EF%BC%8C%E5%87%BA%E7%8F%BE-gameOver-Panel"><span class="nav-number">1.5.5.</span> <span class="nav-text">每秒更新倒數狀態，倒數到0時，出現 gameOver Panel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8-Localstorge-%E5%8E%BB%E8%A8%AD%E5%AE%9A%E8%88%87%E5%88%A4%E6%96%B7%E4%BD%BF%E7%94%A8%E8%80%85%E9%81%B8%E7%9A%84%E9%9B%A3%E5%BA%A6"><span class="nav-number">1.5.6.</span> <span class="nav-text">用 Localstorge 去設定與判斷使用者選的難度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E8%88%87%E4%B8%8B%E6%8B%89%E9%81%B8%E5%96%AE%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%9B%A3%E8%81%BD"><span class="nav-number">1.5.7.</span> <span class="nav-text">設定與下拉選單的事件監聽</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">1.6.</span> <span class="nav-text">參考文章</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/Typing%20Game/";
+    this.page.identifier = "2021/04/07/Typing Game/";
+    this.page.title = "Typing Game";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

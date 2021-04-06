@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Localstorage 是瀏覽器裡面的資料庫，比如說瀏覽商城的時候，會有欄位顯示瀏覽過的商品，這就是透過 Localstorage 的方式紀錄下來的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript LocalStorage">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/localstorage/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="Localstorage 是瀏覽器裡面的資料庫，比如說瀏覽商城的時候，會有欄位顯示瀏覽過的商品，這就是透過 Localstorage 的方式紀錄下來的。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/JJRpMp6.png">
+<meta property="og:image" content="https://i.imgur.com/4imcfNk.png">
+<meta property="article:published_time" content="2021-04-06T17:57:45.330Z">
+<meta property="article:modified_time" content="2021-04-06T18:31:29.794Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/JJRpMp6.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/localstorage/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>JavaScript LocalStorage | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/localstorage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript LocalStorage
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:45 / Modified: 02:31:29" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:45+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/localstorage/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/localstorage/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Localstorage 是瀏覽器裡面的資料庫，比如說瀏覽商城的時候，會有欄位顯示瀏覽過的商品，這就是透過 Localstorage 的方式紀錄下來的。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Localstorage"><a href="#Localstorage" class="headerlink" title="Localstorage"></a>Localstorage</h1><p><strong>localstorage 是瀏覽器裡面的資料庫，<br>比如說瀏覽商城的時候，會有欄位顯示瀏覽過的商品，這就是透過 localstorage 的方式紀錄下來的。<br>要注意到，localstorgae 儲存資料的方式是以 string 的方式，也就是字串。</strong></p>
+<p><strong>在 chrome 瀏覽器可以透過 application 中去查詢 localstorage，<br>下面會介紹幾個操控 localstorage 的方式。</strong></p>
+<blockquote>
+<p>語法：<code>setItem</code> &amp; <code>getItem</code> 等同字面上的意思，設定項目 &amp; 取得項目</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">&quot;John&quot;</span>;</span><br><span class="line">localstorage.setItem(<span class="string">&quot;myName&quot;</span>, str);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(localstorage.getItem(<span class="string">&quot;myName&quot;</span>));</span><br><span class="line"><span class="comment">// John</span></span><br></pre></td></tr></table></figure>
+<p>透過 chrome 瀏覽器觀察</p>
+<p><img src="https://i.imgur.com/JJRpMp6.png"></p>
+<p>進一步設計點擊後儲存資料，與點擊後出叫名字的方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;請輸入你的姓名&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;textClass&quot; &#x2F;&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;button&quot; class&#x3D;&quot;btnClass&quot; value&#x3D;&quot;點擊&quot; &#x2F;&gt;</span><br><span class="line">&lt;input type&#x3D;&quot;button&quot; class&#x3D;&quot;btnCall&quot; value&#x3D;&quot;點擊呼叫名字&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.btnClass&quot;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">saveName</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> str = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.textClass&quot;</span>).value;</span><br><span class="line">  <span class="built_in">localStorage</span>.setItem(<span class="string">&quot;myName&quot;</span>, str);</span><br><span class="line">&#125;</span><br><span class="line">btn.addEventListener(<span class="string">&quot;click&quot;</span>, saveName);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> call = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.btnCall&quot;</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">callName</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> str = <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;myName&quot;</span>);</span><br><span class="line">  alert(str);</span><br><span class="line">&#125;</span><br><span class="line">call.addEventListener(<span class="string">&quot;click&quot;</span>, callName);</span><br></pre></td></tr></table></figure>
+
+<p>透過 chrome 瀏覽器觀察</p>
+<p><img src="https://i.imgur.com/4imcfNk.png"></p>
+<h2 id="資料轉換"><a href="#資料轉換" class="headerlink" title="資料轉換"></a>資料轉換</h2><p>前面提到 localstorage 只會保存 string 的資料，所以這邊要學習字串與陣列的資料轉換。</p>
+<ul>
+<li><code>JSON.stringify()</code>: 轉為 JSON 格式的字串</li>
+<li><code>JSON.parse()</code>: 從 JSON 格式的字串轉為原本的資料內容與型別</li>
+</ul>
+<p>會用在要儲存一個陣列裡面有多筆資料的時候，(JSON 格式)。<br>下面例子則為將陣列中的農夫名稱轉為字串後，儲存進去 localstorgae，再把字串轉回原本型別後取出。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> county = [&#123; <span class="attr">farmer</span>: <span class="string">&quot;約翰&quot;</span> &#125;];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> countyString = <span class="built_in">JSON</span>.stringify(county);</span><br><span class="line"><span class="built_in">console</span>.log(countyString);</span><br><span class="line"><span class="built_in">localStorage</span>.setItem(<span class="string">&quot;countyItem&quot;</span>, countyString);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> getData = <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;countyItem&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(getData);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> getDataArray = <span class="built_in">JSON</span>.parse(getData);</span><br><span class="line"><span class="built_in">console</span>.log(getDataArray[<span class="number">0</span>].farmer);</span><br></pre></td></tr></table></figure>
+<h2 id="dataset-抓取自訂資料"><a href="#dataset-抓取自訂資料" class="headerlink" title="dataset - 抓取自訂資料"></a>dataset - 抓取自訂資料</h2><p>在 html 中，某些情況下會有自訂的屬性，以下面的例子來說<br><code>data-num=&quot;1&quot;, data-dog=&quot;3&quot;</code>就是自訂的屬性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;list&quot;</span>&gt;</span><br><span class="line">  &lt;li data-num=<span class="string">&quot;1&quot;</span> data-dog=<span class="string">&quot;3&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;listli&quot;</span>&gt;約翰&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>自訂的屬性還是可以透過 javascript 來獲取資訊。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ----data-set 抓取資料----</span></span><br><span class="line"><span class="keyword">var</span> dataSet = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.listli&quot;</span>).dataset;</span><br><span class="line"><span class="built_in">console</span>.log(dataSet); </span><br><span class="line"><span class="comment">// 會列出所有的 &quot;data-*&quot; 屬性的所有資訊:&#123;num: &quot;1&quot;, dog: &quot;3&quot;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dataSetDetail1 = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.listli&quot;</span>).dataset.num;</span><br><span class="line"><span class="built_in">console</span>.log(dataSetDetail1); </span><br><span class="line"><span class="comment">// 取得 data-num 的資訊: &quot;1&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dataSetDetail2 = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.listli&quot;</span>).dataset.dog;</span><br><span class="line"><span class="built_in">console</span>.log(dataSetDetail2);</span><br><span class="line"><span class="comment">// 取得 data-dog 的資訊: &quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> listLi = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.listli&quot;</span>);</span><br><span class="line"><span class="comment">// 利用 target 來確認點擊的人名以及相關資訊</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkList</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> num = e.target.dataset.num;</span><br><span class="line">  <span class="keyword">var</span> dog = e.target.dataset.dog;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;第&quot;</span> + num + <span class="string">&quot;個人&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;有&quot;</span> + dog + <span class="string">&quot;隻狗&quot;</span>);</span><br><span class="line">  <span class="comment">// 第 1 個人</span></span><br><span class="line">  <span class="comment">// 有 3 隻狗</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">listLi.addEventListener(<span class="string">&quot;click&quot;</span>, checkList, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="dataset-amp-array-運用"><a href="#dataset-amp-array-運用" class="headerlink" title="dataset &amp; array 運用"></a>dataset &amp; array 運用</h2><p>原本的 html 沒有自訂屬性，但想要透過 js 動態加入。<br>下面的例子是，點擊哪個農夫後，會 alert 是選擇到哪一個農夫。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;list&quot;</span>&gt;&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+
+<p>要注意到用 innerHTML 新增 html 元素或是 splice 去刪除後，都需要去執行資料更新。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> county = [</span><br><span class="line">  &#123;</span><br><span class="line">    farmer: <span class="string">&quot;卡斯伯&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    farmer: <span class="string">&quot;查理&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    farmer: <span class="string">&quot;哈維&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br><span class="line"><span class="keyword">var</span> list = <span class="built_in">document</span>.querySelector(<span class="string">&quot;.list&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//更新農場資料</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateList</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> str = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> len = county.length;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; len &gt; i; i++) &#123;</span><br><span class="line">    str += <span class="string">&quot;&lt;li data-num=&quot;</span> + i + <span class="string">&quot;&gt;&quot;</span> + county[i].farmer + <span class="string">&quot;&lt;/li&gt;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  list.innerHTML = str;</span><br><span class="line">&#125;</span><br><span class="line">updateList();</span><br><span class="line"></span><br><span class="line"><span class="comment">//確認點擊的農夫是誰</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkList</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> num = e.target.dataset.num;</span><br><span class="line">  <span class="keyword">if</span> (e.target.nodeName !== <span class="string">&quot;LI&quot;</span>) &#123;</span><br><span class="line">    <span class="comment">// nodeName是大寫的節點名稱，這邊點擊到的是li</span></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  county.splice(num, <span class="number">1</span>);</span><br><span class="line">  updateList();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">list.addEventListener(<span class="string">&quot;click&quot;</span>, checkList, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Localstorage_%20ToDoList/" rel="prev" title="LocalStorage ToDoList">
+      <i class="fa fa-chevron-left"></i> LocalStorage ToDoList
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Math/" rel="next" title="JavaScript Math">
+      JavaScript Math <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Localstorage"><span class="nav-number">1.</span> <span class="nav-text">Localstorage</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B3%87%E6%96%99%E8%BD%89%E6%8F%9B"><span class="nav-number">1.1.</span> <span class="nav-text">資料轉換</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dataset-%E6%8A%93%E5%8F%96%E8%87%AA%E8%A8%82%E8%B3%87%E6%96%99"><span class="nav-number">1.2.</span> <span class="nav-text">dataset - 抓取自訂資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dataset-amp-array-%E9%81%8B%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">dataset &amp; array 運用</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/localstorage/";
+    this.page.identifier = "2021/04/07/localstorage/";
+    this.page.title = "JavaScript LocalStorage";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="紀錄實作 For 迴圈應用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/JavaScript%20Higher%20Order%20Functions%20&%20Arrays%20(Vanilla%20JavaScript)/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="紀錄實作 For 迴圈應用">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/ebpS8lu.png">
+<meta property="og:image" content="https://i.imgur.com/ebpS8lu.png">
+<meta property="og:image" content="https://i.imgur.com/6NB9sFX.png">
+<meta property="og:image" content="https://i.imgur.com/YhViXk1.png">
+<meta property="og:image" content="https://i.imgur.com/WgyScBp.png">
+<meta property="og:image" content="https://i.imgur.com/WgyScBp.png">
+<meta property="og:image" content="https://i.imgur.com/4M3q9Oj.png">
+<meta property="og:image" content="https://i.imgur.com/x1PBpe5.png">
+<meta property="og:image" content="https://i.imgur.com/zuEWelh.png">
+<meta property="og:image" content="https://i.imgur.com/gKHMYRC.png">
+<meta property="og:image" content="https://i.imgur.com/CQ5MNjw.png">
+<meta property="og:image" content="https://i.imgur.com/t0Gbuob.png">
+<meta property="og:image" content="https://i.imgur.com/qTnAnZK.png">
+<meta property="og:image" content="https://i.imgur.com/Siwzx2V.png">
+<meta property="og:image" content="https://i.imgur.com/qXvWpx0.png">
+<meta property="og:image" content="https://i.imgur.com/5OueGVc.png">
+<meta property="og:image" content="https://i.imgur.com/1zQSVkn.png">
+<meta property="article:published_time" content="2021-04-06T17:57:45.112Z">
+<meta property="article:modified_time" content="2021-04-06T18:35:58.586Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/ebpS8lu.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/JavaScript%20Higher%20Order%20Functions%20&%20Arrays%20(Vanilla%20JavaScript)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>JavaScript Higher Order Functions & Arrays (Vanilla JavaScript) | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/JavaScript%20Higher%20Order%20Functions%20&%20Arrays%20(Vanilla%20JavaScript)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript Higher Order Functions & Arrays (Vanilla JavaScript)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:45 / Modified: 02:35:58" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:45+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/JavaScript%20Higher%20Order%20Functions%20&%20Arrays%20(Vanilla%20JavaScript)/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/JavaScript Higher Order Functions & Arrays (Vanilla JavaScript)/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">紀錄實作 For 迴圈應用</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JavaScript-Higher-Order-Functions-amp-Arrays-Vanilla-JavaScript"><a href="#JavaScript-Higher-Order-Functions-amp-Arrays-Vanilla-JavaScript" class="headerlink" title="JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)"></a>JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)</h1><h6 id="tags-JS"><a href="#tags-JS" class="headerlink" title="tags: JS"></a>tags: <code>JS</code></h6><h1 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備:"></a>事前準備:</h1><p>待會要處理的資料</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> companies= [</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company One&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Finance&quot;</span>, <span class="attr">start</span>: <span class="number">1981</span>, <span class="attr">end</span>: <span class="number">2004</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Two&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Retail&quot;</span>, <span class="attr">start</span>: <span class="number">1992</span>, <span class="attr">end</span>: <span class="number">2008</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Three&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Auto&quot;</span>, <span class="attr">start</span>: <span class="number">1999</span>, <span class="attr">end</span>: <span class="number">2007</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Four&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Retail&quot;</span>, <span class="attr">start</span>: <span class="number">1989</span>, <span class="attr">end</span>: <span class="number">2010</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Five&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Technology&quot;</span>, <span class="attr">start</span>: <span class="number">2009</span>, <span class="attr">end</span>: <span class="number">2014</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Six&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Finance&quot;</span>, <span class="attr">start</span>: <span class="number">1987</span>, <span class="attr">end</span>: <span class="number">2010</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Seven&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Auto&quot;</span>, <span class="attr">start</span>: <span class="number">1986</span>, <span class="attr">end</span>: <span class="number">1996</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Eight&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Technology&quot;</span>, <span class="attr">start</span>: <span class="number">2011</span>, <span class="attr">end</span>: <span class="number">2016</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Nine&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Retail&quot;</span>, <span class="attr">start</span>: <span class="number">1981</span>, <span class="attr">end</span>: <span class="number">1989</span>&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ages = [<span class="number">33</span>, <span class="number">12</span>, <span class="number">20</span>, <span class="number">16</span>, <span class="number">5</span>, <span class="number">54</span>, <span class="number">21</span>, <span class="number">44</span>, <span class="number">61</span>, <span class="number">13</span>, <span class="number">15</span>, <span class="number">45</span>, <span class="number">25</span>, <span class="number">64</span>, <span class="number">32</span>];</span><br></pre></td></tr></table></figure>
+
+<h1 id="forEach-逐個印出"><a href="#forEach-逐個印出" class="headerlink" title="forEach 逐個印出"></a>forEach 逐個印出</h1><h2 id="使用for作範例"><a href="#使用for作範例" class="headerlink" title="使用for作範例"></a>使用for作範例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; companies.length; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(companies[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>印出結果:<br><img src="https://i.imgur.com/ebpS8lu.png"></p>
+<h2 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h2><ul>
+<li>是一個比較好的方法來跑array的迴圈相較於一般的for迴圈並且不會return東西回來</li>
+<li>是個比較優雅的方式處理資料</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//這邊做的印出每一個物件</span></span><br><span class="line">companies.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(company);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//當然也可以取用裡面的資料</span></span><br><span class="line"></span><br><span class="line">companies.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(company.name);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:<br>跟for跑出來的結果一模一樣，但比較淺顯易懂就是使用了一個forEach方法省去了很多複雜的條件<br><img src="https://i.imgur.com/ebpS8lu.png"></p>
+<p>取用裡面的name資料印出的結果<br><img src="https://i.imgur.com/6NB9sFX.png"></p>
+<h1 id="filter-篩選功能"><a href="#filter-篩選功能" class="headerlink" title="filter 篩選功能"></a>filter 篩選功能</h1><h2 id="練習一"><a href="#練習一" class="headerlink" title="練習一:"></a>練習一:</h2><p>篩選 ages 這個array裡面大於等於21歲的人<br><img src="https://i.imgur.com/YhViXk1.png"></p>
+<h2 id="使用for作範例-1"><a href="#使用for作範例-1" class="headerlink" title="使用for作範例"></a>使用for作範例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> canDrink = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; ages.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (ages[i] &gt;= <span class="number">21</span>) &#123;</span><br><span class="line">        canDrink.push(ages[i]); <span class="comment">//使用push把符合條件的人推進去</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(canDrink);</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:<br><img src="https://i.imgur.com/WgyScBp.png"></p>
+<h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canDrink = ages.filter(<span class="function"><span class="keyword">function</span> (<span class="params">age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (age &gt;= <span class="number">21</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(canDrink);</span><br></pre></td></tr></table></figure>
+
+<p>甚至使用ES6語法的箭頭函式可以更簡潔:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canDrink = ages.filter(<span class="function"><span class="params">age</span> =&gt;</span> age &gt;= <span class="number">21</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(canDrink);</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:<br>一樣不需要處理條件式且比較簡潔也不需要而外多使用其他的方法<br><img src="https://i.imgur.com/WgyScBp.png"></p>
+<h2 id="練習二"><a href="#練習二" class="headerlink" title="練習二:"></a>練習二:</h2><p>抓出companies資料裡面含有’Retail內容的物件</p>
+<h2 id="使用ES5的寫法"><a href="#使用ES5的寫法" class="headerlink" title="使用ES5的寫法"></a>使用ES5的寫法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> retailCompanies = companies.filter(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (company.category === <span class="string">&#x27;Retail&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(retailCompanies);</span><br></pre></td></tr></table></figure>
+
+<h2 id="ES6箭頭函式的寫法"><a href="#ES6箭頭函式的寫法" class="headerlink" title="ES6箭頭函式的寫法"></a>ES6箭頭函式的寫法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> retailCompanies = companies.filter(<span class="function"><span class="params">company</span> =&gt;</span> company.category === <span class="string">&#x27;Retail&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(retailCompanies);</span><br></pre></td></tr></table></figure>
+
+
+<p>印出結果會一樣:<br><img src="https://i.imgur.com/4M3q9Oj.png"></p>
+<h2 id="練習三"><a href="#練習三" class="headerlink" title="練習三:"></a>練習三:</h2><p>篩選公司成立時間在1980年代</p>
+<p>主要篩選companies 的start區塊作時間上的判斷</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> eightiesCompanies = companies.filter(<span class="function"><span class="params">company</span> =&gt;</span> (company.start &gt;= <span class="number">1980</span> &amp;&amp; company.start &lt; <span class="number">1990</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(eightiesCompanies)</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:</p>
+<p><img src="https://i.imgur.com/x1PBpe5.png"></p>
+<h2 id="練習四"><a href="#練習四" class="headerlink" title="練習四:"></a>練習四:</h2><p>篩選出所有成立超過或是等於十年的公司</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> lastedTenYears = companies.filter(<span class="function"><span class="params">company</span> =&gt;</span> (company.end - company.start &gt;= <span class="number">10</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(lastedTenYears);</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:<br><img src="https://i.imgur.com/zuEWelh.png"></p>
+<h1 id="map-印出資料-新的array-並且操作他們"><a href="#map-印出資料-新的array-並且操作他們" class="headerlink" title="map 印出資料(新的array)並且操作他們"></a>map 印出資料(新的array)並且操作他們</h1><p>除了篩選資料之外我們還可以創造新的array從現存的array中<br>並且對新的array做各種操作</p>
+<h2 id="練習一-1"><a href="#練習一-1" class="headerlink" title="練習一:"></a>練習一:</h2><p>把所有的公司名稱取出來並放入一個新的array</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> companyNames = companies.map(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> company.name</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(companyNames);</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:</p>
+<p>一個全新的array包含了公司名稱<br><img src="https://i.imgur.com/gKHMYRC.png"></p>
+<h2 id="練習二-1"><a href="#練習二-1" class="headerlink" title="練習二:"></a>練習二:</h2><p>可以操作map取得的新array:</p>
+<p>放入公司名稱跟年份組成新的arra</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> testMap = companies.map(<span class="function"><span class="params">company</span> =&gt;</span> <span class="string">`<span class="subst">$&#123;company.name&#125;</span>[<span class="subst">$&#123;company.start&#125;</span> - <span class="subst">$&#123;company.end&#125;</span>]`</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(testMap);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/CQ5MNjw.png"></p>
+<h2 id="練習三-1"><a href="#練習三-1" class="headerlink" title="練習三:"></a>練習三:</h2><p>對map的新array做數字上面的處理</p>
+<p>把數字開平方</p>
+<p>把數字乘2</p>
+<p>把數字開平方後乘2</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> agesSquare = ages.map(<span class="function"><span class="params">age</span> =&gt;</span> <span class="built_in">Math</span>.sqrt(age));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(agesSquare);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> agesTimesTwo = ages.map(<span class="function"><span class="params">age</span> =&gt;</span> age * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(agesTimesTwo);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 甚至可以把它們做串接處理</span></span><br><span class="line"><span class="keyword">const</span> agesMap = ages</span><br><span class="line">    .map(<span class="function"><span class="params">age</span> =&gt;</span> <span class="built_in">Math</span>.sqrt(age))</span><br><span class="line">    .map(<span class="function"><span class="params">age</span> =&gt;</span> age * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(agesMap);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>印出結果:</p>
+<p>開平方<br><img src="https://i.imgur.com/t0Gbuob.png"></p>
+<p>乘2<br><img src="https://i.imgur.com/qTnAnZK.png"></p>
+<p>開平方後乘2<br><img src="https://i.imgur.com/Siwzx2V.png"></p>
+<h1 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h1><p>如果我們不對sort做任何處理的話會這樣安排:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedAges = ages.sort();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedAges);</span><br></pre></td></tr></table></figure>
+
+<p>看似是由大到小但是有個小問題在於其實只比較了第一個數字然後再比較第二位所以5竟然排在那麼下面顯然不太合理(對一般使用的情況下)<br><img src="https://i.imgur.com/qXvWpx0.png"></p>
+<h2 id="一般我們會這樣處理sort"><a href="#一般我們會這樣處理sort" class="headerlink" title="一般我們會這樣處理sort:"></a>一般我們會這樣處理sort:</h2><p>讓順序由大排到小</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedAges = ages.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a-b);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedAges);</span><br></pre></td></tr></table></figure>
+
+
+<p>由小排到大</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedAges = ages.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> b-a);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedAges);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h2 id="練習一-2"><a href="#練習一-2" class="headerlink" title="練習一:"></a>練習一:</h2><p>分類公司藉著他們的開始年分 最早排到最晚</p>
+<p>一次比較兩個公司如果a&gt;b 則顯示-1排前面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedCompanies = companies.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> (a.start &gt; b.start ? <span class="number">1</span> : -<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedCompanies);</span><br></pre></td></tr></table></figure>
+
+<p>印出的結果:<br><img src="https://i.imgur.com/5OueGVc.png"></p>
+<h1 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h1><p>作加總，記得寫法reduce(參數1,參數2){function(){},0}後面的0要記得寫</p>
+<h2 id="練習一-3"><a href="#練習一-3" class="headerlink" title="練習一:"></a>練習一:</h2><p>加總ages所有的數字和</p>
+<h2 id="使用for範例"><a href="#使用for範例" class="headerlink" title="使用for範例"></a>使用for範例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ageSum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; ages.length; i++) &#123;</span><br><span class="line">    ageSum += ages[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ageSum);</span><br></pre></td></tr></table></figure>
+
+<p>得出加總的數字為:460</p>
+<h2 id="使用reduce"><a href="#使用reduce" class="headerlink" title="使用reduce"></a>使用reduce</h2><h2 id="Es5語法"><a href="#Es5語法" class="headerlink" title="Es5語法:"></a>Es5語法:</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ageSum = ages.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">total, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> total + age;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ageSum);</span><br></pre></td></tr></table></figure>
+
+<p>得出加總的數字為:460</p>
+<h2 id="ES6語法"><a href="#ES6語法" class="headerlink" title="ES6語法:"></a>ES6語法:</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ageSum = ages.reduce(<span class="function">(<span class="params">total, age</span>) =&gt;</span> total + age, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ageSum);</span><br></pre></td></tr></table></figure>
+
+<p>得出加總的數字為:460</p>
+<h2 id="練習二-2"><a href="#練習二-2" class="headerlink" title="練習二:"></a>練習二:</h2><p>加總所有公司的存在年分</p>
+<p>把公司的end年份減去start年份就是存在時間並且做加上total就好瞜</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> totalYears = companies.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">total, company</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> total + (company.end - company.start);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(totalYears);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用ES6的簡化寫法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> totalYears = companies.reduce(<span class="function">(<span class="params">total, company</span>) =&gt;</span></span><br><span class="line">    total + (company.end - company.start), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(totalYears);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>得出結果: 119</p>
+<h1 id="串接使用全部方法"><a href="#串接使用全部方法" class="headerlink" title="串接使用全部方法"></a>串接使用全部方法</h1><p>不是很實用但是他們可以這樣串接使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> combined = ages</span><br><span class="line">    .map(<span class="function"><span class="params">age</span> =&gt;</span> age * <span class="number">2</span>)</span><br><span class="line">    .filter(<span class="function"><span class="params">age</span> =&gt;</span> age &gt;= <span class="number">40</span>)</span><br><span class="line">    .sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    .reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(combined);</span><br></pre></td></tr></table></figure>
+
+<p>由大到小排列:<br><img src="https://i.imgur.com/1zQSVkn.png"></p>
+<p>得到加總結果結果是798</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Infinite%20Scroll/" rel="prev" title="Infinite Scroll">
+      <i class="fa fa-chevron-left"></i> Infinite Scroll
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/JS%20(Promise)(es6)/" rel="next" title="JavaScript (Promise)(es6)">
+      JavaScript (Promise)(es6) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-Higher-Order-Functions-amp-Arrays-Vanilla-JavaScript"><span class="nav-number">1.</span> <span class="nav-text">JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#tags-JS"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">tags: JS</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99"><span class="nav-number">2.</span> <span class="nav-text">事前準備:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#forEach-%E9%80%90%E5%80%8B%E5%8D%B0%E5%87%BA"><span class="nav-number">3.</span> <span class="nav-text">forEach 逐個印出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8for%E4%BD%9C%E7%AF%84%E4%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">使用for作範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#forEach"><span class="nav-number">3.2.</span> <span class="nav-text">forEach</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#filter-%E7%AF%A9%E9%81%B8%E5%8A%9F%E8%83%BD"><span class="nav-number">4.</span> <span class="nav-text">filter 篩選功能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E4%B8%80"><span class="nav-number">4.1.</span> <span class="nav-text">練習一:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8for%E4%BD%9C%E7%AF%84%E4%BE%8B-1"><span class="nav-number">4.2.</span> <span class="nav-text">使用for作範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filter"><span class="nav-number">4.3.</span> <span class="nav-text">filter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E4%BA%8C"><span class="nav-number">4.4.</span> <span class="nav-text">練習二:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8ES5%E7%9A%84%E5%AF%AB%E6%B3%95"><span class="nav-number">4.5.</span> <span class="nav-text">使用ES5的寫法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6%E7%AE%AD%E9%A0%AD%E5%87%BD%E5%BC%8F%E7%9A%84%E5%AF%AB%E6%B3%95"><span class="nav-number">4.6.</span> <span class="nav-text">ES6箭頭函式的寫法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E4%B8%89"><span class="nav-number">4.7.</span> <span class="nav-text">練習三:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E5%9B%9B"><span class="nav-number">4.8.</span> <span class="nav-text">練習四:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#map-%E5%8D%B0%E5%87%BA%E8%B3%87%E6%96%99-%E6%96%B0%E7%9A%84array-%E4%B8%A6%E4%B8%94%E6%93%8D%E4%BD%9C%E4%BB%96%E5%80%91"><span class="nav-number">5.</span> <span class="nav-text">map 印出資料(新的array)並且操作他們</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E4%B8%80-1"><span class="nav-number">5.1.</span> <span class="nav-text">練習一:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E4%BA%8C-1"><span class="nav-number">5.2.</span> <span class="nav-text">練習二:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E4%B8%89-1"><span class="nav-number">5.3.</span> <span class="nav-text">練習三:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sort"><span class="nav-number">6.</span> <span class="nav-text">sort</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E6%88%91%E5%80%91%E6%9C%83%E9%80%99%E6%A8%A3%E8%99%95%E7%90%86sort"><span class="nav-number">6.1.</span> <span class="nav-text">一般我們會這樣處理sort:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E4%B8%80-2"><span class="nav-number">6.2.</span> <span class="nav-text">練習一:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reduce"><span class="nav-number">7.</span> <span class="nav-text">reduce</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E4%B8%80-3"><span class="nav-number">7.1.</span> <span class="nav-text">練習一:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8for%E7%AF%84%E4%BE%8B"><span class="nav-number">7.2.</span> <span class="nav-text">使用for範例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8reduce"><span class="nav-number">7.3.</span> <span class="nav-text">使用reduce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Es5%E8%AA%9E%E6%B3%95"><span class="nav-number">7.4.</span> <span class="nav-text">Es5語法:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6%E8%AA%9E%E6%B3%95"><span class="nav-number">7.5.</span> <span class="nav-text">ES6語法:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B7%B4%E7%BF%92%E4%BA%8C-2"><span class="nav-number">7.6.</span> <span class="nav-text">練習二:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%B2%E6%8E%A5%E4%BD%BF%E7%94%A8%E5%85%A8%E9%83%A8%E6%96%B9%E6%B3%95"><span class="nav-number">8.</span> <span class="nav-text">串接使用全部方法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/JavaScript%20Higher%20Order%20Functions%20&%20Arrays%20(Vanilla%20JavaScript)/";
+    this.page.identifier = "2021/04/07/JavaScript Higher Order Functions & Arrays (Vanilla JavaScript)/";
+    this.page.title = "JavaScript Higher Order Functions & Arrays (Vanilla JavaScript)";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

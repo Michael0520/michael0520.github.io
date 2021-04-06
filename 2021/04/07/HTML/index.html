@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="HTML定義了Internet上每個網頁的內容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探 HTML">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/HTML/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="HTML定義了Internet上每個網頁的內容。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/dVp1HJE.png">
+<meta property="og:image" content="https://i.imgur.com/8dcgO5P.png">
+<meta property="og:image" content="https://i.imgur.com/0FJvdcq.png">
+<meta property="og:image" content="https://i.imgur.com/yVqIMzW.png">
+<meta property="og:image" content="https://i.imgur.com/GiBeAff.png">
+<meta property="og:image" content="https://i.imgur.com/IDDtukD.png">
+<meta property="og:image" content="https://i.imgur.com/T9mMxVK.png">
+<meta property="og:image" content="https://i.imgur.com/nLEsgSu.png">
+<meta property="og:image" content="https://i.imgur.com/yBr6lr2.png">
+<meta property="og:image" content="https://i.imgur.com/ZzemPYX.png">
+<meta property="og:image" content="https://i.imgur.com/SQELGLr.png">
+<meta property="og:image" content="https://i.imgur.com/6fnYZq9.png">
+<meta property="og:image" content="https://i.imgur.com/pONR5Ao.png">
+<meta property="article:published_time" content="2021-04-06T17:57:44.863Z">
+<meta property="article:modified_time" content="2021-04-06T18:38:58.012Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="HTML">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/dVp1HJE.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/HTML/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>初探 HTML | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/HTML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          初探 HTML
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:44 / Modified: 02:38:58" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:44+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/HTML/" itemprop="url" rel="index"><span itemprop="name">HTML</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/HTML/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/HTML/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">HTML定義了Internet上每個網頁的內容。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><p><strong>HTML定義了Internet上每個網頁的內容。</strong></p>
+<blockquote>
+<p>通過使用HTML標籤“標記”原始內容，<br>您可以告訴網頁瀏覽器您希望如何顯示內容的不同部分。<br>創建帶有適當標記內容的HTML文檔是開發網頁的第一步。</p>
+<ol>
+<li>建立且撰寫原始文字檔案，</li>
+<li>加上了 html 標籤，</li>
+<li>再透過伺服器上傳才變成網頁<br><img src="https://i.imgur.com/dVp1HJE.png"></li>
+</ol>
+</blockquote>
+<blockquote>
+<p>認識 HTML ，先了解他的結構<br>HTML 跟人一樣分為<code>&lt;head&gt; &lt;body&gt;</code></p>
+<ul>
+<li><code>&lt;html&gt;</code> 標籤：包住頁面所有內容，有時也被稱作根元素</li>
+<li><code>&lt;head&gt;</code>標籤：放跟網頁有關的資訊，例如：顯示於搜尋結果的關鍵字、頁面說明、CSS等等</li>
+<li><code>&lt;body&gt;</code> 標籤：提供給使用者觀看的網頁內容，例如：文字、圖片、遊戲、可以播放的音樂或其他物件。</li>
+<li><code>&lt;!DOCTYPE html&gt;</code> 標籤：是告訴網頁這是 html5的網頁<br>一般的配置長這樣：</li>
+</ul>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="HTML-標籤"><a href="#HTML-標籤" class="headerlink" title="HTML 標籤"></a>HTML 標籤</h3><p>構成一個 HTML 的「元素」需要三格部分構成：<br>起始標籤、內容、結束標籤</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span> content <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>一般 HTML 的標籤分為：</p>
+<ol>
+<li>塊級元素</li>
+<li>內聯元素</li>
+<li>空元素<blockquote>
+<p>塊級元素：會自成一行或一塊，例如：</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span>&gt;</span><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>內聯元素：通常內嵌在塊級元素，不會產生新行或區塊在網頁中，<br>例如：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">herf</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">strong</span>&gt;</span> <span class="tag">&lt;/<span class="name">strong</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>空元素：單標籤組成，例如：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot; &quot;</span> <span class="attr">alt</span>=<span class="string">&quot; &quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>屬性：屬性包含元素的額外訊息，這些訊息不會出現在實際的內容中，需有 =和 “”，例如：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot; &quot;</span> <span class="attr">alt</span>=<span class="string">&quot; &quot;</span> &gt;</span> <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot; &quot;</span> &gt;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="lt-body-gt-內的標籤"><a href="#lt-body-gt-內的標籤" class="headerlink" title="&lt;body&gt; 內的標籤"></a><code>&lt;body&gt;</code> 內的標籤</h3><ul>
+<li><strong><code>&lt;p&gt;</code> 段落</strong></li>
+</ul>
+<blockquote>
+<p>塊級元素<br><img src="https://i.imgur.com/8dcgO5P.png"><br>在 HTML 中最基本的標籤就是 <code>&lt;p&gt;</code> ，用來標明這些文字是一個句子</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt; 這樣是不會</span><br><span class="line">有換行效果的&lt;&#x2F;p&gt;</span><br><span class="line">&lt;p&gt;這樣才會&lt;&#x2F;p&gt;</span><br><span class="line">&lt;p&gt;有換行效果&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong><code>h1</code> 標題</strong><br><img src="https://i.imgur.com/0FJvdcq.png"></p>
+<blockquote>
+<p>透過 Heading 可以標注此行為標題，<br>並調整大小 &amp; 加粗 Heading 標籤不只一個，從最大的 <code>&lt;h1&gt;</code> 一直到字體最小的 <code>&lt;h6&gt;</code></p>
+<blockquote>
+<p><strong>但要注意一點！</strong><br>使用 Heading 標籤的重點並非透過標籤調整大小<br>字體調整，套用 CSS 的樣式就做得到了，還能更客製化<br>Heading 標籤主要是來標注大標小標的層級關係，協助你分類內容層級關係，在規劃 SEO (搜尋引擎優化)上會運用得到。</p>
+</blockquote>
+</blockquote>
+</li>
+<li><p><strong><code>ul</code>列表</strong></p>
+<blockquote>
+<p>屬於原點符號，適合用來表示產品功能或比較等<br><img src="https://i.imgur.com/yVqIMzW.png"></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">  &lt;&#x2F;head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;h2&gt;Lists&lt;&#x2F;h2&gt;</span><br><span class="line"></span><br><span class="line">    &lt;p&gt;This is how you make an unordered list:&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li&gt;Add a &quot;ul&quot; element (it stands for unordered list)&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;Add each item in its own &quot;li&quot; element&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;They don&#39;t need to be in any particular order&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br><span class="line">  &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p><strong><code>ol</code> 列表</strong></p>
+<blockquote>
+<p>屬於數字符號，<br>適合表示步驟、說明，可透過 CSS 常用來製做成表格<br><img src="https://i.imgur.com/GiBeAff.png"></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;h2&gt;Lists&lt;&#x2F;h2&gt;</span><br><span class="line"></span><br><span class="line">    &lt;p&gt;This is how you make an unordered list:&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li&gt;Add a &quot;ul&quot; element (it stands for unordered list)&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;Add each item in its own &quot;li&quot; element&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;They don&#39;t need to be in any particular order&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br><span class="line">    &lt;p&gt;This is what an ordered list looks like:&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ol&gt;</span><br><span class="line">      &lt;li&gt;Notice the new &quot;ol&quot; element wrapping everything&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;But, the list item elements are the same&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;Also note how the numbers increment on their own&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;You should be noticing things is this precise order, because this is an ordered list&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ol&gt;</span><br><span class="line">  &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<h3 id="div"><a href="#div" class="headerlink" title="div"></a>div</h3><h4 id="div-是塊級元素的大宗，用於規劃區塊"><a href="#div-是塊級元素的大宗，用於規劃區塊" class="headerlink" title="div 是塊級元素的大宗，用於規劃區塊"></a>div 是塊級元素的大宗，用於規劃區塊</h4><blockquote>
+<p><img src="https://i.imgur.com/IDDtukD.png"></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;h1&gt;Interneting Is Easy!&lt;&#x2F;h1&gt;</span><br><span class="line">  &lt;h2&gt;Lists&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;p&gt;This is how you make an unordered list:&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">      &lt;li&gt;Add a &quot;ul&quot; element (it stands for unordered list)&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;Add each item in its own &quot;li&quot; element&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;They don&#39;t need to be in any particular order&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br><span class="line"></span><br><span class="line">    &lt;p&gt;This is what an ordered list looks like:&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ol&gt;</span><br><span class="line">      &lt;li&gt;Notice the new &quot;ol&quot; element wrapping everything&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;But, the list item elements are the same&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;Also note how the numbers increment on their own&lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li&gt;You should be noticing things is this precise order, because this is an ordered list&lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ol&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;h2&gt;Inline Elements&lt;&#x2F;h2&gt;</span><br><span class="line"></span><br><span class="line">      &lt;p&gt;&lt;em&gt;Sometimes&lt;&#x2F;em&gt;, you need to draw attention to a particular word or phrase.&lt;&#x2F;p&gt;</span><br><span class="line">      &lt;p&gt;Regards,&lt;br&#x2F;&gt;</span><br><span class="line">         The Authors&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">     &lt;hr&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">     &lt;p&gt;P.S. This page might look like crap, but we&#39;ll fix that with some CSS soon.&lt;&#x2F;p&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>id、class 是一種屬性，用來標註塊級元素套用特定的 CSS 樣式<br>透過 id、class 屬性標注區塊，可讓 CSS 選擇到該區塊進行排版，例如：並排、橫排、固定….等，或是一些樣式變化。<br>例如：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot; group &quot;&gt;</span><br><span class="line">&lt;p id &#x3D; &quot;123&quot;&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在 CSS 上就可以透過語法標註塊級元素</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.group</span> &#123; ....&#125;</span><br><span class="line"><span class="selector-id">#123</span> &#123;...&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="em-斜體"><a href="#em-斜體" class="headerlink" title="em 斜體"></a>em 斜體</h3><p><img src="https://i.imgur.com/T9mMxVK.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;Inline Elements&lt;&#x2F;h2&gt;</span><br><span class="line"></span><br><span class="line">&lt;p&gt;&lt;em&gt;Sometimes&lt;&#x2F;em&gt;, you need to draw attention to a particular word or</span><br><span class="line">phrase.&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="strong-強調"><a href="#strong-強調" class="headerlink" title="strong 強調"></a>strong 強調</h3><p><img src="https://i.imgur.com/nLEsgSu.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;Other times you need to &lt;strong&gt;strong&lt;&#x2F;strong&gt;ly emphasize the importance of a word or phrase.&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="內聯元素也可以包住行內元素，但不能包塊級元素"><a href="#內聯元素也可以包住行內元素，但不能包塊級元素" class="headerlink" title="內聯元素也可以包住行內元素，但不能包塊級元素"></a>內聯元素也可以包住行內元素，但不能包塊級元素</h3><p><img src="https://i.imgur.com/yBr6lr2.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&lt;em&gt;&lt;strong&gt;And sometimes you need to shout!&lt;&#x2F;strong&gt;&lt;&#x2F;em&gt;&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<h3 id="非常重要＃！"><a href="#非常重要＃！" class="headerlink" title="非常重要＃！"></a>非常重要＃！</h3><p>使用 ‘強調’ 和 ‘斜體’ 的重點，並非透過標籤調整樣式<br>使用強調和斜體時，千萬要記得 HTML 的本質！<br>改變樣式不是 HTML 的工作，HTML 是標示語言，<br>是用來標示文字賦予它意義讓瀏覽器看懂的！</p>
+<p>html 標示的好，<br>可以去加速網站辨識您的網頁主要在訴說什麼內容，<br>進而快速去推算並且分類，提升 SEO</p>
+<blockquote>
+<p> CSS 才是改變樣式的主要手段，千萬不要搞錯了！</p>
+</blockquote>
+</blockquote>
+<hr>
+<h3 id="a-連結"><a href="#a-連結" class="headerlink" title="a 連結"></a>a 連結</h3><blockquote>
+<p>a 為 anchor 是錨的意思，通常會跟的一個屬性叫：herf，表示 a 指向的地方（網址、頁面或段落）<br><img src="https://i.imgur.com/ZzemPYX.png"></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;This example is about links and &lt;a href&#x3D;&#39;images.html&#39;&gt;images&lt;&#x2F;a&gt;.&lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>&lt;a herf=&#39;images.html（檔名路徑）&#39;&gt;</code> ：連結到網站的其他頁面</li>
+<li><code>&lt;a herf=&#39;https://www.medium.com（網址）&#39;&gt;</code> ：連結到另一個網站</li>
+<li><code>&lt;a herf=&#39;#123（要連結段落的 id ）&#39;&gt;</code> ：連結到另一個段落</li>
+</ul>
+<hr>
+<h3 id="image-圖片"><a href="#image-圖片" class="headerlink" title="image 圖片"></a>image 圖片</h3><blockquote>
+<p><code>&lt;img&gt;</code> 標籤通常用於放置圖片，可支援 JPG 、PNG 、 GIF 、 SVG</p>
+</blockquote>
+<p><img src="https://i.imgur.com/SQELGLr.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- In JPGs section --&gt;</span><br><span class="line">&lt;img src&#x3D;&#39;images&#x2F;mochi.jpg&#39; width&#x3D;&#39;75&#39; alt&#x3D;&#39;A mochi ball in a bubble&#39;&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- In GIFs section --&gt;</span><br><span class="line">&lt;img src&#x3D;&#39;images&#x2F;mochi.gif&#39; width&#x3D;&#39;75&#39; alt&#x3D;&#39;A dancing mochi ball&#39;&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- In PNGs section --&gt;</span><br><span class="line">&lt;img src&#x3D;&#39;images&#x2F;mochi.png&#39; width&#x3D;&#39;75&#39; alt&#x3D;&#39;A mochi ball&#39;&#x2F;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- In SVGs section --&gt;</span><br><span class="line">&lt;img src&#x3D;&#39;images&#x2F;mochi.svg&#39; alt&#x3D;&#39;A mochi ball with Bézier handles&#39;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>src 、width 和 alt 是 <code>&lt;img&gt;</code> 的屬性<br>src 是放檔案路徑，width 是調整檔案寬度，alt 是圖片的說明</p>
+<blockquote>
+<p>alt 可以友善視障人士了解圖片內容，且當出現死圖也可以說明圖片內容<br>可以提升網站 SEO</p>
+</blockquote>
+</blockquote>
+<hr>
+<h3 id="lt-head-gt-內的標籤"><a href="#lt-head-gt-內的標籤" class="headerlink" title="&lt;head&gt; 內的標籤"></a><code>&lt;head&gt;</code> 內的標籤</h3><blockquote>
+<p>簡單介紹完 body 後，要來介紹一下 <code>&lt;head&gt;</code> 內有什麼標籤<br><code>&lt;head&gt;</code> 標籤在加載網頁時，內容不會顯示在瀏覽器中<br>因此 <code>&lt;head&gt;</code> 通常是放：<br>瀏覽器頁籤的標題和圖示<br>網頁的 Metadata（作者、關鍵字、Open Graph Data…..）<br>連結的檔案（CSS、JS）</p>
+</blockquote>
+<hr>
+<h3 id="title"><a href="#title" class="headerlink" title="title"></a>title</h3><blockquote>
+<p>更改網頁頁籤文字<br><img src="https://i.imgur.com/6fnYZq9.png"></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;Interneting Is Easy!&lt;&#x2F;title&gt;</span><br><span class="line">  &lt;&#x2F;head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;!-- Content goes here --&gt;</span><br><span class="line">  &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="Meta"><a href="#Meta" class="headerlink" title="Meta"></a>Meta</h3><blockquote>
+<p>為敘述網頁的標籤，包含作者、文字編碼、網站說明文字、關鍵字….等<br>常用的屬性有： charset 、 name 、 content 、 http-equiv</p>
+<p>1.charset<br><code>&lt;meta charset=&quot;utf-8&quot;&gt;</code> 設定文字編碼</p>
+<p>utf-8 為最通用的文字編碼，又稱萬國碼，可支援各語系文字<br>每個語系有自己的文字編碼，像是繁體中文就叫做 Big-5<br>但如果使用 Big-5 碼，解譯其他語言就會變成亂碼，如下圖<br>因此使用 utf-8 會最為合適<br><img src="https://i.imgur.com/pONR5Ao.png"></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;Interneting Is Easy!&lt;&#x2F;title&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&#39;UTF-8&#39;&#x2F;&gt;  </span><br><span class="line">  &lt;&#x2F;head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;h2&gt;Character Sets&lt;&#x2F;h2&gt;</span><br><span class="line"></span><br><span class="line">       &lt;p&gt;You can use UTF-8 to count in Turkish:&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">       &lt;ol&gt;</span><br><span class="line">         &lt;li&gt;bir&lt;&#x2F;li&gt;</span><br><span class="line">         &lt;li&gt;iki&lt;&#x2F;li&gt;</span><br><span class="line">         &lt;li&gt;üç&lt;&#x2F;li&gt;</span><br><span class="line">         &lt;li&gt;dört&lt;&#x2F;li&gt;</span><br><span class="line">         &lt;li&gt;beş&lt;&#x2F;li&gt;</span><br><span class="line">       &lt;&#x2F;ol&gt;</span><br><span class="line">  &lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>2. name &amp; content</strong></p>
+<p>name &amp; content 的應用十分多元，像是：</p>
+<p>作者</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name&#x3D;&quot;author&quot; content&#x3D;&quot;Kion&quot;&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>網頁摘要</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name&#x3D;&quot;description&quot; content&#x3D;&quot;這是顯示在搜尋結果中，網頁標題下的網頁摘要&quot;&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>meta description 的內容也會成為搜尋的關鍵字之一，但並非是網站排名的因素之一<br>若沒有特別撰寫，則會從網頁上的內容抓取</p>
+</blockquote>
+<hr>
+<h3 id="Link"><a href="#Link" class="headerlink" title="Link"></a>Link</h3><blockquote>
+<p>Link 標籤十分常見，凡事要引入 CSS或是外部資源，皆需要透過 Link 標籤連接，應用十分多元</p>
+<p>連接 CSS</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; href&#x3D;&quot;css.css&quot;&gt;&#96;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>但注意，JS 不是用 <code>&lt;link&gt;</code> 喔</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;script.js&quot;&gt;&lt;&#x2F;script&gt;&#96;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>設置網頁頁籤 Icon<br>我 Icon 的圖檔是在這裡轉的：<a target="_blank" rel="noopener" href="http://tw.faviconico.org/">http://tw.faviconico.org/</a><br>轉好圖檔後，在 head 引入檔案</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;&quot;Shortcut Icon&quot; type&#x3D;&quot;image&#x2F;x-icon&quot; href&#x3D;&quot;filename.ico&quot;&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>引入 Icon<br>我使用的網站是：<a target="_blank" rel="noopener" href="https://fontawesome.com/">https://fontawesome.com/</a><br>使用方法很簡單，如果你沒有課金就選一個免費的 Icon<br>記得在 head 引入來源</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel&#x3D;”stylesheet” href&#x3D;”https:&#x2F;&#x2F;use.fontawesome.com&#x2F;releases&#x2F;v5.8.2&#x2F;css&#x2F;all.css&quot; integrity&#x3D;”sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq&#x2F;1cq5FLXAZQ7Ay” crossorigin&#x3D;”anonymous”&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>接著只要在你再插入圖示的那一行，複製該圖示的程式碼<br>例如：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;i class&#x3D;”fab fa-angellist”&gt;&lt;&#x2F;i&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 就可以插入 Icon 了！<br>當然也可以客製化 Icon 大小、顏色喔<br><a target="_blank" rel="noopener" href="https://fontawesome.com/how-to-use/on-the-web/styling/sizing-icons">https://fontawesome.com/how-to-use/on-the-web/styling/sizing-icons</a></p>
+</blockquote>
+<hr>
+<h3 id="Open-Graph-Data-標籤"><a href="#Open-Graph-Data-標籤" class="headerlink" title="Open Graph Data 標籤"></a>Open Graph Data 標籤</h3><blockquote>
+<p>主要用於該網站 URL 被轉貼在社交軟體上，顯示的標題、內容圖片、簡介<br>甚至可以調整大小</p>
+<p>例如：</p>
+<ol>
+<li>圖片</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta property&#x3D;&quot;og:image&quot; content&#x3D;&quot;https:&#x2F;&#x2F;developer.cdn.mozilla.net&#x2F;static&#x2F;img&#x2F;opengraph-logo.dc4e08e2f6af.png&quot;&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol start="2">
+<li>連結文字描述</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta property&#x3D;&quot;og:description&quot; content&#x3D;&quot;The Mozilla Developer Network (MDN) provides information about Open Web technologies including HTML, CSS, and APIs for both Web sites and HTML5 Apps. It also documents Mozilla products, like Firefox OS.&quot;&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol start="3">
+<li>標題</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta property&#x3D;&quot;og:title&quot; content&#x3D;&quot;Mozilla Developer Network&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/HTML/" rel="tag"># HTML</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/GitHub%20Finder/" rel="prev" title="GitHub Finder">
+      <i class="fa fa-chevron-left"></i> GitHub Finder
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/HTML5%20Drag%20and%20Drop%20API/" rel="next" title="HTML5 Drag and Drop API">
+      HTML5 Drag and Drop API <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML"><span class="nav-number">1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-%E6%A8%99%E7%B1%A4"><span class="nav-number">1.0.1.</span> <span class="nav-text">HTML 標籤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-body-gt-%E5%85%A7%E7%9A%84%E6%A8%99%E7%B1%A4"><span class="nav-number">1.0.2.</span> <span class="nav-text">&lt;body&gt; 內的標籤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#div"><span class="nav-number">1.0.3.</span> <span class="nav-text">div</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#div-%E6%98%AF%E5%A1%8A%E7%B4%9A%E5%85%83%E7%B4%A0%E7%9A%84%E5%A4%A7%E5%AE%97%EF%BC%8C%E7%94%A8%E6%96%BC%E8%A6%8F%E5%8A%83%E5%8D%80%E5%A1%8A"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">div 是塊級元素的大宗，用於規劃區塊</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#em-%E6%96%9C%E9%AB%94"><span class="nav-number">1.0.4.</span> <span class="nav-text">em 斜體</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strong-%E5%BC%B7%E8%AA%BF"><span class="nav-number">1.0.5.</span> <span class="nav-text">strong 強調</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A7%E8%81%AF%E5%85%83%E7%B4%A0%E4%B9%9F%E5%8F%AF%E4%BB%A5%E5%8C%85%E4%BD%8F%E8%A1%8C%E5%85%A7%E5%85%83%E7%B4%A0%EF%BC%8C%E4%BD%86%E4%B8%8D%E8%83%BD%E5%8C%85%E5%A1%8A%E7%B4%9A%E5%85%83%E7%B4%A0"><span class="nav-number">1.0.6.</span> <span class="nav-text">內聯元素也可以包住行內元素，但不能包塊級元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%EF%BC%83%EF%BC%81"><span class="nav-number">1.0.7.</span> <span class="nav-text">非常重要＃！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#a-%E9%80%A3%E7%B5%90"><span class="nav-number">1.0.8.</span> <span class="nav-text">a 連結</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-%E5%9C%96%E7%89%87"><span class="nav-number">1.0.9.</span> <span class="nav-text">image 圖片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-head-gt-%E5%85%A7%E7%9A%84%E6%A8%99%E7%B1%A4"><span class="nav-number">1.0.10.</span> <span class="nav-text">&lt;head&gt; 內的標籤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#title"><span class="nav-number">1.0.11.</span> <span class="nav-text">title</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Meta"><span class="nav-number">1.0.12.</span> <span class="nav-text">Meta</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Link"><span class="nav-number">1.0.13.</span> <span class="nav-text">Link</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Open-Graph-Data-%E6%A8%99%E7%B1%A4"><span class="nav-number">1.0.14.</span> <span class="nav-text">Open Graph Data 標籤</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/HTML/";
+    this.page.identifier = "2021/04/07/HTML/";
+    this.page.title = "初探 HTML";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

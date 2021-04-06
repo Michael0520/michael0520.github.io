@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="使用 json 檔案來實作匯率轉換器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exchange Rate Calculate">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/Exchange%20Rate%20Calculate/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="使用 json 檔案來實作匯率轉換器。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/lPUTZT6.png">
+<meta property="og:image" content="https://i.imgur.com/AIJVE78.png">
+<meta property="og:image" content="https://i.imgur.com/wxy3r4P.png">
+<meta property="article:published_time" content="2021-04-06T17:57:44.377Z">
+<meta property="article:modified_time" content="2021-04-06T18:43:42.313Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="作品集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/lPUTZT6.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/Exchange%20Rate%20Calculate/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>Exchange Rate Calculate | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/Exchange%20Rate%20Calculate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Exchange Rate Calculate
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:44 / Modified: 02:43:42" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:44+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/%E4%BD%9C%E5%93%81%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">作品集</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/Exchange%20Rate%20Calculate/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/Exchange Rate Calculate/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">使用 json 檔案來實作匯率轉換器。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Exchange-Rate-Calculate"><a href="#Exchange-Rate-Calculate" class="headerlink" title="Exchange Rate Calculate"></a>Exchange Rate Calculate</h1><h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a><a href="https://michael0520.github.io/Exchange-Rate-Caclulate/index.html">Demo</a></h2><h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="設定圖片＆選單下拉列＆輸入框"><a href="#設定圖片＆選單下拉列＆輸入框" class="headerlink" title="設定圖片＆選單下拉列＆輸入框"></a>設定圖片＆選單下拉列＆輸入框</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;.&#x2F;money拷貝.png&quot; alt&#x3D;&quot;&quot; class&#x3D;&quot;money-img&quot; &#x2F;&gt;</span><br><span class="line">   &lt;h1&gt;Exchange Rate Calculator&lt;&#x2F;h1&gt;</span><br><span class="line">   &lt;p&gt;Choose the currency and the amounts to get the exchange rate&lt;&#x2F;p&gt;</span><br><span class="line"></span><br><span class="line">   &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">     &lt;div class&#x3D;&quot;currency&quot;&gt;</span><br><span class="line">       &lt;select id&#x3D;&quot;currency-one&quot;&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;AED&quot;&gt;AED&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;ARS&quot;&gt;ARS&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;AUD&quot;&gt;AUD&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;BGN&quot;&gt;BGN&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;BRL&quot;&gt;BRL&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;BSD&quot;&gt;BSD&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;CAD&quot;&gt;CAD&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;CHF&quot;&gt;CHF&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;CLP&quot;&gt;CLP&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;CNY&quot;&gt;CNY&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;COP&quot;&gt;COP&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;CZK&quot;&gt;CZK&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;DKK&quot;&gt;DKK&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;DOP&quot;&gt;DOP&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;EGP&quot;&gt;EGP&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;EUR&quot;&gt;EUR&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;FJD&quot;&gt;FJD&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;GBP&quot;&gt;GBP&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;GTQ&quot;&gt;GTQ&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;HKD&quot;&gt;HKD&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;HRK&quot;&gt;HRK&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;HUF&quot;&gt;HUF&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;IDR&quot;&gt;IDR&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;ILS&quot;&gt;ILS&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;INR&quot;&gt;INR&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;ISK&quot;&gt;ISK&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;JPY&quot;&gt;JPY&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;KRW&quot;&gt;KRW&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;KZT&quot;&gt;KZT&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;MXN&quot;&gt;MXN&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;MYR&quot;&gt;MYR&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;NOK&quot;&gt;NOK&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;NZD&quot;&gt;NZD&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;PAB&quot;&gt;PAB&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;PEN&quot;&gt;PEN&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;PHP&quot;&gt;PHP&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;PKR&quot;&gt;PKR&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;PLN&quot;&gt;PLN&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;PYG&quot;&gt;PYG&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;RON&quot;&gt;RON&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;RUB&quot;&gt;RUB&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;SAR&quot;&gt;SAR&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;SEK&quot;&gt;SEK&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;SGD&quot;&gt;SGD&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;THB&quot;&gt;THB&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;TRY&quot;&gt;TRY&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;TWD&quot;&gt;TWD&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;UAH&quot;&gt;UAH&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;USD&quot; selected&gt;USD&lt;&#x2F;option&gt; &#x2F;&#x2F; 設定預設值為 USD</span><br><span class="line">         &lt;option value&#x3D;&quot;UYU&quot;&gt;UYU&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;VND&quot;&gt;VND&lt;&#x2F;option&gt;</span><br><span class="line">         &lt;option value&#x3D;&quot;ZAR&quot;&gt;ZAR&lt;&#x2F;option&gt;</span><br><span class="line">       &lt;&#x2F;select&gt;</span><br><span class="line">         &lt;input type&#x3D;&quot;number&quot; id&#x3D;&quot;amount-one&quot; placeholder&#x3D;&quot;0&quot; value&#x3D;&quot;1&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">     &lt;&#x2F;div&gt;</span><br><span class="line">   &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>完成後如下圖：<br>但還缺少了匯率轉換的選單，<br>下個部分來製作<br><img src="https://i.imgur.com/lPUTZT6.png"></p>
+<h3 id="新增轉換按鈕，以及轉換後的選單列以及輸入框"><a href="#新增轉換按鈕，以及轉換後的選單列以及輸入框" class="headerlink" title="新增轉換按鈕，以及轉換後的選單列以及輸入框"></a>新增轉換按鈕，以及轉換後的選單列以及輸入框</h3><p>避免兩份資料同步，切記要記得修改 id 以及 class 名稱</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;swap-rate-container&quot;&gt;</span><br><span class="line">        &lt;button class&#x3D;&quot;btn&quot; id&#x3D;&quot;rate&quot;&gt;Swap&lt;&#x2F;button&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;rate&quot; id&#x3D;&quot;rate&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &#x2F;&#x2F; 此區塊為顯示轉換率的數值</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">      &lt;div class&#x3D;&quot;currency&quot;&gt;</span><br><span class="line">        &lt;select id&#x3D;&quot;currency-two&quot;&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;AED&quot;&gt;AED&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;ARS&quot;&gt;ARS&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;AUD&quot;&gt;AUD&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;BGN&quot;&gt;BGN&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;BRL&quot;&gt;BRL&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;BSD&quot;&gt;BSD&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;CAD&quot;&gt;CAD&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;CHF&quot;&gt;CHF&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;CLP&quot;&gt;CLP&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;CNY&quot;&gt;CNY&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;COP&quot;&gt;COP&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;CZK&quot;&gt;CZK&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;DKK&quot;&gt;DKK&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;DOP&quot;&gt;DOP&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;EGP&quot;&gt;EGP&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;EUR&quot; selected&gt;EUR&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;FJD&quot;&gt;FJD&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;GBP&quot;&gt;GBP&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;GTQ&quot;&gt;GTQ&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;HKD&quot;&gt;HKD&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;HRK&quot;&gt;HRK&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;HUF&quot;&gt;HUF&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;IDR&quot;&gt;IDR&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;ILS&quot;&gt;ILS&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;INR&quot;&gt;INR&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;ISK&quot;&gt;ISK&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;JPY&quot;&gt;JPY&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;KRW&quot;&gt;KRW&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;KZT&quot;&gt;KZT&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;MXN&quot;&gt;MXN&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;MYR&quot;&gt;MYR&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;NOK&quot;&gt;NOK&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;NZD&quot;&gt;NZD&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;PAB&quot;&gt;PAB&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;PEN&quot;&gt;PEN&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;PHP&quot;&gt;PHP&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;PKR&quot;&gt;PKR&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;PLN&quot;&gt;PLN&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;PYG&quot;&gt;PYG&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;RON&quot;&gt;RON&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;RUB&quot;&gt;RUB&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;SAR&quot;&gt;SAR&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;SEK&quot;&gt;SEK&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;SGD&quot;&gt;SGD&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;THB&quot;&gt;THB&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;TRY&quot;&gt;TRY&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;TWD&quot;&gt;TWD&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;UAH&quot;&gt;UAH&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;USD&quot;&gt;USD&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;UYU&quot;&gt;UYU&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;VND&quot;&gt;VND&lt;&#x2F;option&gt;</span><br><span class="line">          &lt;option value&#x3D;&quot;ZAR&quot;&gt;ZAR&lt;&#x2F;option&gt;</span><br><span class="line">        &lt;&#x2F;select&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;number&quot; id&#x3D;&quot;amount-two&quot; placeholder&#x3D;&quot;0&quot; &#x2F;&gt; </span><br><span class="line">        &#x2F;&#x2F; 這邊不需要設定 value ，因為 value 由上方做決定</span><br><span class="line">        </span><br><span class="line">      &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="設定預設顏色-amp-CSS-起手式-amp-垂直水平置中"><a href="#設定預設顏色-amp-CSS-起手式-amp-垂直水平置中" class="headerlink" title="設定預設顏色&amp; CSS 起手式&amp; 垂直水平置中"></a>設定預設顏色&amp; CSS 起手式&amp; 垂直水平置中</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">    --primary-<span class="attribute">color</span>: <span class="number">#5fbaa7</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#f4f4f4</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: Arial, Helvetica, sans-serif;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="美化貨幣選項外觀與輸入框"><a href="#美化貨幣選項外觀與輸入框" class="headerlink" title="美化貨幣選項外觀與輸入框"></a>美化貨幣選項外觀與輸入框</h3><p><code>background: transparent</code>是黑色且全透明 rgba(0,0,0,0)，<br>如果一個元素需要將他覆蓋在另外一個元素上，而我們又需要顯示下面的元素，就會使用到此屬性。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.currency</span> select &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">10px</span> <span class="number">30px</span> <span class="number">10px</span> <span class="number">10px</span>;</span><br><span class="line">  <span class="comment">/*  取消 selected 預設樣式  */</span></span><br><span class="line">  -moz-appearance: none;</span><br><span class="line">  -webkit-appearance: none;</span><br><span class="line">  appearance: none;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#dedede</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">  <span class="comment">/*  rgba(0,0,0,0)  */</span></span><br><span class="line">  <span class="attribute">background</span>: transparent;</span><br><span class="line">  <span class="comment">/*  向下的三角形的 icon  */</span></span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">&quot;data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%20000002%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E&quot;</span>);</span><br><span class="line">  <span class="attribute">background-position</span>: right <span class="number">10px</span> top <span class="number">50%</span>, <span class="number">0</span>, <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background-size</span>: <span class="number">12px</span> auto, <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*  輸入選項  */</span></span><br><span class="line"><span class="selector-class">.currency</span> <span class="selector-tag">input</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background</span>: transparent;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: right;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="美化匯率的顯示外觀"><a href="#美化匯率的顯示外觀" class="headerlink" title="美化匯率的顯示外觀"></a>美化匯率的顯示外觀</h3><p><code>outline: 0</code>，點下去後，預設會出現的線條外框樣式。</p>
+<p><code>@media (max-width: 600px)</code>，當螢幕寬度小於600時，改變輸入框與h1的大小。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.swap-rate-container</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.rate</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">var</span>(--primary-color);</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">select<span class="selector-pseudo">:focus</span>,</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus</span>,</span><br><span class="line"><span class="selector-tag">button</span><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">  <span class="attribute">outline</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@media</span> (<span class="attribute">max-width</span>: <span class="number">600px</span>) &#123;</span><br><span class="line">  <span class="selector-class">.currency</span> <span class="selector-tag">input</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><h3 id="設定變數讀取表單變化"><a href="#設定變數讀取表單變化" class="headerlink" title="設定變數讀取表單變化"></a>設定變數讀取表單變化</h3><p><code>addEventListener</code> 和電影選位的下拉式選單讀取方法一樣，都是使用change。</p>
+<ul>
+<li>input 事件： 當 input、 textarea 以及帶有 contenteditable 的元素內容被改變時，就會觸發 input 事件。</li>
+<li>change 事件： 當 input、select、textarea、radio、checkbox 等表單元素被改變時觸發。 但與 input 事件不同的是，<blockquote>
+<p> __input 事件會在輸入框輸入內容的當下觸發__，<br><strong>而 change 事件則是在目前焦點離開輸入框後才觸發。</strong></p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 選擇要轉換的匯率1(ex TWD)</span></span><br><span class="line"><span class="keyword">const</span> currencyEl_one = <span class="built_in">document</span>.getElementById(<span class="string">&quot;currency-one&quot;</span>);</span><br><span class="line"><span class="comment">// 匯率的總計1</span></span><br><span class="line"><span class="keyword">const</span> amountEl_one = <span class="built_in">document</span>.getElementById(<span class="string">&quot;amount-one&quot;</span>);</span><br><span class="line"><span class="comment">// 選擇要轉換的匯率2(ex USD)</span></span><br><span class="line"><span class="keyword">const</span> currencyEl_two = <span class="built_in">document</span>.getElementById(<span class="string">&quot;currency-two&quot;</span>);</span><br><span class="line"><span class="comment">// 匯率的總計2</span></span><br><span class="line"><span class="keyword">const</span> amountEl_two = <span class="built_in">document</span>.getElementById(<span class="string">&quot;amount-two&quot;</span>);</span><br><span class="line"><span class="comment">// 顯示匯率的文字</span></span><br><span class="line"><span class="keyword">const</span> rateEl = <span class="built_in">document</span>.getElementById(<span class="string">&quot;rate&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//swap button</span></span><br><span class="line"><span class="keyword">const</span> swap = <span class="built_in">document</span>.getElementById(<span class="string">&quot;swap&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//Fetch exchage rates and update the DOM</span></span><br><span class="line"><span class="comment">// 取得匯率更新使用(fetch) 以及 把取得的資料更新 DOM</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">caclulate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;GOGO&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Event Listeners</span></span><br><span class="line"><span class="comment">//下拉選單的變化是使用change</span></span><br><span class="line">currencyEl_one.addEventListener(<span class="string">&quot;change&quot;</span>, caclulate);</span><br><span class="line"><span class="comment">// 輸入框是使用input</span></span><br><span class="line">amountEl_one.addEventListener(<span class="string">&quot;input&quot;</span>, caclulate);</span><br><span class="line">currencyEl_two.addEventListener(<span class="string">&quot;change&quot;</span>, caclulate);</span><br><span class="line">amountEl_two.addEventListener(<span class="string">&quot;input&quot;</span>, caclulate);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 呼叫函式</span></span><br><span class="line">caclulate();</span><br></pre></td></tr></table></figure>
+
+<p>更動 select 欄位會顯示如下：<br><img src="https://i.imgur.com/AIJVE78.png"></p>
+<h3 id="透過-Fetch-串接取得匯率資料"><a href="#透過-Fetch-串接取得匯率資料" class="headerlink" title="透過 Fetch() 串接取得匯率資料"></a>透過 Fetch() 串接取得匯率資料</h3><h4 id="何謂-Fetch"><a href="#何謂-Fetch" class="headerlink" title="何謂 Fetch?"></a>何謂 Fetch?</h4><blockquote>
+<ul>
+<li>fetch 會使用 ES6 的 Promise 作回應</li>
+<li>then 作為下一步</li>
+<li>catch 作為錯誤回應 (404, 500…)<br>回傳的為 ReadableStream 物件，需要使用不同資料類型使用對應方法，才能正確取得資料物件。</li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Fetch </span></span><br><span class="line">fetch(<span class="string">&#x27;https://randomuser.me/api/&#x27;</span>, &#123;&#125;)</span><br><span class="line">  .then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 這裡會得到一個 ReadableStream 的物件</span></span><br><span class="line">    <span class="built_in">console</span>.log(response);</span><br><span class="line">    <span class="comment">// 可以透過 blob(), json(), text() 轉成可用的資訊</span></span><br><span class="line">    <span class="keyword">return</span> response.json(); </span><br><span class="line">  &#125;).then(<span class="function">(<span class="params">jsonData</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(jsonData);</span><br><span class="line">  &#125;).catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;錯誤:&#x27;</span>, err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>fetch</code> 後方會接 <code>then()</code>，這是 Promise 的特性，資料取得後可在 then 裡面接收。<br><code>return response.json();</code> 的資料則會傳到下一個 <code>then()</code></p>
+</blockquote>
+<hr>
+<p>以下為此專案實作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Fetch exchange rates and update the DOM</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">caclulate</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> currency_one = currencyEl_one.value;</span><br><span class="line">    <span class="keyword">const</span> currency_two = currencyEl_two.value;</span><br><span class="line"><span class="comment">// 使用網址更改最後的部分就可以取得更新選擇的資料</span></span><br><span class="line">    fetch(<span class="string">`https://api.exchangerate-api.com/v4/latest/<span class="subst">$&#123;currency_one&#125;</span>`</span>)</span><br><span class="line"><span class="comment">// 取得的檔案為 json 格式，所以在 fetch 取得檔案之後</span></span><br><span class="line"><span class="comment">// 透過json()的方法處理檔案</span></span><br><span class="line">    .then(<span class="function"><span class="params">res</span> =&gt;</span> res.json()) </span><br><span class="line">    .then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line"><span class="comment">// 查看資料是否正確執行</span></span><br><span class="line">        <span class="built_in">console</span>.log(data)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下為成功切換 select 貨幣執行畫面：<br><img src="https://i.imgur.com/wxy3r4P.png"></p>
+<p><a target="_blank" rel="noopener" href="https://wcc723.github.io/javascript/2017/12/28/javascript-fetch/">Fetch 詳細解說</a></p>
+<p>網址的最後為貨幣的種類，所以在最後設變數，就可以即時取得不同種類的貨幣資料。<br><a target="_blank" rel="noopener" href="https://api.exchangerate-api.com/v4/latest/TWD">https://api.exchangerate-api.com/v4/latest/TWD</a></p>
+<p>會取到的 json 資料，透過語法 json() 變成較容易觀看的格式。</p>
+<h3 id="顯示出選擇的貨幣匯率-amp-計算轉換後的價格"><a href="#顯示出選擇的貨幣匯率-amp-計算轉換後的價格" class="headerlink" title="顯示出選擇的貨幣匯率 &amp; 計算轉換後的價格"></a>顯示出選擇的貨幣匯率 &amp; 計算轉換後的價格</h3><p>使用ES6語法‵‵，裡面使用$將變數放進去。</p>
+<p><code>toFixed(N)</code>為取小數第N位。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> fetch(<span class="string">`https://api.exchangerate-api.com/v4/latest/<span class="subst">$&#123;currency_one&#125;</span>`</span>)</span><br><span class="line">    .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">    .then(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(data);</span><br><span class="line">      <span class="keyword">const</span> rate = data.rates[currency_two];</span><br><span class="line">      rateEl.innerText = <span class="string">`1 <span class="subst">$&#123;currency_one&#125;</span> = <span class="subst">$&#123;rate&#125;</span> <span class="subst">$&#123;currency_two&#125;</span>`</span>;</span><br><span class="line">      amountEl_two.value = (amountEl_one.value * rate).toFixed(<span class="number">2</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="點選swap按鈕可以上下顛倒貨幣"><a href="#點選swap按鈕可以上下顛倒貨幣" class="headerlink" title="點選swap按鈕可以上下顛倒貨幣"></a>點選swap按鈕可以上下顛倒貨幣</h3><p>設立變數幫助進行調換。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">swap.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">//先將one放到temp裡</span></span><br><span class="line">  <span class="keyword">const</span> temp = currencyEl_one.value;</span><br><span class="line">  <span class="comment">//再將two丟到one裡</span></span><br><span class="line">  currencyEl_one.value = currencyEl_two.value;</span><br><span class="line">  <span class="comment">//原先在temp裡面的one放到two裡面，完成交換。</span></span><br><span class="line">  currencyEl_two.value = temp;</span><br><span class="line">  caclulate();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10192175">addeventListener 監聽事件詳細解說</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/%E4%BD%9C%E5%93%81%E9%9B%86/" rel="tag"># 作品集</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/event%20%E9%80%B2%E9%9A%8E%E6%87%89%E7%94%A8%20keycode,blur/" rel="prev" title="JavaScript Event Listeners">
+      <i class="fa fa-chevron-left"></i> JavaScript Event Listeners
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Expense%20Tracker/" rel="next" title="Expense Tracker">
+      Expense Tracker <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Exchange-Rate-Calculate"><span class="nav-number">1.</span> <span class="nav-text">Exchange Rate Calculate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">1.1.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">1.2.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E5%9C%96%E7%89%87%EF%BC%86%E9%81%B8%E5%96%AE%E4%B8%8B%E6%8B%89%E5%88%97%EF%BC%86%E8%BC%B8%E5%85%A5%E6%A1%86"><span class="nav-number">1.2.1.</span> <span class="nav-text">設定圖片＆選單下拉列＆輸入框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E8%BD%89%E6%8F%9B%E6%8C%89%E9%88%95%EF%BC%8C%E4%BB%A5%E5%8F%8A%E8%BD%89%E6%8F%9B%E5%BE%8C%E7%9A%84%E9%81%B8%E5%96%AE%E5%88%97%E4%BB%A5%E5%8F%8A%E8%BC%B8%E5%85%A5%E6%A1%86"><span class="nav-number">1.2.2.</span> <span class="nav-text">新增轉換按鈕，以及轉換後的選單列以及輸入框</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS"><span class="nav-number">1.3.</span> <span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E9%A0%90%E8%A8%AD%E9%A1%8F%E8%89%B2-amp-CSS-%E8%B5%B7%E6%89%8B%E5%BC%8F-amp-%E5%9E%82%E7%9B%B4%E6%B0%B4%E5%B9%B3%E7%BD%AE%E4%B8%AD"><span class="nav-number">1.3.1.</span> <span class="nav-text">設定預設顏色&amp; CSS 起手式&amp; 垂直水平置中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%8E%E5%8C%96%E8%B2%A8%E5%B9%A3%E9%81%B8%E9%A0%85%E5%A4%96%E8%A7%80%E8%88%87%E8%BC%B8%E5%85%A5%E6%A1%86"><span class="nav-number">1.3.2.</span> <span class="nav-text">美化貨幣選項外觀與輸入框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%8E%E5%8C%96%E5%8C%AF%E7%8E%87%E7%9A%84%E9%A1%AF%E7%A4%BA%E5%A4%96%E8%A7%80"><span class="nav-number">1.3.3.</span> <span class="nav-text">美化匯率的顯示外觀</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS"><span class="nav-number">1.4.</span> <span class="nav-text">JS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E8%AE%8A%E6%95%B8%E8%AE%80%E5%8F%96%E8%A1%A8%E5%96%AE%E8%AE%8A%E5%8C%96"><span class="nav-number">1.4.1.</span> <span class="nav-text">設定變數讀取表單變化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E9%81%8E-Fetch-%E4%B8%B2%E6%8E%A5%E5%8F%96%E5%BE%97%E5%8C%AF%E7%8E%87%E8%B3%87%E6%96%99"><span class="nav-number">1.4.2.</span> <span class="nav-text">透過 Fetch() 串接取得匯率資料</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%95%E8%AC%82-Fetch"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">何謂 Fetch?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%AF%E7%A4%BA%E5%87%BA%E9%81%B8%E6%93%87%E7%9A%84%E8%B2%A8%E5%B9%A3%E5%8C%AF%E7%8E%87-amp-%E8%A8%88%E7%AE%97%E8%BD%89%E6%8F%9B%E5%BE%8C%E7%9A%84%E5%83%B9%E6%A0%BC"><span class="nav-number">1.4.3.</span> <span class="nav-text">顯示出選擇的貨幣匯率 &amp; 計算轉換後的價格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%9E%E9%81%B8swap%E6%8C%89%E9%88%95%E5%8F%AF%E4%BB%A5%E4%B8%8A%E4%B8%8B%E9%A1%9B%E5%80%92%E8%B2%A8%E5%B9%A3"><span class="nav-number">1.4.4.</span> <span class="nav-text">點選swap按鈕可以上下顛倒貨幣</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/Exchange%20Rate%20Calculate/";
+    this.page.identifier = "2021/04/07/Exchange Rate Calculate/";
+    this.page.title = "Exchange Rate Calculate";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

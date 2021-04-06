@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="CSS 語言是專為定義網頁的版面設計（layout）而發明的，你可以透過它指定文件中各項 HTML 元件的視覺樣式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探 CSS">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/CSS/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="CSS 語言是專為定義網頁的版面設計（layout）而發明的，你可以透過它指定文件中各項 HTML 元件的視覺樣式。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/MEWWPQ8.png">
+<meta property="og:image" content="https://i.imgur.com/X8x2Jej.png">
+<meta property="og:image" content="https://i.imgur.com/lC84z4b.png">
+<meta property="article:published_time" content="2021-04-06T17:57:43.937Z">
+<meta property="article:modified_time" content="2021-04-06T18:47:55.039Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/MEWWPQ8.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/CSS/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>初探 CSS | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/CSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          初探 CSS
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:43 / Modified: 02:47:55" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:43+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/CSS/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/CSS/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">CSS 語言是專為定義網頁的版面設計（layout）而發明的，你可以透過它指定文件中各項 HTML 元件的視覺樣式。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><h6 id="tags-CSS"><a href="#tags-CSS" class="headerlink" title="tags: CSS"></a>tags: <code>CSS</code></h6><h4 id="CSS-語言是專為定義網頁的版面設計（layout）而發明的，你可以透過它指定文件中各項-HTML-元件的視覺樣式。"><a href="#CSS-語言是專為定義網頁的版面設計（layout）而發明的，你可以透過它指定文件中各項-HTML-元件的視覺樣式。" class="headerlink" title="CSS 語言是專為定義網頁的版面設計（layout）而發明的，你可以透過它指定文件中各項 HTML 元件的視覺樣式。"></a>CSS 語言是專為定義網頁的版面設計（layout）而發明的，你可以透過它指定文件中各項 HTML 元件的視覺樣式。</h4><h4 id="CSS-的全名是-Cascading-Style-Sheets，階層樣式表。而所謂的「階層式-cascading-」，指的是我們可以在同一個元件上套用不同樣式，樣式與樣式之間則存在相對的階層關係。"><a href="#CSS-的全名是-Cascading-Style-Sheets，階層樣式表。而所謂的「階層式-cascading-」，指的是我們可以在同一個元件上套用不同樣式，樣式與樣式之間則存在相對的階層關係。" class="headerlink" title="CSS 的全名是 Cascading Style Sheets，階層樣式表。而所謂的「階層式 (cascading)」，指的是我們可以在同一個元件上套用不同樣式，樣式與樣式之間則存在相對的階層關係。"></a>CSS 的全名是 Cascading Style Sheets，階層樣式表。而所謂的「階層式 (cascading)」，指的是我們可以在同一個元件上套用不同樣式，樣式與樣式之間則存在相對的階層關係。</h4><hr>
+<p>CSS 語法規則<br>以這段 CSS 為例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line"> <span class="attribute">color</span>: <span class="number">#ff6600</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這段是一個 CSS 宣告的長相：<br><img src="https://i.imgur.com/MEWWPQ8.png"></p>
+<ul>
+<li>選擇器 (selector) 定義你的樣式對誰有作用，它對應的可能是 HTML 標籤名稱或者是 class 和 id 屬性，我們在後面會再介紹選擇器。<code>&#123;&#125;</code>：大括號包圍了一個宣告區域，任何寫在這個區域裡的設定，會對文件裡所有的 <code>&lt;h1&gt;</code> 標籤起作用。</li>
+<li>屬性與值：此圖片說明，我們宣告選擇器，也就是 <code>&lt;h1&gt;</code> 的「文字顏色」(color) 屬性的值是 #ff6600。請注意 CSS 是用冒號 ( : ) 而非等號 (=) 來設定。</li>
+<li>每條宣告用分號 ( ; ) 隔開</li>
+</ul>
+<hr>
+<h3 id="引用-CSS-方式"><a href="#引用-CSS-方式" class="headerlink" title="引用 CSS 方式"></a>引用 CSS 方式</h3><p><strong>1. 外部檔案引入 (建議方法)</strong></p>
+<p><strong><code>&lt;link rel=&#39;stylesheet&#39; href=&#39;style.css&#39;&gt;</code></strong></p>
+<blockquote>
+<ul>
+<li><code>&lt;link&gt;</code> 是一種「後設元素」(meta element)只能放在標頭裡，他可以載入外部檔案。<br>所以瀏覽器讀取到這一行時，就會自動載入 CSS 文件的全部內容。</li>
+<li><code>rel=&#39;stylesheet&#39;</code> 告訴文件載入的資源是樣式表，所以瀏覽器就知道要用讀 CSS 的方式去處理載入的內容。</li>
+<li><code>href=&#39;style.css&#39; href</code> 屬性和 <code>&lt;a&gt;</code> 標籤時的用法一樣，描述路徑，讓瀏覽器找得到檔案。</li>
+</ul>
+<p><img src="https://i.imgur.com/X8x2Jej.png"></p>
+</blockquote>
+<p><strong>2. 內嵌在 html檔案裡</strong></p>
+<p><strong><code>&lt;p style=&#39;color: red; font-size: 10pt;&#39;&gt;一段文字&lt;/p&gt;</code></strong></p>
+<blockquote>
+<p>這種宣告方式只會影響到這一個標籤，而不是所有的 <code>&lt;p&gt;</code>。<br>這是一個很簡便的作法，但 CSS 宣告混合在 HTML 結構中，無法進行管理。你可能會在寫 blog 時偶爾不得不這麼做(因為你無法在別人家的平台上開新檔案)。</p>
+<p>在 HTML 內嵌 STYLE 標籤，其效果比較可以從下圖看得出來，左邊是用 Sublime 編輯器在 HTML 裡先寫好，文字是紅色與文字 30pt 大。</p>
+<p><img src="https://i.imgur.com/lC84z4b.png"></p>
+</blockquote>
+<p><strong>3. 標頭裡的 style 標籤</strong> </p>
+<p><strong><code>&lt;style&gt;&lt;/style&gt;</code></strong></p>
+<blockquote>
+<p>這樣做會讓你影響到這份 HTML 文件裡所有的 <code>&lt;p&gt;</code>，如果你的網站真的只有&gt; 一張，這不失為一個快速的方法。然而，這樣做同樣有讓語法變得冗長，以及在檔案變多時維護困難的問題。當前的趨勢是將 HTML 和 CSS 分開維護，因此，請你習慣建立外部檔案來管理你的 CSS 樣式表。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;CSS 宣告&lt;&#x2F;title&gt;</span><br><span class="line">&lt;style&gt;</span><br><span class="line">p &#123; color: black; font-size: 10pt;&#125;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="註解-Comment"><a href="#註解-Comment" class="headerlink" title="註解 (Comment)"></a>註解 (Comment)</h3><p>要小心 CSS 的註解方式跟 HTML 不一樣，CSS 的註解是用 /* 與 */ 來包圍：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line"> <span class="attribute">color</span>: <span class="number">#FF6600</span>;    <span class="comment">/* 這是 Alpha Camp 最喜歡的橘紅色 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="多重選擇-整理程式碼"><a href="#多重選擇-整理程式碼" class="headerlink" title="多重選擇 (整理程式碼)"></a>多重選擇 (整理程式碼)</h3><p>你可以連結宣告多個 CSS 設定：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line"> <span class="attribute">font-family</span>: <span class="string">&quot;Helvetica&quot;</span>, <span class="string">&quot;Arial&quot;</span>, sans-serif;  <span class="comment">/* 指定字型 */</span></span><br><span class="line"> <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h2</span> &#123;</span><br><span class="line"> <span class="attribute">font-family</span>: <span class="string">&quot;Helvetica&quot;</span>, <span class="string">&quot;Arial&quot;</span>, sans-serif;</span><br><span class="line"> <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>font-family 字型選擇的意思，這邊設定的字型要以大多瀏覽器都相容支援的字型為主</p>
+<p>但在這裡，有沒有發現字型 (font) 那一行重覆在 h1 和 h2 出現？<br>也就是說，<code>&lt;h1&gt;</code> 與 <code>&lt;h2&gt;</code> 的字型其實是一樣，只有文字顏色 (font color) 不一樣。如果你總是這樣寫，當我們需要改變 <code>&lt;h1&gt;</code> 與 <code>&lt;h2&gt;</code>的字型是，很容易就會改了這邊、漏了那邊。所以，你需要學習做整理和合併：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>, <span class="selector-tag">h2</span> &#123;</span><br><span class="line"> <span class="attribute">font-family</span>: <span class="string">&quot;Helvetica&quot;</span>, <span class="string">&quot;Arial&quot;</span>, <span class="string">&quot;sans-serif&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line"> <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h2</span> &#123;</span><br><span class="line"> <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如此一來你就能統一管理 h1 和 h2 的字型了！</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/CSS%20%E5%B0%8E%E8%A6%BD%E5%88%97/" rel="prev" title="CSS NavBar 導覽列">
+      <i class="fa fa-chevron-left"></i> CSS NavBar 導覽列
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/CSS3%20(%E5%9C%93%E5%BC%A7%E3%80%81%E6%BC%B8%E5%B1%A4%E3%80%81%E9%99%B0%E5%BD%B1%E6%95%88%E6%9E%9C)/" rel="next" title="CSS3 (圓弧、漸層、陰影效果)">
+      CSS3 (圓弧、漸層、陰影效果) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS"><span class="nav-number">1.</span> <span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#tags-CSS"><span class="nav-number">1.0.0.0.0.1.</span> <span class="nav-text">tags: CSS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS-%E8%AA%9E%E8%A8%80%E6%98%AF%E5%B0%88%E7%82%BA%E5%AE%9A%E7%BE%A9%E7%B6%B2%E9%A0%81%E7%9A%84%E7%89%88%E9%9D%A2%E8%A8%AD%E8%A8%88%EF%BC%88layout%EF%BC%89%E8%80%8C%E7%99%BC%E6%98%8E%E7%9A%84%EF%BC%8C%E4%BD%A0%E5%8F%AF%E4%BB%A5%E9%80%8F%E9%81%8E%E5%AE%83%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E4%B8%AD%E5%90%84%E9%A0%85-HTML-%E5%85%83%E4%BB%B6%E7%9A%84%E8%A6%96%E8%A6%BA%E6%A8%A3%E5%BC%8F%E3%80%82"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">CSS 語言是專為定義網頁的版面設計（layout）而發明的，你可以透過它指定文件中各項 HTML 元件的視覺樣式。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS-%E7%9A%84%E5%85%A8%E5%90%8D%E6%98%AF-Cascading-Style-Sheets%EF%BC%8C%E9%9A%8E%E5%B1%A4%E6%A8%A3%E5%BC%8F%E8%A1%A8%E3%80%82%E8%80%8C%E6%89%80%E8%AC%82%E7%9A%84%E3%80%8C%E9%9A%8E%E5%B1%A4%E5%BC%8F-cascading-%E3%80%8D%EF%BC%8C%E6%8C%87%E7%9A%84%E6%98%AF%E6%88%91%E5%80%91%E5%8F%AF%E4%BB%A5%E5%9C%A8%E5%90%8C%E4%B8%80%E5%80%8B%E5%85%83%E4%BB%B6%E4%B8%8A%E5%A5%97%E7%94%A8%E4%B8%8D%E5%90%8C%E6%A8%A3%E5%BC%8F%EF%BC%8C%E6%A8%A3%E5%BC%8F%E8%88%87%E6%A8%A3%E5%BC%8F%E4%B9%8B%E9%96%93%E5%89%87%E5%AD%98%E5%9C%A8%E7%9B%B8%E5%B0%8D%E7%9A%84%E9%9A%8E%E5%B1%A4%E9%97%9C%E4%BF%82%E3%80%82"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">CSS 的全名是 Cascading Style Sheets，階層樣式表。而所謂的「階層式 (cascading)」，指的是我們可以在同一個元件上套用不同樣式，樣式與樣式之間則存在相對的階層關係。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%94%A8-CSS-%E6%96%B9%E5%BC%8F"><span class="nav-number">1.0.1.</span> <span class="nav-text">引用 CSS 方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%BB%E8%A7%A3-Comment"><span class="nav-number">1.0.2.</span> <span class="nav-text">註解 (Comment)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E9%87%8D%E9%81%B8%E6%93%87-%E6%95%B4%E7%90%86%E7%A8%8B%E5%BC%8F%E7%A2%BC"><span class="nav-number">1.0.3.</span> <span class="nav-text">多重選擇 (整理程式碼)</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/CSS/";
+    this.page.identifier = "2021/04/07/CSS/";
+    this.page.title = "初探 CSS";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="可以紀錄支出與收入的記帳簿。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Expense Tracker">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/Expense%20Tracker/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="可以紀錄支出與收入的記帳簿。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/OmsGG2R.png">
+<meta property="og:image" content="https://i.imgur.com/aozmZ1k.png">
+<meta property="og:image" content="https://i.imgur.com/ExlbcZk.png">
+<meta property="og:image" content="https://i.imgur.com/XryPhar.png">
+<meta property="og:image" content="https://i.imgur.com/JMBEMUX.png">
+<meta property="article:published_time" content="2021-04-06T17:57:44.520Z">
+<meta property="article:modified_time" content="2021-04-06T18:42:19.225Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="作品集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/OmsGG2R.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/Expense%20Tracker/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>Expense Tracker | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/Expense%20Tracker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Expense Tracker
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:44 / Modified: 02:42:19" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:44+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/%E4%BD%9C%E5%93%81%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">作品集</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/Expense%20Tracker/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/Expense Tracker/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">可以紀錄支出與收入的記帳簿。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Expense-Tracker"><a href="#Expense-Tracker" class="headerlink" title="Expense Tracker"></a>Expense Tracker</h1><h2 id="使用到的技能樹"><a href="#使用到的技能樹" class="headerlink" title="使用到的技能樹"></a>使用到的技能樹</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><ul>
+<li>label<h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3></li>
+<li>first-of-type</li>
+<li>input [type=” “]</li>
+<li>outline<h3 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h3></li>
+<li>jQuery</li>
+<li>map()，filter()，reduce()</li>
+<li>math.random()</li>
+<li>math.floor()</li>
+<li>LocalStorage</li>
+</ul>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a><a href="https://michael0520.github.io/Expense_Tracker/index.html">Demo</a></h3><p>可以紀錄支出與收入的記帳簿。<br><img src="https://i.imgur.com/OmsGG2R.png"></p>
+<h2 id="HTML-1"><a href="#HTML-1" class="headerlink" title="HTML"></a>HTML</h2><h3 id="上半部架構"><a href="#上半部架構" class="headerlink" title="上半部架構"></a>上半部架構</h3><p><img src="https://i.imgur.com/aozmZ1k.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;Expense Tracker&lt;&#x2F;h2&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">  &lt;h4&gt;Your Balance&lt;&#x2F;h4&gt;</span><br><span class="line">  &lt;h1 id&#x3D;&quot;balance&quot;&gt;$0.00&lt;&#x2F;h1&gt;</span><br><span class="line"></span><br><span class="line">  &lt;div class&#x3D;&quot;inc-exp-container&quot;&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h4&gt;Income&lt;&#x2F;h4&gt;</span><br><span class="line">      &lt;p id&#x3D;&quot;money-plus&quot; class&#x3D;&quot;money plus&quot;&gt;+$0.00&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h4&gt;Expense&lt;&#x2F;h4&gt;</span><br><span class="line">      &lt;p id&#x3D;&quot;money-minus&quot; class&#x3D;&quot;money minus&quot;&gt;-$0.00&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="下半部架構"><a href="#下半部架構" class="headerlink" title="下半部架構"></a>下半部架構</h3><h4 id="js-動態增加-li"><a href="#js-動態增加-li" class="headerlink" title="js 動態增加 li"></a>js 動態增加 li</h4><p><img src="https://i.imgur.com/ExlbcZk.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;History&lt;&#x2F;h3&gt;</span><br><span class="line">       &lt;ul id&#x3D;&quot;list&quot; class&#x3D;&quot;list&quot;&gt;</span><br><span class="line">         &lt;li class&#x3D;&quot;minus&quot;&gt;</span><br><span class="line">           Cash &lt;span&gt;-$400&lt;&#x2F;span&gt;&lt;button class&#x3D;&quot;delete-btn&quot;&gt;x&lt;&#x2F;button&gt;</span><br><span class="line">         &lt;&#x2F;li&gt;</span><br><span class="line">       &lt;&#x2F;ul&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="表單輸入框與-submit-按鈕"><a href="#表單輸入框與-submit-按鈕" class="headerlink" title="表單輸入框與 submit 按鈕"></a>表單輸入框與 submit 按鈕</h4><p><img src="https://i.imgur.com/XryPhar.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;Add new transaction&lt;&#x2F;h3&gt;</span><br><span class="line">        &lt;form id&#x3D;&quot;form&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;form-control&quot;&gt;</span><br><span class="line">            &lt;label for&#x3D;&quot;text&quot;&gt;Text&lt;&#x2F;label&gt;</span><br><span class="line">            &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Enter text...&quot; &#x2F;&gt;</span><br><span class="line">          &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">          &lt;div class&#x3D;&quot;form-control&quot;&gt;</span><br><span class="line">            &lt;label for&#x3D;&quot;amount&quot;</span><br><span class="line">              &gt;Amount &lt;br &#x2F;&gt;</span><br><span class="line">              (negative - expense , positive - income)</span><br><span class="line">            &lt;&#x2F;label&gt;</span><br><span class="line">            &lt;input type&#x3D;&quot;number&quot; id&#x3D;&quot;amount&quot; placeholder&#x3D;&quot;Enter amount...&quot; &#x2F;&gt;</span><br><span class="line">          &lt;&#x2F;div&gt;</span><br><span class="line">          &lt;button class&#x3D;&quot;btn&quot;&gt;Add transaction&lt;&#x2F;button&gt;</span><br><span class="line">        &lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CSS-1"><a href="#CSS-1" class="headerlink" title="CSS"></a>CSS</h2><h3 id="設立常用顏色變數＆起手式"><a href="#設立常用顏色變數＆起手式" class="headerlink" title="設立常用顏色變數＆起手式"></a>設立常用顏色變數＆起手式</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">    --<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">3px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.12</span>), <span class="number">0</span> <span class="number">1px</span> <span class="number">2px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.24</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#f7f7f7</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="快速置中"><a href="#快速置中" class="headerlink" title="快速置中"></a>快速置中</h3><p>30px 為上下預留的距離，左右使用 auto，讓網頁自己計算就會達成置中的效果。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">30px</span> auto;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">350px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="first-of-type選擇器"><a href="#first-of-type選擇器" class="headerlink" title="first-of-type選擇器"></a>first-of-type選擇器</h3><p>這邊的效果為，選擇到 income 的 div，所以使用到 first-of-type，然後在使用 border-right。<br><img src="https://i.imgur.com/JMBEMUX.png"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.inc-exp-container</span> &gt; <span class="selector-tag">div</span><span class="selector-pseudo">:first</span>-of-type &#123;</span><br><span class="line">  <span class="attribute">border-right</span>: <span class="number">1px</span> solid <span class="number">#dedede</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="用-type-選擇-input"><a href="#用-type-選擇-input" class="headerlink" title="用 type 選擇 input"></a>用 type 選擇 input</h3><p>可以快速篩選元素，去加上樣式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&#x27;text&#x27;</span>]</span>, <span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&#x27;number&#x27;</span>]</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#dedede</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="opacity-來預設消失元素，使用偽元素來條件式顯示"><a href="#opacity-來預設消失元素，使用偽元素來條件式顯示" class="headerlink" title="opacity 來預設消失元素，使用偽元素來條件式顯示"></a>opacity 來預設消失元素，使用偽元素來條件式顯示</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.delete-btn</span> &#123;</span><br><span class="line"><span class="comment">/* 預設消失 */</span></span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line"><span class="comment">/*   0.3 秒後顯示出，增加使用者體驗   */</span></span><br><span class="line">    <span class="attribute">transition</span>: opacity <span class="number">0.3s</span> ease;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 滑鼠滑入後來顯示 */</span></span><br><span class="line"><span class="selector-class">.list</span> <span class="selector-tag">li</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.delete-btn</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="去除點選的預設外框"><a href="#去除點選的預設外框" class="headerlink" title="去除點選的預設外框"></a>去除點選的預設外框</h3><p>瀏覽器都會有個預設外框，<br>outline 設定為 0，就可以取消了</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.btn</span><span class="selector-pseudo">:focus</span>,</span><br><span class="line"><span class="selector-class">.delete-btn</span><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">  <span class="attribute">outline</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下為此專案的完整 CSS code ：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">    --<span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">3px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.12</span>), <span class="number">0</span> <span class="number">1px</span> <span class="number">2px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.24</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#f7f7f7</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">30px</span> auto;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">350px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="comment">/* 字首 1px */</span></span><br><span class="line">    <span class="attribute">letter-spacing</span>: <span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h3</span> &#123;</span><br><span class="line">    <span class="attribute">border-bottom</span>: <span class="number">1px</span> solid <span class="number">#bbb</span>;</span><br><span class="line">    <span class="attribute">padding-bottom</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">40px</span> <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h4</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">text-transform</span>: uppercase;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.inc-exp-container</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">var</span>(--box-shadow);</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">20px</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.inc-exp-container</span>&gt;<span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.inc-exp-container</span>&gt;<span class="selector-tag">div</span><span class="selector-pseudo">:first</span>-of-type &#123;</span><br><span class="line">    <span class="attribute">border-right</span>: <span class="number">1px</span> solid <span class="number">#dedede</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.money</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">letter-spacing</span>: <span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.money</span><span class="selector-class">.plus</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#2ecc71</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.money</span><span class="selector-class">.minus</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#c0392b</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">label</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&#x27;text&#x27;</span>]</span>, <span class="selector-tag">input</span><span class="selector-attr">[type=<span class="string">&#x27;number&#x27;</span>]</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#dedede</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#9c88ff</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">var</span>(--box-shadow);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">display</span>: block;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">16px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">0</span> <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.btn</span><span class="selector-pseudo">:focus</span> <span class="selector-class">.delete-btn</span><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">    <span class="attribute">outline</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list</span> &#123;</span><br><span class="line">    <span class="attribute">list-style-type</span>: none;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">40px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="built_in">var</span>(--box-shadow);</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">10px</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list</span> <span class="selector-tag">li</span><span class="selector-class">.plus</span> &#123;</span><br><span class="line">    <span class="attribute">border-right</span>: <span class="number">5px</span> solid <span class="number">#2ecc71</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list</span> <span class="selector-tag">li</span><span class="selector-class">.minus</span> &#123;</span><br><span class="line">    <span class="attribute">border-right</span>: <span class="number">5px</span> solid <span class="number">#c0392b</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.delete-btn</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#e74c3c</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">2px</span> <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">translate</span>(-<span class="number">100%</span>, -<span class="number">50%</span>);</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">transition</span>: opacity <span class="number">0.3s</span> ease;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.list</span> <span class="selector-tag">li</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.delete-btn</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="JS-1"><a href="#JS-1" class="headerlink" title="JS"></a>JS</h2><p>練習 jQuery ，以下將 JS 轉換為 jQuery</p>
+<h3 id="設定變數"><a href="#設定變數" class="headerlink" title="設定變數"></a>設定變數</h3><blockquote>
+<p>原生 JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> balance = <span class="built_in">document</span>.getElementById(<span class="string">&quot;balance&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> money_plus = <span class="built_in">document</span>.getElementById(<span class="string">&quot;money-plus&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> money_minus = <span class="built_in">document</span>.getElementById(<span class="string">&quot;money-minus&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> list = <span class="built_in">document</span>.getElementById(<span class="string">&quot;list&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> form = <span class="built_in">document</span>.getElementById(<span class="string">&quot;form&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> text = <span class="built_in">document</span>.getElementById(<span class="string">&quot;text&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> amount = <span class="built_in">document</span>.getElementById(<span class="string">&quot;amount&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#balance&#x27;</span>)</span><br><span class="line">$(<span class="string">&#x27;#money-plus&#x27;</span>)</span><br><span class="line">$(<span class="string">&#x27;#money-minus&#x27;</span>)</span><br><span class="line">$(<span class="string">&#x27;#list&#x27;</span>)</span><br><span class="line">$(<span class="string">&#x27;#form&#x27;</span>)</span><br><span class="line">$(<span class="string">&#x27;#text&#x27;</span>)</span><br><span class="line">$(<span class="string">&#x27;#amount&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="新增資料到-list-上測試"><a href="#新增資料到-list-上測試" class="headerlink" title="新增資料到 list 上測試"></a>新增資料到 list 上測試</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dummyTransactions = [</span><br><span class="line"> &#123; <span class="attr">id</span> :<span class="number">1</span> , <span class="attr">text</span> :<span class="string">&#x27;Flower&#x27;</span>,<span class="attr">amount</span> :<span class="number">12</span> &#125;,</span><br><span class="line"> &#123; <span class="attr">id</span> :<span class="number">2</span> , <span class="attr">text</span> :<span class="string">&#x27;box&#x27;</span>, <span class="attr">amount</span> : -<span class="number">500</span> &#125;,   </span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p><strong>函式的概念</strong></p>
+<ol>
+<li>判斷輸入的符號 (sign) 為正或負數，產生新的li</li>
+<li>判斷輸入的值為正或負數(item)</li>
+<li>判斷完後，將 item 放到 list 上</li>
+</ol>
+<p><code>Math.abs()</code> 會傳回絕對值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新增陣列，測試addTransactionDOM()是否可以運行</span></span><br><span class="line"><span class="keyword">const</span> dummyTransactions = [</span><br><span class="line"> &#123; <span class="attr">id</span> :<span class="number">1</span> , <span class="attr">text</span> :<span class="string">&#x27;Flower&#x27;</span>,<span class="attr">amount</span> :<span class="number">12</span> &#125;,</span><br><span class="line"> &#123; <span class="attr">id</span> :<span class="number">2</span> , <span class="attr">text</span> :<span class="string">&#x27;box&#x27;</span>, <span class="attr">amount</span> : -<span class="number">500</span> &#125;,   </span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> transactions = dummyTransactions;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Add transactions to DOM list</span></span><br><span class="line"><span class="comment">// 將動態資料轉換成 li 放到 list</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addTransactionDOM</span>(<span class="params">transaction</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Get sign</span></span><br><span class="line">  <span class="comment">// if 判斷式縮寫 `?(true 執行):(false 執行)`</span></span><br><span class="line">  <span class="comment">// if(transaction.amount &lt; 0) sign 就是 -</span></span><br><span class="line">  <span class="keyword">const</span> sign = transaction.amount &lt; <span class="number">0</span> ? <span class="string">&quot;-&quot;</span> : <span class="string">&quot;+&quot;</span>;</span><br><span class="line">  <span class="comment">// 產生新的 li 元素</span></span><br><span class="line">  <span class="keyword">const</span> item = <span class="built_in">document</span>.createElement(<span class="string">&quot;li&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Add class based on value</span></span><br><span class="line">  <span class="comment">// 把產生新的 li 元素加上 class</span></span><br><span class="line">  <span class="comment">// 判斷當 transactions的value，amount &lt; 0 放minus，&gt; 0 放plus</span></span><br><span class="line">  item.classList.add(transaction.amount &lt; <span class="number">0</span> ? <span class="string">&quot;minus&quot;</span> : <span class="string">&quot;plus&quot;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 將資料動態讀入，使用$&#123;&#125;讀取變數。</span></span><br><span class="line">  item.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">        <span class="subst">$&#123;transaction.text&#125;</span> &lt;span&gt;<span class="subst">$&#123;sign&#125;</span><span class="subst">$&#123;<span class="built_in">Math</span>.abs(transaction.amount)&#125;</span></span></span><br><span class="line"><span class="string">        &lt;/span&gt; &lt;button class = &quot;delete-btn&quot; &gt;x&lt;/button&gt;</span></span><br><span class="line"><span class="string">       `</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//使用appenChild，將item接在list</span></span><br><span class="line">  list.appendChild(item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="init"><a href="#init" class="headerlink" title="init()"></a>init()</h4><p>使 transactions (預先做好的資料)，每一筆都丟到    addTransactionDOM()。</p>
+<p>預設 listinnerHTML = “”為空值，不設定的話會出現HTML 裡預設的 Cash -400。</p>
+<blockquote>
+<p>原生Js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Init app</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 預設 list 為空，不設定的話會出現 HTML 裡設定 Cash 的 -400 元</span></span><br><span class="line">  list.innerHTML = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="comment">// 將 transactions 裡面的每一筆資料</span></span><br><span class="line">  <span class="comment">// 都執行 addTransactionDOM()</span></span><br><span class="line">  transactions.forEach(addTransactionDOM);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">init();</span><br></pre></td></tr></table></figure>
+
+<h3 id="設定總金額，支出，收入的元素"><a href="#設定總金額，支出，收入的元素" class="headerlink" title="設定總金額，支出，收入的元素"></a>設定總金額，支出，收入的元素</h3><ul>
+<li><code>map()</code>需要回傳一個值，他會透過函式內所回傳的值組合成一個陣列。</li>
+<li><code>reduce()</code> 方法像是一個累加器，可以陣列中每項元素（由左至右）傳入回呼函式，將陣列化為單一值。</li>
+<li><code>filter()</code> 會回傳一個陣列，其條件是 return 後方為 true 的物件，適合用在搜尋符合條件的資料(本範例都是用來搜尋符合的資料)。</li>
+</ul>
+<blockquote>
+<p>語法：**<code>.reduce((acc, item) =&gt; (acc += item), 0)</code>**</p>
+<blockquote>
+<p>最後面的 0，是第一次呼叫 callback 時，要傳入的累加器的初始值。若沒有提供初始值，<br>則原陣列的第一個元素將會被當作初始的累加器。<br>但最好是都給一個初始值，必免有 bug，目前在這邊的程式不會影響到。</p>
+</blockquote>
+</blockquote>
+<h4 id="updateValues"><a href="#updateValues" class="headerlink" title="updateValues()"></a>updateValues()</h4><ol>
+<li>使用<code>map()</code>取得新函數，函數裡有每一個函數的 amout 數值(未加總)。</li>
+<li>使用<code>reduce()</code>加總每一個 amout 數值，放到 total 變數，</li>
+<li>以 income 做範例，所以先使用<code>filter()</code>過濾資料，取得大於0的數。</li>
+<li>再來，用<code>refuce()</code>加總。</li>
+<li><code>toFixed()</code>取的小數第二位。</li>
+<li>把處理好的 income,total, expense 放到 DOM 裡面更新文字。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Update the balance,income and expense</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateValues</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 使用 map 方法回傳一個新 Array，他的內容是舊 Array 的 amount 值</span></span><br><span class="line">  <span class="keyword">const</span> amounts = transactions.map(<span class="function">(<span class="params">transaction</span>) =&gt;</span> transaction.amount);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 用 reduce 方法，加總所有值的 amount，並 toFixed(2) 取到小數第二位</span></span><br><span class="line">  <span class="comment">// acc += item -&gt; acc = acc + item</span></span><br><span class="line">  <span class="keyword">const</span> total = amounts.reduce(<span class="function">(<span class="params">acc, item</span>) =&gt;</span> (acc += item), <span class="number">0</span>).toFixed(<span class="number">2</span>);</span><br><span class="line">  <span class="keyword">const</span> income = amounts</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// .filter取得大於零的值</span></span><br><span class="line">    .filter(<span class="function">(<span class="params">item</span>) =&gt;</span> item &gt; <span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// .reduce將 &gt;0 的值 (income) 加總</span></span><br><span class="line">    .reduce(<span class="function">(<span class="params">acc, item</span>) =&gt;</span> (acc += item), <span class="number">0</span>)</span><br><span class="line">    .toFixed(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> expense = (</span><br><span class="line">    amounts</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// .filter 取得大於零的值</span></span><br><span class="line">    .filter(<span class="function">(<span class="params">item</span>) =&gt;</span> item &lt; <span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// .reduce 將 &lt;0 的值 (expense) 加總</span></span><br><span class="line">    .reduce(<span class="function">(<span class="params">acc, item</span>) =&gt;</span> (acc += item), <span class="number">0</span>) *</span><br><span class="line">    -<span class="number">1</span></span><br><span class="line">  ).toFixed(<span class="number">2</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 將動態更新好的 income, total, expense 放到DOM裡面更新文字</span></span><br><span class="line">  balance.innerText = <span class="string">`$<span class="subst">$&#123;total&#125;</span>`</span>;</span><br><span class="line">  money_plus.innerText = <span class="string">`$<span class="subst">$&#123;income&#125;</span>`</span>;</span><br><span class="line">  money_minus.innerText = <span class="string">`$<span class="subst">$&#123;expense&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Init app</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  list.innerHTML = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  transactions.forEach(addTransactionDOM);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 要呼叫 updateValues 函式</span></span><br><span class="line">  updateValues();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<ul>
+<li>innerText =改成.text()</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateValues</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> amounts = transactions.map(<span class="function">(<span class="params">transaction</span>) =&gt;</span> transaction.amount);</span><br><span class="line">  <span class="keyword">const</span> total = amounts.reduce(<span class="function">(<span class="params">acc, item</span>) =&gt;</span> (acc += item), <span class="number">0</span>).toFixed(<span class="number">2</span>);</span><br><span class="line">  <span class="keyword">const</span> income = amounts</span><br><span class="line"></span><br><span class="line">    .filter(<span class="function">(<span class="params">item</span>) =&gt;</span> item &gt; <span class="number">0</span>)</span><br><span class="line">    .reduce(<span class="function">(<span class="params">acc, item</span>) =&gt;</span> (acc += item), <span class="number">0</span>)</span><br><span class="line">    .toFixed(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> expense = (</span><br><span class="line">    amounts.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> item &lt; <span class="number">0</span>).reduce(<span class="function">(<span class="params">acc, item</span>) =&gt;</span> (acc += item), <span class="number">0</span>) *</span><br><span class="line">    -<span class="number">1</span></span><br><span class="line">  ).toFixed(<span class="number">2</span>);</span><br><span class="line">  <span class="comment">// balance.innerText = `$$&#123;total&#125;`;</span></span><br><span class="line">  $(<span class="string">&quot;#balance&quot;</span>).text(<span class="string">`$<span class="subst">$&#123;total&#125;</span>`</span>);</span><br><span class="line">  $(<span class="string">&quot;#money-plus&quot;</span>).text(<span class="string">`$<span class="subst">$&#123;income&#125;</span>`</span>);</span><br><span class="line">  $(<span class="string">&quot;#money-minus&quot;</span>).text(<span class="string">`$<span class="subst">$&#123;expense&#125;</span>`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="generateID"><a href="#generateID" class="headerlink" title="generateID()"></a>generateID()</h4><p><code>Math.floor()</code>會回傳小於等於所給數字的最大整數，<br>簡單來說就是，<strong>小數無條件捨去到比自身小的最大整數</strong>。</p>
+<p><code>Math.random()</code>會隨機產生出 0~1 之間的小數，出來的值永遠不會大於 1。</p>
+<blockquote>
+<p>挺方便的隨機產生器</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.random(); <span class="comment">//0.8961082300942438</span></span><br><span class="line"><span class="built_in">Math</span>.random(); <span class="comment">//0.009676286758744546</span></span><br></pre></td></tr></table></figure>
+
+<p>如果將<code>Math.random()</code>產生出來的數，<br>乘上 2 就會得到 0-2 之間的小數，乘上 3 就會得到 0-3 之間的小數，<br>再使用<code>Math.floor()</code>就會達成無條件取整數。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">2</span>); <span class="comment">//回傳0或1</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">3</span>); <span class="comment">//回傳0或1或2</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">5</span>); <span class="comment">//回傳0或1或2或3或4</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*<span class="number">50</span>); <span class="comment">//回傳0或1或2或3...或49</span></span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li>取0-100000000的亂數當作ID。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Generate random ID</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateID</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">100000000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="刪除選取的代辦事項"><a href="#刪除選取的代辦事項" class="headerlink" title="刪除選取的代辦事項"></a>刪除選取的代辦事項</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;delete-btn&quot;</span> onclick=<span class="string">&quot;removeTransaction($&#123;transaction.id&#125;)&quot;</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>假如我們點擊A列表，那A列表的 <code>transaction.id</code> 會傳進去 <code>removeTransaction()</code> 函式裡。</p>
+<p>再使用<code>filter()</code>過濾，當原始的 <code>transaction.id</code> 們不等於A列表的 id ，就會被回傳。<br>所以A列表沒有被回傳，再使用<code>init()</code>，就被刪除了。</p>
+<p>如果沒有呼叫<code>init()</code>，畫面是不會重新渲染的，<br>所以最後要記得加上<code>init()</code>函數。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Remove transaction by ID</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeTransaction</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line">  transactions = transactions.filter(<span class="function">(<span class="params">transaction</span>) =&gt;</span> transaction.id !== id);</span><br><span class="line">  init();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="submit-監聽事件"><a href="#submit-監聽事件" class="headerlink" title="submit 監聽事件"></a>submit 監聽事件</h3><blockquote>
+<p>原生 Js</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">form.addEventListener(<span class="string">&quot;submit&quot;</span>, addTransaction);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<ul>
+<li><code>.addEventListener(&quot;submit&quot;,xxx)</code>轉成<code>.submit</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;#form&quot;</span>).submit(addTransaction);</span><br></pre></td></tr></table></figure>
+
+<h3 id="設定-Local-Storage-存取資料"><a href="#設定-Local-Storage-存取資料" class="headerlink" title="設定 Local Storage 存取資料"></a>設定 Local Storage 存取資料</h3><p>從 Localstorage 抓取資料使用 <code>getItem()</code><br>需要轉換格式使用<code>JSON.parse</code><br>判斷<code>getItem()</code>得到的資料內容是否為空。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> localStorageTransactions = <span class="built_in">JSON</span>.parse(</span><br><span class="line">  <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;transaction&quot;</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> transactions =</span><br><span class="line">  <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;transaction&quot;</span>) !== <span class="literal">null</span> ? localStorageTransactions : [];</span><br></pre></td></tr></table></figure>
+
+<p>更新 Localstorage 裡面的資料。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Update local storage transactions</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateLocalStorage</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">localStorage</span>.setItem(<span class="string">&quot;transactions&quot;</span>, <span class="built_in">JSON</span>.stringify(transactions));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>addTransaction()</code>，<code>removeTransaction()</code>函數裡需要呼叫<code>updateLocalStorage()</code>，才能夠更新資料。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/%E4%BD%9C%E5%93%81%E9%9B%86/" rel="tag"># 作品集</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Exchange%20Rate%20Calculate/" rel="prev" title="Exchange Rate Calculate">
+      <i class="fa fa-chevron-left"></i> Exchange Rate Calculate
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Git%20%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9/" rel="next" title="初探 Git 基礎介紹">
+      初探 Git 基礎介紹 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Expense-Tracker"><span class="nav-number">1.</span> <span class="nav-text">Expense Tracker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%88%B0%E7%9A%84%E6%8A%80%E8%83%BD%E6%A8%B9"><span class="nav-number">1.1.</span> <span class="nav-text">使用到的技能樹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML"><span class="nav-number">1.1.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS"><span class="nav-number">1.1.2.</span> <span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS"><span class="nav-number">1.1.3.</span> <span class="nav-text">JS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.2.</span> <span class="nav-text">簡介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">1.2.1.</span> <span class="nav-text">Demo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-1"><span class="nav-number">1.3.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8A%E5%8D%8A%E9%83%A8%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">上半部架構</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E5%8D%8A%E9%83%A8%E6%9E%B6%E6%A7%8B"><span class="nav-number">1.3.2.</span> <span class="nav-text">下半部架構</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#js-%E5%8B%95%E6%85%8B%E5%A2%9E%E5%8A%A0-li"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">js 動態增加 li</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A1%A8%E5%96%AE%E8%BC%B8%E5%85%A5%E6%A1%86%E8%88%87-submit-%E6%8C%89%E9%88%95"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">表單輸入框與 submit 按鈕</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-1"><span class="nav-number">1.4.</span> <span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E7%AB%8B%E5%B8%B8%E7%94%A8%E9%A1%8F%E8%89%B2%E8%AE%8A%E6%95%B8%EF%BC%86%E8%B5%B7%E6%89%8B%E5%BC%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">設立常用顏色變數＆起手式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E7%BD%AE%E4%B8%AD"><span class="nav-number">1.4.2.</span> <span class="nav-text">快速置中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#first-of-type%E9%81%B8%E6%93%87%E5%99%A8"><span class="nav-number">1.4.3.</span> <span class="nav-text">first-of-type選擇器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8-type-%E9%81%B8%E6%93%87-input"><span class="nav-number">1.4.4.</span> <span class="nav-text">用 type 選擇 input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#opacity-%E4%BE%86%E9%A0%90%E8%A8%AD%E6%B6%88%E5%A4%B1%E5%85%83%E7%B4%A0%EF%BC%8C%E4%BD%BF%E7%94%A8%E5%81%BD%E5%85%83%E7%B4%A0%E4%BE%86%E6%A2%9D%E4%BB%B6%E5%BC%8F%E9%A1%AF%E7%A4%BA"><span class="nav-number">1.4.5.</span> <span class="nav-text">opacity 來預設消失元素，使用偽元素來條件式顯示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E9%99%A4%E9%BB%9E%E9%81%B8%E7%9A%84%E9%A0%90%E8%A8%AD%E5%A4%96%E6%A1%86"><span class="nav-number">1.4.6.</span> <span class="nav-text">去除點選的預設外框</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-1"><span class="nav-number">1.5.</span> <span class="nav-text">JS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E8%AE%8A%E6%95%B8"><span class="nav-number">1.5.1.</span> <span class="nav-text">設定變數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E8%B3%87%E6%96%99%E5%88%B0-list-%E4%B8%8A%E6%B8%AC%E8%A9%A6"><span class="nav-number">1.5.2.</span> <span class="nav-text">新增資料到 list 上測試</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#init"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">init()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E7%B8%BD%E9%87%91%E9%A1%8D%EF%BC%8C%E6%94%AF%E5%87%BA%EF%BC%8C%E6%94%B6%E5%85%A5%E7%9A%84%E5%85%83%E7%B4%A0"><span class="nav-number">1.5.3.</span> <span class="nav-text">設定總金額，支出，收入的元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#updateValues"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">updateValues()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#generateID"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">generateID()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%AA%E9%99%A4%E9%81%B8%E5%8F%96%E7%9A%84%E4%BB%A3%E8%BE%A6%E4%BA%8B%E9%A0%85"><span class="nav-number">1.5.4.</span> <span class="nav-text">刪除選取的代辦事項</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#submit-%E7%9B%A3%E8%81%BD%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.5.5.</span> <span class="nav-text">submit 監聽事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A-Local-Storage-%E5%AD%98%E5%8F%96%E8%B3%87%E6%96%99"><span class="nav-number">1.5.6.</span> <span class="nav-text">設定 Local Storage 存取資料</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/Expense%20Tracker/";
+    this.page.identifier = "2021/04/07/Expense Tracker/";
+    this.page.title = "Expense Tracker";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

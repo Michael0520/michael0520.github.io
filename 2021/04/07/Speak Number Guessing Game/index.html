@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="猜數字遊戲，實作使用麥克風音訊來猜數字">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Speak Number Guessing Game">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/Speak%20Number%20Guessing%20Game/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="猜數字遊戲，實作使用麥克風音訊來猜數字">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/df0xzPk.png">
+<meta property="og:image" content="https://i.imgur.com/Yt2BOcR.png">
+<meta property="article:published_time" content="2021-04-06T17:57:45.788Z">
+<meta property="article:modified_time" content="2021-04-06T18:25:16.486Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="作品集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/df0xzPk.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/Speak%20Number%20Guessing%20Game/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>Speak Number Guessing Game | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/Speak%20Number%20Guessing%20Game/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Speak Number Guessing Game
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:45 / Modified: 02:25:16" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:45+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/%E4%BD%9C%E5%93%81%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">作品集</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/Speak%20Number%20Guessing%20Game/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/Speak Number Guessing Game/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">猜數字遊戲，實作使用麥克風音訊來猜數字</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Speak-Number-Guessing-Game"><a href="#Speak-Number-Guessing-Game" class="headerlink" title="Speak Number Guessing Game"></a>Speak Number Guessing Game</h1><h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><ul>
+<li>display:inline-block<h3 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h3></li>
+<li>html()完全替代 &amp; append()新增追加</li>
+<li>Web Speech API</li>
+</ul>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p><strong>猜數字遊戲</strong></p>
+<p><a href="https://michael0520.github.io/Speak-Number-Guessing-Game/index.html">Demo</a></p>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h3><p><img src="https://i.imgur.com/df0xzPk.png" alt="基礎HTML 結構圖"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;&quot;.&#x2F;img&#x2F;mic.png&quot; alt&#x3D;&quot;Speak&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;Guess a Number Between 1 - 100&lt;&#x2F;h1&gt;</span><br><span class="line"></span><br><span class="line">&lt;h3&gt;Speak the number into you microphone&lt;&#x2F;h3&gt;</span><br><span class="line"></span><br><span class="line">&lt;div id&#x3D;&quot;msg&quot; class&#x3D;&quot;msg&quot;&gt;</span><br><span class="line">  &lt;div&gt;You said:&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;span class&#x3D;&quot;box&quot;&gt;20&lt;&#x2F;span&gt;</span><br><span class="line">  &lt;div&gt;GO HIGHER&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CSS-1"><a href="#CSS-1" class="headerlink" title="CSS"></a>CSS</h2><h3 id="起手式"><a href="#起手式" class="headerlink" title="起手式"></a>起手式</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: Arial, Helvetica, sans-serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="新增上客製化樣式"><a href="#新增上客製化樣式" class="headerlink" title="新增上客製化樣式"></a>新增上客製化樣式</h3><p>完整 css code:</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#2f3542</span> <span class="built_in">url</span>(<span class="string">&#x27;./img/bg.jpg&#x27;</span>) no-repeat left center/cover;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: Arial, Helvetica, sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span>, <span class="selector-tag">h3</span> &#123;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">1.5</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.play-again</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">8px</span> <span class="number">15px</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f4f4f4</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.msg</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">1.5em</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">40px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#dedede</span>;</span><br><span class="line">    <span class="attribute">display</span>: inline-block;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://ytclion.medium.com/css%E6%95%99%E5%AD%B8-%E9%97%9C%E6%96%BCdisplay-inline-inline-block-block%E7%9A%84%E5%B7%AE%E5%88%A5-1034f38eda82">關於display:inline、block、inline-block的差別</a></p>
+<h2 id="JS-1"><a href="#JS-1" class="headerlink" title="JS"></a>JS</h2><h3 id="產生隨機數-getRandomNumber"><a href="#產生隨機數-getRandomNumber" class="headerlink" title="產生隨機數 getRandomNumber()"></a>產生隨機數 getRandomNumber()</h3><blockquote>
+<p>JS</p>
+</blockquote>
+<ul>
+<li><code>Math.floor()</code>函式: 回傳小於等於所給數字的最大整數。 ex 9.6213 回傳 9</li>
+<li><code>Math.random()</code>函式: 會隨機產生出 0~1 之間的小數，出來的值永遠不會大於 1 。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> msgEl = <span class="built_in">document</span>.getElementById(<span class="string">&quot;msg&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> randomNum = getRandomNumber();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;Number:&quot;</span>, randomNum);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Generate random number</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomNumber</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 產生的數會是9-99，所以+1，變成隨機產生 1~100 的數字。</span></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">100</span>) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<p>無轉換的程式碼</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> randomNum = getRandomNumber();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;Number:&quot;</span>, randomNum);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRandomNumber</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">100</span>) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Web-Speech-API-onSpeak"><a href="#Web-Speech-API-onSpeak" class="headerlink" title="Web Speech API onSpeak()"></a>Web Speech API onSpeak()</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition">Speed API</a></p>
+<p><img src="https://i.imgur.com/Yt2BOcR.png"></p>
+<p>取得 API，然後印出 e，可以觀察到許多資訊，裡面的 result 裡的 transcript 會有我們說的內容，再對 transcript 進行轉換，就可以得到說的內容。</p>
+<hr>
+<p>Web Speech API有兩個部分</p>
+<ul>
+<li>speechSynthesis 語音合成(文字轉語音)</li>
+<li>speechRecognition 語音識別(非同步語音識別)</li>
+</ul>
+<ol>
+<li><p>先查看瀏覽器是否有支援不需要 prefix (前綴)的  speechRecognition 介面，若沒有則將  webkit 標頭的  webkit.SpeechRecognition 指定給該全域變數。</p>
+<blockquote>
+<p>可以前往 <a target="_blank" rel="noopener" href="https://caniuse.com/?search=SpeechRecognition">Can I use</a> 查看</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.SpeechRecognition =</span><br><span class="line">  <span class="built_in">window</span>.SpeechRecognition || <span class="built_in">window</span>.webkitSpeechRecognition;</span><br></pre></td></tr></table></figure></li>
+<li><p>使用前要先建構一個物件實體放到 recognition 變數，使用<code>SpeechRecognition()</code>建構式建立</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> recognition = <span class="keyword">new</span> <span class="built_in">window</span>.SpeechRecognition();</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>並監聽<code>result</code>事件。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recognition.addEventListener(<span class="string">&quot;result&quot;</span>, onSpeak);</span><br></pre></td></tr></table></figure></li>
+<li>設定完後要使用 <code>start()</code> 才會開始辨識</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">recognition.start();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.SpeechRecognition =</span><br><span class="line">  <span class="built_in">window</span>.SpeechRecognition || <span class="built_in">window</span>.webkitSpeechRecognition;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> recognition = <span class="keyword">new</span> <span class="built_in">window</span>.SpeechRecognition();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Start recognition and game</span></span><br><span class="line">recognition.start();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Capture user speak</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onSpeak</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e);</span><br><span class="line">  <span class="keyword">const</span> msg = e.results[<span class="number">0</span>][<span class="number">0</span>].transcript;</span><br><span class="line">  <span class="built_in">console</span>.log(msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Speak result</span></span><br><span class="line"><span class="comment">// 藉由 onSpeak 函式取得 speak result</span></span><br><span class="line">recognition.addEventListener(<span class="string">&quot;result&quot;</span>, onSpeak);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<p>無轉換的程式碼</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.SpeechRecognition =</span><br><span class="line">  <span class="built_in">window</span>.SpeechRecognition || <span class="built_in">window</span>.webkitSpeechRecognition;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> recognition = <span class="keyword">new</span> <span class="built_in">window</span>.SpeechRecognition();</span><br><span class="line"></span><br><span class="line">recognition.start();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onSpeak</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e);</span><br><span class="line">  <span class="keyword">const</span> msg = e.results[<span class="number">0</span>][<span class="number">0</span>].transcript;</span><br><span class="line">  <span class="built_in">console</span>.log(msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">recognition.addEventListener(<span class="string">&quot;result&quot;</span>, onSpeak);</span><br></pre></td></tr></table></figure>
+<h3 id="將得到的數字，印在印在頁面上-writeMessage"><a href="#將得到的數字，印在印在頁面上-writeMessage" class="headerlink" title="將得到的數字，印在印在頁面上 writeMessage()"></a>將得到的數字，印在印在頁面上 writeMessage()</h3><blockquote>
+<p>JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Write what user speaks</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">writeMessage</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">  msgEl.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;You said: &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;span class=&quot;box&quot;&gt;<span class="subst">$&#123;msg&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<ul>
+<li><code>.innerHTML =</code>轉成<code>.html()</code><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Write what user speaks</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">writeMessage</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">  $(<span class="string">&quot;#msg&quot;</span>).html(<span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div&gt;You said: &lt;/div&gt;</span></span><br><span class="line"><span class="string">    &lt;span class=&quot;box&quot;&gt;<span class="subst">$&#123;msg&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">  `</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="判斷說出的值-checkNumber"><a href="#判斷說出的值-checkNumber" class="headerlink" title="判斷說出的值 checkNumber()"></a>判斷說出的值 checkNumber()</h2><blockquote>
+<p>JS</p>
+</blockquote>
+<ul>
+<li><code>.start()</code>只會開啟一次辨識，設定 functoin，結束時就啟動 <code>start()</code>。</li>
+<li> +是將 string 轉成數字，等同於 parseInt </li>
+<li> isNaN 函式會判斷某個數值是不是 NaN</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onSpeak</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> msg = e.results[<span class="number">0</span>][<span class="number">0</span>].transcript;</span><br><span class="line">  writeMessage(msg);</span><br><span class="line">  <span class="comment">// 加上這行</span></span><br><span class="line">  checkNumber(msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Check msg against number</span></span><br><span class="line"><span class="comment">// 判斷輸入的內容</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkNumber</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> num = +msg;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Check if valid number</span></span><br><span class="line">  <span class="comment">// 判斷是否為數字</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Number</span>.isNaN(num)) &#123;</span><br><span class="line">    msgEl.innerHTML += <span class="string">&quot;&lt;div&gt;That is not a valid number&lt;/div&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Check in range</span></span><br><span class="line">  <span class="comment">// 判斷數字有無超過範圍</span></span><br><span class="line">  <span class="keyword">if</span> (num &gt; <span class="number">100</span> || num &lt; <span class="number">1</span>) &#123;</span><br><span class="line">    msgEl.innerHTML += <span class="string">&quot;&lt;div&gt;Number must be between 1 and 100&lt;/div&gt;&quot;</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Check number</span></span><br><span class="line">  <span class="comment">// 如果是數字，就判斷是否與隨機數相等，不等於就判斷大於還是小於。</span></span><br><span class="line">  <span class="keyword">if</span> (num === randomNum) &#123;</span><br><span class="line">    <span class="built_in">document</span>.body.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h2&gt;Congrats! You have guessed the number! &lt;br&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">      It was <span class="subst">$&#123;num&#125;</span>&lt;/h2&gt;</span></span><br><span class="line"><span class="string">      &lt;button class=&quot;play-again&quot; id=&quot;play-again&quot;&gt;Play Again&lt;/button&gt;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (num &gt; randomNum) &#123;</span><br><span class="line">    msgEl.innerHTML += <span class="string">&quot;&lt;div&gt;GO LOWER&lt;/div&gt;&quot;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    msgEl.innerHTML += <span class="string">&quot;&lt;div&gt;GO HIGHER&lt;/div&gt;&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// End SR service</span></span><br><span class="line"><span class="comment">// 每判斷一次又會再重新執行 start()</span></span><br><span class="line"><span class="comment">// 所以可以持續判斷聲音</span></span><br><span class="line"><span class="comment">// 不加這行就只能判斷一次就需要 reload</span></span><br><span class="line">recognition.addEventListener(<span class="string">&quot;end&quot;</span>, <span class="function">() =&gt;</span> recognition.start());</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<ul>
+<li><code>.innerHTML +=</code>轉成<code>.append()</code></li>
+<li><code>.innerHTML +=</code> 轉成 <code>.html()</code></li>
+</ul>
+<p><code>append()</code>跟<code>html()</code>乍看之下有點像，但他們其實不一樣。<br><code>append()</code>是追加 (+=) 的概念，而<code>html()</code>是完全替換 (=)。</p>
+<p><a target="_blank" rel="noopener" href="https://vimsky.com/zh-tw/examples/usage/jquery-append-method.html">jQuery append()用法及代碼示例</a><br><a target="_blank" rel="noopener" href="https://api.jquery.com/html/">.html()</a></p>
+<p>Example:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- html() 完全替代--&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Q:</span></span><br><span class="line">&lt;p id=”<span class="number">1</span>″&gt;</span><br><span class="line">  &lt;p&gt;<span class="number">123</span>&lt;/p&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;#1&quot;</span>).html(<span class="string">&quot;&lt;span&gt;456&lt;/span&gt;&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// A:</span></span><br><span class="line">&lt;p id=”<span class="number">1</span>″&gt;</span><br><span class="line">  &lt;span&gt;<span class="number">456</span>&lt;/span&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// // // // //</span></span><br><span class="line"></span><br><span class="line">&lt;!-- append() 追加新增--&gt;</span><br><span class="line"><span class="comment">// Q:</span></span><br><span class="line">&lt;p id=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line">  &lt;span&gt;<span class="number">456</span>&lt;/span&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">$(<span class="string">&quot;#1&quot;</span>).append(<span class="string">&quot;&lt;span&gt;&lt;/span&gt;&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// A:</span></span><br><span class="line">&lt;p id=<span class="string">&quot;1&quot;</span>&gt;</span><br><span class="line">  &lt;p&gt;<span class="number">123</span>&lt;/p&gt;</span><br><span class="line">  &lt;span&gt;<span class="number">456</span>&lt;/span&gt;</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此部分的 Code</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkNumber</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> num = +msg;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Check if valid number</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Number</span>.isNaN(num)) &#123;</span><br><span class="line">    $(<span class="string">&quot;#msg&quot;</span>).append(<span class="string">&quot;&lt;div&gt;That is not a valid number&lt;/div&gt;&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Check in range</span></span><br><span class="line">  <span class="keyword">if</span> (num &gt; <span class="number">100</span> || num &lt; <span class="number">1</span>) &#123;</span><br><span class="line">    $(<span class="string">&quot;#msg&quot;</span>).append(<span class="string">&quot;&lt;div&gt;Number must be between 1 and 100&lt;/div&gt;&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Check number</span></span><br><span class="line">  <span class="keyword">if</span> (num === randomNum) &#123;</span><br><span class="line">    $(<span class="string">&quot;body&quot;</span>).html(<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;h2&gt;Congrats! You have guessed the number! &lt;br&gt;&lt;br&gt;</span></span><br><span class="line"><span class="string">      It was <span class="subst">$&#123;num&#125;</span>&lt;/h2&gt;</span></span><br><span class="line"><span class="string">      &lt;button class=&quot;play-again&quot; id=&quot;play-again&quot;&gt;Play Again&lt;/button&gt;</span></span><br><span class="line"><span class="string">    `</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (num &gt; randomNum) &#123;</span><br><span class="line">    $(<span class="string">&quot;#msg&quot;</span>).append(<span class="string">&quot;&lt;div&gt;GO LOWER&lt;/div&gt;&quot;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    $(<span class="string">&quot;#msg&quot;</span>).append(<span class="string">&quot;&lt;div&gt;GO HIGHER&lt;/div&gt;&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">recognition.addEventListener(<span class="string">&quot;end&quot;</span>, <span class="function">() =&gt;</span> recognition.start());</span><br></pre></td></tr></table></figure>
+
+<h3 id="設定重新開始-Button"><a href="#設定重新開始-Button" class="headerlink" title="設定重新開始 Button"></a>設定重新開始 Button</h3><p>當數字相等時，會出現 reload 按鈕。<br>當按鈕<code>(.play-again)</code>被觸發時，整個 window 就 reload。</p>
+<blockquote>
+<p>JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (e.target.id == <span class="string">&quot;play-again&quot;</span>) &#123;</span><br><span class="line">    <span class="built_in">window</span>.location.reload();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<ul>
+<li><code>.addEventListener(&quot;click&quot;)</code>轉成<code>.click()</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&quot;body&quot;</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (e.target.id == <span class="string">&quot;play-again&quot;</span>) &#123;</span><br><span class="line">    <span class="built_in">window</span>.location.reload();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><p><a target="_blank" rel="noopener" href="https://vimsky.com/zh-tw/examples/usage/jquery-append-method.html">jQuery append()用法及代碼示例</a></p>
+<p><a target="_blank" rel="noopener" href="https://api.jquery.com/html/">.html()</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.itread01.com/p/1330644.html">window.location.Reload()和window.location.href 區別</a></p>
+<p><a target="_blank" rel="noopener" href="https://caniuse.com/?search=SpeechRecognition">Can I use</a></p>
+<p><a target="_blank" rel="noopener" href="https://ytclion.medium.com/css%E6%95%99%E5%AD%B8-%E9%97%9C%E6%96%BCdisplay-inline-inline-block-block%E7%9A%84%E5%B7%AE%E5%88%A5-1034f38eda82">關於display:inline、block、inline-block的差別</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/%E4%BD%9C%E5%93%81%E9%9B%86/" rel="tag"># 作品集</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/ParseInt/" rel="prev" title="JavaScript ParseInt">
+      <i class="fa fa-chevron-left"></i> JavaScript ParseInt
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/" rel="next" title="Styled-component 元件管理">
+      Styled-component 元件管理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Speak-Number-Guessing-Game"><span class="nav-number">1.</span> <span class="nav-text">Speak Number Guessing Game</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AD%98%E9%BB%9E"><span class="nav-number">1.1.</span> <span class="nav-text">學習到的知識點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS"><span class="nav-number">1.1.1.</span> <span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS"><span class="nav-number">1.1.2.</span> <span class="nav-text">JS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.2.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">1.3.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%90%E6%A7%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">結構</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-1"><span class="nav-number">1.4.</span> <span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%B7%E6%89%8B%E5%BC%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">起手式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%A2%9E%E4%B8%8A%E5%AE%A2%E8%A3%BD%E5%8C%96%E6%A8%A3%E5%BC%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">新增上客製化樣式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-1"><span class="nav-number">1.5.</span> <span class="nav-text">JS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A2%E7%94%9F%E9%9A%A8%E6%A9%9F%E6%95%B8-getRandomNumber"><span class="nav-number">1.5.1.</span> <span class="nav-text">產生隨機數 getRandomNumber()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-Speech-API-onSpeak"><span class="nav-number">1.5.2.</span> <span class="nav-text">Web Speech API onSpeak()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%87%E5%BE%97%E5%88%B0%E7%9A%84%E6%95%B8%E5%AD%97%EF%BC%8C%E5%8D%B0%E5%9C%A8%E5%8D%B0%E5%9C%A8%E9%A0%81%E9%9D%A2%E4%B8%8A-writeMessage"><span class="nav-number">1.5.3.</span> <span class="nav-text">將得到的數字，印在印在頁面上 writeMessage()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%B7%E8%AA%AA%E5%87%BA%E7%9A%84%E5%80%BC-checkNumber"><span class="nav-number">1.6.</span> <span class="nav-text">判斷說出的值 checkNumber()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E9%87%8D%E6%96%B0%E9%96%8B%E5%A7%8B-Button"><span class="nav-number">1.6.1.</span> <span class="nav-text">設定重新開始 Button</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">1.7.</span> <span class="nav-text">參考文章</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/Speak%20Number%20Guessing%20Game/";
+    this.page.identifier = "2021/04/07/Speak Number Guessing Game/";
+    this.page.title = "Speak Number Guessing Game";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

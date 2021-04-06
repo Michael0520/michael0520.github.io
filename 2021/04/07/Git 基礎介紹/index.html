@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="「Git 是一種版本控制系統」，專業一點的可以說是「Git 是一種分散式版本的版本控制系統」。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探 Git 基礎介紹">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/Git%20%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="「Git 是一種版本控制系統」，專業一點的可以說是「Git 是一種分散式版本的版本控制系統」。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/lHtJBlG.png">
+<meta property="og:image" content="https://i.imgur.com/tbs9BmT.gif">
+<meta property="og:image" content="https://i.imgur.com/qwIDlGn.gif">
+<meta property="og:image" content="https://i.imgur.com/BDGC8L6.png">
+<meta property="og:image" content="https://i.imgur.com/T8TSGca.png">
+<meta property="og:image" content="https://i.imgur.com/ukjC60D.png">
+<meta property="og:image" content="https://i.imgur.com/LESxyil.png">
+<meta property="og:image" content="https://i.imgur.com/2ESF0Fc.png">
+<meta property="og:image" content="https://i.imgur.com/TP2RpqZ.png">
+<meta property="article:published_time" content="2021-04-06T17:57:44.615Z">
+<meta property="article:modified_time" content="2021-04-06T18:41:53.814Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/lHtJBlG.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/Git%20%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>初探 Git 基礎介紹 | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/Git%20%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          初探 Git 基礎介紹
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:44 / Modified: 02:41:53" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:44+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/Git%20%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/Git 基礎介紹/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">「Git 是一種版本控制系統」，專業一點的可以說是「Git 是一種分散式版本的版本控制系統」。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Git-基礎介紹"><a href="#Git-基礎介紹" class="headerlink" title="Git 基礎介紹"></a>Git 基礎介紹</h1><h3 id="什麼是-Git？"><a href="#什麼是-Git？" class="headerlink" title="什麼是 Git？"></a>什麼是 Git？</h3><p>「Git 是一種版本控制系統」，專業一點的可以說是「Git 是一種分散式版本的版本控制系統」。<br>「版本控制系統」的英文是「Version Control System」，但這個回答，對沒接觸過的新手來說，有講跟沒講差不多。<br>到底什麼是「版本」？<br>要「控制」什麼東西？什麼又是「分散式」？</p>
+<p>不管你是不是工程師，只要你是電腦工作者，你每天的工作可能都是每天新增、編輯、修改許多檔案。舉個例子來說，你可能是一名人資部門主管，你有一個叫做 resume 的目錄，裡面專門用來存放面試者的資料。</p>
+<p><img src="https://i.imgur.com/lHtJBlG.png"></p>
+<p>讓我們來看圖說故事。</p>
+<p>如圖所示，隨著時間的變化，</p>
+<ol>
+<li>一開始這個目錄裡只有 3 個檔案</li>
+<li>過兩天增加到 5 個。</li>
+<li>不久之後，其中的 2 個被修改了，</li>
+<li>過了三個月後又增加到 7 個</li>
+<li>最後又刪掉了 1 個，變成 6 個。</li>
+</ol>
+<p>這每一個「目錄的狀態變化」，不管是新增或刪除檔案，亦或是修改檔案內容，都稱之為一個「版本」，例如上圖圖例的版本 1 ~ 5。<br>而所謂的「版本控制系統」，就是指會幫你記錄這些所有的狀態變化，並且可以像搭乘時光機一樣，隨時切換到過去某個「版本」時候的狀態。</p>
+<p>簡單的說，Git 就像玩遊戲的時候可以儲存進度一樣。<br>舉例來說，為了避免打頭目打輸了而損失裝備，又或是打倒頭目卻沒有掉落期望的珍貴裝備，<br>你也許在每次要去打頭目之前之前記錄一下，在發生狀況的時候可以載入舊進度，再來挑戰一次。</p>
+<hr>
+<h2 id="git-指令"><a href="#git-指令" class="headerlink" title="git 指令"></a>git 指令</h2><h3 id="git-init-（初始化專案）"><a href="#git-init-（初始化專案）" class="headerlink" title="git init （初始化專案）"></a>git init （初始化專案）</h3><p>這個指令會讓我們本機端的專案資料夾成功加入Git系統內，<br>我們可以看到加入成功後會出現第一個分支master，</p>
+<h3 id="git-status-查看狀態"><a href="#git-status-查看狀態" class="headerlink" title="git status (查看狀態)"></a>git status (查看狀態)</h3><p>這個指令可以查看目前位址的狀態是如何，<br>我們可以看到 目前狀態是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">On branch master  &#x2F;&#x2F;正在 master 分支上</span><br><span class="line">No commits yet   &#x2F;&#x2F;尚未提交</span><br><span class="line">noting to commit (copy files and use &quot;git add&quot; to track) </span><br><span class="line">&#x2F;&#x2F; 沒有任何提交，複製檔案在使用 &quot;git add&quot; 去追蹤檔案</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/tbs9BmT.gif"></p>
+<p>接下來我們新增檔案，並且加入到 git 去做追蹤</p>
+<h3 id="git-add-將檔案加入-git-版本控制"><a href="#git-add-將檔案加入-git-版本控制" class="headerlink" title="git add (將檔案加入 git 版本控制)"></a>git add (將檔案加入 git 版本控制)</h3><p>我們新增個檔案，指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;add file&quot; &gt;&gt; index.html</span><br><span class="line">（語法+ &quot;新增動機&quot; + &gt;&gt; +檔案名字）</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>git add 剛剛新增的檔案名字</code>，來加入 git ，<br>接著使用 <code>git status</code> 來查看顯示目前狀態，<br>出現了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Changes to be commited:</span><br><span class="line">    (use&quot;git rm&quot; --created &lt;file&gt;...&quot;to unstage) </span><br><span class="line">    &#x2F;&#x2F;上述 &#x3D;&gt; 使用 git rm 來取消暫存</span><br><span class="line">    new file:  index.html &#x2F;&#x2F;剛剛成功新增的檔案</span><br></pre></td></tr></table></figure>
+<p>示意圖如下↓<br><img src="https://i.imgur.com/qwIDlGn.gif"></p>
+<h3 id="git-commit-提交更改事件"><a href="#git-commit-提交更改事件" class="headerlink" title="git commit 提交更改事件"></a>git commit 提交更改事件</h3><p>這個指令可以把更動過的事件，提交給 git 版本庫(存檔的概念)<br>下方使用的指令是 git commit 的小變化，<br>為了讓我們可以去更了解每次更改檔案的動機，<br>可以命名存檔 <code>git commit -m &quot;動機&quot;</code>，<br><img src="https://i.imgur.com/BDGC8L6.png"></p>
+<h3 id="git-push-發布至遠端專案"><a href="#git-push-發布至遠端專案" class="headerlink" title="git push 發布至遠端專案"></a>git push 發布至遠端專案</h3><p>此指令可以將我們本地端的專案推送到遠端：github等網站。</p>
+<h3 id="git-clone-下載遠端專案"><a href="#git-clone-下載遠端專案" class="headerlink" title="git clone 下載遠端專案"></a>git clone 下載遠端專案</h3><p>此指令則是可以讓我們從遠端下載專案到本機端。</p>
+<hr>
+<h3 id="git-branch-查看分支"><a href="#git-branch-查看分支" class="headerlink" title="git branch 查看分支"></a>git branch 查看分支</h3><p>此指令可以去觀看目前有哪些分支以及分支的名字。<br><img src="https://i.imgur.com/T8TSGca.png"></p>
+<hr>
+<h3 id="git-branch-”分支名稱”-建立新分支"><a href="#git-branch-”分支名稱”-建立新分支" class="headerlink" title="git branch +”分支名稱” (建立新分支)"></a>git branch +”分支名稱” (建立新分支)</h3><p><img src="https://i.imgur.com/ukjC60D.png"></p>
+<hr>
+<h3 id="git-checkout-”分支名稱”-切換分支"><a href="#git-checkout-”分支名稱”-切換分支" class="headerlink" title="git checkout +”分支名稱” (切換分支)"></a>git checkout +”分支名稱” (切換分支)</h3><p><img src="https://i.imgur.com/LESxyil.png"></p>
+<hr>
+<h3 id="git-branch-d-”分支名稱”-刪除分支"><a href="#git-branch-d-”分支名稱”-刪除分支" class="headerlink" title="git branch -d +”分支名稱” (刪除分支)"></a>git branch -d +”分支名稱” (刪除分支)</h3><p><strong>小重點：不得刪除當前所在的分支，必須切換到其他分支，才能夠刪除分支</strong></p>
+<p>錯誤狀況示意圖↓<br><img src="https://i.imgur.com/2ESF0Fc.png"></p>
+<p>正確切換到其他分支，執行刪除分支示意圖↓<br><img src="https://i.imgur.com/TP2RpqZ.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Expense%20Tracker/" rel="prev" title="Expense Tracker">
+      <i class="fa fa-chevron-left"></i> Expense Tracker
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/GitHub%20Finder/" rel="next" title="GitHub Finder">
+      GitHub Finder <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9"><span class="nav-number">1.</span> <span class="nav-text">Git 基礎介紹</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-Git%EF%BC%9F"><span class="nav-number">1.0.1.</span> <span class="nav-text">什麼是 Git？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-%E6%8C%87%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">git 指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-init-%EF%BC%88%E5%88%9D%E5%A7%8B%E5%8C%96%E5%B0%88%E6%A1%88%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">git init （初始化專案）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-status-%E6%9F%A5%E7%9C%8B%E7%8B%80%E6%85%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">git status (查看狀態)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-add-%E5%B0%87%E6%AA%94%E6%A1%88%E5%8A%A0%E5%85%A5-git-%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6"><span class="nav-number">1.1.3.</span> <span class="nav-text">git add (將檔案加入 git 版本控制)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-commit-%E6%8F%90%E4%BA%A4%E6%9B%B4%E6%94%B9%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.1.4.</span> <span class="nav-text">git commit 提交更改事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-push-%E7%99%BC%E5%B8%83%E8%87%B3%E9%81%A0%E7%AB%AF%E5%B0%88%E6%A1%88"><span class="nav-number">1.1.5.</span> <span class="nav-text">git push 發布至遠端專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-clone-%E4%B8%8B%E8%BC%89%E9%81%A0%E7%AB%AF%E5%B0%88%E6%A1%88"><span class="nav-number">1.1.6.</span> <span class="nav-text">git clone 下載遠端專案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch-%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF"><span class="nav-number">1.1.7.</span> <span class="nav-text">git branch 查看分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch-%E2%80%9D%E5%88%86%E6%94%AF%E5%90%8D%E7%A8%B1%E2%80%9D-%E5%BB%BA%E7%AB%8B%E6%96%B0%E5%88%86%E6%94%AF"><span class="nav-number">1.1.8.</span> <span class="nav-text">git branch +”分支名稱” (建立新分支)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-checkout-%E2%80%9D%E5%88%86%E6%94%AF%E5%90%8D%E7%A8%B1%E2%80%9D-%E5%88%87%E6%8F%9B%E5%88%86%E6%94%AF"><span class="nav-number">1.1.9.</span> <span class="nav-text">git checkout +”分支名稱” (切換分支)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch-d-%E2%80%9D%E5%88%86%E6%94%AF%E5%90%8D%E7%A8%B1%E2%80%9D-%E5%88%AA%E9%99%A4%E5%88%86%E6%94%AF"><span class="nav-number">1.1.10.</span> <span class="nav-text">git branch -d +”分支名稱” (刪除分支)</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/Git%20%E5%9F%BA%E7%A4%8E%E4%BB%8B%E7%B4%B9/";
+    this.page.identifier = "2021/04/07/Git 基礎介紹/";
+    this.page.title = "初探 Git 基礎介紹";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

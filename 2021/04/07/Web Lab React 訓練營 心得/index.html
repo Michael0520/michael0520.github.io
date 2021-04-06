@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="參加總長為 12週，課程訓練相當緊湊，學習到的內容都是目前最新的前端資訊">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web Lab React 訓練營 心得">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/Web%20Lab%20React%20%E8%A8%93%E7%B7%B4%E7%87%9F%20%E5%BF%83%E5%BE%97/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="參加總長為 12週，課程訓練相當緊湊，學習到的內容都是目前最新的前端資訊">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-04-06T17:57:46.276Z">
+<meta property="article:modified_time" content="2021-04-06T18:15:11.815Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="技術社群">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/Web%20Lab%20React%20%E8%A8%93%E7%B7%B4%E7%87%9F%20%E5%BF%83%E5%BE%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>Web Lab React 訓練營 心得 | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/Web%20Lab%20React%20%E8%A8%93%E7%B7%B4%E7%87%9F%20%E5%BF%83%E5%BE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Web Lab React 訓練營 心得
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:46 / Modified: 02:15:11" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:46+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%8A%80%E8%A1%93%E7%A4%BE%E7%BE%A4/" itemprop="url" rel="index"><span itemprop="name">技術社群</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/Web%20Lab%20React%20%E8%A8%93%E7%B7%B4%E7%87%9F%20%E5%BF%83%E5%BE%97/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/Web Lab React 訓練營 心得/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">參加總長為 12週，課程訓練相當緊湊，學習到的內容都是目前最新的前端資訊</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Web-Lab-React-訓練營-心得"><a href="#Web-Lab-React-訓練營-心得" class="headerlink" title="Web Lab React 訓練營 心得"></a>Web Lab React 訓練營 心得</h1><h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>總長為 12週，課程訓練相當緊湊，學習到的內容都是目前最新的前端資訊</p>
+<p>課程開始之前</p>
+<h2 id="為什麼選擇這個課程"><a href="#為什麼選擇這個課程" class="headerlink" title="為什麼選擇這個課程"></a>為什麼選擇這個課程</h2><p>當初會知道 KK 和 React 訓練營計畫，是因為平時有在追蹤些前端社群的資訊，<br>期許自己未來有天能跨出去參加，並且多認識些前端圈的朋友，<br>此課程有個試聽會，如果可以聽得懂課程才再來參加，覺得 KK 把課程大綱寫得很簡明扼要，前端語言以及工具安排的循序漸進，<br>透過日常情境的方式來教導，讓人很能感同身受也印象深刻，教課風格挺有趣的。（這點在之後的課程中也會體驗到。）</p>
+<blockquote>
+<p>如果能將課綱上所提的內容融會貫通，應該就真的如計畫簡章所宣稱的，能在結業後找到工程師的工作，<br>這點相當吸引到我，希望能夠藉此減少許多不必要的歪路，直達我的需求核心。</p>
+</blockquote>
+<p>我是在上份工作在新創公司擔任業務時，才認識到何謂程式語言，那時公司主要的產品是製作聊天機器人，<br>藉由機器人聊天機制來快速，讓使用者獲得他想得到的資訊，<br>過層中因為需要教導客戶端後台，因為後台是使用 wordpress 構造，而學習到了基礎的 html , css ,<br>也對程式語言產生了興趣，因而下定決心全職來學習。</p>
+<h2 id="規則吸引我的地方"><a href="#規則吸引我的地方" class="headerlink" title="規則吸引我的地方"></a>規則吸引我的地方</h2><ol>
+<li>直播講情境大綱 + 線上課程講細節</li>
+<li>「任何時候」都可以問問題 (這實在太重要了！)</li>
+<li>有討論區來讓學員們，共同學習的方式來討論問題解法(喜歡這種方式，感覺比較不孤單)</li>
+<li>淘汰機制，讓我能夠督促自己的學習進度，如果真的被淘汰了，也能夠清楚自己不足的部分未來加以補足！</li>
+<li>期末專案，能夠有個場地來展示自己的作品，這點像是以前在做大學專題的感覺，相當熟悉</li>
+<li>成果分享，未來能夠在這留下來，持續為這個社群推進，推廣更多前端技術，是我很憧憬的一件事！</li>
+</ol>
+<p>備註：</p>
+<blockquote>
+<p>自學能力是工程師的一大條件，課程內不時會放入些問題，讓我們去尋找解答，<br>對初學者來說是一個 debug。雖然知道自己一定是哪裡寫錯了，<br>但能不能找到解決辦法，真的是一大難事啊，<br>這次的訓練營讓我學習到找資源的重要性！</p>
+</blockquote>
+<h2 id="對課程的期待"><a href="#對課程的期待" class="headerlink" title="對課程的期待"></a>對課程的期待</h2><p>有效率的學習以及有挑戰性的解決任務到達最後一關，獲得屬於自己的專題發表。</p>
+<h2 id="課程開始之後：關於學習歷程與轉變"><a href="#課程開始之後：關於學習歷程與轉變" class="headerlink" title="課程開始之後：關於學習歷程與轉變"></a>課程開始之後：關於學習歷程與轉變</h2><h3 id="前期：（實際時間：前四週課程）"><a href="#前期：（實際時間：前四週課程）" class="headerlink" title="前期：（實際時間：前四週課程）"></a>前期：（實際時間：前四週課程）</h3><p>還以為前三週的學習，會是挺輕鬆的，殊不知前三週的三大基礎資訊量相當龐大，<br>HTML , CSS , JavaScript 學習的將當緊湊，需要實作許多小專案才能加速理解，<br>尤其是 JavaScript，再 pormise 以及 同步非同步中，花了相當多的時間來解決，<br>最後關頭才上傳了作業，才剛準備要鬆口氣，就是第一次期中考的到來！</p>
+<p>轉變：對於三大基礎有了基礎的任務，了解哪些元件需要哪些技術來構築完成</p>
+<blockquote>
+<p>比較難理解的是 callback function 以及 LocalStory 資料的進階應用</p>
+</blockquote>
+<h3 id="中期：-實際時間：後三週課程"><a href="#中期：-實際時間：後三週課程" class="headerlink" title="中期：(實際時間：後三週課程)"></a>中期：(實際時間：後三週課程)</h3><p>好不容易地吸收資訊，努力的完成且通過了第一次期中考，就準備來迎接 React 的實戰開發了，實在是很興奮啊！</p>
+<p>主要學習：</p>
+<ol>
+<li>事件處理</li>
+<li>狀態管理</li>
+<li>命名的重要性</li>
+</ol>
+<ul>
+<li>hook 各自帶不同的變數（地方政府）</li>
+<li>redux 帶相同變數（統一集權）</li>
+</ul>
+<p>轉變：開始了解並使用前端開發的思維，不斷嘗試錯誤，累積經驗延伸到下個技術</p>
+<blockquote>
+<p>好不容易爬到了第二次期中考，差了些分數通過，這時才深知自己的不足之處，<br>花了些時間沈澱，開始思考要往哪個方向繼續前進。</p>
+</blockquote>
+<h2 id="後期-amp-小結：（實際時間：過年後、第八週～現在）"><a href="#後期-amp-小結：（實際時間：過年後、第八週～現在）" class="headerlink" title="後期 &amp; 小結：（實際時間：過年後、第八週～現在）"></a>後期 &amp; 小結：（實際時間：過年後、第八週～現在）</h2><p>感謝老師、助教、同學們。<br>讓我學到了好多從未學習過的，也在這次參加過程中，<br>建立了自信心，讓我能夠持續堅強地往前邁進，</p>
+<p>利用前面兩個個階段所累積的經驗值，目前開始補足自身比較不足的領域，</p>
+<p>真期待未來能夠再次參與這類型的計畫，並且成功達到最後，<br>在這做個心得紀錄，期許自己在未來能夠更進步。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E8%A1%93%E7%A4%BE%E7%BE%A4/" rel="tag"># 技術社群</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Weather%20API/" rel="prev" title="Weather API">
+      <i class="fa fa-chevron-left"></i> Weather API
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/YouTube%20API/" rel="next" title="YouTube API">
+      YouTube API <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-Lab-React-%E8%A8%93%E7%B7%B4%E7%87%9F-%E5%BF%83%E5%BE%97"><span class="nav-number">1.</span> <span class="nav-text">Web Lab React 訓練營 心得</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">1.1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%82%BA%E4%BB%80%E9%BA%BC%E9%81%B8%E6%93%87%E9%80%99%E5%80%8B%E8%AA%B2%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">為什麼選擇這個課程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A6%8F%E5%89%87%E5%90%B8%E5%BC%95%E6%88%91%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="nav-number">1.3.</span> <span class="nav-text">規則吸引我的地方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8D%E8%AA%B2%E7%A8%8B%E7%9A%84%E6%9C%9F%E5%BE%85"><span class="nav-number">1.4.</span> <span class="nav-text">對課程的期待</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AA%B2%E7%A8%8B%E9%96%8B%E5%A7%8B%E4%B9%8B%E5%BE%8C%EF%BC%9A%E9%97%9C%E6%96%BC%E5%AD%B8%E7%BF%92%E6%AD%B7%E7%A8%8B%E8%88%87%E8%BD%89%E8%AE%8A"><span class="nav-number">1.5.</span> <span class="nav-text">課程開始之後：關於學習歷程與轉變</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%EF%BC%9A%EF%BC%88%E5%AF%A6%E9%9A%9B%E6%99%82%E9%96%93%EF%BC%9A%E5%89%8D%E5%9B%9B%E9%80%B1%E8%AA%B2%E7%A8%8B%EF%BC%89"><span class="nav-number">1.5.1.</span> <span class="nav-text">前期：（實際時間：前四週課程）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%9C%9F%EF%BC%9A-%E5%AF%A6%E9%9A%9B%E6%99%82%E9%96%93%EF%BC%9A%E5%BE%8C%E4%B8%89%E9%80%B1%E8%AA%B2%E7%A8%8B"><span class="nav-number">1.5.2.</span> <span class="nav-text">中期：(實際時間：後三週課程)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%8C%E6%9C%9F-amp-%E5%B0%8F%E7%B5%90%EF%BC%9A%EF%BC%88%E5%AF%A6%E9%9A%9B%E6%99%82%E9%96%93%EF%BC%9A%E9%81%8E%E5%B9%B4%E5%BE%8C%E3%80%81%E7%AC%AC%E5%85%AB%E9%80%B1%EF%BD%9E%E7%8F%BE%E5%9C%A8%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">後期 &amp; 小結：（實際時間：過年後、第八週～現在）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/Web%20Lab%20React%20%E8%A8%93%E7%B7%B4%E7%87%9F%20%E5%BF%83%E5%BE%97/";
+    this.page.identifier = "2021/04/07/Web Lab React 訓練營 心得/";
+    this.page.title = "Web Lab React 訓練營 心得";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="使用者可以隨意拖曳項目到不同位置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可排序的清單 Sortable list">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/%E5%8F%AF%E6%8E%92%E5%BA%8F%E7%9A%84%E6%B8%85%E5%96%AE%20Sortable%20list/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="使用者可以隨意拖曳項目到不同位置">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/PKdS8PJ.png">
+<meta property="og:image" content="https://i.imgur.com/PKdS8PJ.png">
+<meta property="og:image" content="https://i.imgur.com/ZCeJjoU.png">
+<meta property="og:image" content="https://i.imgur.com/Gll7Gtw.png">
+<meta property="og:image" content="https://i.imgur.com/qH0hl2n.png">
+<meta property="og:image" content="https://i.imgur.com/hoFQZyx.png">
+<meta property="og:image" content="https://i.imgur.com/9436rPh.png">
+<meta property="og:image" content="https://i.imgur.com/yYUnDtS.png">
+<meta property="og:image" content="https://i.imgur.com/Zq7pJjU.png">
+<meta property="og:image" content="https://i.imgur.com/IfeYdU7.png">
+<meta property="article:published_time" content="2021-04-06T17:57:42.535Z">
+<meta property="article:modified_time" content="2021-04-06T19:22:47.746Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="作品集">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/PKdS8PJ.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/%E5%8F%AF%E6%8E%92%E5%BA%8F%E7%9A%84%E6%B8%85%E5%96%AE%20Sortable%20list/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>可排序的清單 Sortable list | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/%E5%8F%AF%E6%8E%92%E5%BA%8F%E7%9A%84%E6%B8%85%E5%96%AE%20Sortable%20list/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          可排序的清單 Sortable list
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 01:57:42 / Modified: 03:22:47" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:42+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/%E4%BD%9C%E5%93%81%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">作品集</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/%E5%8F%AF%E6%8E%92%E5%BA%8F%E7%9A%84%E6%B8%85%E5%96%AE%20Sortable%20list/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/可排序的清單 Sortable list/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">使用者可以隨意拖曳項目到不同位置</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><img src="https://i.imgur.com/PKdS8PJ.png"></p>
+<p><strong><a href="https://michael0520.github.io/Storable_List/index.html">Demo</a></strong></p>
+<h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><ul>
+<li><code>draggable=&quot;true&quot;</code></li>
+<li><code>data-* attribute</code><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3></li>
+</ul>
+<h3 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h3><ul>
+<li>Drag and Drop API</li>
+<li><code>.setAttribute()</code></li>
+<li><code>.sort()</code></li>
+<li><code>map()</code></li>
+</ul>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>使用者可以隨意拖曳項目到不同位置</p>
+<p><img src="https://i.imgur.com/PKdS8PJ.png"></p>
+<p><strong><a href="https://michael0520.github.io/Storable_List/index.html">Demo</a></strong></p>
+<h2 id="HTML-1"><a href="#HTML-1" class="headerlink" title="HTML"></a>HTML</h2><h3 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h3><p><img src="https://i.imgur.com/ZCeJjoU.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;TOP 10 World&#39;s Most Valuable Brands in 2021&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;p&gt;Drag and drop the items into their corresponding spots&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;!--  JS動態產生ul  --&gt;</span><br><span class="line">    &lt;ul class&#x3D;&quot;draggable-list&quot; id&#x3D;&quot;draggable-list&quot;&gt;&lt;&#x2F;ul&gt;</span><br><span class="line">    &lt;button class&#x3D;&quot;check-btn&quot; id&#x3D;&quot;check&quot;&gt;</span><br><span class="line">      Check Order</span><br><span class="line">      &lt;i class&#x3D;&quot;fas fa-paper-plane&quot;&gt;&lt;&#x2F;i&gt;</span><br><span class="line">    &lt;&#x2F;button&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="JS-1"><a href="#JS-1" class="headerlink" title="JS"></a>JS</h2><p><strong><a target="_blank" rel="noopener" href="https://github.com/Michael0520/Storable_List/blob/gh-pages/all.js">完整 JS Code</a></strong></p>
+<h3 id="宣告變數"><a href="#宣告變數" class="headerlink" title="宣告變數"></a>宣告變數</h3><blockquote>
+<p>JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> draggable_list = <span class="built_in">document</span>.getElementById(<span class="string">&quot;draggable-list&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> check = <span class="built_in">document</span>.getElementById(<span class="string">&quot;check&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> richestPeople = [</span><br><span class="line">  <span class="string">&quot;珍煮丹黑糖飲品專賣&quot;</span>,</span><br><span class="line">  <span class="string">&quot;陳三鼎黑糖青蛙鮮奶創始店&quot;</span>,</span><br><span class="line">  <span class="string">&quot;春水堂人文茶館 Chun Shui Tang&quot;</span>,</span><br><span class="line">  <span class="string">&quot;樺達奶茶 Huada Milk Tea&quot;</span>,</span><br><span class="line">  <span class="string">&quot;十杯手作茶飲&quot;</span>,</span><br><span class="line">  <span class="string">&quot;郭姐茶坊&quot;</span>,</span><br><span class="line">  <span class="string">&quot;廖媽媽珍珠奶茶&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Queenny葵米 珍珠飲品專售&quot;</span>,</span><br><span class="line">  <span class="string">&quot;雙妃奶茶&quot;</span>,</span><br><span class="line">  <span class="string">&quot;迷客夏綠光牧場主題飲品&quot;</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Store listitems</span></span><br><span class="line"><span class="keyword">const</span> listItems = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> dragStartIndex;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> draggable_list = $(<span class="string">&#x27;#draggable-list&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">const</span> richestPeople = [</span><br><span class="line">  <span class="string">&quot;珍煮丹黑糖飲品專賣&quot;</span>,</span><br><span class="line">  <span class="string">&quot;陳三鼎黑糖青蛙鮮奶創始店&quot;</span>,</span><br><span class="line">  <span class="string">&quot;春水堂人文茶館 Chun Shui Tang&quot;</span>,</span><br><span class="line">  <span class="string">&quot;樺達奶茶 Huada Milk Tea&quot;</span>,</span><br><span class="line">  <span class="string">&quot;十杯手作茶飲&quot;</span>,</span><br><span class="line">  <span class="string">&quot;郭姐茶坊&quot;</span>,</span><br><span class="line">  <span class="string">&quot;廖媽媽珍珠奶茶&quot;</span>,</span><br><span class="line">  <span class="string">&quot;Queenny葵米 珍珠飲品專售&quot;</span>,</span><br><span class="line">  <span class="string">&quot;雙妃奶茶&quot;</span>,</span><br><span class="line">  <span class="string">&quot;迷客夏綠光牧場主題飲品&quot;</span>,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> listItems = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> dragStartIndex;</span><br></pre></td></tr></table></figure>
+<h3 id="將資料更新入-DOM-裡"><a href="#將資料更新入-DOM-裡" class="headerlink" title="將資料更新入 DOM 裡"></a>將資料更新入 DOM 裡</h3><h4 id="展開運算子"><a href="#展開運算子" class="headerlink" title="展開運算子"></a>展開運算子</h4><ul>
+<li>展開運算符(Spread Operator)與其餘運算符(Rest Operator)</li>
+</ul>
+<p>是ES6中的其中兩種新特性，雖然這兩種特性的符號是一模一樣的，都是<code>(...)</code>三個點，<br>但使用的情況與意義不同。我們常常在文字敘述或聊天時，<br>這個<code>(...)</code>常用來代表了”無言”、”無窮的想像”或”還有其他更多的”的意思。</p>
+<ul>
+<li>一個是展開陣列中的值</li>
+<li>一個是集合其餘的值成為陣列</li>
+</ul>
+<p>在 <a target="_blank" rel="noopener" href="https://hackmd.io/@Michael0520/Movie_Seat_Booking">實作電影定位介面</a> 時，也有使用到此技巧。</p>
+<p><a target="_blank" rel="noopener" href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/rest_spread.html">解構拆解 ( …arg ) </a></p>
+<h4 id="setAttribute"><a href="#setAttribute" class="headerlink" title=".setAttribute()"></a><code>.setAttribute()</code></h4><p><code>Element.setAttribute(name, value)</code></p>
+<p>增加指定名稱和值的新屬性，或者把一個現有的屬性設定為指定的值。</p>
+<p><a target="_blank" rel="noopener" href="https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/289731/">setAttribute用法介紹</a></p>
+<h4 id="HTML5-中的-data-attribute-屬性"><a href="#HTML5-中的-data-attribute-屬性" class="headerlink" title="HTML5 中的 data-* attribute 屬性"></a>HTML5 中的 data-* attribute 屬性</h4><p>在製作網頁的過程中，我們常常會添加一些自己需要用到的屬性名稱，<br>以方便自己容易理解，為了要避免大家在 HTML 結構中隨意的添加屬性，<br>在 HTML5 中就多了 <code>data-* attribte</code> 這個屬性，其中的 * 就是一個可以自定義的名稱。</p>
+<p>例如：<code>data-key=&#39;83&#39;</code> 或者是 <code>data-item=&#39;1&#39;</code>。<br>而這邊的範例就是<code>data-index</code>。</p>
+<blockquote>
+<p>JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">createList();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Insert list items into DOM</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createList</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  [...powerfulBrands].forEach(<span class="function">(<span class="params">company, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// listItem為空的陣列，放入powerfulBrands的陣列。</span></span><br><span class="line">    <span class="keyword">const</span> listItem = <span class="built_in">document</span>.createElement(<span class="string">&quot;li&quot;</span>);</span><br><span class="line"></span><br><span class="line">    listItem.setAttribute(<span class="string">&quot;data-index&quot;</span>, index);</span><br><span class="line"></span><br><span class="line">    listItem.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;span class=&quot;number&quot;&gt;<span class="subst">$&#123;index + <span class="number">1</span>&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;draggable&quot; draggable=&quot;true&quot;&gt;</span></span><br><span class="line"><span class="string">          &lt;p class=&quot;person-name&quot;&gt;<span class="subst">$&#123;company&#125;</span>&lt;/p&gt;</span></span><br><span class="line"><span class="string">          &lt;i class=&quot;fas fa-grip-lines&quot;&gt;&lt;/i&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      `</span>;</span><br><span class="line"></span><br><span class="line">    listItems.push(listItem);</span><br><span class="line"></span><br><span class="line">    draggable_list.appendChild(listItem);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/Gll7Gtw.png" alt="示意圖"></p>
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.forEach(<span class="function">(<span class="params">company, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> listItem = <span class="built_in">document</span>.createElement(<span class="string">&quot;li&quot;</span>);</span><br><span class="line"></span><br><span class="line">      listItem.setAttribute(<span class="string">&quot;data-index&quot;</span>, index);</span><br><span class="line"></span><br><span class="line">      listItem.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">        &lt;span class=&quot;number&quot;&gt;<span class="subst">$&#123;index + <span class="number">1</span>&#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">        &lt;div class=&quot;draggable&quot; draggable=&quot;true&quot;&gt;</span></span><br><span class="line"><span class="string">          &lt;p class=&quot;company-name&quot;&gt;<span class="subst">$&#123;company&#125;</span>&lt;/p&gt;</span></span><br><span class="line"><span class="string">          &lt;i class=&quot;fas fa-grip-lines&quot;&gt;&lt;/i&gt;</span></span><br><span class="line"><span class="string">        &lt;/div&gt;</span></span><br><span class="line"><span class="string">      `</span>;</span><br><span class="line"></span><br><span class="line">      listItems.push(listItem);</span><br><span class="line"></span><br><span class="line">      draggable_list.appendChild(listItem);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="random-隨機排列-item-順序"><a href="#random-隨機排列-item-順序" class="headerlink" title="random() 隨機排列 item 順序"></a><code>random()</code> 隨機排列 item 順序</h3><p>這邊使用的方法是</p>
+<ol>
+<li>先產生隨機數</li>
+<li>再利用<code>sort()</code>方法由小排到大</li>
+<li>完成每次都能產生隨機排列的順序</li>
+</ol>
+<ul>
+<li>當只有<code>.map((a) =&gt; (&#123; value: a, sort: Math.random() &#125;))</code>時，company 會印出<code>map()</code>賦予的<code>sort()</code>，可以注意到都是 random( 0 - 1 之間 )的值。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.map(<span class="function">(<span class="params">a</span>) =&gt;</span> (&#123; <span class="attr">value</span>: a, <span class="attr">sort</span>: <span class="built_in">Math</span>.random() &#125;))</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/qH0hl2n.png"></p>
+<ul>
+<li><code>.map()</code>每個都取得隨機變數後，利用<code>sort()</code>由小排到大。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a.sort - b.sort)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><img src="https://i.imgur.com/hoFQZyx.png"></p>
+<ul>
+<li>排列完大小後，用<code>map()</code>來取出值<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.map(<span class="function">(<span class="params">a</span>) =&gt;</span> a.value)</span><br></pre></td></tr></table></figure>
+<img src="https://i.imgur.com/9436rPh.png"></li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array.prototype.sort()</a></p>
+<blockquote>
+<p>JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[...powerfulBrands]</span><br><span class="line">   <span class="comment">// array有sort方法，所以利用random產生sort值</span></span><br><span class="line">  .map(<span class="function">(<span class="params">a</span>) =&gt;</span> (&#123; <span class="attr">value</span>: a, <span class="attr">sort</span>: <span class="built_in">Math</span>.random() &#125;))</span><br><span class="line">  <span class="comment">// 產生了之後，sort方法比大小，這樣每次重整後的順序都會不同</span></span><br><span class="line">  .sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a.sort - b.sort)</span><br><span class="line">  <span class="comment">// 只取得value</span></span><br><span class="line">  .map(<span class="function">(<span class="params">a</span>) =&gt;</span> a.value)</span><br><span class="line">  .forEach(<span class="function">(<span class="params">person, index</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(person)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[...powerfulBrands]</span><br><span class="line">.map(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    value: data,</span><br><span class="line">    sort: <span class="built_in">Math</span>.random(),</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)</span><br><span class="line">.sort(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a.sort - b.sort;</span><br><span class="line">&#125;)</span><br><span class="line">.map(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> data.value;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="設定事件監聽"><a href="#設定事件監聽" class="headerlink" title="設定事件監聽"></a>設定事件監聽</h3><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/HTML_Drag_and_Drop_API">HTML Drag API</a></p>
+<p><strong><a target="_blank" rel="noopener" href="https://hackmd.io/@Michael0520/Drag_and_Drop_API"> HTML5 Drag and Drop API 筆記</a></strong></p>
+<p>針對能夠被拖曳的元素，在其 HTML 標籤上添加屬性 draggable=”true”</p>
+<p>以下整理成表格，方便之後判斷。這次實作沒有運用到dropend。</p>
+<table>
+<thead>
+<tr>
+<th align="left">x</th>
+<th align="left">Drag Source</th>
+<th align="left">Drag Target</th>
+<th align="left">解釋</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">dragstart</td>
+<td align="left"></td>
+<td align="left">始拖曳元素時觸發此事件 (點擊元素的瞬間)</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">drag</td>
+<td align="left">dragenter</td>
+<td align="left">拖曳元素時觸發此事件</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"></td>
+<td align="left">dragover</td>
+<td align="left">當元素拖曳到有效位置放置則觸發此事件</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"></td>
+<td align="left">dragleave</td>
+<td align="left">拖曳的元素離開有效的位置時觸發</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"></td>
+<td align="left">drop</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">dropend</td>
+<td align="left"></td>
+<td align="left">單元格 當拖曳結束時會觸發此事件</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addEventListeners</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> draggables = <span class="built_in">document</span>.querySelectorAll(<span class="string">&quot;.draggable&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> dragListItems = <span class="built_in">document</span>.querySelectorAll(<span class="string">&quot;.draggable-list li&quot;</span>);</span><br><span class="line"></span><br><span class="line">  draggables.forEach(<span class="function">(<span class="params">draggable</span>) =&gt;</span> &#123;</span><br><span class="line">    draggable.addEventListener(<span class="string">&quot;dragstart&quot;</span>, dragStart);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  dragListItems.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    item.addEventListener(<span class="string">&quot;dragover&quot;</span>, dragOver);</span><br><span class="line">    item.addEventListener(<span class="string">&quot;drop&quot;</span>, dragDrop);</span><br><span class="line">    item.addEventListener(<span class="string">&quot;dragenter&quot;</span>, dragEnter);</span><br><span class="line">    item.addEventListener(<span class="string">&quot;dragleave&quot;</span>, dragLeave);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">check.addEventListener(<span class="string">&quot;click&quot;</span>, checkOrder);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>jQuery</p>
+</blockquote>
+<p>:bug: 未來再回頭來查看如何更改為 jQuery UI<br><a target="_blank" rel="noopener" href="https://www.runoob.com/jqueryui/api-draggable.html">jQuery UI drog 套件</a></p>
+<h4 id="dragEnter-，dragLeave"><a href="#dragEnter-，dragLeave" class="headerlink" title="dragEnter()，dragLeave()"></a><code>dragEnter()，dragLeave()</code></h4><ul>
+<li><code>dragenter()</code>，拖曳元素時觸發的事件。</li>
+<li><code>dragleave()</code>，拖曳的元素離開有效的位置時觸發。</li>
+</ul>
+<p>這邊做出的效果是，當拖曳的元素到其他元素上時，會變色。拖曳第一欄到第二欄上時，第二欄就變色。</p>
+<p><img src="https://i.imgur.com/yYUnDtS.png"></p>
+<p>但是當拖曳欄位不在有效範圍時，第二欄的欄位就不會變色。</p>
+<p><img src="https://i.imgur.com/Zq7pJjU.png"></p>
+<blockquote>
+<p>JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dragEnter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// console.log(&#x27;Event: &#x27;, &#x27;dragenter&#x27;);</span></span><br><span class="line">  <span class="built_in">this</span>.classList.add(<span class="string">&quot;over&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dragLeave</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// console.log(&#x27;Event: &#x27;, &#x27;dragleave&#x27;);</span></span><br><span class="line">  <span class="built_in">this</span>.classList.remove(<span class="string">&quot;over&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="dragStart-，dragDrop"><a href="#dragStart-，dragDrop" class="headerlink" title="dragStart()，dragDrop()"></a><code>dragStart()，dragDrop()</code></h4><ul>
+<li><code>.closet</code> : 是一個遍歷的方法，簡單來說就是尋找一個最近的元素</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jquery/traversing_closest.asp">closet 詳細解說</a></p>
+<ul>
+<li><p><code>.getAttribute()</code>: 增加指定名稱和值的新屬性，所以可以得到 index。</p>
+</li>
+<li><p><code>dragstart()</code> : 開始拖曳元素時觸發此事件。</p>
+</li>
+<li><p><code>drop()</code> :在有效位置上放置元素時，觸發此事件。<br>當開始拖曳元素欄位時，就開始記錄 Index，停止拖曳元素時，也記錄當下的 Index。</p>
+</li>
+</ul>
+<p>再利用 <code>swapItems()</code>，交換內容。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dragStart</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// console.log(&#x27;Event: &#x27;, &#x27;dragstart&#x27;);</span></span><br><span class="line">  dragStartIndex = +<span class="built_in">this</span>.closest(<span class="string">&quot;li&quot;</span>).getAttribute(<span class="string">&quot;data-index&quot;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(dragStartIndex)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dragDrop</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// console.log(&#x27;Event: &#x27;, &#x27;drop&#x27;);</span></span><br><span class="line">  <span class="keyword">const</span> dragEndIndex = +<span class="built_in">this</span>.getAttribute(<span class="string">&quot;data-index&quot;</span>);</span><br><span class="line">  swapItems(dragStartIndex, dragEndIndex);</span><br><span class="line">  <span class="built_in">this</span>.classList.remove(<span class="string">&quot;over&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>當我移動第一個時，<code>dragStartIndex</code>的改變，就會跳出 0,1,2,3 以此類推。</p>
+<p><img src="https://i.imgur.com/IfeYdU7.png"></p>
+<h4 id="dragOver"><a href="#dragOver" class="headerlink" title="dragOver()"></a><code>dragOver()</code></h4><p>避免預設行為，才使用<code>swapItems()</code>避免被觸發提交。</p>
+<p><code>dragOver()</code> ，當元素拖曳到有效位置放置則觸發此事件。<br>在 dragOver 函式裡加上避免預設行為的<code>preventDefault()</code>，避免被持續觸發。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dragOver</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// console.log(&#x27;Event: &#x27;, &#x27;dragover&#x27;);</span></span><br><span class="line">  e.preventDefault();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="SwapItems"><a href="#SwapItems" class="headerlink" title="SwapItems()"></a><code>SwapItems()</code></h4><p>交換 items，使用到<code>appendChild()</code>方法。</p>
+<p><strong>注意是拖曳的 listItems[1] 要去替換掉原先的 listItems[0]</strong><br>所以 [fromIndex] =&gt; 新增上 itemTwo ; [toIndex] =&gt; 新增上 itemOne</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Swap list items that are drag and drop</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">swapItems</span>(<span class="params">fromIndex, toIndex</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> itemOne = listItems[fromIndex].querySelector(<span class="string">&quot;.draggable&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> itemTwo = listItems[toIndex].querySelector(<span class="string">&quot;.draggable&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// console.log(itemOne, itemTwo);</span></span><br><span class="line">  listItems[fromIndex].appendChild(itemTwo);</span><br><span class="line">  listItems[toIndex].appendChild(itemOne);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="檢查順序是否正確"><a href="#檢查順序是否正確" class="headerlink" title="檢查順序是否正確"></a>檢查順序是否正確</h3><ul>
+<li><code>trim()</code>將字串去除空白<blockquote>
+<p>JS</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Check the order of list items</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkOrder</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  listItems.forEach(<span class="function">(<span class="params">listItem, index</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> randomBrands = listItem.querySelector(<span class="string">&quot;.draggable&quot;</span>).innerText.trim();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (randomBrands !== powerfulBrands[index]) &#123;</span><br><span class="line">      listItem.classList.add(<span class="string">&quot;wrong&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      listItem.classList.remove(<span class="string">&quot;wrong&quot;</span>);</span><br><span class="line">      listItem.classList.add(<span class="string">&quot;right&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">check.addEventListener(<span class="string">&quot;click&quot;</span>, checkOrder);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="CSS-1"><a href="#CSS-1" class="headerlink" title="CSS"></a>CSS</h2><p>先做 JS 動態更新資料上去後，再回頭來新增樣式</p>
+<p><strong><a target="_blank" rel="noopener" href="https://github.com/Michael0520/Storable_List/blob/gh-pages/style.css">完整 CSS Code</a></strong></p>
+<h3 id="取消預設-list-樣式"><a href="#取消預設-list-樣式" class="headerlink" title="取消預設 list 樣式"></a>取消預設 list 樣式</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">list-style-type</span>: none;</span><br></pre></td></tr></table></figure>
+
+<h3 id="放大縮小元素比例"><a href="#放大縮小元素比例" class="headerlink" title="放大縮小元素比例"></a>放大縮小元素比例</h3><p><code>flex:flex-grow flex-shrink flex-basic</code></p>
+<ul>
+<li>flex: 放大比例 縮小比例 計算元素是否有多餘空間，預設值為auto。</li>
+</ul>
+<p><code>flex:1</code>的意思為<code>flex: 1 1 0</code>：<br>數字與<code>&lt;i class=&quot;fas fa-grip-lines&quot;&gt;&lt;/i&gt;</code>的空間，最小最大都會是1，所以不會變形。</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex">flex-css 詳細解說</a></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.draggable-list</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.draggable</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">15px</span>;</span><br><span class="line">    <span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Check-Button-按下開啟放大動畫-amp-取消預設邊框"><a href="#Check-Button-按下開啟放大動畫-amp-取消預設邊框" class="headerlink" title="Check Button 按下開啟放大動畫 &amp; 取消預設邊框"></a>Check Button 按下開啟放大動畫 &amp; 取消預設邊框</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.check-btn</span><span class="selector-pseudo">:active</span> &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">0.98</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.check-btn</span><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">    <span class="attribute">outline</span>: none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/flex">flex-css 詳細解說</a></p>
+<p><a target="_blank" rel="noopener" href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/rest_spread.html">解構拆解 ( …arg ) </a></p>
+<p><a target="_blank" rel="noopener" href="https://codertw.com/%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC/289731/">setAttribute用法介紹</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jquery/traversing_closest.asp">closet 詳細解說</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array.prototype.sort()</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/API/HTML_Drag_and_Drop_API">HTML Drag API</a></p>
+<p><strong><a target="_blank" rel="noopener" href="https://hackmd.io/@Michael0520/Drag_and_Drop_API"> HTML5 Drag and Drop API 筆記</a></strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/jqueryui/api-draggable.html">jQuery UI drog 套件</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/%E4%BD%9C%E5%93%81%E9%9B%86/" rel="tag"># 作品集</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/%E4%B8%8A%E5%82%B3%20GitHub/" rel="prev" title="初探 GitHub">
+      <i class="fa fa-chevron-left"></i> 初探 GitHub
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/07/%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/" rel="next" title="初次實作表單驗證">
+      初次實作表單驗證 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%B8%E7%BF%92%E5%88%B0%E7%9A%84%E7%9F%A5%E8%AD%98%E9%BB%9E"><span class="nav-number">1.</span> <span class="nav-text">學習到的知識點</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML"><span class="nav-number">1.1.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS"><span class="nav-number">1.2.</span> <span class="nav-text">CSS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS"><span class="nav-number">1.3.</span> <span class="nav-text">JS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B0%A1%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-1"><span class="nav-number">3.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B5%90%E6%A7%8B"><span class="nav-number">3.1.</span> <span class="nav-text">結構</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS-1"><span class="nav-number">4.</span> <span class="nav-text">JS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A3%E5%91%8A%E8%AE%8A%E6%95%B8"><span class="nav-number">4.1.</span> <span class="nav-text">宣告變數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%87%E8%B3%87%E6%96%99%E6%9B%B4%E6%96%B0%E5%85%A5-DOM-%E8%A3%A1"><span class="nav-number">4.2.</span> <span class="nav-text">將資料更新入 DOM 裡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%95%E9%96%8B%E9%81%8B%E7%AE%97%E5%AD%90"><span class="nav-number">4.2.1.</span> <span class="nav-text">展開運算子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setAttribute"><span class="nav-number">4.2.2.</span> <span class="nav-text">.setAttribute()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML5-%E4%B8%AD%E7%9A%84-data-attribute-%E5%B1%AC%E6%80%A7"><span class="nav-number">4.2.3.</span> <span class="nav-text">HTML5 中的 data-* attribute 屬性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#random-%E9%9A%A8%E6%A9%9F%E6%8E%92%E5%88%97-item-%E9%A0%86%E5%BA%8F"><span class="nav-number">4.3.</span> <span class="nav-text">random() 隨機排列 item 順序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%AD%E5%AE%9A%E4%BA%8B%E4%BB%B6%E7%9B%A3%E8%81%BD"><span class="nav-number">4.4.</span> <span class="nav-text">設定事件監聽</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dragEnter-%EF%BC%8CdragLeave"><span class="nav-number">4.4.1.</span> <span class="nav-text">dragEnter()，dragLeave()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dragStart-%EF%BC%8CdragDrop"><span class="nav-number">4.4.2.</span> <span class="nav-text">dragStart()，dragDrop()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dragOver"><span class="nav-number">4.4.3.</span> <span class="nav-text">dragOver()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SwapItems"><span class="nav-number">4.4.4.</span> <span class="nav-text">SwapItems()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AA%A2%E6%9F%A5%E9%A0%86%E5%BA%8F%E6%98%AF%E5%90%A6%E6%AD%A3%E7%A2%BA"><span class="nav-number">4.5.</span> <span class="nav-text">檢查順序是否正確</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-1"><span class="nav-number">5.</span> <span class="nav-text">CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%96%E6%B6%88%E9%A0%90%E8%A8%AD-list-%E6%A8%A3%E5%BC%8F"><span class="nav-number">5.1.</span> <span class="nav-text">取消預設 list 樣式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BE%E5%A4%A7%E7%B8%AE%E5%B0%8F%E5%85%83%E7%B4%A0%E6%AF%94%E4%BE%8B"><span class="nav-number">5.2.</span> <span class="nav-text">放大縮小元素比例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Check-Button-%E6%8C%89%E4%B8%8B%E9%96%8B%E5%95%9F%E6%94%BE%E5%A4%A7%E5%8B%95%E7%95%AB-amp-%E5%8F%96%E6%B6%88%E9%A0%90%E8%A8%AD%E9%82%8A%E6%A1%86"><span class="nav-number">5.3.</span> <span class="nav-text">Check Button 按下開啟放大動畫 &amp; 取消預設邊框</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">6.</span> <span class="nav-text">參考文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/%E5%8F%AF%E6%8E%92%E5%BA%8F%E7%9A%84%E6%B8%85%E5%96%AE%20Sortable%20list/";
+    this.page.identifier = "2021/04/07/可排序的清單 Sortable list/";
+    this.page.title = "可排序的清單 Sortable list";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>
