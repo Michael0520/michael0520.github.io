@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JavaScript AJAX</title>
+    <url>/2021/04/07/AJAX/</url>
+    <content><![CDATA[<h2 id="readyState"><a href="#readyState" class="headerlink" title="readyState"></a>readyState</h2><p>0 - 已經產生一個 XMLHttpRequest，但是還沒連結要撈的 資料，接著下 open 指法來設定環境（有三個參數）<br>1 - 用了open，但是還沒傳資料<br>2 - 偵測到你有用 send<br>3 - 資料 loading 中<br>4 - 你撈到資料了，數據已經接收到</p>
+<h2 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h2><p>格式，讀取網址，同步非同步<br>格式: get (讀取資料)，post (傳送資料到伺服器)</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;網址&quot;</span>, <span class="literal">false</span>);</span><br><span class="line"><span class="comment">//空的資料</span></span><br><span class="line">xhr.send(<span class="literal">null</span>);<span class="comment">//空的資料</span></span><br><span class="line"><span class="built_in">console</span>.log(xhr.responseText);</span><br></pre></td></tr></table></figure>
+<h2 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">&#x27;post&#x27;</span>,<span class="string">&#x27;網址&#x27;</span>,<span class="literal">true</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">&quot;Content-type&quot;</span>,<span class="string">&quot;application/x-www-form-urlencoded&quot;</span>);</span><br><span class="line">xhr.send(<span class="string">&#x27;email=xxxxx@gmail.com&amp;password=xxx&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>Post js 格式</strong><br><img src="https://i.imgur.com/KfI4ZT3.png"></li>
+<li><strong>Post json 格式</strong><br><img src="https://i.imgur.com/6AP3svI.png"></li>
+</ul>
+<h2 id="同步非同步"><a href="#同步非同步" class="headerlink" title="同步非同步"></a>同步非同步</h2><ul>
+<li>true - 非同步，<br>資料不會傳回來，就讓程式繼續往下跑，等到回傳才會自動回傳</li>
+<li>false - 同步，<br>等資料傳回來，才會讓程式碼繼續往下跑通常使用true不必等到資料回傳才往下跑</li>
+</ul>
+<p>demo:<br><a href="https://codepen.io/michael-luo/pen/RwRyPOg?editors=1010">https://codepen.io/michael-luo/pen/RwRyPOg?editors=1010</a></p>
+<h2 id="http狀態碼"><a href="#http狀態碼" class="headerlink" title="http狀態碼"></a>http狀態碼</h2><p>200 - 確定。 用戶端要求成功。<br>401 - 拒絕存取。 IIS 定義數個不同的 401 錯誤，以表示更詳細的錯誤原因。</p>
+<p>更多：<a href="https://blog.miniasp.com/post/2009/01/16/Web-developer-should-know-about-HTTP-Status-Code">https://blog.miniasp.com/post/2009/01/16/Web-developer-should-know-about-HTTP-Status-Code</a></p>
+<h2 id="Cors"><a href="#Cors" class="headerlink" title="Cors"></a>Cors</h2><p>開了這個權限，其他開發者才能跨網域撈取資料。想知道某筆資料（JSON 或 API）有沒有開 CROS，可以上 test-cros.org 查詢。</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript BOM</title>
     <url>/2021/04/07/BOM/</url>
     <content><![CDATA[<h1 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h1><h2 id="window-history-系列語法"><a href="#window-history-系列語法" class="headerlink" title="window.history 系列語法"></a>window.history 系列語法</h2><ul>
@@ -24,33 +51,6 @@
 </li>
 </ul>
 <p>demo:<br><a href="https://codepen.io/michael-luo/pen/gOMewmb">https://codepen.io/michael-luo/pen/gOMewmb</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript AJAX</title>
-    <url>/2021/04/07/AJAX/</url>
-    <content><![CDATA[<h2 id="readyState"><a href="#readyState" class="headerlink" title="readyState"></a>readyState</h2><p>0 - 已經產生一個 XMLHttpRequest，但是還沒連結要撈的 資料，接著下 open 指法來設定環境（有三個參數）<br>1 - 用了open，但是還沒傳資料<br>2 - 偵測到你有用 send<br>3 - 資料 loading 中<br>4 - 你撈到資料了，數據已經接收到</p>
-<h2 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h2><p>格式，讀取網址，同步非同步<br>格式: get (讀取資料)，post (傳送資料到伺服器)</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">&quot;get&quot;</span>, <span class="string">&quot;網址&quot;</span>, <span class="literal">false</span>);</span><br><span class="line"><span class="comment">//空的資料</span></span><br><span class="line">xhr.send(<span class="literal">null</span>);<span class="comment">//空的資料</span></span><br><span class="line"><span class="built_in">console</span>.log(xhr.responseText);</span><br></pre></td></tr></table></figure>
-<h2 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">&#x27;post&#x27;</span>,<span class="string">&#x27;網址&#x27;</span>,<span class="literal">true</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">&quot;Content-type&quot;</span>,<span class="string">&quot;application/x-www-form-urlencoded&quot;</span>);</span><br><span class="line">xhr.send(<span class="string">&#x27;email=xxxxx@gmail.com&amp;password=xxx&#x27;</span>);</span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>Post js 格式</strong><br><img src="https://i.imgur.com/KfI4ZT3.png"></li>
-<li><strong>Post json 格式</strong><br><img src="https://i.imgur.com/6AP3svI.png"></li>
-</ul>
-<h2 id="同步非同步"><a href="#同步非同步" class="headerlink" title="同步非同步"></a>同步非同步</h2><ul>
-<li>true - 非同步，<br>資料不會傳回來，就讓程式繼續往下跑，等到回傳才會自動回傳</li>
-<li>false - 同步，<br>等資料傳回來，才會讓程式碼繼續往下跑通常使用true不必等到資料回傳才往下跑</li>
-</ul>
-<p>demo:<br><a href="https://codepen.io/michael-luo/pen/RwRyPOg?editors=1010">https://codepen.io/michael-luo/pen/RwRyPOg?editors=1010</a></p>
-<h2 id="http狀態碼"><a href="#http狀態碼" class="headerlink" title="http狀態碼"></a>http狀態碼</h2><p>200 - 確定。 用戶端要求成功。<br>401 - 拒絕存取。 IIS 定義數個不同的 401 錯誤，以表示更詳細的錯誤原因。</p>
-<p>更多：<a href="https://blog.miniasp.com/post/2009/01/16/Web-developer-should-know-about-HTTP-Status-Code">https://blog.miniasp.com/post/2009/01/16/Web-developer-should-know-about-HTTP-Status-Code</a></p>
-<h2 id="Cors"><a href="#Cors" class="headerlink" title="Cors"></a>Cors</h2><p>開了這個權限，其他開發者才能跨網域撈取資料。想知道某筆資料（JSON 或 API）有沒有開 CROS，可以上 test-cros.org 查詢。</p>
 ]]></content>
       <categories>
         <category>JavaScript</category>
@@ -347,101 +347,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript Control &amp; Loop</title>
-    <url>/2021/04/07/Control%20&amp;%20Loop%EF%BC%88%E6%8E%A7%E5%88%B6%E5%88%A4%E6%96%B7%E8%88%87%E8%BF%B4%E5%9C%88%EF%BC%89/</url>
-    <content><![CDATA[<h1 id="Control-amp-Loop（控制判斷與迴圈）"><a href="#Control-amp-Loop（控制判斷與迴圈）" class="headerlink" title="Control &amp; Loop（控制判斷與迴圈）"></a>Control &amp; Loop（控制判斷與迴圈）</h1><p>var 會產生全域問題, 所以都改用 es6 的 let,const</p>
-<h2 id="Control-Flow"><a href="#Control-Flow" class="headerlink" title="Control Flow"></a>Control Flow</h2><p>JavaScript 用來控制流程的「條件語法」指的是，當指定的條件為 true 時，就會執行後續所指定的指令。 而 JavaScript 的條件語法有兩種︰ if…else 和 switch。</p>
-<h3 id="if-else"><a href="#if-else" class="headerlink" title="if..else"></a>if..else</h3><p>如同字面上，如果指定條件為true就執行某件事，否則else就做另一件事。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (指定條件) &#123;</span><br><span class="line">  陳述式 <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  陳述式 <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果有多個不同的條件也可以藉由 else if 來使用複合的陳述式來測試，如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (指定條件<span class="number">1</span>) &#123;</span><br><span class="line">  陳述式 <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (指定條件 <span class="number">2</span>) &#123;</span><br><span class="line">  陳述式 <span class="number">2</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (指定條件 n) &#123;</span><br><span class="line">  陳述式 n;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  最後陳述式;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> (expression) &#123;</span><br><span class="line">  <span class="keyword">case</span> value_1:</span><br><span class="line">    statements_1</span><br><span class="line">    [<span class="keyword">break</span>;]</span><br><span class="line">  <span class="keyword">case</span> value_2:</span><br><span class="line">    statements_2</span><br><span class="line">    [<span class="keyword">break</span>;]</span><br><span class="line">    ...</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    statements_def</span><br><span class="line">    [<span class="keyword">break</span>;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> (i) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    alert(<span class="string">&quot;i = 1&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">    alert(<span class="string">&quot;i = 2&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">    alert(<span class="string">&quot;i = 3&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    alert(<span class="string">&quot;i &gt; 3 or i &lt;= 0&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果變數 i 的值 1，則執行 case 1 區塊的程式碼，以此類推;如果都不在指定的 case 裡面，則會執行 default 區塊的程式碼。</p>
-<p>關鍵字 break<br>當 JavaScript 執行到 break 這個關鍵字的時後，就會直接跳出整個 switch 區塊，繼續往下執行。<br>如果沒有break，程式會從符合的 case 區塊開始一路往下執行，直到遇到 break 為止。</p>
-<p>相較來說 switch 得效能比較好一些</p>
-<ul>
-<li>if…else 會先判斷後再執行</li>
-<li>switch 一定會執行，但還是會先比對 case</li>
-</ul>
-<hr>
-<h2 id="Loop"><a href="#Loop" class="headerlink" title="Loop"></a>Loop</h2><p>迴圈(loop)指的是，想要重複做某件事情，數值則會依次數而有遞增或遞減的變化來完成結束的條件。<br>主要分為</p>
-<ul>
-<li>for</li>
-<li>while</li>
-<li>do..while</li>
-</ul>
-<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>直接看例子:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>先定義初始值 <code>let i=0</code><br>然後<code>i &lt; 5</code>是結束條件，意思就是如果 i 大於等於 5 就會結束。<br><code>i++</code>為結束每一回合時變動，意思就是<code>i = i + 1</code>。</p>
-<h3 id="用-for-迴圈做加總"><a href="#用-for-迴圈做加總" class="headerlink" title="用 for 迴圈做加總"></a>用 for 迴圈做加總</h3><p>從陣列中取出資料，並使用 for 迴圈做加總。</p>
-<p>用人物資訊來做練習，</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> person = [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">&quot;Tim&quot;</span>,</span><br><span class="line">    age: <span class="number">20</span>,</span><br><span class="line">    height: <span class="number">200</span>,</span><br><span class="line">    gender:boy,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">&quot;Mary&quot;</span>,</span><br><span class="line">    age: <span class="number">17</span></span><br><span class="line">    height: <span class="number">150</span>,</span><br><span class="line">    gender:girl,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">&quot;jessica&quot;</span>,</span><br><span class="line">    age: <span class="number">18</span>,</span><br><span class="line">    height: <span class="number">150</span>,</span><br><span class="line">    gender:girl,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> personTotal = person.length; <span class="comment">//先抓取幾個人</span></span><br><span class="line"><span class="built_in">console</span>.log(personTotal); <span class="comment">//結果會得到 3 人，3 份資料</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ageTotal = <span class="number">0</span>; <span class="comment">//先預設數量為 0</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; personTotal; i++) &#123;</span><br><span class="line">  <span class="comment">//從第一個開始迴圈；在人數內條件；加總總值</span></span><br><span class="line">  ageTotal += ((person[i].age)%<span class="number">3</span>); <span class="comment">//</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;今年的平均年齡為: &quot;</span> + ageTotal);</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><p>while 基本上概念與 for 是相同的，看下面兩格結果是相同的例子</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// for</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// while</span></span><br><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">5</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">  i += <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>while</code> 的做法是 <code>while</code>(條件){行為}，上面的例子 <code>i &lt; 5</code> 是條件，每一次的行為是印出 i 後再讓 <code>i+1</code> ，之後當 <code>i = 4</code> 這次行為結束後 <code>i+1</code> 變成 5 ，下一次開始判斷條件就不符合，迴圈即終止。</p>
-<p>兩者相較</p>
-<p><code>while</code> 是控制條件的變數在迴圈開始前即存在，迴圈開始後只會定義條件，不會去初始化參數，大多數用在迴圈執行次數『不確定』的時候。<br><code>for</code> 則在迴圈一開始就定義變數，大多數用在迴圈次數『明確』的狀態。</p>
-<h3 id="do…while"><a href="#do…while" class="headerlink" title="do…while"></a>do…while</h3><p>do…while 則是跟 while 幾乎一樣，只是 do…while 可以確保迴圈的第一次行為被執行。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// do...while</span></span><br><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">  i += <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">while</span> (i &lt; <span class="number">5</span>);</span><br></pre></td></tr></table></figure>
-
-<p><strong>迴圈操作</strong></p>
-<p>break 與 continue 是迴圈中兩種特別的指令</p>
-<ul>
-<li>break<br>會直接中斷跳離迴圈。</li>
-<li>continue<br>會讓迴圈跳過這一次的行為繼續執行下一次的迴圈。</li>
-</ul>
-<p>Break 例子：如果找到所要的東西，就停止迴圈</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> result = foo();</span><br><span class="line">  <span class="keyword">if</span> (result == <span class="string">&quot;find it&quot;</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;找到了，結束迴圈&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Continue 例子：假設想要印出 1 ~ 10的數字 ，但是不包括 3 的倍數。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="comment">// i 能被 3 整除表示 i 是 3 的倍數，遇到 continue 就會跳過這次</span></span><br><span class="line">  <span class="keyword">if</span>( i % <span class="number">3</span> === <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="迴圈應用-99乘法表"><a href="#迴圈應用-99乘法表" class="headerlink" title="迴圈應用 - 99乘法表"></a>迴圈應用 - 99乘法表</h2><p>利用迴圈來印出九九乘法表的結果<br>這是用到nesting for loops的方式</p>
-<h3 id="for-迴圈"><a href="#for-迴圈" class="headerlink" title="for 迴圈"></a>for 迴圈</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j=<span class="number">1</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i + <span class="string">&quot;x&quot;</span> + j + <span class="string">&quot; = &quot;</span> +  i * j)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="while-迴圈"><a href="#while-迴圈" class="headerlink" title="while 迴圈"></a>while 迴圈</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (j &lt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i + <span class="string">&quot; x &quot;</span> + j + <span class="string">&quot; = &quot;</span> + i * j);</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="do…while-迴圈"><a href="#do…while-迴圈" class="headerlink" title="do…while 迴圈"></a>do…while 迴圈</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i + <span class="string">&quot; x &quot;</span> + j + <span class="string">&quot; = &quot;</span> + i * j);</span><br><span class="line">        j++;</span><br><span class="line">    &#125;<span class="keyword">while</span> (j &lt; <span class="number">10</span>);</span><br><span class="line">    i++;</span><br><span class="line">&#125;<span class="keyword">while</span> (i &lt; <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
-
-<p>Demo:<a href="https://codesandbox.io/s/chengshichai-for-huiquan-fc735?file=/all.js"> 99 乘法表以及 for迴圈練習</a></p>
-<hr>
-<h2 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// for </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> array = [<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>, <span class="string">&#x27;漂亮阿姨&#x27;</span>, <span class="string">&#x27;小美&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">  <span class="keyword">const</span> item = array[i];</span><br><span class="line">  <span class="built_in">console</span>.log(i, item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// foreach</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> array = [<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>, <span class="string">&#x27;漂亮阿姨&#x27;</span>, <span class="string">&#x27;小美&#x27;</span>]</span><br><span class="line">array.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item, i</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i, item)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//es6寫法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> array = [<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>, <span class="string">&#x27;漂亮阿姨&#x27;</span>, <span class="string">&#x27;小美&#x27;</span>]</span><br><span class="line">array.forEach(<span class="function">(<span class="params">item,i</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i,item)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="展開符號-…-arg"><a href="#展開符號-…-arg" class="headerlink" title="展開符號 … , arg"></a>展開符號 … , arg</h2><p>展開符號能夠把”陣列”與”類陣列”裡的內容給取出來。<br>以下說明展開符號的幾個用途。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> groupA = [<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>, <span class="string">&#x27;阿姨&#x27;</span>];</span><br><span class="line"><span class="keyword">let</span> groupB = [<span class="string">&#x27;老媽&#x27;</span>, <span class="string">&#x27;老爸&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> groupAll = [...groupA, ...groupB];</span><br><span class="line"><span class="built_in">console</span>.log(groupAll);</span><br><span class="line">    <span class="comment">// [&#x27;小明&#x27;, &#x27;杰倫&#x27;, &#x27;阿姨&#x27;,&#x27;老媽&#x27;, &#x27;老爸&#x27;]</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-<h2 id="for…in-迭代-物件-arr"><a href="#for…in-迭代-物件-arr" class="headerlink" title="for…in 迭代 物件(arr)"></a>for…in 迭代 物件(arr)</h2><p>語法：for (const value of arr){}</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> iterable = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 回傳「key」</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">// &quot;0&quot;, &quot;1&quot;, &quot;2&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 回傳「value」</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">// 3, 5, 7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="for…of-迭代-物件-object"><a href="#for…of-迭代-物件-object" class="headerlink" title="for…of 迭代 物件(object)"></a>for…of 迭代 物件(object)</h2><p>語法：for (const key of arr){}</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 內層為陣列類型時</span></span><br><span class="line"><span class="keyword">let</span> arr = [</span><br><span class="line">    [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">    [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">    [<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;world&#x27;</span>]</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [x, y, z] <span class="keyword">of</span> arr) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(x, y, z);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1, 2, 3</span></span><br><span class="line"><span class="comment">// 4, 5, 6</span></span><br><span class="line"><span class="comment">// &#x27;Hello&#x27;, &#x27;world&#x27;, undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 內層為物件類型時</span></span><br><span class="line"><span class="keyword">let</span> family = [</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">&#x27;ES6&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;JavaScript&#x27;</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">&#x27;for&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;Iterator&#x27;</span>&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> &#123;name, type&#125; <span class="keyword">of</span> family) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name + <span class="string">&#x27;: &#x27;</span> + type);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// &#x27;ES6: JavaScript&#x27;</span></span><br><span class="line"><span class="comment">// &#x27;for: Iterator&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="map-映射"><a href="#map-映射" class="headerlink" title="map() 映射"></a>map() 映射</h2><p>語法: .map()</p>
-<p>回傳會是一個 list</p>
-<h2 id="filter-保留"><a href="#filter-保留" class="headerlink" title=".filter() 保留"></a>.filter() 保留</h2><p>語法: .filter()</p>
-<p>回傳會是一個 list</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Command Line 指令</title>
     <url>/2021/04/07/Command%20Line%20%E6%8C%87%E4%BB%A4/</url>
     <content><![CDATA[<h1 id="Command-Line-指令"><a href="#Command-Line-指令" class="headerlink" title="Command Line 指令"></a>Command Line 指令</h1><h4 id="1-cd-change-directory）"><a href="#1-cd-change-directory）" class="headerlink" title="1. cd (change directory）"></a>1. <code>cd</code> (change directory）</h4><blockquote>
@@ -563,6 +468,101 @@
       </categories>
       <tags>
         <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript Control &amp; Loop</title>
+    <url>/2021/04/07/Control%20&amp;%20Loop%EF%BC%88%E6%8E%A7%E5%88%B6%E5%88%A4%E6%96%B7%E8%88%87%E8%BF%B4%E5%9C%88%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="Control-amp-Loop（控制判斷與迴圈）"><a href="#Control-amp-Loop（控制判斷與迴圈）" class="headerlink" title="Control &amp; Loop（控制判斷與迴圈）"></a>Control &amp; Loop（控制判斷與迴圈）</h1><p>var 會產生全域問題, 所以都改用 es6 的 let,const</p>
+<h2 id="Control-Flow"><a href="#Control-Flow" class="headerlink" title="Control Flow"></a>Control Flow</h2><p>JavaScript 用來控制流程的「條件語法」指的是，當指定的條件為 true 時，就會執行後續所指定的指令。 而 JavaScript 的條件語法有兩種︰ if…else 和 switch。</p>
+<h3 id="if-else"><a href="#if-else" class="headerlink" title="if..else"></a>if..else</h3><p>如同字面上，如果指定條件為true就執行某件事，否則else就做另一件事。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (指定條件) &#123;</span><br><span class="line">  陳述式 <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  陳述式 <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果有多個不同的條件也可以藉由 else if 來使用複合的陳述式來測試，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (指定條件<span class="number">1</span>) &#123;</span><br><span class="line">  陳述式 <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (指定條件 <span class="number">2</span>) &#123;</span><br><span class="line">  陳述式 <span class="number">2</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (指定條件 n) &#123;</span><br><span class="line">  陳述式 n;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  最後陳述式;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> (expression) &#123;</span><br><span class="line">  <span class="keyword">case</span> value_1:</span><br><span class="line">    statements_1</span><br><span class="line">    [<span class="keyword">break</span>;]</span><br><span class="line">  <span class="keyword">case</span> value_2:</span><br><span class="line">    statements_2</span><br><span class="line">    [<span class="keyword">break</span>;]</span><br><span class="line">    ...</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    statements_def</span><br><span class="line">    [<span class="keyword">break</span>;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">switch</span> (i) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    alert(<span class="string">&quot;i = 1&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">    alert(<span class="string">&quot;i = 2&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">    alert(<span class="string">&quot;i = 3&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    alert(<span class="string">&quot;i &gt; 3 or i &lt;= 0&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果變數 i 的值 1，則執行 case 1 區塊的程式碼，以此類推;如果都不在指定的 case 裡面，則會執行 default 區塊的程式碼。</p>
+<p>關鍵字 break<br>當 JavaScript 執行到 break 這個關鍵字的時後，就會直接跳出整個 switch 區塊，繼續往下執行。<br>如果沒有break，程式會從符合的 case 區塊開始一路往下執行，直到遇到 break 為止。</p>
+<p>相較來說 switch 得效能比較好一些</p>
+<ul>
+<li>if…else 會先判斷後再執行</li>
+<li>switch 一定會執行，但還是會先比對 case</li>
+</ul>
+<hr>
+<h2 id="Loop"><a href="#Loop" class="headerlink" title="Loop"></a>Loop</h2><p>迴圈(loop)指的是，想要重複做某件事情，數值則會依次數而有遞增或遞減的變化來完成結束的條件。<br>主要分為</p>
+<ul>
+<li>for</li>
+<li>while</li>
+<li>do..while</li>
+</ul>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>直接看例子:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先定義初始值 <code>let i=0</code><br>然後<code>i &lt; 5</code>是結束條件，意思就是如果 i 大於等於 5 就會結束。<br><code>i++</code>為結束每一回合時變動，意思就是<code>i = i + 1</code>。</p>
+<h3 id="用-for-迴圈做加總"><a href="#用-for-迴圈做加總" class="headerlink" title="用 for 迴圈做加總"></a>用 for 迴圈做加總</h3><p>從陣列中取出資料，並使用 for 迴圈做加總。</p>
+<p>用人物資訊來做練習，</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> person = [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">&quot;Tim&quot;</span>,</span><br><span class="line">    age: <span class="number">20</span>,</span><br><span class="line">    height: <span class="number">200</span>,</span><br><span class="line">    gender:boy,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">&quot;Mary&quot;</span>,</span><br><span class="line">    age: <span class="number">17</span></span><br><span class="line">    height: <span class="number">150</span>,</span><br><span class="line">    gender:girl,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">&quot;jessica&quot;</span>,</span><br><span class="line">    age: <span class="number">18</span>,</span><br><span class="line">    height: <span class="number">150</span>,</span><br><span class="line">    gender:girl,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> personTotal = person.length; <span class="comment">//先抓取幾個人</span></span><br><span class="line"><span class="built_in">console</span>.log(personTotal); <span class="comment">//結果會得到 3 人，3 份資料</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ageTotal = <span class="number">0</span>; <span class="comment">//先預設數量為 0</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; personTotal; i++) &#123;</span><br><span class="line">  <span class="comment">//從第一個開始迴圈；在人數內條件；加總總值</span></span><br><span class="line">  ageTotal += ((person[i].age)%<span class="number">3</span>); <span class="comment">//</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;今年的平均年齡為: &quot;</span> + ageTotal);</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><p>while 基本上概念與 for 是相同的，看下面兩格結果是相同的例子</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// for</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// while</span></span><br><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">5</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">  i += <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>while</code> 的做法是 <code>while</code>(條件){行為}，上面的例子 <code>i &lt; 5</code> 是條件，每一次的行為是印出 i 後再讓 <code>i+1</code> ，之後當 <code>i = 4</code> 這次行為結束後 <code>i+1</code> 變成 5 ，下一次開始判斷條件就不符合，迴圈即終止。</p>
+<p>兩者相較</p>
+<p><code>while</code> 是控制條件的變數在迴圈開始前即存在，迴圈開始後只會定義條件，不會去初始化參數，大多數用在迴圈執行次數『不確定』的時候。<br><code>for</code> 則在迴圈一開始就定義變數，大多數用在迴圈次數『明確』的狀態。</p>
+<h3 id="do…while"><a href="#do…while" class="headerlink" title="do…while"></a>do…while</h3><p>do…while 則是跟 while 幾乎一樣，只是 do…while 可以確保迴圈的第一次行為被執行。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// do...while</span></span><br><span class="line"><span class="keyword">let</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">  i += <span class="number">1</span>;</span><br><span class="line">&#125; <span class="keyword">while</span> (i &lt; <span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>迴圈操作</strong></p>
+<p>break 與 continue 是迴圈中兩種特別的指令</p>
+<ul>
+<li>break<br>會直接中斷跳離迴圈。</li>
+<li>continue<br>會讓迴圈跳過這一次的行為繼續執行下一次的迴圈。</li>
+</ul>
+<p>Break 例子：如果找到所要的東西，就停止迴圈</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> result = foo();</span><br><span class="line">  <span class="keyword">if</span> (result == <span class="string">&quot;find it&quot;</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;找到了，結束迴圈&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Continue 例子：假設想要印出 1 ~ 10的數字 ，但是不包括 3 的倍數。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="comment">// i 能被 3 整除表示 i 是 3 的倍數，遇到 continue 就會跳過這次</span></span><br><span class="line">  <span class="keyword">if</span>( i % <span class="number">3</span> === <span class="number">0</span>)&#123;</span><br><span class="line">    <span class="keyword">continue</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="迴圈應用-99乘法表"><a href="#迴圈應用-99乘法表" class="headerlink" title="迴圈應用 - 99乘法表"></a>迴圈應用 - 99乘法表</h2><p>利用迴圈來印出九九乘法表的結果<br>這是用到nesting for loops的方式</p>
+<h3 id="for-迴圈"><a href="#for-迴圈" class="headerlink" title="for 迴圈"></a>for 迴圈</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">1</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j=<span class="number">1</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i + <span class="string">&quot;x&quot;</span> + j + <span class="string">&quot; = &quot;</span> +  i * j)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="while-迴圈"><a href="#while-迴圈" class="headerlink" title="while 迴圈"></a>while 迴圈</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (i &lt; <span class="number">10</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (j &lt; <span class="number">10</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i + <span class="string">&quot; x &quot;</span> + j + <span class="string">&quot; = &quot;</span> + i * j);</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    i++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="do…while-迴圈"><a href="#do…while-迴圈" class="headerlink" title="do…while 迴圈"></a>do…while 迴圈</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(i + <span class="string">&quot; x &quot;</span> + j + <span class="string">&quot; = &quot;</span> + i * j);</span><br><span class="line">        j++;</span><br><span class="line">    &#125;<span class="keyword">while</span> (j &lt; <span class="number">10</span>);</span><br><span class="line">    i++;</span><br><span class="line">&#125;<span class="keyword">while</span> (i &lt; <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Demo:<a href="https://codesandbox.io/s/chengshichai-for-huiquan-fc735?file=/all.js"> 99 乘法表以及 for迴圈練習</a></p>
+<hr>
+<h2 id="foreach"><a href="#foreach" class="headerlink" title="foreach"></a>foreach</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// for </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> array = [<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>, <span class="string">&#x27;漂亮阿姨&#x27;</span>, <span class="string">&#x27;小美&#x27;</span>]</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">  <span class="keyword">const</span> item = array[i];</span><br><span class="line">  <span class="built_in">console</span>.log(i, item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// foreach</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> array = [<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>, <span class="string">&#x27;漂亮阿姨&#x27;</span>, <span class="string">&#x27;小美&#x27;</span>]</span><br><span class="line">array.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item, i</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i, item)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//es6寫法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> array = [<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>, <span class="string">&#x27;漂亮阿姨&#x27;</span>, <span class="string">&#x27;小美&#x27;</span>]</span><br><span class="line">array.forEach(<span class="function">(<span class="params">item,i</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i,item)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="展開符號-…-arg"><a href="#展開符號-…-arg" class="headerlink" title="展開符號 … , arg"></a>展開符號 … , arg</h2><p>展開符號能夠把”陣列”與”類陣列”裡的內容給取出來。<br>以下說明展開符號的幾個用途。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> groupA = [<span class="string">&#x27;小明&#x27;</span>, <span class="string">&#x27;杰倫&#x27;</span>, <span class="string">&#x27;阿姨&#x27;</span>];</span><br><span class="line"><span class="keyword">let</span> groupB = [<span class="string">&#x27;老媽&#x27;</span>, <span class="string">&#x27;老爸&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> groupAll = [...groupA, ...groupB];</span><br><span class="line"><span class="built_in">console</span>.log(groupAll);</span><br><span class="line">    <span class="comment">// [&#x27;小明&#x27;, &#x27;杰倫&#x27;, &#x27;阿姨&#x27;,&#x27;老媽&#x27;, &#x27;老爸&#x27;]</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+<h2 id="for…in-迭代-物件-arr"><a href="#for…in-迭代-物件-arr" class="headerlink" title="for…in 迭代 物件(arr)"></a>for…in 迭代 物件(arr)</h2><p>語法：for (const value of arr){}</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> iterable = [<span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 回傳「key」</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">in</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">// &quot;0&quot;, &quot;1&quot;, &quot;2&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 回傳「value」</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">// 3, 5, 7</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="for…of-迭代-物件-object"><a href="#for…of-迭代-物件-object" class="headerlink" title="for…of 迭代 物件(object)"></a>for…of 迭代 物件(object)</h2><p>語法：for (const key of arr){}</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 內層為陣列類型時</span></span><br><span class="line"><span class="keyword">let</span> arr = [</span><br><span class="line">    [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">    [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>],</span><br><span class="line">    [<span class="string">&#x27;Hello&#x27;</span>, <span class="string">&#x27;world&#x27;</span>]</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> [x, y, z] <span class="keyword">of</span> arr) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(x, y, z);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1, 2, 3</span></span><br><span class="line"><span class="comment">// 4, 5, 6</span></span><br><span class="line"><span class="comment">// &#x27;Hello&#x27;, &#x27;world&#x27;, undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 內層為物件類型時</span></span><br><span class="line"><span class="keyword">let</span> family = [</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">&#x27;ES6&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;JavaScript&#x27;</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">name</span>: <span class="string">&#x27;for&#x27;</span>, <span class="attr">type</span>: <span class="string">&#x27;Iterator&#x27;</span>&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> &#123;name, type&#125; <span class="keyword">of</span> family) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name + <span class="string">&#x27;: &#x27;</span> + type);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// &#x27;ES6: JavaScript&#x27;</span></span><br><span class="line"><span class="comment">// &#x27;for: Iterator&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="map-映射"><a href="#map-映射" class="headerlink" title="map() 映射"></a>map() 映射</h2><p>語法: .map()</p>
+<p>回傳會是一個 list</p>
+<h2 id="filter-保留"><a href="#filter-保留" class="headerlink" title=".filter() 保留"></a>.filter() 保留</h2><p>語法: .filter()</p>
+<p>回傳會是一個 list</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -904,6 +904,78 @@
       </tags>
   </entry>
   <entry>
+    <title>GitHub Finder</title>
+    <url>/2021/04/07/GitHub%20Finder/</url>
+    <content><![CDATA[<h1 id="GitHub-Finder"><a href="#GitHub-Finder" class="headerlink" title="GitHub Finder"></a>GitHub Finder</h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
+<li>搜索Github用戶，並顯示個人訊息和最新的Repository。</li>
+</ul>
+<h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><ul>
+<li>Ajax 實作串接 Github API</li>
+<li>jQuery Ajax</li>
+</ul>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p><img src="https://i.imgur.com/gooFsQ1.png" alt="完成圖"></p>
+<p><strong><a href="https://">Demo</a></strong></p>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="引入-Bootstrap-CDN-amp-Bootstrap-watch-CDN"><a href="#引入-Bootstrap-CDN-amp-Bootstrap-watch-CDN" class="headerlink" title="引入 Bootstrap CDN &amp; Bootstrap watch CDN"></a>引入 Bootstrap CDN &amp; Bootstrap watch CDN</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;link</span><br><span class="line">  rel&#x3D;&quot;stylesheet&quot;</span><br><span class="line">  href&#x3D;&quot;https:&#x2F;&#x2F;bootswatch.com&#x2F;4&#x2F;litera&#x2F;bootstrap.min.css&quot;</span><br><span class="line">    &#x2F;&gt;</span><br><span class="line">&lt;script</span><br><span class="line">  src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;bootstrap@5.0.0-beta1&#x2F;dist&#x2F;js&#x2F;bootstrap.bundle.min.js&quot;</span><br><span class="line">  integrity&#x3D;&quot;sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7&#x2F;t7LECLbyPA2x65Kgf80OJFdroafW&quot;</span><br><span class="line">  crossorigin&#x3D;&quot;anonymous&quot;</span><br><span class="line">&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script</span><br><span class="line">  src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;@popperjs&#x2F;core@2.5.4&#x2F;dist&#x2F;umd&#x2F;popper.min.js&quot;</span><br><span class="line">  integrity&#x3D;&quot;sha384-q2kxQ16AaE6UbzuKqyBE9&#x2F;u&#x2F;KzioAlnx2maXQHiDX9d4&#x2F;zp8Ok3f+M7DPm+Ib6IU&quot;</span><br><span class="line">  crossorigin&#x3D;&quot;anonymous&quot;</span><br><span class="line">&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script</span><br><span class="line">  src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;bootstrap@5.0.0-beta1&#x2F;dist&#x2F;js&#x2F;bootstrap.min.js&quot;</span><br><span class="line">  integrity&#x3D;&quot;sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj&quot;</span><br><span class="line">  crossorigin&#x3D;&quot;anonymous&quot;</span><br><span class="line">&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h3><p>HTML 內容不多，多為用JS動態產生的內容。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;nav class&#x3D;&quot;navbar navbar-dark bg-primary mb-3&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">      &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;navbar-brand&quot;&gt;GitHub Finder&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;nav&gt;</span><br><span class="line"></span><br><span class="line">  &lt;div class&#x3D;&quot;container searchContainer&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;search card card-body&quot;&gt;</span><br><span class="line">      &lt;h1&gt;Search GitHub Users&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;p class&#x3D;&quot;lead&quot;&gt;</span><br><span class="line">        Enter a username to fetch a user profile and repos from Github</span><br><span class="line">      &lt;&#x2F;p&gt;</span><br><span class="line">      &lt;input</span><br><span class="line">        type&#x3D;&quot;text&quot;</span><br><span class="line">        id&#x3D;&quot;searchUser&quot;</span><br><span class="line">        class&#x3D;&quot;form-control&quot;</span><br><span class="line">        placeholder&#x3D;&quot;GitHub Username...&quot;</span><br><span class="line">      &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;br &#x2F;&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;profile&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;footer class&#x3D;&quot;mt-5 p-3 text-center bg-light&quot;&gt;GitHub Finder &amp;copy;&lt;&#x2F;footer&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><p>使用 <a href="https://bootswatch.com/">Bootswatch</a> CSS UI</p>
+<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><h3 id="宣告變數"><a href="#宣告變數" class="headerlink" title="宣告變數"></a>宣告變數</h3><blockquote>
+<p>JS</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Search input</span></span><br><span class="line"><span class="keyword">const</span> searchUser = <span class="built_in">document</span>.getElementById(<span class="string">&quot;searchUser&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="取得輸入-input-值"><a href="#取得輸入-input-值" class="headerlink" title="取得輸入 input 值"></a>取得輸入 input 值</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Search input event listener</span></span><br><span class="line">searchUser.addEventListener(<span class="string">&quot;keyup&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Get input text</span></span><br><span class="line">  <span class="keyword">const</span> userText = e.target.value;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (userText !== <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(userText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="取得資料"><a href="#取得資料" class="headerlink" title="取得資料"></a>取得資料</h3><ul>
+<li><p>過濾取到 API 裡面的資料，使用keyup時，會不停的觸發搜尋，如果使用change，輸入完成後按下enter才會執行，就看要做什麼樣的處理去使用監聽事件</p>
+</li>
+<li><p><code>url(&#39;&#39;)</code> 裡面放的資料可以透過網址先觀察，只要更改後面的名字，就可以取到不同人的資料。</p>
+</li>
+</ul>
+<p><img src="https://i.imgur.com/8qakCqW.png"></p>
+<ul>
+<li><code>success()</code> 為成功運行後執行的 function，<code>insertProfile()</code>函式利用物件的方法，將 json 檔取出，這邊先過濾一整包資料，因為會出現 no data 的狀況。相較之下， repository 就不會出現沒有資料顯示null的狀況，所以只要這邊做資料過濾就可以。</li>
+</ul>
+<blockquote>
+<p><code>jQuery.ajax(url [, settings])</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>參數</th>
+<th>型別</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>url</td>
+<td>Quantity</td>
+<td>指定要進行呼叫的位址</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>要傳給 server 的 Key/value 值對</td>
+</tr>
+<tr>
+<td>success</td>
+<td>Function</td>
+<td>Ajax 請求完成時 (必需是 success) 呼叫的 callback</td>
+</tr>
+</tbody></table>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+        <category>作品集</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>作品集</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>初探 HTML</title>
     <url>/2021/04/07/HTML/</url>
     <content><![CDATA[<h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><p><strong>HTML定義了Internet上每個網頁的內容。</strong></p>
@@ -1198,78 +1270,6 @@
       </tags>
   </entry>
   <entry>
-    <title>GitHub Finder</title>
-    <url>/2021/04/07/GitHub%20Finder/</url>
-    <content><![CDATA[<h1 id="GitHub-Finder"><a href="#GitHub-Finder" class="headerlink" title="GitHub Finder"></a>GitHub Finder</h1><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
-<li>搜索Github用戶，並顯示個人訊息和最新的Repository。</li>
-</ul>
-<h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><ul>
-<li>Ajax 實作串接 Github API</li>
-<li>jQuery Ajax</li>
-</ul>
-<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p><img src="https://i.imgur.com/gooFsQ1.png" alt="完成圖"></p>
-<p><strong><a href="https://">Demo</a></strong></p>
-<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="引入-Bootstrap-CDN-amp-Bootstrap-watch-CDN"><a href="#引入-Bootstrap-CDN-amp-Bootstrap-watch-CDN" class="headerlink" title="引入 Bootstrap CDN &amp; Bootstrap watch CDN"></a>引入 Bootstrap CDN &amp; Bootstrap watch CDN</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;link</span><br><span class="line">  rel&#x3D;&quot;stylesheet&quot;</span><br><span class="line">  href&#x3D;&quot;https:&#x2F;&#x2F;bootswatch.com&#x2F;4&#x2F;litera&#x2F;bootstrap.min.css&quot;</span><br><span class="line">    &#x2F;&gt;</span><br><span class="line">&lt;script</span><br><span class="line">  src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;bootstrap@5.0.0-beta1&#x2F;dist&#x2F;js&#x2F;bootstrap.bundle.min.js&quot;</span><br><span class="line">  integrity&#x3D;&quot;sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7&#x2F;t7LECLbyPA2x65Kgf80OJFdroafW&quot;</span><br><span class="line">  crossorigin&#x3D;&quot;anonymous&quot;</span><br><span class="line">&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script</span><br><span class="line">  src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;@popperjs&#x2F;core@2.5.4&#x2F;dist&#x2F;umd&#x2F;popper.min.js&quot;</span><br><span class="line">  integrity&#x3D;&quot;sha384-q2kxQ16AaE6UbzuKqyBE9&#x2F;u&#x2F;KzioAlnx2maXQHiDX9d4&#x2F;zp8Ok3f+M7DPm+Ib6IU&quot;</span><br><span class="line">  crossorigin&#x3D;&quot;anonymous&quot;</span><br><span class="line">&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script</span><br><span class="line">  src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;bootstrap@5.0.0-beta1&#x2F;dist&#x2F;js&#x2F;bootstrap.min.js&quot;</span><br><span class="line">  integrity&#x3D;&quot;sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj&quot;</span><br><span class="line">  crossorigin&#x3D;&quot;anonymous&quot;</span><br><span class="line">&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h3><p>HTML 內容不多，多為用JS動態產生的內容。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;nav class&#x3D;&quot;navbar navbar-dark bg-primary mb-3&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">      &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;navbar-brand&quot;&gt;GitHub Finder&lt;&#x2F;a&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;nav&gt;</span><br><span class="line"></span><br><span class="line">  &lt;div class&#x3D;&quot;container searchContainer&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;search card card-body&quot;&gt;</span><br><span class="line">      &lt;h1&gt;Search GitHub Users&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;p class&#x3D;&quot;lead&quot;&gt;</span><br><span class="line">        Enter a username to fetch a user profile and repos from Github</span><br><span class="line">      &lt;&#x2F;p&gt;</span><br><span class="line">      &lt;input</span><br><span class="line">        type&#x3D;&quot;text&quot;</span><br><span class="line">        id&#x3D;&quot;searchUser&quot;</span><br><span class="line">        class&#x3D;&quot;form-control&quot;</span><br><span class="line">        placeholder&#x3D;&quot;GitHub Username...&quot;</span><br><span class="line">      &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;br &#x2F;&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;profile&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;footer class&#x3D;&quot;mt-5 p-3 text-center bg-light&quot;&gt;GitHub Finder &amp;copy;&lt;&#x2F;footer&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><p>使用 <a href="https://bootswatch.com/">Bootswatch</a> CSS UI</p>
-<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><h3 id="宣告變數"><a href="#宣告變數" class="headerlink" title="宣告變數"></a>宣告變數</h3><blockquote>
-<p>JS</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Search input</span></span><br><span class="line"><span class="keyword">const</span> searchUser = <span class="built_in">document</span>.getElementById(<span class="string">&quot;searchUser&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="取得輸入-input-值"><a href="#取得輸入-input-值" class="headerlink" title="取得輸入 input 值"></a>取得輸入 input 值</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Search input event listener</span></span><br><span class="line">searchUser.addEventListener(<span class="string">&quot;keyup&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// Get input text</span></span><br><span class="line">  <span class="keyword">const</span> userText = e.target.value;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (userText !== <span class="string">&quot;&quot;</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(userText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="取得資料"><a href="#取得資料" class="headerlink" title="取得資料"></a>取得資料</h3><ul>
-<li><p>過濾取到 API 裡面的資料，使用keyup時，會不停的觸發搜尋，如果使用change，輸入完成後按下enter才會執行，就看要做什麼樣的處理去使用監聽事件</p>
-</li>
-<li><p><code>url(&#39;&#39;)</code> 裡面放的資料可以透過網址先觀察，只要更改後面的名字，就可以取到不同人的資料。</p>
-</li>
-</ul>
-<p><img src="https://i.imgur.com/8qakCqW.png"></p>
-<ul>
-<li><code>success()</code> 為成功運行後執行的 function，<code>insertProfile()</code>函式利用物件的方法，將 json 檔取出，這邊先過濾一整包資料，因為會出現 no data 的狀況。相較之下， repository 就不會出現沒有資料顯示null的狀況，所以只要這邊做資料過濾就可以。</li>
-</ul>
-<blockquote>
-<p><code>jQuery.ajax(url [, settings])</code></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>參數</th>
-<th>型別</th>
-<th>說明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>url</td>
-<td>Quantity</td>
-<td>指定要進行呼叫的位址</td>
-</tr>
-<tr>
-<td>data</td>
-<td>Object</td>
-<td>要傳給 server 的 Key/value 值對</td>
-</tr>
-<tr>
-<td>success</td>
-<td>Function</td>
-<td>Ajax 請求完成時 (必需是 success) 呼叫的 callback</td>
-</tr>
-</tbody></table>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-        <category>作品集</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>作品集</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Infinite Scroll</title>
     <url>/2021/04/07/Infinite%20Scroll/</url>
     <content><![CDATA[<h1 id="Infinite-Scroll"><a href="#Infinite-Scroll" class="headerlink" title="Infinite Scroll"></a>Infinite Scroll</h1><h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><ul>
@@ -1469,6 +1469,119 @@
 
 
 <h3 id="結論：-如何判斷-function-是否為-async"><a href="#結論：-如何判斷-function-是否為-async" class="headerlink" title="結論：(如何判斷 function 是否為 async)"></a>結論：(如何判斷 function 是否為 async)</h3><p><strong>return 回來的話如果是一個 Promise 那就是 async<br>如果不是 Promise 那就是一般的 function</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)</title>
+    <url>/2021/04/07/JavaScript%20Higher%20Order%20Functions%20&amp;%20Arrays%20(Vanilla%20JavaScript)/</url>
+    <content><![CDATA[<h1 id="JavaScript-Higher-Order-Functions-amp-Arrays-Vanilla-JavaScript"><a href="#JavaScript-Higher-Order-Functions-amp-Arrays-Vanilla-JavaScript" class="headerlink" title="JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)"></a>JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)</h1><h6 id="tags-JS"><a href="#tags-JS" class="headerlink" title="tags: JS"></a>tags: <code>JS</code></h6><h1 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備:"></a>事前準備:</h1><p>待會要處理的資料</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> companies= [</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company One&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Finance&quot;</span>, <span class="attr">start</span>: <span class="number">1981</span>, <span class="attr">end</span>: <span class="number">2004</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Two&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Retail&quot;</span>, <span class="attr">start</span>: <span class="number">1992</span>, <span class="attr">end</span>: <span class="number">2008</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Three&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Auto&quot;</span>, <span class="attr">start</span>: <span class="number">1999</span>, <span class="attr">end</span>: <span class="number">2007</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Four&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Retail&quot;</span>, <span class="attr">start</span>: <span class="number">1989</span>, <span class="attr">end</span>: <span class="number">2010</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Five&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Technology&quot;</span>, <span class="attr">start</span>: <span class="number">2009</span>, <span class="attr">end</span>: <span class="number">2014</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Six&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Finance&quot;</span>, <span class="attr">start</span>: <span class="number">1987</span>, <span class="attr">end</span>: <span class="number">2010</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Seven&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Auto&quot;</span>, <span class="attr">start</span>: <span class="number">1986</span>, <span class="attr">end</span>: <span class="number">1996</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Eight&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Technology&quot;</span>, <span class="attr">start</span>: <span class="number">2011</span>, <span class="attr">end</span>: <span class="number">2016</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Nine&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Retail&quot;</span>, <span class="attr">start</span>: <span class="number">1981</span>, <span class="attr">end</span>: <span class="number">1989</span>&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ages = [<span class="number">33</span>, <span class="number">12</span>, <span class="number">20</span>, <span class="number">16</span>, <span class="number">5</span>, <span class="number">54</span>, <span class="number">21</span>, <span class="number">44</span>, <span class="number">61</span>, <span class="number">13</span>, <span class="number">15</span>, <span class="number">45</span>, <span class="number">25</span>, <span class="number">64</span>, <span class="number">32</span>];</span><br></pre></td></tr></table></figure>
+
+<h1 id="forEach-逐個印出"><a href="#forEach-逐個印出" class="headerlink" title="forEach 逐個印出"></a>forEach 逐個印出</h1><h2 id="使用for作範例"><a href="#使用for作範例" class="headerlink" title="使用for作範例"></a>使用for作範例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; companies.length; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(companies[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>印出結果:<br><img src="https://i.imgur.com/ebpS8lu.png"></p>
+<h2 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h2><ul>
+<li>是一個比較好的方法來跑array的迴圈相較於一般的for迴圈並且不會return東西回來</li>
+<li>是個比較優雅的方式處理資料</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//這邊做的印出每一個物件</span></span><br><span class="line">companies.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(company);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//當然也可以取用裡面的資料</span></span><br><span class="line"></span><br><span class="line">companies.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(company.name);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:<br>跟for跑出來的結果一模一樣，但比較淺顯易懂就是使用了一個forEach方法省去了很多複雜的條件<br><img src="https://i.imgur.com/ebpS8lu.png"></p>
+<p>取用裡面的name資料印出的結果<br><img src="https://i.imgur.com/6NB9sFX.png"></p>
+<h1 id="filter-篩選功能"><a href="#filter-篩選功能" class="headerlink" title="filter 篩選功能"></a>filter 篩選功能</h1><h2 id="練習一"><a href="#練習一" class="headerlink" title="練習一:"></a>練習一:</h2><p>篩選 ages 這個array裡面大於等於21歲的人<br><img src="https://i.imgur.com/YhViXk1.png"></p>
+<h2 id="使用for作範例-1"><a href="#使用for作範例-1" class="headerlink" title="使用for作範例"></a>使用for作範例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> canDrink = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; ages.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (ages[i] &gt;= <span class="number">21</span>) &#123;</span><br><span class="line">        canDrink.push(ages[i]); <span class="comment">//使用push把符合條件的人推進去</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(canDrink);</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:<br><img src="https://i.imgur.com/WgyScBp.png"></p>
+<h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> canDrink = ages.filter(<span class="function"><span class="keyword">function</span> (<span class="params">age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (age &gt;= <span class="number">21</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(canDrink);</span><br></pre></td></tr></table></figure>
+
+<p>甚至使用ES6語法的箭頭函式可以更簡潔:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> canDrink = ages.filter(<span class="function"><span class="params">age</span> =&gt;</span> age &gt;= <span class="number">21</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(canDrink);</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:<br>一樣不需要處理條件式且比較簡潔也不需要而外多使用其他的方法<br><img src="https://i.imgur.com/WgyScBp.png"></p>
+<h2 id="練習二"><a href="#練習二" class="headerlink" title="練習二:"></a>練習二:</h2><p>抓出companies資料裡面含有’Retail內容的物件</p>
+<h2 id="使用ES5的寫法"><a href="#使用ES5的寫法" class="headerlink" title="使用ES5的寫法"></a>使用ES5的寫法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> retailCompanies = companies.filter(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (company.category === <span class="string">&#x27;Retail&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(retailCompanies);</span><br></pre></td></tr></table></figure>
+
+<h2 id="ES6箭頭函式的寫法"><a href="#ES6箭頭函式的寫法" class="headerlink" title="ES6箭頭函式的寫法"></a>ES6箭頭函式的寫法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> retailCompanies = companies.filter(<span class="function"><span class="params">company</span> =&gt;</span> company.category === <span class="string">&#x27;Retail&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(retailCompanies);</span><br></pre></td></tr></table></figure>
+
+
+<p>印出結果會一樣:<br><img src="https://i.imgur.com/4M3q9Oj.png"></p>
+<h2 id="練習三"><a href="#練習三" class="headerlink" title="練習三:"></a>練習三:</h2><p>篩選公司成立時間在1980年代</p>
+<p>主要篩選companies 的start區塊作時間上的判斷</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> eightiesCompanies = companies.filter(<span class="function"><span class="params">company</span> =&gt;</span> (company.start &gt;= <span class="number">1980</span> &amp;&amp; company.start &lt; <span class="number">1990</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(eightiesCompanies)</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:</p>
+<p><img src="https://i.imgur.com/x1PBpe5.png"></p>
+<h2 id="練習四"><a href="#練習四" class="headerlink" title="練習四:"></a>練習四:</h2><p>篩選出所有成立超過或是等於十年的公司</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> lastedTenYears = companies.filter(<span class="function"><span class="params">company</span> =&gt;</span> (company.end - company.start &gt;= <span class="number">10</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(lastedTenYears);</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:<br><img src="https://i.imgur.com/zuEWelh.png"></p>
+<h1 id="map-印出資料-新的array-並且操作他們"><a href="#map-印出資料-新的array-並且操作他們" class="headerlink" title="map 印出資料(新的array)並且操作他們"></a>map 印出資料(新的array)並且操作他們</h1><p>除了篩選資料之外我們還可以創造新的array從現存的array中<br>並且對新的array做各種操作</p>
+<h2 id="練習一-1"><a href="#練習一-1" class="headerlink" title="練習一:"></a>練習一:</h2><p>把所有的公司名稱取出來並放入一個新的array</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> companyNames = companies.map(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> company.name</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(companyNames);</span><br></pre></td></tr></table></figure>
+
+<p>印出結果:</p>
+<p>一個全新的array包含了公司名稱<br><img src="https://i.imgur.com/gKHMYRC.png"></p>
+<h2 id="練習二-1"><a href="#練習二-1" class="headerlink" title="練習二:"></a>練習二:</h2><p>可以操作map取得的新array:</p>
+<p>放入公司名稱跟年份組成新的arra</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> testMap = companies.map(<span class="function"><span class="params">company</span> =&gt;</span> <span class="string">`<span class="subst">$&#123;company.name&#125;</span>[<span class="subst">$&#123;company.start&#125;</span> - <span class="subst">$&#123;company.end&#125;</span>]`</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(testMap);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/CQ5MNjw.png"></p>
+<h2 id="練習三-1"><a href="#練習三-1" class="headerlink" title="練習三:"></a>練習三:</h2><p>對map的新array做數字上面的處理</p>
+<p>把數字開平方</p>
+<p>把數字乘2</p>
+<p>把數字開平方後乘2</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> agesSquare = ages.map(<span class="function"><span class="params">age</span> =&gt;</span> <span class="built_in">Math</span>.sqrt(age));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(agesSquare);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> agesTimesTwo = ages.map(<span class="function"><span class="params">age</span> =&gt;</span> age * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(agesTimesTwo);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 甚至可以把它們做串接處理</span></span><br><span class="line"><span class="keyword">const</span> agesMap = ages</span><br><span class="line">    .map(<span class="function"><span class="params">age</span> =&gt;</span> <span class="built_in">Math</span>.sqrt(age))</span><br><span class="line">    .map(<span class="function"><span class="params">age</span> =&gt;</span> age * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(agesMap);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>印出結果:</p>
+<p>開平方<br><img src="https://i.imgur.com/t0Gbuob.png"></p>
+<p>乘2<br><img src="https://i.imgur.com/qTnAnZK.png"></p>
+<p>開平方後乘2<br><img src="https://i.imgur.com/Siwzx2V.png"></p>
+<h1 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h1><p>如果我們不對sort做任何處理的話會這樣安排:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedAges = ages.sort();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedAges);</span><br></pre></td></tr></table></figure>
+
+<p>看似是由大到小但是有個小問題在於其實只比較了第一個數字然後再比較第二位所以5竟然排在那麼下面顯然不太合理(對一般使用的情況下)<br><img src="https://i.imgur.com/qXvWpx0.png"></p>
+<h2 id="一般我們會這樣處理sort"><a href="#一般我們會這樣處理sort" class="headerlink" title="一般我們會這樣處理sort:"></a>一般我們會這樣處理sort:</h2><p>讓順序由大排到小</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedAges = ages.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a-b);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedAges);</span><br></pre></td></tr></table></figure>
+
+
+<p>由小排到大</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedAges = ages.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> b-a);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedAges);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h2 id="練習一-2"><a href="#練習一-2" class="headerlink" title="練習一:"></a>練習一:</h2><p>分類公司藉著他們的開始年分 最早排到最晚</p>
+<p>一次比較兩個公司如果a&gt;b 則顯示-1排前面</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedCompanies = companies.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> (a.start &gt; b.start ? <span class="number">1</span> : -<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedCompanies);</span><br></pre></td></tr></table></figure>
+
+<p>印出的結果:<br><img src="https://i.imgur.com/5OueGVc.png"></p>
+<h1 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h1><p>作加總，記得寫法reduce(參數1,參數2){function(){},0}後面的0要記得寫</p>
+<h2 id="練習一-3"><a href="#練習一-3" class="headerlink" title="練習一:"></a>練習一:</h2><p>加總ages所有的數字和</p>
+<h2 id="使用for範例"><a href="#使用for範例" class="headerlink" title="使用for範例"></a>使用for範例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> ageSum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; ages.length; i++) &#123;</span><br><span class="line">    ageSum += ages[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ageSum);</span><br></pre></td></tr></table></figure>
+
+<p>得出加總的數字為:460</p>
+<h2 id="使用reduce"><a href="#使用reduce" class="headerlink" title="使用reduce"></a>使用reduce</h2><h2 id="Es5語法"><a href="#Es5語法" class="headerlink" title="Es5語法:"></a>Es5語法:</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ageSum = ages.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">total, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> total + age;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ageSum);</span><br></pre></td></tr></table></figure>
+
+<p>得出加總的數字為:460</p>
+<h2 id="ES6語法"><a href="#ES6語法" class="headerlink" title="ES6語法:"></a>ES6語法:</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ageSum = ages.reduce(<span class="function">(<span class="params">total, age</span>) =&gt;</span> total + age, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ageSum);</span><br></pre></td></tr></table></figure>
+
+<p>得出加總的數字為:460</p>
+<h2 id="練習二-2"><a href="#練習二-2" class="headerlink" title="練習二:"></a>練習二:</h2><p>加總所有公司的存在年分</p>
+<p>把公司的end年份減去start年份就是存在時間並且做加上total就好瞜</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> totalYears = companies.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">total, company</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> total + (company.end - company.start);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(totalYears);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用ES6的簡化寫法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> totalYears = companies.reduce(<span class="function">(<span class="params">total, company</span>) =&gt;</span></span><br><span class="line">    total + (company.end - company.start), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(totalYears);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>得出結果: 119</p>
+<h1 id="串接使用全部方法"><a href="#串接使用全部方法" class="headerlink" title="串接使用全部方法"></a>串接使用全部方法</h1><p>不是很實用但是他們可以這樣串接使用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> combined = ages</span><br><span class="line">    .map(<span class="function"><span class="params">age</span> =&gt;</span> age * <span class="number">2</span>)</span><br><span class="line">    .filter(<span class="function"><span class="params">age</span> =&gt;</span> age &gt;= <span class="number">40</span>)</span><br><span class="line">    .sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    .reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(combined);</span><br></pre></td></tr></table></figure>
+
+<p>由大到小排列:<br><img src="https://i.imgur.com/1zQSVkn.png"></p>
+<p>得到加總結果結果是798</p>
 ]]></content>
       <categories>
         <category>JavaScript</category>
@@ -1913,119 +2026,6 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>作品集</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)</title>
-    <url>/2021/04/07/JavaScript%20Higher%20Order%20Functions%20&amp;%20Arrays%20(Vanilla%20JavaScript)/</url>
-    <content><![CDATA[<h1 id="JavaScript-Higher-Order-Functions-amp-Arrays-Vanilla-JavaScript"><a href="#JavaScript-Higher-Order-Functions-amp-Arrays-Vanilla-JavaScript" class="headerlink" title="JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)"></a>JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)</h1><h6 id="tags-JS"><a href="#tags-JS" class="headerlink" title="tags: JS"></a>tags: <code>JS</code></h6><h1 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備:"></a>事前準備:</h1><p>待會要處理的資料</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> companies= [</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company One&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Finance&quot;</span>, <span class="attr">start</span>: <span class="number">1981</span>, <span class="attr">end</span>: <span class="number">2004</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Two&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Retail&quot;</span>, <span class="attr">start</span>: <span class="number">1992</span>, <span class="attr">end</span>: <span class="number">2008</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Three&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Auto&quot;</span>, <span class="attr">start</span>: <span class="number">1999</span>, <span class="attr">end</span>: <span class="number">2007</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Four&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Retail&quot;</span>, <span class="attr">start</span>: <span class="number">1989</span>, <span class="attr">end</span>: <span class="number">2010</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Five&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Technology&quot;</span>, <span class="attr">start</span>: <span class="number">2009</span>, <span class="attr">end</span>: <span class="number">2014</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Six&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Finance&quot;</span>, <span class="attr">start</span>: <span class="number">1987</span>, <span class="attr">end</span>: <span class="number">2010</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Seven&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Auto&quot;</span>, <span class="attr">start</span>: <span class="number">1986</span>, <span class="attr">end</span>: <span class="number">1996</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Eight&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Technology&quot;</span>, <span class="attr">start</span>: <span class="number">2011</span>, <span class="attr">end</span>: <span class="number">2016</span>&#125;,</span><br><span class="line">  &#123;<span class="attr">name</span>: <span class="string">&quot;Company Nine&quot;</span>, <span class="attr">category</span>: <span class="string">&quot;Retail&quot;</span>, <span class="attr">start</span>: <span class="number">1981</span>, <span class="attr">end</span>: <span class="number">1989</span>&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> ages = [<span class="number">33</span>, <span class="number">12</span>, <span class="number">20</span>, <span class="number">16</span>, <span class="number">5</span>, <span class="number">54</span>, <span class="number">21</span>, <span class="number">44</span>, <span class="number">61</span>, <span class="number">13</span>, <span class="number">15</span>, <span class="number">45</span>, <span class="number">25</span>, <span class="number">64</span>, <span class="number">32</span>];</span><br></pre></td></tr></table></figure>
-
-<h1 id="forEach-逐個印出"><a href="#forEach-逐個印出" class="headerlink" title="forEach 逐個印出"></a>forEach 逐個印出</h1><h2 id="使用for作範例"><a href="#使用for作範例" class="headerlink" title="使用for作範例"></a>使用for作範例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; companies.length; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(companies[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>印出結果:<br><img src="https://i.imgur.com/ebpS8lu.png"></p>
-<h2 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h2><ul>
-<li>是一個比較好的方法來跑array的迴圈相較於一般的for迴圈並且不會return東西回來</li>
-<li>是個比較優雅的方式處理資料</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//這邊做的印出每一個物件</span></span><br><span class="line">companies.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(company);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//當然也可以取用裡面的資料</span></span><br><span class="line"></span><br><span class="line">companies.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(company.name);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>印出結果:<br>跟for跑出來的結果一模一樣，但比較淺顯易懂就是使用了一個forEach方法省去了很多複雜的條件<br><img src="https://i.imgur.com/ebpS8lu.png"></p>
-<p>取用裡面的name資料印出的結果<br><img src="https://i.imgur.com/6NB9sFX.png"></p>
-<h1 id="filter-篩選功能"><a href="#filter-篩選功能" class="headerlink" title="filter 篩選功能"></a>filter 篩選功能</h1><h2 id="練習一"><a href="#練習一" class="headerlink" title="練習一:"></a>練習一:</h2><p>篩選 ages 這個array裡面大於等於21歲的人<br><img src="https://i.imgur.com/YhViXk1.png"></p>
-<h2 id="使用for作範例-1"><a href="#使用for作範例-1" class="headerlink" title="使用for作範例"></a>使用for作範例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> canDrink = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; ages.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (ages[i] &gt;= <span class="number">21</span>) &#123;</span><br><span class="line">        canDrink.push(ages[i]); <span class="comment">//使用push把符合條件的人推進去</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(canDrink);</span><br></pre></td></tr></table></figure>
-
-<p>印出結果:<br><img src="https://i.imgur.com/WgyScBp.png"></p>
-<h2 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> canDrink = ages.filter(<span class="function"><span class="keyword">function</span> (<span class="params">age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (age &gt;= <span class="number">21</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(canDrink);</span><br></pre></td></tr></table></figure>
-
-<p>甚至使用ES6語法的箭頭函式可以更簡潔:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> canDrink = ages.filter(<span class="function"><span class="params">age</span> =&gt;</span> age &gt;= <span class="number">21</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(canDrink);</span><br></pre></td></tr></table></figure>
-
-<p>印出結果:<br>一樣不需要處理條件式且比較簡潔也不需要而外多使用其他的方法<br><img src="https://i.imgur.com/WgyScBp.png"></p>
-<h2 id="練習二"><a href="#練習二" class="headerlink" title="練習二:"></a>練習二:</h2><p>抓出companies資料裡面含有’Retail內容的物件</p>
-<h2 id="使用ES5的寫法"><a href="#使用ES5的寫法" class="headerlink" title="使用ES5的寫法"></a>使用ES5的寫法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> retailCompanies = companies.filter(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (company.category === <span class="string">&#x27;Retail&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(retailCompanies);</span><br></pre></td></tr></table></figure>
-
-<h2 id="ES6箭頭函式的寫法"><a href="#ES6箭頭函式的寫法" class="headerlink" title="ES6箭頭函式的寫法"></a>ES6箭頭函式的寫法</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> retailCompanies = companies.filter(<span class="function"><span class="params">company</span> =&gt;</span> company.category === <span class="string">&#x27;Retail&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(retailCompanies);</span><br></pre></td></tr></table></figure>
-
-
-<p>印出結果會一樣:<br><img src="https://i.imgur.com/4M3q9Oj.png"></p>
-<h2 id="練習三"><a href="#練習三" class="headerlink" title="練習三:"></a>練習三:</h2><p>篩選公司成立時間在1980年代</p>
-<p>主要篩選companies 的start區塊作時間上的判斷</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> eightiesCompanies = companies.filter(<span class="function"><span class="params">company</span> =&gt;</span> (company.start &gt;= <span class="number">1980</span> &amp;&amp; company.start &lt; <span class="number">1990</span>))</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(eightiesCompanies)</span><br></pre></td></tr></table></figure>
-
-<p>印出結果:</p>
-<p><img src="https://i.imgur.com/x1PBpe5.png"></p>
-<h2 id="練習四"><a href="#練習四" class="headerlink" title="練習四:"></a>練習四:</h2><p>篩選出所有成立超過或是等於十年的公司</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> lastedTenYears = companies.filter(<span class="function"><span class="params">company</span> =&gt;</span> (company.end - company.start &gt;= <span class="number">10</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(lastedTenYears);</span><br></pre></td></tr></table></figure>
-
-<p>印出結果:<br><img src="https://i.imgur.com/zuEWelh.png"></p>
-<h1 id="map-印出資料-新的array-並且操作他們"><a href="#map-印出資料-新的array-並且操作他們" class="headerlink" title="map 印出資料(新的array)並且操作他們"></a>map 印出資料(新的array)並且操作他們</h1><p>除了篩選資料之外我們還可以創造新的array從現存的array中<br>並且對新的array做各種操作</p>
-<h2 id="練習一-1"><a href="#練習一-1" class="headerlink" title="練習一:"></a>練習一:</h2><p>把所有的公司名稱取出來並放入一個新的array</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> companyNames = companies.map(<span class="function"><span class="keyword">function</span> (<span class="params">company</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> company.name</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(companyNames);</span><br></pre></td></tr></table></figure>
-
-<p>印出結果:</p>
-<p>一個全新的array包含了公司名稱<br><img src="https://i.imgur.com/gKHMYRC.png"></p>
-<h2 id="練習二-1"><a href="#練習二-1" class="headerlink" title="練習二:"></a>練習二:</h2><p>可以操作map取得的新array:</p>
-<p>放入公司名稱跟年份組成新的arra</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> testMap = companies.map(<span class="function"><span class="params">company</span> =&gt;</span> <span class="string">`<span class="subst">$&#123;company.name&#125;</span>[<span class="subst">$&#123;company.start&#125;</span> - <span class="subst">$&#123;company.end&#125;</span>]`</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(testMap);</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://i.imgur.com/CQ5MNjw.png"></p>
-<h2 id="練習三-1"><a href="#練習三-1" class="headerlink" title="練習三:"></a>練習三:</h2><p>對map的新array做數字上面的處理</p>
-<p>把數字開平方</p>
-<p>把數字乘2</p>
-<p>把數字開平方後乘2</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> agesSquare = ages.map(<span class="function"><span class="params">age</span> =&gt;</span> <span class="built_in">Math</span>.sqrt(age));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(agesSquare);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> agesTimesTwo = ages.map(<span class="function"><span class="params">age</span> =&gt;</span> age * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(agesTimesTwo);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 甚至可以把它們做串接處理</span></span><br><span class="line"><span class="keyword">const</span> agesMap = ages</span><br><span class="line">    .map(<span class="function"><span class="params">age</span> =&gt;</span> <span class="built_in">Math</span>.sqrt(age))</span><br><span class="line">    .map(<span class="function"><span class="params">age</span> =&gt;</span> age * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(agesMap);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>印出結果:</p>
-<p>開平方<br><img src="https://i.imgur.com/t0Gbuob.png"></p>
-<p>乘2<br><img src="https://i.imgur.com/qTnAnZK.png"></p>
-<p>開平方後乘2<br><img src="https://i.imgur.com/Siwzx2V.png"></p>
-<h1 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h1><p>如果我們不對sort做任何處理的話會這樣安排:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedAges = ages.sort();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedAges);</span><br></pre></td></tr></table></figure>
-
-<p>看似是由大到小但是有個小問題在於其實只比較了第一個數字然後再比較第二位所以5竟然排在那麼下面顯然不太合理(對一般使用的情況下)<br><img src="https://i.imgur.com/qXvWpx0.png"></p>
-<h2 id="一般我們會這樣處理sort"><a href="#一般我們會這樣處理sort" class="headerlink" title="一般我們會這樣處理sort:"></a>一般我們會這樣處理sort:</h2><p>讓順序由大排到小</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedAges = ages.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a-b);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedAges);</span><br></pre></td></tr></table></figure>
-
-
-<p>由小排到大</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedAges = ages.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> b-a);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedAges);</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-<h2 id="練習一-2"><a href="#練習一-2" class="headerlink" title="練習一:"></a>練習一:</h2><p>分類公司藉著他們的開始年分 最早排到最晚</p>
-<p>一次比較兩個公司如果a&gt;b 則顯示-1排前面</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sortedCompanies = companies.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> (a.start &gt; b.start ? <span class="number">1</span> : -<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(sortedCompanies);</span><br></pre></td></tr></table></figure>
-
-<p>印出的結果:<br><img src="https://i.imgur.com/5OueGVc.png"></p>
-<h1 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h1><p>作加總，記得寫法reduce(參數1,參數2){function(){},0}後面的0要記得寫</p>
-<h2 id="練習一-3"><a href="#練習一-3" class="headerlink" title="練習一:"></a>練習一:</h2><p>加總ages所有的數字和</p>
-<h2 id="使用for範例"><a href="#使用for範例" class="headerlink" title="使用for範例"></a>使用for範例</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> ageSum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; ages.length; i++) &#123;</span><br><span class="line">    ageSum += ages[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ageSum);</span><br></pre></td></tr></table></figure>
-
-<p>得出加總的數字為:460</p>
-<h2 id="使用reduce"><a href="#使用reduce" class="headerlink" title="使用reduce"></a>使用reduce</h2><h2 id="Es5語法"><a href="#Es5語法" class="headerlink" title="Es5語法:"></a>Es5語法:</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ageSum = ages.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">total, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> total + age;</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ageSum);</span><br></pre></td></tr></table></figure>
-
-<p>得出加總的數字為:460</p>
-<h2 id="ES6語法"><a href="#ES6語法" class="headerlink" title="ES6語法:"></a>ES6語法:</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> ageSum = ages.reduce(<span class="function">(<span class="params">total, age</span>) =&gt;</span> total + age, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(ageSum);</span><br></pre></td></tr></table></figure>
-
-<p>得出加總的數字為:460</p>
-<h2 id="練習二-2"><a href="#練習二-2" class="headerlink" title="練習二:"></a>練習二:</h2><p>加總所有公司的存在年分</p>
-<p>把公司的end年份減去start年份就是存在時間並且做加上total就好瞜</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> totalYears = companies.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">total, company</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> total + (company.end - company.start);</span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(totalYears);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//使用ES6的簡化寫法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> totalYears = companies.reduce(<span class="function">(<span class="params">total, company</span>) =&gt;</span></span><br><span class="line">    total + (company.end - company.start), <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(totalYears);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>得出結果: 119</p>
-<h1 id="串接使用全部方法"><a href="#串接使用全部方法" class="headerlink" title="串接使用全部方法"></a>串接使用全部方法</h1><p>不是很實用但是他們可以這樣串接使用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> combined = ages</span><br><span class="line">    .map(<span class="function"><span class="params">age</span> =&gt;</span> age * <span class="number">2</span>)</span><br><span class="line">    .filter(<span class="function"><span class="params">age</span> =&gt;</span> age &gt;= <span class="number">40</span>)</span><br><span class="line">    .sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    .reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(combined);</span><br></pre></td></tr></table></figure>
-
-<p>由大到小排列:<br><img src="https://i.imgur.com/1zQSVkn.png"></p>
-<p>得到加總結果結果是798</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -2531,6 +2531,55 @@
       </tags>
   </entry>
   <entry>
+    <title>Underscore.js 常用方法總結</title>
+    <url>/2021/04/07/Underscore.js%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E7%B8%BD%E7%B5%90/</url>
+    <content><![CDATA[<h1 id="Underscore-js-常用方法總結"><a href="#Underscore-js-常用方法總結" class="headerlink" title="Underscore.js 常用方法總結"></a>Underscore.js 常用方法總結</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Underscore.js 是一個很精幹的資料庫，<strong>壓縮後只有4KB</strong>。<br>它提供了幾十種函數語言程式設計的方法，大大方便了 Javascript 的程式設計。<br>MVC 框架 backbone.js 就是基於這個庫。</p>
+<p>它定義了一個下劃線 物件，函式庫的所有方法都屬於這個物件。<br>這些方法大致上可以分成：</p>
+<ol>
+<li>集合（collection）</li>
+<li>陣列（array）</li>
+<li>函式（function）</li>
+<li>物件（object）和工具（utility）五大類。</li>
+</ol>
+<h2 id="安裝環境"><a href="#安裝環境" class="headerlink" title="安裝環境"></a>安裝環境</h2><h3 id="node-js下安裝"><a href="#node-js下安裝" class="headerlink" title="node.js下安裝"></a>node.js下安裝</h3><p>Underscore.js 不僅可以用於瀏覽器環境，還可以用於 node.js。安裝命令如下：<br>複製程式碼 程式碼如下:</p>
+<p><code>npm install underscore</code></p>
+<p>但是，node.js 不能直接使用 <code>_</code> 作為變數名，因此要用下面的方法使用 underscore.js。<br>複製程式碼 程式碼如下:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> u = <span class="built_in">require</span>(“underscore”);</span><br></pre></td></tr></table></figure>
+
+<h3 id="CDN-引入"><a href="#CDN-引入" class="headerlink" title="CDN 引入"></a>CDN 引入</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.12.0/underscore-min.js&quot;</span> integrity=<span class="string">&quot;sha512-BDXGXSvYeLxaldQeYJZVWXJmkisgMlECofWFXKpWwXnfcp/R708nrs/BtNLH5cb/5TE7aeYRTDBRXu6kRL4VeQ==&quot;</span> crossorigin=<span class="string">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="method"><a href="#method" class="headerlink" title="method"></a>method</h2><p>與集合有關的方法</p>
+<p>Javascript 語言的資料集合，<strong>包括兩種結構：陣列和物件</strong>。以下的方法同時適用於這兩種結構。</p>
+<ul>
+<li><code>map()</code></li>
+</ul>
+<p>該方法對集合的每個成員依次進行某種操作，將返回的值依次存入一個新的陣列。<br>複製程式碼 程式碼如下:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.map([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123; <span class="keyword">return</span> num * <span class="number">3</span>; &#125;);  <span class="comment">// [3, 6, 9] </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.map(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">num, key</span>)</span>&#123; <span class="keyword">return</span> num * <span class="number">3</span>; &#125;);  <span class="comment">// [3, 6, 9]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>each()</code></li>
+</ul>
+<p>該方法與map類似，<br>依次對集合的每個成員進行某種操作，但是不返回值。<br>複製程式碼 程式碼如下:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.each([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], alert);    </span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.each(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;, alert);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>reduce</li>
+</ul>
+<p>該方法依次對集合的每個成員進行某種操作，然後將操作結果累計在某一個初始值之上，全部操作結束之後，返回累計的值。</p>
+<p>該方法接受三個引數。第一個引數是被處理的集合，第二個引數是對每個成員進行操作的函式，第三個引數是累計用的變數。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.reduce([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">memo, num</span>)</span>&#123; <span class="keyword">return</span> memo num; &#125;, <span class="number">0</span>);  <span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.reduce(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;), <span class="function"><span class="keyword">function</span>(<span class="params">num, key</span>)</span>&#123; <span class="keyword">return</span> &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>reduce方法的第二個引數是操作函式，它本身又接受兩個引數，第一個是累計用的變數，第二個是集合每個成員的值。</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Weather API</title>
     <url>/2021/04/07/Weather%20API/</url>
     <content><![CDATA[<h1 id="Weather-API"><a href="#Weather-API" class="headerlink" title="Weather API"></a>Weather API</h1><h6 id="tags-作品集"><a href="#tags-作品集" class="headerlink" title="tags: 作品集"></a>tags: <code>作品集</code></h6><h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><ul>
@@ -2608,55 +2657,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Underscore.js 常用方法總結</title>
-    <url>/2021/04/07/Underscore.js%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E7%B8%BD%E7%B5%90/</url>
-    <content><![CDATA[<h1 id="Underscore-js-常用方法總結"><a href="#Underscore-js-常用方法總結" class="headerlink" title="Underscore.js 常用方法總結"></a>Underscore.js 常用方法總結</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Underscore.js 是一個很精幹的資料庫，<strong>壓縮後只有4KB</strong>。<br>它提供了幾十種函數語言程式設計的方法，大大方便了 Javascript 的程式設計。<br>MVC 框架 backbone.js 就是基於這個庫。</p>
-<p>它定義了一個下劃線 物件，函式庫的所有方法都屬於這個物件。<br>這些方法大致上可以分成：</p>
-<ol>
-<li>集合（collection）</li>
-<li>陣列（array）</li>
-<li>函式（function）</li>
-<li>物件（object）和工具（utility）五大類。</li>
-</ol>
-<h2 id="安裝環境"><a href="#安裝環境" class="headerlink" title="安裝環境"></a>安裝環境</h2><h3 id="node-js下安裝"><a href="#node-js下安裝" class="headerlink" title="node.js下安裝"></a>node.js下安裝</h3><p>Underscore.js 不僅可以用於瀏覽器環境，還可以用於 node.js。安裝命令如下：<br>複製程式碼 程式碼如下:</p>
-<p><code>npm install underscore</code></p>
-<p>但是，node.js 不能直接使用 <code>_</code> 作為變數名，因此要用下面的方法使用 underscore.js。<br>複製程式碼 程式碼如下:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> u = <span class="built_in">require</span>(“underscore”);</span><br></pre></td></tr></table></figure>
-
-<h3 id="CDN-引入"><a href="#CDN-引入" class="headerlink" title="CDN 引入"></a>CDN 引入</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.12.0/underscore-min.js&quot;</span> integrity=<span class="string">&quot;sha512-BDXGXSvYeLxaldQeYJZVWXJmkisgMlECofWFXKpWwXnfcp/R708nrs/BtNLH5cb/5TE7aeYRTDBRXu6kRL4VeQ==&quot;</span> crossorigin=<span class="string">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="method"><a href="#method" class="headerlink" title="method"></a>method</h2><p>與集合有關的方法</p>
-<p>Javascript 語言的資料集合，<strong>包括兩種結構：陣列和物件</strong>。以下的方法同時適用於這兩種結構。</p>
-<ul>
-<li><code>map()</code></li>
-</ul>
-<p>該方法對集合的每個成員依次進行某種操作，將返回的值依次存入一個新的陣列。<br>複製程式碼 程式碼如下:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.map([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123; <span class="keyword">return</span> num * <span class="number">3</span>; &#125;);  <span class="comment">// [3, 6, 9] </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.map(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">num, key</span>)</span>&#123; <span class="keyword">return</span> num * <span class="number">3</span>; &#125;);  <span class="comment">// [3, 6, 9]</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>each()</code></li>
-</ul>
-<p>該方法與map類似，<br>依次對集合的每個成員進行某種操作，但是不返回值。<br>複製程式碼 程式碼如下:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.each([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], alert);    </span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.each(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;, alert);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>reduce</li>
-</ul>
-<p>該方法依次對集合的每個成員進行某種操作，然後將操作結果累計在某一個初始值之上，全部操作結束之後，返回累計的值。</p>
-<p>該方法接受三個引數。第一個引數是被處理的集合，第二個引數是對每個成員進行操作的函式，第三個引數是累計用的變數。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.reduce([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">memo, num</span>)</span>&#123; <span class="keyword">return</span> memo num; &#125;, <span class="number">0</span>);  <span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.reduce(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;), <span class="function"><span class="keyword">function</span>(<span class="params">num, key</span>)</span>&#123; <span class="keyword">return</span> &#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>reduce方法的第二個引數是操作函式，它本身又接受兩個引數，第一個是累計用的變數，第二個是集合每個成員的值。</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Web Lab React 訓練營 心得</title>
     <url>/2021/04/07/Web%20Lab%20React%20%E8%A8%93%E7%B7%B4%E7%87%9F%20%E5%BF%83%E5%BE%97/</url>
     <content><![CDATA[<h1 id="Web-Lab-React-訓練營-心得"><a href="#Web-Lab-React-訓練營-心得" class="headerlink" title="Web Lab React 訓練營 心得"></a>Web Lab React 訓練營 心得</h1><h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>總長為 12週，課程訓練相當緊湊，學習到的內容都是目前最新的前端資訊</p>
@@ -2708,6 +2708,63 @@
       </categories>
       <tags>
         <tag>技術社群</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>YouTube API</title>
+    <url>/2021/04/07/YouTube%20API/</url>
+    <content><![CDATA[<h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><ul>
+<li>.clearfix<h3 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h3></li>
+<li>$.get</li>
+<li>$.each</li>
+<li>fancy box 套件</li>
+</ul>
+<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>利用 Youtube API，可以搜尋 Youtube 影片。</p>
+<p>有查看上一頁和下一頁的功能，點擊標題連結可以在該頁撥放影片。</p>
+<p><img src="https://i.imgur.com/3JMDKbB.png"></p>
+<p><a href="https://">Demp</a></p>
+<h2 id="HTML-1"><a href="#HTML-1" class="headerlink" title="HTML"></a>HTML</h2><h3 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h3><p><img src="https://i.imgur.com/lYjXPdo.png"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">    &lt;header&gt;</span><br><span class="line">      &lt;h1&gt;Search&lt;span&gt; Videos&lt;&#x2F;span&gt;&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;p&gt;Search all Youtube videos&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;&#x2F;header&gt;</span><br><span class="line">    &lt;!--  TODO: 1. Submit 送出後 callbackFunction --&gt;</span><br><span class="line">    &lt;section&gt;</span><br><span class="line">      &lt;form</span><br><span class="line">        id&#x3D;&quot;search-form&quot;</span><br><span class="line">        class&#x3D;&quot;search-form&quot;</span><br><span class="line">        name&#x3D;&quot;search-form&quot;</span><br><span class="line">        onsubmit&#x3D;&quot;return search()&quot;</span><br><span class="line">      &gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;fieldcontainer&quot;&gt;</span><br><span class="line">          &lt;input</span><br><span class="line">            type&#x3D;&quot;search&quot;</span><br><span class="line">            id&#x3D;&quot;query&quot;</span><br><span class="line">            class&#x3D;&quot;search-field&quot;</span><br><span class="line">            placeholder&#x3D;&quot;Search Youtube...&quot;</span><br><span class="line">          &#x2F;&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">          type&#x3D;&quot;submit&quot;</span><br><span class="line">          class&#x3D;&quot;search-btn&quot;</span><br><span class="line">          id&#x3D;&quot;search-btn&quot;</span><br><span class="line">          value&#x3D;&quot;&quot;</span><br><span class="line">        &gt;&lt;&#x2F;input&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;form&gt;</span><br><span class="line"></span><br><span class="line">      &lt;ul id&#x3D;&quot;results&quot;&gt;&lt;&#x2F;ul&gt;</span><br><span class="line">      &lt;div id&#x3D;&quot;buttons&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;section&gt;</span><br><span class="line"></span><br><span class="line">    &lt;footer&gt;</span><br><span class="line">        &lt;p&gt;Copyright &amp;copy; 2021,All Right Reserved&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;&#x2F;footer&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;script src&#x3D;&quot;.&#x2F;app.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">  &lt;script src&#x3D;&quot;.&#x2F;js&#x2F;jquery.fancybox.pack.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">      $(document).ready(function () &#123;</span><br><span class="line">        $(&quot;.fancybox&quot;).fancybox();</span><br><span class="line">      &#125;);</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="CSS-1"><a href="#CSS-1" class="headerlink" title="CSS"></a>CSS</h2><p><a href="https://">完整 CSS code</a></p>
+<h3 id="clearFix"><a href="#clearFix" class="headerlink" title="clearFix"></a>clearFix</h3><p>在使用 float 的時候經常會遇到圖片超出預設的寬度，但只要使用 clearfix ，就可以使圖片和容器寬度一樣。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span> &#123;</span><br><span class="line">  <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="box-shadow-套件"><a href="#box-shadow-套件" class="headerlink" title="box-shadow 套件"></a>box-shadow 套件</h3><p><a href="https://getcssscan.com/css-box-shadow-examples">Beautiful CSS box-shadow examples</a></p>
+<h2 id="JS-1"><a href="#JS-1" class="headerlink" title="JS"></a>JS</h2><h3 id="動態變化-Search-Bar"><a href="#動態變化-Search-Bar" class="headerlink" title="動態變化 Search Bar"></a>動態變化 Search Bar</h3><p><strong>利用 jQuery 在 focus 與 blur（離開焦點）的時候執行 animate 來達到拉長與縮短的效果。</strong></p>
+<p>search bar 是由一個輸入區塊跟搜尋按鈕兩部分組成，輸入區塊的位置用 <code>width</code> 百分比控制、按鈕則是用<code>position: absolute</code>加上 <code>right</code> 的 <code>px</code> 來控制。<br>原始狀態，也就是 blur 時輸入區塊是用<code>width:45％</code>、按鈕是用<code>position: absolute</code>、<code>right:360px</code>。<br>點擊後變為 focus 狀態，輸入區塊則用<code>width:100％</code>、按鈕是用<code>right:10px</code>。</p>
+<ul>
+<li><p>focus 時範例<br><img src="https://i.imgur.com/rrf5L56.png" alt="Focus 時範例"></p>
+</li>
+<li><p>blur 時範例<br><img src="https://i.imgur.com/bvbZruW.png" alt="Blur 時範例"></p>
+</li>
+</ul>
+<p>需要注意搜尋按鈕是用 submit 事件，要用<code>e.preventDefault()</code>來停止預設行為的發生。</p>
+<p>:bug: <em>這邊應該是要讓 icon 跟 輸入 input 綁在一起，讓 icon 也能夠往右移，但這邊不曉得出了什麼錯，一直沒辦法用好，之後再回頭修改來讓動畫效果更精緻</em></p>
+<h3 id="取得-YouTube-資料"><a href="#取得-YouTube-資料" class="headerlink" title="取得 YouTube 資料"></a>取得 YouTube 資料</h3><p>利用網址可以取得的json資料。</p>
+<p><code>https://www.googleapis.com/youtube/v3/search</code></p>
+<p><img src="https://i.imgur.com/aviL0mD.png"></p>
+<p><img src="https://i.imgur.com/hPMR0jD.png"></p>
+<h3 id="get-取得資料"><a href="#get-取得資料" class="headerlink" title="$.get 取得資料"></a><code>$.get</code> 取得資料</h3><ul>
+<li>part: 這個參數是為了避免大家呼叫 API 時得到太多不相關的資訊，所以用 part 來定義要取得的資料範圍。在 - - Search 的情況下，設定為 part:snippet 。</li>
+<li>type：限制搜尋結果為 video、channel 或 playlist</li>
+<li>q：搜尋關鍵字</li>
+<li>key: 金鑰</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">search</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// * Clear Result</span></span><br><span class="line">  $(<span class="string">&quot;#result&quot;</span>).html(<span class="string">&quot;&quot;</span>);</span><br><span class="line">  $(<span class="string">&quot;#buttons&quot;</span>).html(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// * Get Form Input value</span></span><br><span class="line">  q = $(<span class="string">&quot;#query&quot;</span>).val();</span><br><span class="line"></span><br><span class="line">  $.get(</span><br><span class="line">    <span class="string">&quot;https://www.googleapis.com/youtube/v3/search&quot;</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      part: <span class="string">&quot;snippet,id&quot;</span>,</span><br><span class="line">      q: q,</span><br><span class="line">      type: <span class="string">&quot;video&quot;</span>,</span><br><span class="line">      key: <span class="string">&quot;AIzaSyBcMsR-AjSrK-Dxyd2o3F8vcF-JueJma4o&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 取得 data 裡的 Token 方便之後使用</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> nextPageToken = data.nextPageToken;</span><br><span class="line">      <span class="keyword">var</span> prevPageToken = data.prevPageToken;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Log Data</span></span><br><span class="line">      <span class="built_in">console</span>.log(data);</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="each-讀取每一筆資料"><a href="#each-讀取每一筆資料" class="headerlink" title="$.each 讀取每一筆資料"></a><code>$.each</code> 讀取每一筆資料</h3><p><img src="https://i.imgur.com/DnNokDZ.png"></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.each(data.items, <span class="function"><span class="keyword">function</span> (<span class="params">i, item</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// * Get Output</span></span><br><span class="line"><span class="keyword">var</span> output = getOutput(item);</span><br><span class="line"></span><br><span class="line"><span class="comment">// * Display Result</span></span><br><span class="line">$(<span class="string">&quot;#results&quot;</span>).append(output);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> buttons = getButtons(prevPageToken, nextPageToken);</span><br><span class="line"></span><br><span class="line"><span class="comment">// * Display Buttons</span></span><br><span class="line">$(<span class="string">&quot;#buttons&quot;</span>).append(buttons);</span><br></pre></td></tr></table></figure>
+
+<h3 id="getOutput-列印出搜尋資料"><a href="#getOutput-列印出搜尋資料" class="headerlink" title="getOutput () 列印出搜尋資料"></a>getOutput () 列印出搜尋資料</h3><p>過濾資料，取得需要的部分，建立成 output 字串。</p>
+<p>在這邊就可以得到影片與內容的資訊，然後更改 video 的樣式。</p>
+<h3 id="fancy-box-套件"><a href="#fancy-box-套件" class="headerlink" title="fancy box 套件"></a>fancy box 套件</h3><p>到<a href="http://fancybox.net/">fancy box</a> 官網下載檔案，然後放到Project裡。</p>
+<p><img src="https://i.imgur.com/8h1W3bC.png"></p>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2>]]></content>
+      <categories>
+        <category>JavaScript</category>
+        <category>作品集</category>
+      </categories>
+      <tags>
+        <tag>作品集</tag>
       </tags>
   </entry>
   <entry>
@@ -2807,60 +2864,50 @@
       </tags>
   </entry>
   <entry>
-    <title>YouTube API</title>
-    <url>/2021/04/07/YouTube%20API/</url>
-    <content><![CDATA[<h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><ul>
-<li>.clearfix<h3 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h3></li>
-<li>$.get</li>
-<li>$.each</li>
-<li>fancy box 套件</li>
+    <title>JavaScript async (非同步) , sync (同步)</title>
+    <url>/2021/04/07/async%20(%E9%9D%9E%E5%90%8C%E6%AD%A5)%20,%20sync%20(%E5%90%8C%E6%AD%A5)/</url>
+    <content><![CDATA[<p>上篇<a href="https://hackmd.io/2q-URsBTTOS3doStyuSTbw">Promise</a></p>
+<h2 id="生活範例："><a href="#生活範例：" class="headerlink" title="生活範例："></a>生活範例：</h2><ul>
+<li>async(非同步) : </li>
 </ul>
-<h2 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h2><p>利用 Youtube API，可以搜尋 Youtube 影片。</p>
-<p>有查看上一頁和下一頁的功能，點擊標題連結可以在該頁撥放影片。</p>
-<p><img src="https://i.imgur.com/3JMDKbB.png"></p>
-<p><a href="https://">Demp</a></p>
-<h2 id="HTML-1"><a href="#HTML-1" class="headerlink" title="HTML"></a>HTML</h2><h3 id="結構"><a href="#結構" class="headerlink" title="結構"></a>結構</h3><p><img src="https://i.imgur.com/lYjXPdo.png"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">  &lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">    &lt;header&gt;</span><br><span class="line">      &lt;h1&gt;Search&lt;span&gt; Videos&lt;&#x2F;span&gt;&lt;&#x2F;h1&gt;</span><br><span class="line">      &lt;p&gt;Search all Youtube videos&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;&#x2F;header&gt;</span><br><span class="line">    &lt;!--  TODO: 1. Submit 送出後 callbackFunction --&gt;</span><br><span class="line">    &lt;section&gt;</span><br><span class="line">      &lt;form</span><br><span class="line">        id&#x3D;&quot;search-form&quot;</span><br><span class="line">        class&#x3D;&quot;search-form&quot;</span><br><span class="line">        name&#x3D;&quot;search-form&quot;</span><br><span class="line">        onsubmit&#x3D;&quot;return search()&quot;</span><br><span class="line">      &gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;fieldcontainer&quot;&gt;</span><br><span class="line">          &lt;input</span><br><span class="line">            type&#x3D;&quot;search&quot;</span><br><span class="line">            id&#x3D;&quot;query&quot;</span><br><span class="line">            class&#x3D;&quot;search-field&quot;</span><br><span class="line">            placeholder&#x3D;&quot;Search Youtube...&quot;</span><br><span class="line">          &#x2F;&gt;</span><br><span class="line">        &lt;input</span><br><span class="line">          type&#x3D;&quot;submit&quot;</span><br><span class="line">          class&#x3D;&quot;search-btn&quot;</span><br><span class="line">          id&#x3D;&quot;search-btn&quot;</span><br><span class="line">          value&#x3D;&quot;&quot;</span><br><span class="line">        &gt;&lt;&#x2F;input&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;form&gt;</span><br><span class="line"></span><br><span class="line">      &lt;ul id&#x3D;&quot;results&quot;&gt;&lt;&#x2F;ul&gt;</span><br><span class="line">      &lt;div id&#x3D;&quot;buttons&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;section&gt;</span><br><span class="line"></span><br><span class="line">    &lt;footer&gt;</span><br><span class="line">        &lt;p&gt;Copyright &amp;copy; 2021,All Right Reserved&lt;&#x2F;p&gt;</span><br><span class="line">    &lt;&#x2F;footer&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">  &lt;script src&#x3D;&quot;.&#x2F;app.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">  &lt;script src&#x3D;&quot;.&#x2F;js&#x2F;jquery.fancybox.pack.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">  &lt;script&gt;</span><br><span class="line">      $(document).ready(function () &#123;</span><br><span class="line">        $(&quot;.fancybox&quot;).fancybox();</span><br><span class="line">      &#125;);</span><br><span class="line">    &lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="CSS-1"><a href="#CSS-1" class="headerlink" title="CSS"></a>CSS</h2><p><a href="https://">完整 CSS code</a></p>
-<h3 id="clearFix"><a href="#clearFix" class="headerlink" title="clearFix"></a>clearFix</h3><p>在使用 float 的時候經常會遇到圖片超出預設的寬度，但只要使用 clearfix ，就可以使圖片和容器寬度一樣。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span> &#123;</span><br><span class="line">  <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="box-shadow-套件"><a href="#box-shadow-套件" class="headerlink" title="box-shadow 套件"></a>box-shadow 套件</h3><p><a href="https://getcssscan.com/css-box-shadow-examples">Beautiful CSS box-shadow examples</a></p>
-<h2 id="JS-1"><a href="#JS-1" class="headerlink" title="JS"></a>JS</h2><h3 id="動態變化-Search-Bar"><a href="#動態變化-Search-Bar" class="headerlink" title="動態變化 Search Bar"></a>動態變化 Search Bar</h3><p><strong>利用 jQuery 在 focus 與 blur（離開焦點）的時候執行 animate 來達到拉長與縮短的效果。</strong></p>
-<p>search bar 是由一個輸入區塊跟搜尋按鈕兩部分組成，輸入區塊的位置用 <code>width</code> 百分比控制、按鈕則是用<code>position: absolute</code>加上 <code>right</code> 的 <code>px</code> 來控制。<br>原始狀態，也就是 blur 時輸入區塊是用<code>width:45％</code>、按鈕是用<code>position: absolute</code>、<code>right:360px</code>。<br>點擊後變為 focus 狀態，輸入區塊則用<code>width:100％</code>、按鈕是用<code>right:10px</code>。</p>
+<ol>
+<li>去醫院掛號</li>
+<li>等護士叫，可以先去上廁所</li>
+<li>護士叫了，我在過去</li>
+</ol>
 <ul>
-<li><p>focus 時範例<br><img src="https://i.imgur.com/rrf5L56.png" alt="Focus 時範例"></p>
-</li>
-<li><p>blur 時範例<br><img src="https://i.imgur.com/bvbZruW.png" alt="Blur 時範例"></p>
-</li>
+<li>sync(同步) :</li>
 </ul>
-<p>需要注意搜尋按鈕是用 submit 事件，要用<code>e.preventDefault()</code>來停止預設行為的發生。</p>
-<p>:bug: <em>這邊應該是要讓 icon 跟 輸入 input 綁在一起，讓 icon 也能夠往右移，但這邊不曉得出了什麼錯，一直沒辦法用好，之後再回頭修改來讓動畫效果更精緻</em></p>
-<h3 id="取得-YouTube-資料"><a href="#取得-YouTube-資料" class="headerlink" title="取得 YouTube 資料"></a>取得 YouTube 資料</h3><p>利用網址可以取得的json資料。</p>
-<p><code>https://www.googleapis.com/youtube/v3/search</code></p>
-<p><img src="https://i.imgur.com/aviL0mD.png"></p>
-<p><img src="https://i.imgur.com/hPMR0jD.png"></p>
-<h3 id="get-取得資料"><a href="#get-取得資料" class="headerlink" title="$.get 取得資料"></a><code>$.get</code> 取得資料</h3><ul>
-<li>part: 這個參數是為了避免大家呼叫 API 時得到太多不相關的資訊，所以用 part 來定義要取得的資料範圍。在 - - Search 的情況下，設定為 part:snippet 。</li>
-<li>type：限制搜尋結果為 video、channel 或 playlist</li>
-<li>q：搜尋關鍵字</li>
-<li>key: 金鑰</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">search</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// * Clear Result</span></span><br><span class="line">  $(<span class="string">&quot;#result&quot;</span>).html(<span class="string">&quot;&quot;</span>);</span><br><span class="line">  $(<span class="string">&quot;#buttons&quot;</span>).html(<span class="string">&quot;&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// * Get Form Input value</span></span><br><span class="line">  q = $(<span class="string">&quot;#query&quot;</span>).val();</span><br><span class="line"></span><br><span class="line">  $.get(</span><br><span class="line">    <span class="string">&quot;https://www.googleapis.com/youtube/v3/search&quot;</span>,</span><br><span class="line">    &#123;</span><br><span class="line">      part: <span class="string">&quot;snippet,id&quot;</span>,</span><br><span class="line">      q: q,</span><br><span class="line">      type: <span class="string">&quot;video&quot;</span>,</span><br><span class="line">      key: <span class="string">&quot;AIzaSyBcMsR-AjSrK-Dxyd2o3F8vcF-JueJma4o&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 取得 data 裡的 Token 方便之後使用</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> nextPageToken = data.nextPageToken;</span><br><span class="line">      <span class="keyword">var</span> prevPageToken = data.prevPageToken;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Log Data</span></span><br><span class="line">      <span class="built_in">console</span>.log(data);</span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="each-讀取每一筆資料"><a href="#each-讀取每一筆資料" class="headerlink" title="$.each 讀取每一筆資料"></a><code>$.each</code> 讀取每一筆資料</h3><p><img src="https://i.imgur.com/DnNokDZ.png"></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">$.each(data.items, <span class="function"><span class="keyword">function</span> (<span class="params">i, item</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// * Get Output</span></span><br><span class="line"><span class="keyword">var</span> output = getOutput(item);</span><br><span class="line"></span><br><span class="line"><span class="comment">// * Display Result</span></span><br><span class="line">$(<span class="string">&quot;#results&quot;</span>).append(output);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> buttons = getButtons(prevPageToken, nextPageToken);</span><br><span class="line"></span><br><span class="line"><span class="comment">// * Display Buttons</span></span><br><span class="line">$(<span class="string">&quot;#buttons&quot;</span>).append(buttons);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>去醫院掛號</li>
+<li>在櫃檯等，等到護士說好了</li>
+<li>我才能去上廁所</li>
+</ol>
+<h1 id="實作解析："><a href="#實作解析：" class="headerlink" title="實作解析："></a>實作解析：</h1><p><a href="https://codesandbox.io/s/hw2-function-mouxianwang-6904-zuoyejiexiforked-j70zb?file=/src/index.js">撈取資料實作範例</a><br>另一個 Js 檔案(utils.js 是資料庫)</p>
+<hr>
+<h3 id="try-catch-捕捉錯誤"><a href="#try-catch-捕捉錯誤" class="headerlink" title="try()catch() 捕捉錯誤"></a>try()catch() 捕捉錯誤</h3><p>語法：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> (用鑰匙開門)&#123;</span><br><span class="line"></span><br><span class="line">  小妹用自己鑰匙開自己房門成功</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">catch</span>()&#123;</span><br><span class="line"></span><br><span class="line">  小妹用哥哥鑰匙開自己房門失敗</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="getOutput-列印出搜尋資料"><a href="#getOutput-列印出搜尋資料" class="headerlink" title="getOutput () 列印出搜尋資料"></a>getOutput () 列印出搜尋資料</h3><p>過濾資料，取得需要的部分，建立成 output 字串。</p>
-<p>在這邊就可以得到影片與內容的資訊，然後更改 video 的樣式。</p>
-<h3 id="fancy-box-套件"><a href="#fancy-box-套件" class="headerlink" title="fancy box 套件"></a>fancy box 套件</h3><p>到<a href="http://fancybox.net/">fancy box</a> 官網下載檔案，然後放到Project裡。</p>
-<p><img src="https://i.imgur.com/8h1W3bC.png"></p>
-<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2>]]></content>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// foo 透過 async 回傳會得到一個 foo()</span></span><br><span class="line"><span class="comment">// foo() 是一個 promise</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> foo = <span class="keyword">async</span>()=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">    a:<span class="number">1</span>,</span><br><span class="line">    b:<span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. promise 版本</span></span><br><span class="line"></span><br><span class="line">foo().then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span>=&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. async 版本</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span>()=&gt;&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> data2 = <span class="keyword">await</span> foo ()</span><br><span class="line">    &#125;<span class="keyword">catch</span>(error)&#123;</span><br><span class="line">        <span class="keyword">return</span>(error)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h3 id="小叮嚀："><a href="#小叮嚀：" class="headerlink" title="小叮嚀："></a>小叮嚀：</h3><ol>
+<li><p><strong>.then().catch()是Promise的用法，<br>async 沒有 .then().catch()，<br>所以只好用 try() catch() 來捕捉錯誤</strong></p>
+</li>
+<li><p><strong>await(等待)，外層一定要有 async(非同步)包裹著</strong></p>
+</li>
+</ol>
+<hr>
+]]></content>
       <categories>
         <category>JavaScript</category>
-        <category>作品集</category>
       </categories>
       <tags>
-        <tag>作品集</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -2910,53 +2957,6 @@
 <li>mousemove 滑鼠觸發事件</li>
 </ul>
 <p>demo:<br><a href="https://codepen.io/michael-luo/pen/QWEdRjO">https://codepen.io/michael-luo/pen/QWEdRjO</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript async (非同步) , sync (同步)</title>
-    <url>/2021/04/07/async%20(%E9%9D%9E%E5%90%8C%E6%AD%A5)%20,%20sync%20(%E5%90%8C%E6%AD%A5)/</url>
-    <content><![CDATA[<p>上篇<a href="https://hackmd.io/2q-URsBTTOS3doStyuSTbw">Promise</a></p>
-<h2 id="生活範例："><a href="#生活範例：" class="headerlink" title="生活範例："></a>生活範例：</h2><ul>
-<li>async(非同步) : </li>
-</ul>
-<ol>
-<li>去醫院掛號</li>
-<li>等護士叫，可以先去上廁所</li>
-<li>護士叫了，我在過去</li>
-</ol>
-<ul>
-<li>sync(同步) :</li>
-</ul>
-<ol>
-<li>去醫院掛號</li>
-<li>在櫃檯等，等到護士說好了</li>
-<li>我才能去上廁所</li>
-</ol>
-<h1 id="實作解析："><a href="#實作解析：" class="headerlink" title="實作解析："></a>實作解析：</h1><p><a href="https://codesandbox.io/s/hw2-function-mouxianwang-6904-zuoyejiexiforked-j70zb?file=/src/index.js">撈取資料實作範例</a><br>另一個 Js 檔案(utils.js 是資料庫)</p>
-<hr>
-<h3 id="try-catch-捕捉錯誤"><a href="#try-catch-捕捉錯誤" class="headerlink" title="try()catch() 捕捉錯誤"></a>try()catch() 捕捉錯誤</h3><p>語法：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> (用鑰匙開門)&#123;</span><br><span class="line"></span><br><span class="line">  小妹用自己鑰匙開自己房門成功</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">catch</span>()&#123;</span><br><span class="line"></span><br><span class="line">  小妹用哥哥鑰匙開自己房門失敗</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// foo 透過 async 回傳會得到一個 foo()</span></span><br><span class="line"><span class="comment">// foo() 是一個 promise</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> foo = <span class="keyword">async</span>()=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">    a:<span class="number">1</span>,</span><br><span class="line">    b:<span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. promise 版本</span></span><br><span class="line"></span><br><span class="line">foo().then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span>=&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. async 版本</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span>()=&gt;&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> data2 = <span class="keyword">await</span> foo ()</span><br><span class="line">    &#125;<span class="keyword">catch</span>(error)&#123;</span><br><span class="line">        <span class="keyword">return</span>(error)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<hr>
-<h3 id="小叮嚀："><a href="#小叮嚀：" class="headerlink" title="小叮嚀："></a>小叮嚀：</h3><ol>
-<li><p><strong>.then().catch()是Promise的用法，<br>async 沒有 .then().catch()，<br>所以只好用 try() catch() 來捕捉錯誤</strong></p>
-</li>
-<li><p><strong>await(等待)，外層一定要有 async(非同步)包裹著</strong></p>
-</li>
-</ol>
-<hr>
 ]]></content>
       <categories>
         <category>JavaScript</category>
