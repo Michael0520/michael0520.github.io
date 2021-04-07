@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/dinosaurLogo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言一般來說程式語言都是逐行執行的，所以正常都應該先宣告變數或函式才可以使用。 但寫過 JS 的人都會發現有件神奇的事，我們可以先執行函式或變數，然後才進行宣告。 一般的解釋是 JS 會執行類似”提升“的動作，自動將宣告或賦值的步驟在呼叫的時候執行。但其實 Hoisting 這個字多少要負些責任讓大家誤會大了。Hoisting 中文叫做提升，我們先把中文的名字忘一邊。 Hoisting的好處 Ja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript Hosting 變數提升">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/07/JavaScript-Hosting/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="前言一般來說程式語言都是逐行執行的，所以正常都應該先宣告變數或函式才可以使用。 但寫過 JS 的人都會發現有件神奇的事，我們可以先執行函式或變數，然後才進行宣告。 一般的解釋是 JS 會執行類似”提升“的動作，自動將宣告或賦值的步驟在呼叫的時候執行。但其實 Hoisting 這個字多少要負些責任讓大家誤會大了。Hoisting 中文叫做提升，我們先把中文的名字忘一邊。 Hoisting的好處 Ja">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2021-04-07T10:01:05.000Z">
+<meta property="article:modified_time" content="2021-04-07T10:04:02.724Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/07/JavaScript-Hosting/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>JavaScript Hosting 變數提升 | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/JavaScript-Hosting/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript Hosting 變數提升
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-07 18:01:05 / Modified: 18:04:02" itemprop="dateCreated datePublished" datetime="2021-04-07T18:01:05+08:00">2021-04-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/07/JavaScript-Hosting/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/JavaScript-Hosting/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一般來說程式語言都是逐行執行的，所以正常都應該先宣告變數或函式才可以使用。</p>
+<p>但寫過 JS 的人都會發現有件神奇的事，我們可以先執行函式或變數，然後才進行宣告。</p>
+<p>一般的解釋是 JS 會執行類似”<strong>提升</strong>“的動作，自動將宣告或賦值的步驟在呼叫的時候執行。<br>但其實 Hoisting 這個字多少要負些責任讓大家誤會大了。<br>Hoisting 中文叫做提升，我們先把中文的名字忘一邊。</p>
+<h3 id="Hoisting的好處"><a href="#Hoisting的好處" class="headerlink" title="Hoisting的好處"></a>Hoisting的好處</h3><ul>
+<li>JavaScript 先宣告變數與函式再使用</li>
+<li>函式可互相呼叫 (不論宣告的前後順序)</li>
+</ul>
+<h3 id="is-not-defined-amp-undefined-差異"><a href="#is-not-defined-amp-undefined-差異" class="headerlink" title="is not defined &amp; undefined 差異"></a><code>is not defined</code> &amp; <code>undefined</code> 差異</h3><p>在 JS 中，如果使用未宣告的變數：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>使用已宣告、未賦值變數</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)</span><br><span class="line"><span class="keyword">var</span> a</span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>不管變數宣告的位置在哪裡，<br>一開始載入時都會先找到所有「變數」與「函式 function」，並完成宣告，才會開始其他執行動作。</p>
+<p>所以即使執行程式在變數之前，也都找得到變數，即稱為「Hosting」。</p>
+<p>:::warning<br><strong>只有變數宣告可提升，賦值不會</strong><br>:::</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a</span><br><span class="line"><span class="built_in">console</span>.log(a) </span><br><span class="line">a = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 執行順序為：</span></span><br><span class="line"><span class="comment">// 1. var a</span></span><br><span class="line"><span class="comment">// 2. console.log(a)</span></span><br><span class="line"><span class="comment">// 3. a = 5</span></span><br></pre></td></tr></table></figure>
+<p>:::warning<br><strong>函式帶的參數，即視為變數</strong><br>(如果沒有參數，則以函式內的賦值優先)<br>:::</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(v)  </span><br><span class="line">  <span class="keyword">var</span> v = <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">test(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 10</span></span><br><span class="line"><span class="comment">// 因為參數帶入 10 ，故等同於先宣告了 var v = 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 執行順序為：</span></span><br><span class="line"><span class="comment">// var test = function(v)&#123; console.log(v) var v =3 &#125;</span></span><br><span class="line"><span class="comment">// test(10)</span></span><br></pre></td></tr></table></figure>
+
+<p>:::warning<br><strong>函式 function 的宣告優先權高於變數</strong><br>:::</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a) </span><br><span class="line"><span class="keyword">var</span> a</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// [function: a]</span></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 執行順序為：</span></span><br><span class="line"><span class="comment">// function a()&#123;&#125;</span></span><br><span class="line"><span class="comment">// console.log(a)</span></span><br><span class="line"><span class="comment">// var a = &#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>:::warning<br><strong>用 let 與 const 宣告的變數也會提升，但未賦值前如果使用該變數會出錯</strong><br>:::</p>
+<blockquote>
+<p>let 與 const 有 hoisting，<br>與 var 的差別在於提升之後，var 宣告的變數會被初始化為 undefined，而 let 與 const 的宣告不會被初始化為 undefined，而且如果你在「賦值之前」就存取它，就會拋出錯誤。<br>在「提升之後」以及「賦值之前」這段「期間」，<br>如果你存取它就會拋出錯誤，而這段期間就稱做是 TDZ(Temporal Dead Zone)。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a) </span><br><span class="line">  <span class="keyword">let</span> a</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line"></span><br><span class="line"><span class="comment">//  ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="hoisting-到底是怎麼運作的？"><a href="#hoisting-到底是怎麼運作的？" class="headerlink" title="hoisting 到底是怎麼運作的？"></a>hoisting 到底是怎麼運作的？</h2><p>Execution Contexts（以下簡稱 EC）， 每當你進入一個 function 的時候，就會產生一個 EC，裡面儲存跟這個 function 有關的一些資訊，並且把這個 EC 放到 stack 裡面，當 function 執行完以後，就會把 EC 給 pop 出來。<br>每個 EC 都會有相對應的 variable object（以下簡稱 VO），在裡面宣告的變數跟函式都會被加進 VO 裡面，如果是 function，那參數也會被加到 VO 裡。<br>對於function的參數，它會直接被放到 VO 裡面去，如果有些參數沒有值的話，那它的值會被初始化成 undefined。 如果 VO 裡面找不到，會透過 scope chain 不斷往上尋找，如果每一層都找不到就會拋出錯誤。</p>
+<h2 id="在進入-EC-的時候-跑-function-程式碼前-，會按照以下順序把東西放到-VO-裡面，新的會覆蓋掉舊的"><a href="#在進入-EC-的時候-跑-function-程式碼前-，會按照以下順序把東西放到-VO-裡面，新的會覆蓋掉舊的" class="headerlink" title="在進入 EC 的時候(跑 function 程式碼前)，會按照以下順序把東西放到 VO 裡面，新的會覆蓋掉舊的"></a>在進入 EC 的時候(跑 function 程式碼前)，會按照以下順序把東西放到 VO 裡面，新的會覆蓋掉舊的</h2><ol>
+<li>function的參數：傳什麼進來就是什麼，沒有值的設成 undefined</li>
+<li>function 宣告放到 VO 裡，如果已經有同名的就覆蓋掉</li>
+<li>變數宣告放到 VO 裡，如果已經有同名的則忽略</li>
+</ol>
+<p>舉例來說我們熟知的使用方式應該是:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;Hello World!&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Called b!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b();</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"></span><br><span class="line"><span class="comment">//  * Called b!</span></span><br><span class="line"><span class="comment">//  * Hello World!</span></span><br></pre></td></tr></table></figure>
+
+<p>到這裡沒有太大的問題<br>那如果按照 Hoisting 的說法，下面的程式執行應該會產出什麼呢?</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b();</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;Hello World!&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Called b!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// * Called b!</span></span><br><span class="line"><span class="comment">// * undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>首先會先執行 <code>function</code> =&gt; <code>console.log(a)</code> =&gt; <code>var a =&#39;Hello World!&#39;</code></p>
+<blockquote>
+<p>function 會優先被提升到最上方做執行，其餘的部分就會照正常順序走</p>
+</blockquote>
+<p>這跟 JS 如何初始執行環境有關，<br>JS 在初始的 context 第一個步驟，就配置給函式還有變數一個記憶體空間。<br>函式在配置時就會完整放在記憶體空間裡，而變數就只是宣告但尚未賦值。</p>
+<p>所以回頭來看，用上面的話來解釋的話，在JS初始階段，程式碼應該會被解讀成為以下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Called b!&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"></span><br><span class="line">b();</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"></span><br><span class="line">a = <span class="string">&#x27;Hello World!&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/aszx87410/blog/issues/34">我知道你懂 hoisting，可是你了解到多深？</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/07/Youtube%20Data%20API%20-%20Search%20Engine/" rel="prev" title="Youtube Data API - Search Engine">
+      <i class="fa fa-chevron-left"></i> Youtube Data API - Search Engine
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hoisting%E7%9A%84%E5%A5%BD%E8%99%95"><span class="nav-number">1.1.</span> <span class="nav-text">Hoisting的好處</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#is-not-defined-amp-undefined-%E5%B7%AE%E7%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">is not defined &amp; undefined 差異</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hoisting-%E5%88%B0%E5%BA%95%E6%98%AF%E6%80%8E%E9%BA%BC%E9%81%8B%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">hoisting 到底是怎麼運作的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E9%80%B2%E5%85%A5-EC-%E7%9A%84%E6%99%82%E5%80%99-%E8%B7%91-function-%E7%A8%8B%E5%BC%8F%E7%A2%BC%E5%89%8D-%EF%BC%8C%E6%9C%83%E6%8C%89%E7%85%A7%E4%BB%A5%E4%B8%8B%E9%A0%86%E5%BA%8F%E6%8A%8A%E6%9D%B1%E8%A5%BF%E6%94%BE%E5%88%B0-VO-%E8%A3%A1%E9%9D%A2%EF%BC%8C%E6%96%B0%E7%9A%84%E6%9C%83%E8%A6%86%E8%93%8B%E6%8E%89%E8%88%8A%E7%9A%84"><span class="nav-number">3.</span> <span class="nav-text">在進入 EC 的時候(跑 function 程式碼前)，會按照以下順序把東西放到 VO 裡面，新的會覆蓋掉舊的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">49</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/07/JavaScript-Hosting/";
+    this.page.identifier = "2021/04/07/JavaScript-Hosting/";
+    this.page.title = "JavaScript Hosting 變數提升";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>

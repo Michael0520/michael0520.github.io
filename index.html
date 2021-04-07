@@ -192,7 +192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
-    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/%E5%88%9D%E6%8E%A2Hexo/">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/JavaScript-Hosting/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
@@ -206,7 +206,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/07/%E5%88%9D%E6%8E%A2Hexo/" class="post-title-link" itemprop="url">初探Hexo</a>
+            <a href="/2021/04/07/JavaScript-Hosting/" class="post-title-link" itemprop="url">JavaScript Hosting 變數提升</a>
         </h2>
 
         <div class="post-meta">
@@ -217,7 +217,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-04-07 03:29:58 / Modified: 03:30:39" itemprop="dateCreated datePublished" datetime="2021-04-07T03:29:58+08:00">2021-04-07</time>
+              <time title="Created: 2021-04-07 18:01:05 / Modified: 18:04:02" itemprop="dateCreated datePublished" datetime="2021-04-07T18:01:05+08:00">2021-04-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,7 +225,7 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
                 </span>
             </span>
 
@@ -238,8 +238,8 @@
       </span>
       <span class="post-meta-item-text">Disqus: </span>
     
-    <a title="disqus" href="/2021/04/07/%E5%88%9D%E6%8E%A2Hexo/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/初探Hexo/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/04/07/JavaScript-Hosting/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/JavaScript-Hosting/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -254,15 +254,57 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>eee</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/07/%E5%88%9D%E6%8E%A2Hexo/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一般來說程式語言都是逐行執行的，所以正常都應該先宣告變數或函式才可以使用。</p>
+<p>但寫過 JS 的人都會發現有件神奇的事，我們可以先執行函式或變數，然後才進行宣告。</p>
+<p>一般的解釋是 JS 會執行類似”<strong>提升</strong>“的動作，自動將宣告或賦值的步驟在呼叫的時候執行。<br>但其實 Hoisting 這個字多少要負些責任讓大家誤會大了。<br>Hoisting 中文叫做提升，我們先把中文的名字忘一邊。</p>
+<h3 id="Hoisting的好處"><a href="#Hoisting的好處" class="headerlink" title="Hoisting的好處"></a>Hoisting的好處</h3><ul>
+<li>JavaScript 先宣告變數與函式再使用</li>
+<li>函式可互相呼叫 (不論宣告的前後順序)</li>
+</ul>
+<h3 id="is-not-defined-amp-undefined-差異"><a href="#is-not-defined-amp-undefined-差異" class="headerlink" title="is not defined &amp; undefined 差異"></a><code>is not defined</code> &amp; <code>undefined</code> 差異</h3><p>在 JS 中，如果使用未宣告的變數：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>使用已宣告、未賦值變數</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a)</span><br><span class="line"><span class="keyword">var</span> a</span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>不管變數宣告的位置在哪裡，<br>一開始載入時都會先找到所有「變數」與「函式 function」，並完成宣告，才會開始其他執行動作。</p>
+<p>所以即使執行程式在變數之前，也都找得到變數，即稱為「Hosting」。</p>
+<p>:::warning<br><strong>只有變數宣告可提升，賦值不會</strong><br>:::</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a</span><br><span class="line"><span class="built_in">console</span>.log(a) </span><br><span class="line">a = <span class="number">5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 執行順序為：</span></span><br><span class="line"><span class="comment">// 1. var a</span></span><br><span class="line"><span class="comment">// 2. console.log(a)</span></span><br><span class="line"><span class="comment">// 3. a = 5</span></span><br></pre></td></tr></table></figure>
+<p>:::warning<br><strong>函式帶的參數，即視為變數</strong><br>(如果沒有參數，則以函式內的賦值優先)<br>:::</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(v)  </span><br><span class="line">  <span class="keyword">var</span> v = <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">test(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 10</span></span><br><span class="line"><span class="comment">// 因為參數帶入 10 ，故等同於先宣告了 var v = 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 執行順序為：</span></span><br><span class="line"><span class="comment">// var test = function(v)&#123; console.log(v) var v =3 &#125;</span></span><br><span class="line"><span class="comment">// test(10)</span></span><br></pre></td></tr></table></figure>
+
+<p>:::warning<br><strong>函式 function 的宣告優先權高於變數</strong><br>:::</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a) </span><br><span class="line"><span class="keyword">var</span> a</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// [function: a]</span></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 執行順序為：</span></span><br><span class="line"><span class="comment">// function a()&#123;&#125;</span></span><br><span class="line"><span class="comment">// console.log(a)</span></span><br><span class="line"><span class="comment">// var a = &#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>:::warning<br><strong>用 let 與 const 宣告的變數也會提升，但未賦值前如果使用該變數會出錯</strong><br>:::</p>
+<blockquote>
+<p>let 與 const 有 hoisting，<br>與 var 的差別在於提升之後，var 宣告的變數會被初始化為 undefined，而 let 與 const 的宣告不會被初始化為 undefined，而且如果你在「賦值之前」就存取它，就會拋出錯誤。<br>在「提升之後」以及「賦值之前」這段「期間」，<br>如果你存取它就會拋出錯誤，而這段期間就稱做是 TDZ(Temporal Dead Zone)。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a) </span><br><span class="line">  <span class="keyword">let</span> a</span><br><span class="line">&#125;</span><br><span class="line">test()</span><br><span class="line"></span><br><span class="line"><span class="comment">//  ReferenceError: a is not defined</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="hoisting-到底是怎麼運作的？"><a href="#hoisting-到底是怎麼運作的？" class="headerlink" title="hoisting 到底是怎麼運作的？"></a>hoisting 到底是怎麼運作的？</h2><p>Execution Contexts（以下簡稱 EC）， 每當你進入一個 function 的時候，就會產生一個 EC，裡面儲存跟這個 function 有關的一些資訊，並且把這個 EC 放到 stack 裡面，當 function 執行完以後，就會把 EC 給 pop 出來。<br>每個 EC 都會有相對應的 variable object（以下簡稱 VO），在裡面宣告的變數跟函式都會被加進 VO 裡面，如果是 function，那參數也會被加到 VO 裡。<br>對於function的參數，它會直接被放到 VO 裡面去，如果有些參數沒有值的話，那它的值會被初始化成 undefined。 如果 VO 裡面找不到，會透過 scope chain 不斷往上尋找，如果每一層都找不到就會拋出錯誤。</p>
+<h2 id="在進入-EC-的時候-跑-function-程式碼前-，會按照以下順序把東西放到-VO-裡面，新的會覆蓋掉舊的"><a href="#在進入-EC-的時候-跑-function-程式碼前-，會按照以下順序把東西放到-VO-裡面，新的會覆蓋掉舊的" class="headerlink" title="在進入 EC 的時候(跑 function 程式碼前)，會按照以下順序把東西放到 VO 裡面，新的會覆蓋掉舊的"></a>在進入 EC 的時候(跑 function 程式碼前)，會按照以下順序把東西放到 VO 裡面，新的會覆蓋掉舊的</h2><ol>
+<li>function的參數：傳什麼進來就是什麼，沒有值的設成 undefined</li>
+<li>function 宣告放到 VO 裡，如果已經有同名的就覆蓋掉</li>
+<li>變數宣告放到 VO 裡，如果已經有同名的則忽略</li>
+</ol>
+<p>舉例來說我們熟知的使用方式應該是:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;Hello World!&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Called b!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">b();</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"></span><br><span class="line"><span class="comment">//  * Called b!</span></span><br><span class="line"><span class="comment">//  * Hello World!</span></span><br></pre></td></tr></table></figure>
+
+<p>到這裡沒有太大的問題<br>那如果按照 Hoisting 的說法，下面的程式執行應該會產出什麼呢?</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">b();</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">&#x27;Hello World!&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Called b!&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// * Called b!</span></span><br><span class="line"><span class="comment">// * undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>首先會先執行 <code>function</code> =&gt; <code>console.log(a)</code> =&gt; <code>var a =&#39;Hello World!&#39;</code></p>
+<blockquote>
+<p>function 會優先被提升到最上方做執行，其餘的部分就會照正常順序走</p>
+</blockquote>
+<p>這跟 JS 如何初始執行環境有關，<br>JS 在初始的 context 第一個步驟，就配置給函式還有變數一個記憶體空間。<br>函式在配置時就會完整放在記憶體空間裡，而變數就只是宣告但尚未賦值。</p>
+<p>所以回頭來看，用上面的話來解釋的話，在JS初始階段，程式碼應該會被解讀成為以下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Called b!&#x27;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> a;</span><br><span class="line"></span><br><span class="line">b();</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"></span><br><span class="line">a = <span class="string">&#x27;Hello World!&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/aszx87410/blog/issues/34">我知道你懂 hoisting，可是你了解到多深？</a></li>
+</ul>
+
       
     </div>
 
@@ -1176,13 +1218,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

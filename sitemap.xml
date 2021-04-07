@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://michael0520.github.io/2021/04/07/%E5%88%9D%E6%8E%A2Hexo/</loc>
+    <loc>https://michael0520.github.io/2021/04/07/JavaScript-Hosting/</loc>
     
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     
   </url>
   
@@ -382,7 +382,7 @@
 
   <url>
     <loc>https://michael0520.github.io/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -390,70 +390,63 @@
   
   <url>
     <loc>https://michael0520.github.io/tags/JavaScript/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/tags/BootStrap/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/tags/CSS/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/tags/Git/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/tags/%E4%BD%9C%E5%93%81%E9%9B%86/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/tags/HTML/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/tags/React/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/tags/%E6%8A%80%E8%A1%93%E7%A4%BE%E7%BE%A4/</loc>
-    <lastmod>2021-04-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://michael0520.github.io/tags/Hexo/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/tags/%E7%AC%AC-12-%E9%80%B1-%E7%9B%B4%E6%92%AD/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -462,63 +455,56 @@
   
   <url>
     <loc>https://michael0520.github.io/categories/JavaScript/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/categories/BootStrap/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/categories/CSS/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/categories/Git/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/categories/JavaScript/%E4%BD%9C%E5%93%81%E9%9B%86/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/categories/HTML/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/categories/JavaScript/React/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://michael0520.github.io/categories/%E6%8A%80%E8%A1%93%E7%A4%BE%E7%BE%A4/</loc>
-    <lastmod>2021-04-06</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://michael0520.github.io/categories/Hexo/</loc>
-    <lastmod>2021-04-06</lastmod>
+    <lastmod>2021-04-07</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
