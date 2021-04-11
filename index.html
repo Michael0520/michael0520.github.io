@@ -192,6 +192,273 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/11/JavaScript-Event-Delegation-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%B4%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/11/JavaScript-Event-Delegation-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%B4%BE/" class="post-title-link" itemprop="url">JavaScript Event Delegation (事件委派)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-11 20:08:07 / Modified: 20:08:50" itemprop="dateCreated datePublished" datetime="2021-04-11T20:08:07+08:00">2021-04-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/11/JavaScript-Event-Delegation-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%B4%BE/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/11/JavaScript-Event-Delegation-事件委派/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Event Delegation（事件委派）是一種受惠於 Event Bubbling 而能減少監聽器數目的方法。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/11/JavaScript-Event-Delegation-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%B4%BE/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/11/JavaScript-%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E4%BA%8B%E4%BB%B6-capturing-and-bubbling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/11/JavaScript-%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E4%BA%8B%E4%BB%B6-capturing-and-bubbling/" class="post-title-link" itemprop="url">JavaScript 中的冒泡事件 (capturing and bubbling)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-11 20:05:33 / Modified: 20:07:19" itemprop="dateCreated datePublished" datetime="2021-04-11T20:05:33+08:00">2021-04-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/11/JavaScript-%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E4%BA%8B%E4%BB%B6-capturing-and-bubbling/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/11/JavaScript-中的冒泡事件-capturing-and-bubbling/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Javascript 是一種事件驅動 (Event-driven) 的程式語言，簡單來說就是當 user 對網頁做了一些動作 (ex:點擊click)，才會觸發執行要做的動作。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/11/JavaScript-%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E4%BA%8B%E4%BB%B6-capturing-and-bubbling/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/10/JavaScript-closure-%E9%96%89%E5%8C%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/10/JavaScript-closure-%E9%96%89%E5%8C%85/" class="post-title-link" itemprop="url">JavaScript closure 閉包</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-10 06:17:21 / Modified: 06:18:08" itemprop="dateCreated datePublished" datetime="2021-04-10T06:17:21+08:00">2021-04-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/10/JavaScript-closure-%E9%96%89%E5%8C%85/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/10/JavaScript-closure-閉包/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>閉包是函式記得並存取語彙範疇的能力，可說是指向特定範疇的參考，因此當函式是在其宣告的語彙範疇之外執行時也能正常運作。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/04/10/JavaScript-closure-%E9%96%89%E5%8C%85/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
     <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/08/JavaScript-Scope-%E4%BD%9C%E7%94%A8%E5%9F%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -849,307 +1116,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
-    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/Typing%20Game/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
-      <meta itemprop="name" content="Michael">
-      <meta itemprop="description" content="人人有功練">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Michael">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/07/Typing%20Game/" class="post-title-link" itemprop="url">Typing Game</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-07 01:57:45" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:45+08:00">2021-04-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-08 18:50:09" itemprop="dateModified" datetime="2021-04-08T18:50:09+08:00">2021-04-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/%E4%BD%9C%E5%93%81%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">作品集</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2021/04/07/Typing%20Game/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/Typing Game/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>實作打字遊戲，在有限時間內輸入一模一樣文字，每過一道關卡增加難易度！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/07/Typing%20Game/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
-    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
-      <meta itemprop="name" content="Michael">
-      <meta itemprop="description" content="人人有功練">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Michael">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">Styled-component 元件管理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-07 01:57:45" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:45+08:00">2021-04-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-08 18:50:10" itemprop="dateModified" datetime="2021-04-08T18:50:10+08:00">2021-04-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/Styled-component 元件管理/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>React 以輕量化 Library 自居，因此 React 在樣式刻畫、狀態管理、網頁互動上充滿靈活、自由的樣貌，相同的問題，有各式各樣的解決方案！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/07/Styled-component%20%E5%85%83%E4%BB%B6%E7%AE%A1%E7%90%86/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
-    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/07/Speak%20Number%20Guessing%20Game/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
-      <meta itemprop="name" content="Michael">
-      <meta itemprop="description" content="人人有功練">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Michael">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/07/Speak%20Number%20Guessing%20Game/" class="post-title-link" itemprop="url">Speak Number Guessing Game</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-07 01:57:45" itemprop="dateCreated datePublished" datetime="2021-04-07T01:57:45+08:00">2021-04-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-08 18:50:09" itemprop="dateModified" datetime="2021-04-08T18:50:09+08:00">2021-04-08</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/%E4%BD%9C%E5%93%81%E9%9B%86/" itemprop="url" rel="index"><span itemprop="name">作品集</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus: </span>
-    
-    <a title="disqus" href="/2021/04/07/Speak%20Number%20Guessing%20Game/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/07/Speak Number Guessing Game/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>猜數字遊戲，實作使用麥克風音訊來猜數字</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/04/07/Speak%20Number%20Guessing%20Game/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1217,7 +1187,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">53</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

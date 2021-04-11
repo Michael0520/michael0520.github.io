@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/dinosaurLogo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Javascript 是一種事件驅動 (Event-driven) 的程式語言，簡單來說就是當 user 對網頁做了一些動作 (ex:點擊click)，才會觸發執行要做的動作。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 中的冒泡事件 (capturing and bubbling)">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/11/JavaScript-%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E4%BA%8B%E4%BB%B6-capturing-and-bubbling/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="Javascript 是一種事件驅動 (Event-driven) 的程式語言，簡單來說就是當 user 對網頁做了一些動作 (ex:點擊click)，才會觸發執行要做的動作。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/eM0urBR.png">
+<meta property="og:image" content="https://i.imgur.com/07NQC8Z.png">
+<meta property="og:image" content="https://i.imgur.com/4HmCnej.png">
+<meta property="og:image" content="https://i.imgur.com/i8Xqlw2.png">
+<meta property="og:image" content="https://i.imgur.com/ESGhlsp.png">
+<meta property="og:image" content="https://i.imgur.com/viWhUjf.png">
+<meta property="og:image" content="https://i.imgur.com/bZTCGA8.png">
+<meta property="article:published_time" content="2021-04-11T12:05:33.000Z">
+<meta property="article:modified_time" content="2021-04-11T12:07:19.151Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/eM0urBR.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/11/JavaScript-%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E4%BA%8B%E4%BB%B6-capturing-and-bubbling/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>JavaScript 中的冒泡事件 (capturing and bubbling) | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/11/JavaScript-%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E4%BA%8B%E4%BB%B6-capturing-and-bubbling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript 中的冒泡事件 (capturing and bubbling)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-04-11 20:05:33 / Modified: 20:07:19" itemprop="dateCreated datePublished" datetime="2021-04-11T20:05:33+08:00">2021-04-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/11/JavaScript-%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E4%BA%8B%E4%BB%B6-capturing-and-bubbling/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/11/JavaScript-中的冒泡事件-capturing-and-bubbling/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">Javascript 是一種事件驅動 (Event-driven) 的程式語言，簡單來說就是當 user 對網頁做了一些動作 (ex:點擊click)，才會觸發執行要做的動作。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Javascript 是一種事件驅動 (Event-driven) 的程式語言，簡單來說就是當 user 對網頁做了一些動作 (ex: 點擊click)，才會觸發執行要做的動作。<br>你知道嗎？當你點擊了<code>ul</code> <code>li</code> 裡面的一個 <code>a</code> link，<br>其實 ul, li, a 都被點到了，因為 ul 包著 li，而 li 包著 a ，所以實際上來說，你點到了整個網頁，這是什麼意思？<br>這就是 Javascript 中的 <strong>DOM 事件傳遞機制</strong>：「傳遞與冒泡」，</p>
+<p>為了證明上述所說，我在這三個元素上綁定 <code>addEventListener</code> 事件印出 console：</p>
+<p><img src="https://i.imgur.com/eM0urBR.png"></p>
+<p>如圖所見，在事件上發生的順序，會先觸發了我所點擊的 a link，再依序往回觸發父層 DOM 元素的事件。<br>事件傳遞機制總共分為三大階段：</p>
+<ul>
+<li>捕獲階段 (Capture Phase)</li>
+<li>目標階段 (Target Phase)</li>
+<li>冒泡階段 (Bubbling Phase)</li>
+</ul>
+<p><img src="https://i.imgur.com/07NQC8Z.png"></p>
+<p>圖片取自<a target="_blank" rel="noopener" href="https://www.w3.org/TR/DOM-Level-3-Events/#event-flow">W3</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PhaseType</span></span><br><span class="line"><span class="keyword">const</span> unsigned short      CAPTURING_PHASE                = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> unsigned short      AT_TARGET                      = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> unsigned short      BUBBLING_PHASE                 = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>捕獲階段 (Capture Phase)<br>在捕獲階段，DOM 的事件會從祖先層 (window) 開始往下尋找目標 (target)，這個過稱稱為捕獲階段 (CAPTURING_PHASE)。</li>
+<li>目標階段 (Target Phase)<br>在找到目標的時候，就會是目標階段 (AT_TARGET)。</li>
+<li>冒泡階段 (Bubbling Phase)<br>循著原路回去的過程，就是冒泡階段 (BUBBLING_PHASE)。</li>
+</ul>
+<div class="note info">
+            <p>這個階段的順序，也是常常聽到的口訣：「先捕獲，再冒泡」。</p>
+          </div>
+
+<p>所以我的 <code>addEventListener</code> 就是在冒泡階段依序觸發的囉？也不完全是。<br>其實我們所熟知的 <code>addEventListener</code> 還有第三個參數：true/false 可以決定你的監聽要在捕獲階段或是冒泡階段觸發：</p>
+<ul>
+<li>預設為 false ，則為監聽冒泡階段</li>
+<li>若改為 true ，就是監聽捕獲階段</li>
+</ul>
+<p>來看看剛剛的例子中，我的監聽事件就如平常的方式一樣：</p>
+<p><img src="https://i.imgur.com/4HmCnej.png"></p>
+<p>如果我在每一個 addEventListener 加上了 <code>true</code> 的參數，表示我要在捕獲階段就觸發我的動作：</p>
+<p><img src="https://i.imgur.com/i8Xqlw2.png"></p>
+<p>因為捕獲階段是從父層一層一層找下去的，所以觸發的順序跟剛剛相反了。</p>
+<p>再看一眼剛剛的事件階段 (eventPhase) 定義：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CAPTURING_PHASE = <span class="number">1</span> <span class="comment">// 捕獲階段：1</span></span><br><span class="line">AT_TARGET       = <span class="number">2</span> <span class="comment">// 目標階段：2</span></span><br><span class="line">BUBBLING_PHASE  = <span class="number">3</span> <span class="comment">// 冒泡階段：3</span></span><br></pre></td></tr></table></figure>
+
+<p>把這個 eventPhase 加入剛剛的範例中，來看看我們是不是真的在捕獲階段觸發了我們的動作：</p>
+<p><img src="https://i.imgur.com/ESGhlsp.png"></p>
+<p>如我們的期待，的確是在捕獲階段觸發了父層的事件，也在找到點擊的 alink 的時候成為目標階段。<br>如果我們再把剛剛沒有設定第三個參數，預設為 false 的 addEventListener 加回去的話，照理說就可以看到整個捕獲與冒泡的過程：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">ul.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;ul clicked&quot;</span>, e.eventPhase);</span><br><span class="line"> &#125;, <span class="literal">true</span>);</span><br><span class="line">li.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;li clicked&quot;</span>, e.eventPhase);</span><br><span class="line"> &#125;, <span class="literal">true</span>);</span><br><span class="line">alink.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;a link clicked&quot;</span>, e.eventPhase);</span><br><span class="line"> &#125;, <span class="literal">true</span>);</span><br><span class="line">ul.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">&quot;ul clicked&quot;</span>, e.eventPhase);</span><br><span class="line">&#125;);</span><br><span class="line">li.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">&quot;li clicked&quot;</span>, e.eventPhase);</span><br><span class="line">&#125;);</span><br><span class="line">alink.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">&quot;a link clicked&quot;</span>, e.eventPhase);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+<p>結果：</p>
+<p><img src="https://i.imgur.com/viWhUjf.png"></p>
+<p>跟想像中的差不多，但是在目標階段這邊有一個小小的地方要注意，就是在 target phase 的時候，<br>不論你的 addEventListener 設為 true/false 都沒有差別，<br>可以把 target phase 想像成一個點，捕獲和冒泡想像成一個過程，<br>在 target phase 這個位置，就不會管 addEventListener 的 true/false，只照著程式的順序執行。</p>
+<p>舉例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">alink.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">&quot;a link clicked when bubbling&quot;</span>, e.eventPhase);</span><br><span class="line">&#125;);</span><br><span class="line">alink.addEventListener( <span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&quot;a link clicked when capturing&quot;</span>, e.eventPhase);</span><br><span class="line"> &#125;, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我寫了兩個 alink 的監聽，<br>第一個監聽為預設是 false，應該會在冒泡階段執行，<br>第二個則為 true，應該要在捕獲階段執行，執行結果卻會是：</p>
+<p><img src="https://i.imgur.com/bZTCGA8.png"></p>
+<p>表示上述所說，addEventListener 的 true/false 並不影響 target phase 觸發的階段，他不算是捕獲或是冒泡的階段之一。</p>
+<p>動手玩玩看：</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="capture &amp; bubbling" src="https://codepen.io/michael-luo/embed/wvgpQBv?height=265&theme-id=dark&default-tab=js,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a target="_blank" rel="noopener" href='https://codepen.io/michael-luo/pen/wvgpQBv'>capture &amp; bubbling</a> by Michael Luo
+  (<a target="_blank" rel="noopener" href='https://codepen.io/michael-luo'>@michael-luo</a>) on <a target="_blank" rel="noopener" href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+<p>如果上述的捕獲與冒泡機制你已經理解了，那就會明白取消預設行為和事件傳遞機制是不一樣的事情，如果在這之前你不是特別清楚，希望這篇文章可以讓你更加理解他們之間的差異。</p>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.techbridge.cc/2017/07/15/javascript-event-propagation/">DOM 的事件傳遞機制：捕獲與冒泡
+</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10191970">重新認識 JavaScript: Day 14 事件機制的原理
+</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/10/JavaScript-closure-%E9%96%89%E5%8C%85/" rel="prev" title="JavaScript closure 閉包">
+      <i class="fa fa-chevron-left"></i> JavaScript closure 閉包
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/11/JavaScript-Event-Delegation-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%B4%BE/" rel="next" title="JavaScript Event Delegation (事件委派)">
+      JavaScript Event Delegation (事件委派) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">1.</span> <span class="nav-text">參考文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/11/JavaScript-%E4%B8%AD%E7%9A%84%E5%86%92%E6%B3%A1%E4%BA%8B%E4%BB%B6-capturing-and-bubbling/";
+    this.page.identifier = "2021/04/11/JavaScript-中的冒泡事件-capturing-and-bubbling/";
+    this.page.title = "JavaScript 中的冒泡事件 (capturing and bubbling)";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>
