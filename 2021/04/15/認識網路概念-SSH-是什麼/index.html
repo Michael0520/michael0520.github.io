@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/dinosaurLogo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="SSH， 全名是 Secure SHell protocol 的簡寫 (安全的殼程式協定)，是一個遠端管理的網路協定，能讓使用者(伺服器管理員)透過網路遠端控制或修改(e.g 執行 commend)伺服器(電腦)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="認識網路概念 - SSH 是什麼？">
+<meta property="og:url" content="https://michael0520.github.io/2021/04/15/%E8%AA%8D%E8%AD%98%E7%B6%B2%E8%B7%AF%E6%A6%82%E5%BF%B5-SSH-%E6%98%AF%E4%BB%80%E9%BA%BC/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="SSH， 全名是 Secure SHell protocol 的簡寫 (安全的殼程式協定)，是一個遠端管理的網路協定，能讓使用者(伺服器管理員)透過網路遠端控制或修改(e.g 執行 commend)伺服器(電腦)。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/dtZT1W5.png">
+<meta property="article:published_time" content="2021-04-15T07:39:41.000Z">
+<meta property="article:modified_time" content="2021-04-19T05:32:28.537Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="Backend">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/dtZT1W5.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/04/15/%E8%AA%8D%E8%AD%98%E7%B6%B2%E8%B7%AF%E6%A6%82%E5%BF%B5-SSH-%E6%98%AF%E4%BB%80%E9%BA%BC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>認識網路概念 - SSH 是什麼？ | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/04/15/%E8%AA%8D%E8%AD%98%E7%B6%B2%E8%B7%AF%E6%A6%82%E5%BF%B5-SSH-%E6%98%AF%E4%BB%80%E9%BA%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          認識網路概念 - SSH 是什麼？
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-15 15:39:41" itemprop="dateCreated datePublished" datetime="2021-04-15T15:39:41+08:00">2021-04-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-19 13:32:28" itemprop="dateModified" datetime="2021-04-19T13:32:28+08:00">2021-04-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Backend/" itemprop="url" rel="index"><span itemprop="name">Backend</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/04/15/%E8%AA%8D%E8%AD%98%E7%B6%B2%E8%B7%AF%E6%A6%82%E5%BF%B5-SSH-%E6%98%AF%E4%BB%80%E9%BA%BC/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/04/15/認識網路概念-SSH-是什麼/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">SSH， 全名是 Secure SHell protocol 的簡寫 (安全的殼程式協定)，是一個遠端管理的網路協定，能讓使用者(伺服器管理員)透過網路遠端控制或修改(e.g 執行 commend)伺服器(電腦)。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="什麼是-SSH"><a href="#什麼是-SSH" class="headerlink" title="什麼是 SSH ?"></a>什麼是 SSH ?</h2><p>SSH， 全名是 Secure SHell protocol 的簡寫 (安全的殼程式協定)，是一個遠端管理的網路協定，能讓使用者(伺服器管理員)透過網路遠端控制或修改(e.g 執行 commend)伺服器(電腦)。</p>
+<p>SSH 這項服務是為了取代 Telnet 而建立，由於 Telnet 並沒有加密機制會有資安問題，所以 SSH 使用加密機制確保所有在網路上的傳輸都是安全的，他同時也提供了認證遠端使用者的功能。</p>
+<div class="note warning">
+            <p>這個 SSH 協定，在預設的狀態中，本身就提供兩個伺服器功能：</p><ol><li>一個就是類似 telnet 的遠端連線使用 shell 的伺服器，亦即是俗稱的 ssh ；</li><li>另一個就是類似 FTP 服務的 sftp-server ！提供更安全的 FTP 服務。</li></ol>
+          </div>
+
+<h2 id="連線加密技術簡介"><a href="#連線加密技術簡介" class="headerlink" title="連線加密技術簡介"></a>連線加密技術簡介</h2><p>什麼是『資料加密』呢？<br>簡單的說，就是將人們看的懂得原始電子資料，經過一些運算，讓這些資料變成沒有意義的亂碼 (至少對人類來說)，<br>然後再讓這個亂碼在網路上面傳輸，而當使用者想要查閱這個資料時，再透過解密運算，<br>將這些亂碼反推出原始的電子資料。由於這些資料已經被重新處理過，<br>所以，即使資料在網際網路上被 cracker 監聽而竊取，他們也不容易就推算得出來原始資料內容的。</p>
+<blockquote>
+<p>[翻譯蒟蒻] 轉自鳥哥:</p>
+<blockquote>
+<p>鳥哥常常說，加密機制有點像是兩個人之間的火星語對話啦！如果你跟你的朋友約定好使用你們制訂的某種特別語言， 這個語言只對你們兩個有意義。那麼當你們兩人講話時，在旁邊的人聽到的只是一堆沒有意義的聲音，因為他們聽不懂啊！ 即使路人將你的聲音錄下來，只要他不知道你們的特殊用語，那他就不可能瞭解你們對話的內容囉。</p>
+</blockquote>
+</blockquote>
+<h2 id="了解不同的加密技術"><a href="#了解不同的加密技術" class="headerlink" title="了解不同的加密技術"></a>了解不同的加密技術</h2><p>SSH 明顯的優勢在於它之前是用來確保 host 跟 client 之間資料傳輸的安全性，host代表你嘗試去存取的遠端伺服器， client 代表你使用的電腦，而 SSH 使用了三種不同的加密技術。</p>
+<ul>
+<li>對稱加密</li>
+<li>非對稱加密</li>
+<li>雜湊函數</li>
+</ul>
+<h2 id="對稱加密"><a href="#對稱加密" class="headerlink" title="對稱加密"></a>對稱加密</h2><p>對稱加密是一個加密的演算法，這個演算法會使用一個密鑰在client端與host端之間去加密與解密訊息，任何擁有這個密鑰的人都可以解鎖訊息密傳送。</p>
+<p><img src="https://i.imgur.com/dtZT1W5.png"></p>
+<p>對稱加密通常被稱作共享鑰匙或共享秘密加密，通常只會使用的一個鑰匙去加解密，有時候會有一對鑰匙，並用其中一隻鑰匙去加密另一隻鑰匙。</p>
+<p>對稱加密的鑰匙可以被使用在整個 SSH 協定的溝通中，  Client 端跟 Server 端會透過彼此同意的方法去產生密鑰，這個密鑰絕對不能讓任何第三方知道，而產生密鑰的程序被「Key exchange algorithm」所執行。</p>
+<p>由於這個演算法並不會直接傳送密鑰給 client 和 host ，而是讓 client 和 host 共同分享一串資料，並分別更改它，並透過這串資料去計算出密鑰，就算有第三方獲得這串資料，沒有「Key exchange algorithm」也無法計算出密鑰。</p>
+<p>例外值得注意的是，每一次 SSH 的交談中，都會有一個「secret token」，這個「secret token」會在 client 端做認證前產生。</p>
+<p>而一旦這個密鑰產生，所有在 client 和 host 之間傳送的封包都會透過這個密鑰加密起來，就連使用者透過 console 輸入的密碼也是，所以 client 的身分會被保護著以免被監聽。</p>
+<p>這裡有多種不同的對稱式加密演算法，但不侷限一定要使用哪個，像是 AES、CAST128、Blowfish 等等，在建立安全連線之前， client 端跟 host 端會從一個經過排序好的演算法清單中，決定出要使用哪一個演算法，在 client 端最首選的加密方法是在 host 端中被使用為雙向加密的加密方法。</p>
+<h2 id="非對稱加密"><a href="#非對稱加密" class="headerlink" title="非對稱加密"></a>非對稱加密</h2><p>不像對稱式加密，非對稱是使用兩個不同的鑰匙去加解密，這兩把鑰匙分別是公鑰「public key」和私鑰「private key」，而這兩把鑰匙通常會一起使用。</p>
+<ul>
+<li>公鑰，顧名思義就是能公開散布並且分享給所有人，雖然他的功能會與私鑰緊密相連著，但私鑰是不能透過公鑰去計算出來的。這兩個密鑰的關係有點複雜，若用 A機器的公鑰去加密的訊息，只能用A機器的私鑰去解密，而公鑰也無法解密他自己加密的訊息，也無法解密其他不相干私鑰的訊息。</li>
+<li>私鑰就必須保持私密，也就是說為了連謝的安全性，不能有不相干的其他人知道私鑰，而 SSH 整個連線的優勢就是私鑰永遠不會被揭露出去，私鑰的功能是負責解開被他對應公鑰所加密後的訊息，因此任何有能力用公鑰加密訊息的人，都會擁有對應的私鑰。</li>
+</ul>
+<p>與一般認知的不同，非對稱式加密並不使用在整個 SSH 的溝通中，而是被使用於對稱式加密的「Key exchange algorithm」中。</p>
+<p>在安全連線建立之前， client 跟 host 雙方會產生一對暫時性的公私鑰，並用彼此的私鑰去產生對稱式加密中的共向密鑰。</p>
+<p>一旦對稱式加密溝通建立後， host 端會使用 client 端的公鑰去產生一組數字傳送給client並驗證client端的身分，如果client端能成功解開這組數字，代表他擁有建立連結所對應的私鑰，整個SSH的溝通才正式啟動。</p>
+<h2 id="雜湊函數"><a href="#雜湊函數" class="headerlink" title="雜湊函數"></a>雜湊函數</h2><p>單向的雜湊函數是另一種被使用於 SSH 連線中的加密方法。</p>
+<p>單向雜湊函數在某些意義不同於上述兩個加密方法，單向雜湊函數所產生的數字永遠不會被解密，他會透過你輸入的資料產生出一組固定長度且唯一的數值，且這組數值沒有明顯的趨勢能被利用，也就是說他很難被反向推導。</p>
+<p>從輸入的資料產生出加密後的雜湊值並不難，但要從雜湊值反推回輸入的值幾乎是不可能，也就是說如果 client 端如果擁有正確的資料，那他就可以用雜湊值去比對他所擁有的值是否是正確的。</p>
+<p>SSH 使用雜湊函數去驗證訊息的正確性，而雜湊函數被HMACs(Hash-based Message Authentication Codes)這個演法所完成，他確保host端所接受的指令沒有被任何方式給竄改過。</p>
+<p>在選擇對稱式加密演算法的同時，也必須選擇合適的訊息驗證演算法(雜湊函數)，而選擇訊息驗證演算法的方式跟選擇對稱式加密演算法類似。</p>
+<p>每一個被傳送的訊息都會包含一個MAC(驗證值)，這個MAC使用對稱式鑰匙、訊息封包序列號碼、跟訊息內容所計算出來，最後會在加在使用對稱式加密後的訊息外，透過封包傳送出去。</p>
+<h2 id="SSH協定如何使用這些加密技術"><a href="#SSH協定如何使用這些加密技術" class="headerlink" title="SSH協定如何使用這些加密技術"></a>SSH協定如何使用這些加密技術</h2><p>SSH 運作的方式是使用 client-server 模式的同時能讓兩個遠端的系統達到認證與資料加密的功能。</p>
+<p>SSH 預設運作在 TCP port 22(雖然如果需要是可以改變port號碼)，host(sevrer)是透過 port 22 去接受訊息(或者其他SSH指定的port號碼)，SSH 透過認證機制建立與 client 端安全的連結並開啟正確的 shell 環境，如果驗證是成功的。</p>
+<p>client 端必須透過 <strong>TCP三次交握法</strong> 建立與 server 的連結，同時還要確保是安全的對程式連結並驗證 client 身分是否與 server 上之前的紀錄匹配(通常會以 RSA key 作為身分紀錄)，最後ssh會提供驗證所需要的使用者身分。</p>
+<p>要建立起連結有兩個步驟，第一雙方系統都必須在加密標準達成共識去保護未來的溝通，第二使用者進行使用者驗證，一旦身分能夠跟server的資料匹配，使用者就能進入 server。</p>
+<h2 id="Session-Encryption-Negotiation"><a href="#Session-Encryption-Negotiation" class="headerlink" title="Session Encryption Negotiation"></a>Session Encryption Negotiation</h2><p>當 client 端試著使用 TCP 協定去連上 server 端， server 端會提供一個加密的協定跟他能支援的版本，如果 client 端有能夠對應的協定與版本，連結就會採用被接受的協定去建立， client 端也會用 server 端的非對稱式公鑰去驗證server的正確性。</p>
+<p>一旦連結建立後， client 與 server 端會使用「 Diffie-Hellman Key Exchange Algorithm」去產生對稱式金鑰，這個演算法讓 client 和 sevrer 獲得一個加密金鑰，之後能使用它去加密整個溝通的過程。</p>
+<p>這裡說明一下這個演算法基礎的運作方式：<br> client 跟 server 會同意一個主要且非常的數值(prime number)，且這個數值沒有什麼共通且普遍的因素，這個數值被稱做「seed value」。</p>
+<p>接下來 client 跟 server 會決定一個共用的加密方式，並利用一個特定的演算法更改 seed value 去產生另一組值，這些透過執行大量的運算在seed上的方法被稱為「加密產生器」，AES就是其中之一。</p>
+<p>之後會各自分別產生另一個主要數值，這個數值會作為秘密私鑰在之後的互動中。</p>
+<p>這個新產生的私鑰，會有一個能共享的數值跟一個加密演算法(e.g AES)，這些會被使用於計算出公鑰，並分享給其他電腦。<br>client與server會使用各自的私要跟其他人的公鑰和最原本彼此同意出來的主要數值(prime number)去產生最後的對稱式金鑰，這個金鑰client與server會分別在運算，但最後會產生相同的加密金鑰。</p>
+<p>現在 client 端與 server 都有了共同的金鑰，可以用來進行對稱式加密在整個SSH的溝通中，這個金鑰能夠加密也能夠解密。<br>現在安全的對稱式加密溝通已經被建立了，接下來就是用做使用者認證。</p>
+<h2 id="Authentication-User"><a href="#Authentication-User" class="headerlink" title="Authentication User"></a>Authentication User</h2><p>在使用者進入 server 之前的最後一步就是去驗證使用者的身分，大部分的SSH使用者是使用密碼，使用者在輸入 username 後會被要求輸入密碼，這些身分資料會透過對稱式加密通道安全地傳送，所以說沒有任何機會能夠被其它人獲取這些資料。</p>
+<p>雖然密碼能夠被加密，但這個方式在安全的考量上仍不被建議，因為有很多機器人可以透過暴力破解或一些預設密碼成功進入 server ，所以推薦另一個替代方案，SSH Key Pairs。</p>
+<p>它是一組非對稱式的金鑰，能夠被使用於驗證使用者身分，但不需要輸入任何密碼。</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>深入地去了解 SSH 底層如何運作的能讓我們用資安的角度去看待這個技術，大部分的人認為資訊安全的處理過程非常複雜且難以理解，但其實它比你想得還簡單。如果你想知道電腦花多久再計算這些雜湊值或驗證使用者，其實它只花不到一秒的時間，事實上，大部分的時間都會花在資料在網路中的傳輸上。</p>
+<p>希望這篇關於 SSH 的文章能夠幫助你看見，不同技術的組合能夠建立起強大的系統且不同技術都在其中扮演重要的角色，同時你也知道為何 SSH 一出現 Telnet 就成為了過去。</p>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><a target="_blank" rel="noopener" href="http://linux.vbird.org/linux_server/0310telnetssh.php#ssh_server">鳥哥的 Linux 私房菜</a></li>
+<li><a target="_blank" rel="noopener" href="https://jennycodes.me/posts/security-ssh">你該知道所有關於 SSH 的那些事</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Backend/" rel="tag"># Backend</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/11/JavaScript-Event-Delegation-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%B4%BE/" rel="prev" title="JavaScript Event Delegation (事件委派)">
+      <i class="fa fa-chevron-left"></i> JavaScript Event Delegation (事件委派)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/15/%E8%AA%8D%E8%AD%98%E7%B6%B2%E8%B7%AF%E6%A6%82%E5%BF%B5-HTTP%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F/" rel="next" title="認識網路概念 - HTTP 是什麼？">
+      認識網路概念 - HTTP 是什麼？ <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E9%BA%BC%E6%98%AF-SSH"><span class="nav-number">1.</span> <span class="nav-text">什麼是 SSH ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%A3%E7%B7%9A%E5%8A%A0%E5%AF%86%E6%8A%80%E8%A1%93%E7%B0%A1%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">連線加密技術簡介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8A%A0%E5%AF%86%E6%8A%80%E8%A1%93"><span class="nav-number">3.</span> <span class="nav-text">了解不同的加密技術</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8D%E7%A8%B1%E5%8A%A0%E5%AF%86"><span class="nav-number">4.</span> <span class="nav-text">對稱加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E5%B0%8D%E7%A8%B1%E5%8A%A0%E5%AF%86"><span class="nav-number">5.</span> <span class="nav-text">非對稱加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%9C%E6%B9%8A%E5%87%BD%E6%95%B8"><span class="nav-number">6.</span> <span class="nav-text">雜湊函數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH%E5%8D%94%E5%AE%9A%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%80%99%E4%BA%9B%E5%8A%A0%E5%AF%86%E6%8A%80%E8%A1%93"><span class="nav-number">7.</span> <span class="nav-text">SSH協定如何使用這些加密技術</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Session-Encryption-Negotiation"><span class="nav-number">8.</span> <span class="nav-text">Session Encryption Negotiation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Authentication-User"><span class="nav-number">9.</span> <span class="nav-text">Authentication User</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">10.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">11.</span> <span class="nav-text">參考文章</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/04/15/%E8%AA%8D%E8%AD%98%E7%B6%B2%E8%B7%AF%E6%A6%82%E5%BF%B5-SSH-%E6%98%AF%E4%BB%80%E9%BA%BC/";
+    this.page.identifier = "2021/04/15/認識網路概念-SSH-是什麼/";
+    this.page.title = "認識網路概念 - SSH 是什麼？";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>
