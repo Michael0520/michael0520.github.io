@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://i.imgur.com/Bhb2q39.png">
 <meta property="og:image" content="https://i.imgur.com/hLxAS1r.png">
 <meta property="article:published_time" content="2021-04-24T11:01:16.000Z">
-<meta property="article:modified_time" content="2021-04-24T11:02:55.980Z">
+<meta property="article:modified_time" content="2021-04-25T12:09:08.134Z">
 <meta property="article:author" content="Michael">
 <meta property="article:tag" content="Backend">
 <meta name="twitter:card" content="summary">
@@ -223,10 +223,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-04-24 19:01:16 / Modified: 19:02:55" itemprop="dateCreated datePublished" datetime="2021-04-24T19:01:16+08:00">2021-04-24</time>
+              <time title="Created: 2021-04-24 19:01:16" itemprop="dateCreated datePublished" datetime="2021-04-24T19:01:16+08:00">2021-04-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-25 20:09:08" itemprop="dateModified" datetime="2021-04-25T20:09:08+08:00">2021-04-25</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -273,20 +279,26 @@
         <h1 id="環境安裝"><a href="#環境安裝" class="headerlink" title="環境安裝"></a>環境安裝</h1><h2 id="1-Python-環境準備-MAC"><a href="#1-Python-環境準備-MAC" class="headerlink" title="1. Python 環境準備 (MAC)"></a>1. Python 環境準備 (MAC)</h2><p>我們要在 Mac 環境安裝</p>
 <ul>
 <li>Python3</li>
-<li>pip</li>
+<li>pip3</li>
 </ul>
 <h3 id="使用-homebrew-安裝-Python-3"><a href="#使用-homebrew-安裝-Python-3" class="headerlink" title="使用 homebrew 安裝 Python 3"></a>使用 homebrew 安裝 Python 3</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install python</span><br></pre></td></tr></table></figure>
 
+<blockquote>
 <p>檢查目前 Python 的版本</p>
+</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python --version</span><br></pre></td></tr></table></figure>
 
+<blockquote>
 <p>如果顯示的版本是 Python 2，那麼試著下面的指令</p>
+</blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 --version</span><br></pre></td></tr></table></figure>
 
+<blockquote>
 <p>看看是否是 Python 3</p>
+</blockquote>
 <h3 id="確認-pip-是否安裝成功"><a href="#確認-pip-是否安裝成功" class="headerlink" title="確認 pip 是否安裝成功"></a>確認 pip 是否安裝成功</h3><p>pip 是 python 的套件管理工具，但是並非等於 npm，更加類似於 mac 的 homebrew，或是 ubuntu 中的 apt install 這樣的工具</p>
 <div class="note warning">
-            <p>這次我們要使用的 python 版本為 python3<br>所要安裝 pip3 </p>
+            <p>這次我們要使用的 python 版本為 python3 ，所以要安裝 pip3 </p>
           </div>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install pipenv</span><br></pre></td></tr></table></figure>
