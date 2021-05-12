@@ -60,6 +60,30 @@
       </tags>
   </entry>
   <entry>
+    <title>CSS NavBar 導覽列</title>
+    <url>/2021/04/07/CSS%20%E5%B0%8E%E8%A6%BD%E5%88%97/</url>
+    <content><![CDATA[<h1 id="CSS-導覽列"><a href="#CSS-導覽列" class="headerlink" title="CSS 導覽列"></a>CSS 導覽列</h1><ol>
+<li>首先先建立 html 架構</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;header class&#x3D;&quot;main-header&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;main-container&quot;&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;logo&quot;&gt;</span><br><span class="line">          &lt;img</span><br><span class="line">            src&#x3D;&quot;https:&#x2F;&#x2F;picsum.photos&#x2F;100&#x2F;100?random&#x3D;1</span><br><span class="line">            &quot;</span><br><span class="line">            alt&#x3D;&quot;假圖產生器&quot;</span><br><span class="line">          &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">        &lt;nav class&#x3D;&quot;main-nav&quot;&gt;</span><br><span class="line">          &lt;a href&#x3D;&quot;#&quot;&gt;貓咪國度&lt;&#x2F;a&gt;</span><br><span class="line">          &lt;a href&#x3D;&quot;#&quot;&gt;貓咪生活&lt;&#x2F;a&gt;</span><br><span class="line">          &lt;a href&#x3D;&quot;#&quot;&gt;貓咪商品&lt;&#x2F;a&gt;</span><br><span class="line">          &lt;a href&#x3D;&quot;#&quot;&gt;貓咪電話&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;&#x2F;nav&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;header&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用套件 live-sever 開啟就會看到目前網頁有一張圖片，變且下方有四個 a 標籤了，</li>
+</ol>
+<p><img src="https://i.imgur.com/oV3tQIt.png"></p>
+<hr>
+<ol start="3">
+<li>接下來設定css</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 基本的css reset */</span></span><br><span class="line">    * &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">&#x27;Franklin Gothic Medium&#x27;</span>, <span class="string">&#x27;Arial Narrow&#x27;</span>, Arial, sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 背景漸層色（角度,顏色,顏色） */</span></span><br><span class="line">    <span class="selector-class">.main-header</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">0deg</span>, green, yellow)</span><br><span class="line">&#125;</span><br><span class="line">    <span class="selector-class">.main-header</span> <span class="selector-class">.main-container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">    <span class="comment">/* x軸排成直向 */</span></span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="comment">/* y軸置中 */</span></span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">1200px</span>;</span><br><span class="line">    <span class="comment">/* 避免爆版，先設定最大框度 */</span></span><br><span class="line">    <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="selector-class">.main-header</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="comment">/* 圖片完整寬度 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-class">.main-header</span> <span class="selector-class">.logo</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="comment">/* 圖片完整呈現 */</span></span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">    <span class="comment">/*  inline 元素置中    */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Bootstrap</title>
     <url>/2021/04/07/Bootstrap4/</url>
     <content><![CDATA[<h1 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h1><p><a href="https://getbootstrap.com/docs/4.5/getting-started/introduction/">Bootstrap官網</a></p>
@@ -225,30 +249,6 @@
       </tags>
   </entry>
   <entry>
-    <title>CSS NavBar 導覽列</title>
-    <url>/2021/04/07/CSS%20%E5%B0%8E%E8%A6%BD%E5%88%97/</url>
-    <content><![CDATA[<h1 id="CSS-導覽列"><a href="#CSS-導覽列" class="headerlink" title="CSS 導覽列"></a>CSS 導覽列</h1><ol>
-<li>首先先建立 html 架構</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;header class&#x3D;&quot;main-header&quot;&gt;</span><br><span class="line">      &lt;div class&#x3D;&quot;main-container&quot;&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;#&quot; class&#x3D;&quot;logo&quot;&gt;</span><br><span class="line">          &lt;img</span><br><span class="line">            src&#x3D;&quot;https:&#x2F;&#x2F;picsum.photos&#x2F;100&#x2F;100?random&#x3D;1</span><br><span class="line">            &quot;</span><br><span class="line">            alt&#x3D;&quot;假圖產生器&quot;</span><br><span class="line">          &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">        &lt;nav class&#x3D;&quot;main-nav&quot;&gt;</span><br><span class="line">          &lt;a href&#x3D;&quot;#&quot;&gt;貓咪國度&lt;&#x2F;a&gt;</span><br><span class="line">          &lt;a href&#x3D;&quot;#&quot;&gt;貓咪生活&lt;&#x2F;a&gt;</span><br><span class="line">          &lt;a href&#x3D;&quot;#&quot;&gt;貓咪商品&lt;&#x2F;a&gt;</span><br><span class="line">          &lt;a href&#x3D;&quot;#&quot;&gt;貓咪電話&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;&#x2F;nav&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;header&gt;</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>使用套件 live-sever 開啟就會看到目前網頁有一張圖片，變且下方有四個 a 標籤了，</li>
-</ol>
-<p><img src="https://i.imgur.com/oV3tQIt.png"></p>
-<hr>
-<ol start="3">
-<li>接下來設定css</li>
-</ol>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 基本的css reset */</span></span><br><span class="line">    * &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">&#x27;Franklin Gothic Medium&#x27;</span>, <span class="string">&#x27;Arial Narrow&#x27;</span>, Arial, sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 背景漸層色（角度,顏色,顏色） */</span></span><br><span class="line">    <span class="selector-class">.main-header</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: <span class="built_in">linear-gradient</span>(<span class="number">0deg</span>, green, yellow)</span><br><span class="line">&#125;</span><br><span class="line">    <span class="selector-class">.main-header</span> <span class="selector-class">.main-container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line">    <span class="comment">/* x軸排成直向 */</span></span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="comment">/* y軸置中 */</span></span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">max-width</span>: <span class="number">1200px</span>;</span><br><span class="line">    <span class="comment">/* 避免爆版，先設定最大框度 */</span></span><br><span class="line">    <span class="attribute">margin</span>: auto;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="selector-class">.main-header</span> <span class="selector-class">.logo</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="comment">/* 圖片完整寬度 */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-class">.main-header</span> <span class="selector-class">.logo</span> <span class="selector-tag">img</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="comment">/* 圖片完整呈現 */</span></span><br><span class="line">    <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">    <span class="comment">/*  inline 元素置中    */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSS 繼承順序</title>
     <url>/2021/04/07/CSS%20%E7%B9%BC%E6%89%BF%E9%A0%86%E5%BA%8F/</url>
     <content><![CDATA[<h2 id="繼承順序"><a href="#繼承順序" class="headerlink" title="繼承順序"></a>繼承順序</h2><p> !importand &gt; inline-style &gt;ID &gt;class &gt;tag &gt; * &gt;繼承</p>
@@ -310,6 +310,34 @@
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>, <span class="selector-tag">h2</span> &#123;</span><br><span class="line"> <span class="attribute">font-family</span>: <span class="string">&quot;Helvetica&quot;</span>, <span class="string">&quot;Arial&quot;</span>, <span class="string">&quot;sans-serif&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line"> <span class="attribute">color</span>: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">h2</span> &#123;</span><br><span class="line"> <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>如此一來你就能統一管理 h1 和 h2 的字型了！</p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CSS3 (圓弧、漸層、陰影效果)</title>
+    <url>/2021/04/07/CSS3%20(%E5%9C%93%E5%BC%A7%E3%80%81%E6%BC%B8%E5%B1%A4%E3%80%81%E9%99%B0%E5%BD%B1%E6%95%88%E6%9E%9C)/</url>
+    <content><![CDATA[<h1 id="CSS3-圓弧、漸層、陰影效果"><a href="#CSS3-圓弧、漸層、陰影效果" class="headerlink" title="CSS3 (圓弧、漸層、陰影效果)"></a>CSS3 (圓弧、漸層、陰影效果)</h1><h6 id="tags-CSS"><a href="#tags-CSS" class="headerlink" title="tags: CSS"></a>tags: <code>CSS</code></h6><ol>
+<li><p>圓弧效果 (border radius)</p>
+<blockquote>
+<p>圓形：<code>border radius:50%</code><br> 不規則形：<code>border radius:50px 0 0 50px</code><br> <a href="https://codepen.io/michael-luo/pen/PozgbXJ"> codepen 預覽圖</a></p>
+</blockquote>
+</li>
+<li><p>漸層效果 (linear-gradient)</p>
+<blockquote>
+<p><code>linear-gradient:(顏色,顏色)</code><br><code>linear-gradient:(方向,顏色,顏色)</code><br><code>linear-gradient:(角度(deg),顏色,顏色)</code><br><a href="https://codepen.io/michael-luo/pen/KKMYNOb?editors=1100"> codepen 預覽圖</a></p>
+</blockquote>
+</li>
+<li><p>陰影效果 (box-shadow)</p>
+<blockquote>
+<p>基本黑底:<code>box-shadow:10px 10px black;</code><br>柔焦陰影：box-shadow:3px 3px 3px gray;<br> <a href="https://codepen.io/michael-luo/pen/mdEgReq"> codepen 預覽圖</a></p>
+</blockquote>
+</li>
+</ol>
 ]]></content>
       <categories>
         <category>CSS</category>
@@ -535,34 +563,6 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CSS3 (圓弧、漸層、陰影效果)</title>
-    <url>/2021/04/07/CSS3%20(%E5%9C%93%E5%BC%A7%E3%80%81%E6%BC%B8%E5%B1%A4%E3%80%81%E9%99%B0%E5%BD%B1%E6%95%88%E6%9E%9C)/</url>
-    <content><![CDATA[<h1 id="CSS3-圓弧、漸層、陰影效果"><a href="#CSS3-圓弧、漸層、陰影效果" class="headerlink" title="CSS3 (圓弧、漸層、陰影效果)"></a>CSS3 (圓弧、漸層、陰影效果)</h1><h6 id="tags-CSS"><a href="#tags-CSS" class="headerlink" title="tags: CSS"></a>tags: <code>CSS</code></h6><ol>
-<li><p>圓弧效果 (border radius)</p>
-<blockquote>
-<p>圓形：<code>border radius:50%</code><br> 不規則形：<code>border radius:50px 0 0 50px</code><br> <a href="https://codepen.io/michael-luo/pen/PozgbXJ"> codepen 預覽圖</a></p>
-</blockquote>
-</li>
-<li><p>漸層效果 (linear-gradient)</p>
-<blockquote>
-<p><code>linear-gradient:(顏色,顏色)</code><br><code>linear-gradient:(方向,顏色,顏色)</code><br><code>linear-gradient:(角度(deg),顏色,顏色)</code><br><a href="https://codepen.io/michael-luo/pen/KKMYNOb?editors=1100"> codepen 預覽圖</a></p>
-</blockquote>
-</li>
-<li><p>陰影效果 (box-shadow)</p>
-<blockquote>
-<p>基本黑底:<code>box-shadow:10px 10px black;</code><br>柔焦陰影：box-shadow:3px 3px 3px gray;<br> <a href="https://codepen.io/michael-luo/pen/mdEgReq"> codepen 預覽圖</a></p>
-</blockquote>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
@@ -1270,6 +1270,57 @@
       </tags>
   </entry>
   <entry>
+    <title>JavaScript (Promise)(es6)</title>
+    <url>/2021/04/07/JS%20(Promise)(es6)/</url>
+    <content><![CDATA[<h1 id="JS-Promise-es6"><a href="#JS-Promise-es6" class="headerlink" title="JS (Promise)(es6)"></a>JS (Promise)(es6)</h1><p>下篇筆記 <a href="https://hackmd.io/7Sn_JrQ2T7uD5HZhMFwdvg?both">async(非同步),sync(同步)</a></p>
+<ul>
+<li><h3 id="es5"><a href="#es5" class="headerlink" title="es5:"></a>es5:</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// parameter 參數 (外部) foo</span></span><br><span class="line"><span class="comment">// argument 引數 (內部) (arg1,arg2)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1,arg2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg1+arg2</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(foo(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line"><span class="comment">// 此 function 意思為</span></span><br><span class="line"><span class="comment">// 名字為 foo (的function) 裡頭會有兩個變數(arg1,arg2)</span></span><br><span class="line"><span class="comment">// 關鍵 return (回傳) </span></span><br><span class="line"><span class="comment">// 會印出 1+2 = 3</span></span><br></pre></td></tr></table></figure></li>
+<li><h3 id="es6-arrow-function"><a href="#es6-arrow-function" class="headerlink" title="es6: (arrow function)"></a>es6: (arrow function)</h3></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> foo =&gt; (arg1,arg2)&#123;</span><br><span class="line">    <span class="keyword">return</span> arg1+arg2</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(foo(<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><h4 id="setTimeout-延遲觸發-function"><a href="#setTimeout-延遲觸發-function" class="headerlink" title="setTimeout (延遲觸發 function)"></a>setTimeout (延遲觸發 function)</h4></li>
+</ul>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(</span><br><span class="line">    () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;in setTimeout&#x27;</span>)    </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="number">1000</span> <span class="comment">//1000毫秒</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><h3 id="Promise-承諾"><a href="#Promise-承諾" class="headerlink" title="Promise( 承諾 )"></a>Promise( 承諾 )</h3><blockquote>
+<h4 id="true-做什麼事情，-false-做什麼事情"><a href="#true-做什麼事情，-false-做什麼事情" class="headerlink" title="( true 做什麼事情， false 做什麼事情)"></a>( true 做什麼事情， false 做什麼事情)</h4><h3 id="Promise-一寫完就會開始執行"><a href="#Promise-一寫完就會開始執行" class="headerlink" title="Promise 一寫完就會開始執行"></a>Promise 一寫完就會開始執行</h3></blockquote>
+</li>
+</ul>
+<p><strong>語法：</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myPromise = <span class="keyword">new</span> <span class="built_in">Promise</span>((resolve,reject)</span><br><span class="line">    <span class="keyword">const</span> x=<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">1</span>)&#123;</span><br><span class="line">        resolve(<span class="string">&#x27;成功了&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;失敗了&#x27;</span>))</span><br><span class="line">        <span class="comment">// new Error 存放失敗事件</span></span><br><span class="line">    &#125;)</span><br><span class="line"><span class="comment">// 上方 Promise 一寫完就馬上會被執行</span></span><br><span class="line"><span class="comment">// resolve() true 做什麼事</span></span><br><span class="line"><span class="comment">// reject() false 做什麼事</span></span><br><span class="line"></span><br><span class="line">myPromise.then().catch()</span><br><span class="line"><span class="comment">// then() true做什麼事情，又 true 就會再進到下個 then()</span></span><br><span class="line"><span class="comment">// 可寫無數個 then()</span></span><br><span class="line"><span class="comment">// catch() false 要做什麼事情</span></span><br><span class="line"><span class="comment">// catch() 做完事情，變成 true，就會再進到下個 then()</span></span><br><span class="line"></span><br><span class="line"> .then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; </span><br><span class="line"> <span class="comment">// true 再進到下一個 then()</span></span><br><span class="line">     <span class="keyword">return</span> data+<span class="number">1</span></span><br><span class="line"> &#125;)</span><br><span class="line"> .then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; </span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>()<span class="comment">//拋出一個錯誤</span></span><br><span class="line">         <span class="keyword">return</span> data <span class="comment">// 所以會到 catch</span></span><br><span class="line"> &#125;)</span><br><span class="line">.catch(<span class="function">(<span class="params">error</span>)=&gt;</span>&#123; </span><br><span class="line"><span class="comment">// 執行完，變成 true 就再進到下個 then()</span></span><br><span class="line">     <span class="keyword">return</span> data-<span class="number">1</span></span><br><span class="line"> &#125;)</span><br><span class="line">.then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">     <span class="keyword">return</span> data+<span class="number">1</span></span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="function-搭配-Promise"><a href="#function-搭配-Promise" class="headerlink" title="function 搭配 Promise"></a>function 搭配 Promise</h3><blockquote>
+<h3 id="important-function-被呼叫才會執行"><a href="#important-function-被呼叫才會執行" class="headerlink" title="(!important) function 被呼叫才會執行"></a>(!important) function 被呼叫才會執行</h3><h3 id="important-Promise-一寫完就會執行"><a href="#important-Promise-一寫完就會執行" class="headerlink" title="(!important) Promise 一寫完就會執行"></a>(!important) Promise 一寫完就會執行</h3></blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getMyPromise = <span class="function">(<span class="params">a,b</span>) =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span> (<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> x = a + b</span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    resolve(<span class="string">&#x27;成功了&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(<span class="string">&#x27;失敗了&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">getMyPromise() <span class="comment">//這樣 function 才會被呼叫</span></span><br><span class="line">getMyPromise(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// 1+2=3, x&gt;0,return(&#x27;成功了&#x27;)</span></span><br><span class="line">getMyPromise(<span class="number">1</span>,-<span class="number">10</span>) <span class="comment">// 1+(-10)=-9,x&lt;0,return (&#x27;失敗了&#x27;)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="async-function-return-Promise-的簡寫"><a href="#async-function-return-Promise-的簡寫" class="headerlink" title="async (function return Promise 的簡寫)"></a>async (function return Promise 的簡寫)</h2><blockquote>
+<h4 id="async-非同步-await-等待"><a href="#async-非同步-await-等待" class="headerlink" title="async(非同步) / await(等待)"></a><code>async</code>(非同步) / <code>await</code>(等待)</h4></blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getMyNewPromise = <span class="keyword">async</span> (a,b) =&gt;&#123;</span><br><span class="line">    <span class="keyword">const</span> x = a + b</span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&#x27;成功！&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;有錯誤！&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">getMyPromise() <span class="comment">//這樣 function 才會被呼叫</span></span><br><span class="line">getMyPromise(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// 1+2=3, x&gt;0,return(&#x27;成功了&#x27;)</span></span><br><span class="line">getMyPromise(<span class="number">1</span>,-<span class="number">10</span>) <span class="comment">// 1+(-10)=-9,x&lt;0,return (&#x27;失敗了&#x27;)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 上述此 async function 意思是</span></span><br><span class="line"><span class="comment">// getMyNewPromise 裡有兩個數值 (a,b)</span></span><br><span class="line"><span class="comment">// const x = a + b</span></span><br><span class="line"><span class="comment">// if else , if (x &gt; 0)</span></span><br><span class="line"><span class="comment">// 就會 return(&#x27;成功&#x27;)</span></span><br><span class="line"><span class="comment">// else 錯誤的話就會拋出一個錯誤顯示(&#x27;有錯誤！&#x27;)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="上述-async-加上-await-寫法"><a href="#上述-async-加上-await-寫法" class="headerlink" title="上述 async 加上(await)寫法"></a>上述 async 加上(await)寫法</h3><blockquote>
+<h4 id="async-function-會傳一個-Promsie"><a href="#async-function-會傳一個-Promsie" class="headerlink" title="(async function)會傳一個 Promsie"></a>(async function)會傳一個 Promsie</h4></blockquote>
+<p>引用情境：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getMyNewPromise = <span class="keyword">async</span> (a,b) =&gt; &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> user = <span class="keyword">await</span> getUser()</span><br><span class="line">        &#125; <span class="keyword">catch</span>(error)&#123;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// try&#123;&#125; catch + (Promise) &#123;&#125; 語法</span></span><br><span class="line">        <span class="comment">// 如果發生錯誤，也會告知你是在發生了什麼錯誤，不會直接跳出發生錯誤</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> user = <span class="keyword">await</span> getUser()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> x = a + b</span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&#x27;成功！&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;有錯誤！&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="callback-回調"><a href="#callback-回調" class="headerlink" title="callback (回調)"></a>callback (回調)</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> bar = <span class="function">(<span class="params">a, b, successCallback, failureCallback</span>) =&gt;</span> </span><br><span class="line">    <span class="keyword">const</span> x = a + b</span><br><span class="line">    <span class="keyword">if</span>( x &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        successCallback(<span class="string">&#x27;成功了&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        failureCallback(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;失敗了&#x27;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">bar(</span><br><span class="line">    <span class="number">1</span>,<span class="number">2</span>,</span><br><span class="line">    (data)=&gt;&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;I am callback&#x27;</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    (error) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;I am callback&#x27;</span>)</span><br><span class="line">    &#125;.</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ＊＊等 arg1() 都執行好，在執行 bar() 即可</span></span><br><span class="line"><span class="comment">// 先定義好要用的 function</span></span><br><span class="line"><span class="comment">// 成功再來執行這個 function ，失敗再來執行這個 function</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ＊＊情境式解釋，要設定活動頁面裏廣告彈出的畫面，</span></span><br><span class="line"><span class="comment">// bar() 可以不需理會裡頭活動頁面(arg1)還要去執行什麼事情，</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="結論：-如何判斷-function-是否為-async"><a href="#結論：-如何判斷-function-是否為-async" class="headerlink" title="結論：(如何判斷 function 是否為 async)"></a>結論：(如何判斷 function 是否為 async)</h3><p><strong>return 回來的話如果是一個 Promise 那就是 async<br>如果不是 Promise 那就是一般的 function</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Infinite Scroll</title>
     <url>/2021/04/07/Infinite%20Scroll/</url>
     <content><![CDATA[<h1 id="Infinite-Scroll"><a href="#Infinite-Scroll" class="headerlink" title="Infinite Scroll"></a>Infinite Scroll</h1><h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><ul>
@@ -1427,83 +1478,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript (Promise)(es6)</title>
-    <url>/2021/04/07/JS%20(Promise)(es6)/</url>
-    <content><![CDATA[<h1 id="JS-Promise-es6"><a href="#JS-Promise-es6" class="headerlink" title="JS (Promise)(es6)"></a>JS (Promise)(es6)</h1><p>下篇筆記 <a href="https://hackmd.io/7Sn_JrQ2T7uD5HZhMFwdvg?both">async(非同步),sync(同步)</a></p>
-<ul>
-<li><h3 id="es5"><a href="#es5" class="headerlink" title="es5:"></a>es5:</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// parameter 參數 (外部) foo</span></span><br><span class="line"><span class="comment">// argument 引數 (內部) (arg1,arg2)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1,arg2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> arg1+arg2</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(foo(<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line"><span class="comment">// 此 function 意思為</span></span><br><span class="line"><span class="comment">// 名字為 foo (的function) 裡頭會有兩個變數(arg1,arg2)</span></span><br><span class="line"><span class="comment">// 關鍵 return (回傳) </span></span><br><span class="line"><span class="comment">// 會印出 1+2 = 3</span></span><br></pre></td></tr></table></figure></li>
-<li><h3 id="es6-arrow-function"><a href="#es6-arrow-function" class="headerlink" title="es6: (arrow function)"></a>es6: (arrow function)</h3></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> foo =&gt; (arg1,arg2)&#123;</span><br><span class="line">    <span class="keyword">return</span> arg1+arg2</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(foo(<span class="number">1</span>,<span class="number">2</span>))</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<ul>
-<li><h4 id="setTimeout-延遲觸發-function"><a href="#setTimeout-延遲觸發-function" class="headerlink" title="setTimeout (延遲觸發 function)"></a>setTimeout (延遲觸發 function)</h4></li>
-</ul>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setTimeout</span>(</span><br><span class="line">    () =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;in setTimeout&#x27;</span>)    </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="number">1000</span> <span class="comment">//1000毫秒</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><h3 id="Promise-承諾"><a href="#Promise-承諾" class="headerlink" title="Promise( 承諾 )"></a>Promise( 承諾 )</h3><blockquote>
-<h4 id="true-做什麼事情，-false-做什麼事情"><a href="#true-做什麼事情，-false-做什麼事情" class="headerlink" title="( true 做什麼事情， false 做什麼事情)"></a>( true 做什麼事情， false 做什麼事情)</h4><h3 id="Promise-一寫完就會開始執行"><a href="#Promise-一寫完就會開始執行" class="headerlink" title="Promise 一寫完就會開始執行"></a>Promise 一寫完就會開始執行</h3></blockquote>
-</li>
-</ul>
-<p><strong>語法：</strong> </p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> myPromise = <span class="keyword">new</span> <span class="built_in">Promise</span>((resolve,reject)</span><br><span class="line">    <span class="keyword">const</span> x=<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">1</span>)&#123;</span><br><span class="line">        resolve(<span class="string">&#x27;成功了&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;失敗了&#x27;</span>))</span><br><span class="line">        <span class="comment">// new Error 存放失敗事件</span></span><br><span class="line">    &#125;)</span><br><span class="line"><span class="comment">// 上方 Promise 一寫完就馬上會被執行</span></span><br><span class="line"><span class="comment">// resolve() true 做什麼事</span></span><br><span class="line"><span class="comment">// reject() false 做什麼事</span></span><br><span class="line"></span><br><span class="line">myPromise.then().catch()</span><br><span class="line"><span class="comment">// then() true做什麼事情，又 true 就會再進到下個 then()</span></span><br><span class="line"><span class="comment">// 可寫無數個 then()</span></span><br><span class="line"><span class="comment">// catch() false 要做什麼事情</span></span><br><span class="line"><span class="comment">// catch() 做完事情，變成 true，就會再進到下個 then()</span></span><br><span class="line"></span><br><span class="line"> .then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; </span><br><span class="line"> <span class="comment">// true 再進到下一個 then()</span></span><br><span class="line">     <span class="keyword">return</span> data+<span class="number">1</span></span><br><span class="line"> &#125;)</span><br><span class="line"> .then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123; </span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>()<span class="comment">//拋出一個錯誤</span></span><br><span class="line">         <span class="keyword">return</span> data <span class="comment">// 所以會到 catch</span></span><br><span class="line"> &#125;)</span><br><span class="line">.catch(<span class="function">(<span class="params">error</span>)=&gt;</span>&#123; </span><br><span class="line"><span class="comment">// 執行完，變成 true 就再進到下個 then()</span></span><br><span class="line">     <span class="keyword">return</span> data-<span class="number">1</span></span><br><span class="line"> &#125;)</span><br><span class="line">.then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">     <span class="keyword">return</span> data+<span class="number">1</span></span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
-<hr>
-<h3 id="function-搭配-Promise"><a href="#function-搭配-Promise" class="headerlink" title="function 搭配 Promise"></a>function 搭配 Promise</h3><blockquote>
-<h3 id="important-function-被呼叫才會執行"><a href="#important-function-被呼叫才會執行" class="headerlink" title="(!important) function 被呼叫才會執行"></a>(!important) function 被呼叫才會執行</h3><h3 id="important-Promise-一寫完就會執行"><a href="#important-Promise-一寫完就會執行" class="headerlink" title="(!important) Promise 一寫完就會執行"></a>(!important) Promise 一寫完就會執行</h3></blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getMyPromise = <span class="function">(<span class="params">a,b</span>) =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span> (<span class="function">(<span class="params">resolve,reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> x = a + b</span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    resolve(<span class="string">&#x27;成功了&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(<span class="string">&#x27;失敗了&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">getMyPromise() <span class="comment">//這樣 function 才會被呼叫</span></span><br><span class="line">getMyPromise(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// 1+2=3, x&gt;0,return(&#x27;成功了&#x27;)</span></span><br><span class="line">getMyPromise(<span class="number">1</span>,-<span class="number">10</span>) <span class="comment">// 1+(-10)=-9,x&lt;0,return (&#x27;失敗了&#x27;)</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="async-function-return-Promise-的簡寫"><a href="#async-function-return-Promise-的簡寫" class="headerlink" title="async (function return Promise 的簡寫)"></a>async (function return Promise 的簡寫)</h2><blockquote>
-<h4 id="async-非同步-await-等待"><a href="#async-非同步-await-等待" class="headerlink" title="async(非同步) / await(等待)"></a><code>async</code>(非同步) / <code>await</code>(等待)</h4></blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getMyNewPromise = <span class="keyword">async</span> (a,b) =&gt;&#123;</span><br><span class="line">    <span class="keyword">const</span> x = a + b</span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&#x27;成功！&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;有錯誤！&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">getMyPromise() <span class="comment">//這樣 function 才會被呼叫</span></span><br><span class="line">getMyPromise(<span class="number">1</span>,<span class="number">2</span>) <span class="comment">// 1+2=3, x&gt;0,return(&#x27;成功了&#x27;)</span></span><br><span class="line">getMyPromise(<span class="number">1</span>,-<span class="number">10</span>) <span class="comment">// 1+(-10)=-9,x&lt;0,return (&#x27;失敗了&#x27;)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 上述此 async function 意思是</span></span><br><span class="line"><span class="comment">// getMyNewPromise 裡有兩個數值 (a,b)</span></span><br><span class="line"><span class="comment">// const x = a + b</span></span><br><span class="line"><span class="comment">// if else , if (x &gt; 0)</span></span><br><span class="line"><span class="comment">// 就會 return(&#x27;成功&#x27;)</span></span><br><span class="line"><span class="comment">// else 錯誤的話就會拋出一個錯誤顯示(&#x27;有錯誤！&#x27;)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="上述-async-加上-await-寫法"><a href="#上述-async-加上-await-寫法" class="headerlink" title="上述 async 加上(await)寫法"></a>上述 async 加上(await)寫法</h3><blockquote>
-<h4 id="async-function-會傳一個-Promsie"><a href="#async-function-會傳一個-Promsie" class="headerlink" title="(async function)會傳一個 Promsie"></a>(async function)會傳一個 Promsie</h4></blockquote>
-<p>引用情境：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> getMyNewPromise = <span class="keyword">async</span> (a,b) =&gt; &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> user = <span class="keyword">await</span> getUser()</span><br><span class="line">        &#125; <span class="keyword">catch</span>(error)&#123;</span><br><span class="line">        </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// try&#123;&#125; catch + (Promise) &#123;&#125; 語法</span></span><br><span class="line">        <span class="comment">// 如果發生錯誤，也會告知你是在發生了什麼錯誤，不會直接跳出發生錯誤</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> user = <span class="keyword">await</span> getUser()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> x = a + b</span><br><span class="line">    <span class="keyword">if</span>(x &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>(<span class="string">&#x27;成功！&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;有錯誤！&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="callback-回調"><a href="#callback-回調" class="headerlink" title="callback (回調)"></a>callback (回調)</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> bar = <span class="function">(<span class="params">a, b, successCallback, failureCallback</span>) =&gt;</span> </span><br><span class="line">    <span class="keyword">const</span> x = a + b</span><br><span class="line">    <span class="keyword">if</span>( x &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        successCallback(<span class="string">&#x27;成功了&#x27;</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        failureCallback(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;失敗了&#x27;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">bar(</span><br><span class="line">    <span class="number">1</span>,<span class="number">2</span>,</span><br><span class="line">    (data)=&gt;&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;I am callback&#x27;</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    (error) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;I am callback&#x27;</span>)</span><br><span class="line">    &#125;.</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ＊＊等 arg1() 都執行好，在執行 bar() 即可</span></span><br><span class="line"><span class="comment">// 先定義好要用的 function</span></span><br><span class="line"><span class="comment">// 成功再來執行這個 function ，失敗再來執行這個 function</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// ＊＊情境式解釋，要設定活動頁面裏廣告彈出的畫面，</span></span><br><span class="line"><span class="comment">// bar() 可以不需理會裡頭活動頁面(arg1)還要去執行什麼事情，</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="結論：-如何判斷-function-是否為-async"><a href="#結論：-如何判斷-function-是否為-async" class="headerlink" title="結論：(如何判斷 function 是否為 async)"></a>結論：(如何判斷 function 是否為 async)</h3><p><strong>return 回來的話如果是一個 Promise 那就是 async<br>如果不是 Promise 那就是一般的 function</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript Event Delegation (事件委派)</title>
-    <url>/2021/04/11/JavaScript-Event-Delegation-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%B4%BE/</url>
-    <content><![CDATA[<p>Event Delegation（事件委派）是一種受惠於 Event Bubbling 而能減少監聽器數目的方法。</p>
-<iframe height="265" style="width: 100%;" scrolling="no" title="Event Delegation" src="https://codepen.io/michael-luo/embed/mdRXyXR?height=265&theme-id=dark&default-tab=css,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
-  See the Pen <a href='https://codepen.io/michael-luo/pen/mdRXyXR'>Event Delegation</a> by Michael Luo
-  (<a href='https://codepen.io/michael-luo'>@michael-luo</a>) on <a href='https://codepen.io'>CodePen</a>.
-</iframe>
-
-
-<p>當我們 click 不同的小區塊時，就會 console 出它們個別的名字，例如：a、b 或 c。</p>
-<p>實作方法是將:</p>
-<p>click 事件綁在 parent 上，藉由 Event Bubbling 傳遞給 child，而非直接將事件綁定在 child 上。</p>
-<ul>
-<li>優點是可減少監聽器的數目，</li>
-<li>缺點是由於需要判斷哪些 child node 是我們有興趣的項目，而必須多寫一些程式碼做判斷。</li>
-</ul>
-<p>在此範例中，我們加上一個 <code>filter.child</code>，表示只對有<code>.child</code>這個 class 的節點有興趣，<br>而沒有加上<code>.child</code>的節點則不被影響，例如<code>click.subitem</code>這個節點之後就不會 console 它的名字。</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)</title>
     <url>/2021/04/07/JavaScript%20Higher%20Order%20Functions%20&amp;%20Arrays%20(Vanilla%20JavaScript)/</url>
     <content><![CDATA[<h1 id="JavaScript-Higher-Order-Functions-amp-Arrays-Vanilla-JavaScript"><a href="#JavaScript-Higher-Order-Functions-amp-Arrays-Vanilla-JavaScript" class="headerlink" title="JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)"></a>JavaScript Higher Order Functions &amp; Arrays (Vanilla JavaScript)</h1><h6 id="tags-JS"><a href="#tags-JS" class="headerlink" title="tags: JS"></a>tags: <code>JS</code></h6><h1 id="事前準備"><a href="#事前準備" class="headerlink" title="事前準備:"></a>事前準備:</h1><p>待會要處理的資料</p>
@@ -1608,6 +1582,32 @@
 
 <p>由大到小排列:<br><img src="https://i.imgur.com/1zQSVkn.png"></p>
 <p>得到加總結果結果是798</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript Event Delegation (事件委派)</title>
+    <url>/2021/04/11/JavaScript-Event-Delegation-%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%B4%BE/</url>
+    <content><![CDATA[<p>Event Delegation（事件委派）是一種受惠於 Event Bubbling 而能減少監聽器數目的方法。</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="Event Delegation" src="https://codepen.io/michael-luo/embed/mdRXyXR?height=265&theme-id=dark&default-tab=css,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/michael-luo/pen/mdRXyXR'>Event Delegation</a> by Michael Luo
+  (<a href='https://codepen.io/michael-luo'>@michael-luo</a>) on <a href='https://codepen.io'>CodePen</a>.
+</iframe>
+
+
+<p>當我們 click 不同的小區塊時，就會 console 出它們個別的名字，例如：a、b 或 c。</p>
+<p>實作方法是將:</p>
+<p>click 事件綁在 parent 上，藉由 Event Bubbling 傳遞給 child，而非直接將事件綁定在 child 上。</p>
+<ul>
+<li>優點是可減少監聽器的數目，</li>
+<li>缺點是由於需要判斷哪些 child node 是我們有興趣的項目，而必須多寫一些程式碼做判斷。</li>
+</ul>
+<p>在此範例中，我們加上一個 <code>filter.child</code>，表示只對有<code>.child</code>這個 class 的節點有興趣，<br>而沒有加上<code>.child</code>的節點則不被影響，例如<code>click.subitem</code>這個節點之後就不會 console 它的名字。</p>
 ]]></content>
       <categories>
         <category>JavaScript</category>
@@ -2023,6 +2023,137 @@
       </tags>
   </entry>
   <entry>
+    <title>Movie Seat Booking</title>
+    <url>/2021/04/07/Movie%20Seat%20Booking/</url>
+    <content><![CDATA[<h1 id="Movie-Seat-Booking"><a href="#Movie-Seat-Booking" class="headerlink" title="Movie Seat Booking"></a>Movie Seat Booking</h1><h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a><a href="https://michael0520.github.io/Movie-Seat-Booking/index.html">Demo</a></h2><h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="建立電影選單"><a href="#建立電影選單" class="headerlink" title="建立電影選單"></a>建立電影選單</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;movie-container&quot;&gt;</span><br><span class="line">    &lt;label&gt;Pick a movie&lt;&#x2F;label&gt;</span><br><span class="line">    &lt;select id&#x3D;&quot;movie&quot;&gt;</span><br><span class="line">      &lt;option value&#x3D;&quot;10&quot;&gt;Avengers: Endgame ($10)&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&quot;12&quot;&gt;Joker ($12)&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&quot;8&quot;&gt;Toy Story 4 ($8)&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&quot;9&quot;&gt;The Lion King ($9)&lt;&#x2F;option&gt;</span><br><span class="line">    &lt;&#x2F;select&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+<p>示意圖：<br><img src="https://i.imgur.com/pL3DdEc.png" alt="示意圖"></p>
+<h3 id="建立座位狀態標示"><a href="#建立座位狀態標示" class="headerlink" title="建立座位狀態標示"></a>建立座位狀態標示</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;ul class&#x3D;&quot;showcase&quot;&gt;</span><br><span class="line">      &lt;li &gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;small&gt;N&#x2F;A&lt;&#x2F;small&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li &gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;seat selected&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;small&gt;Selected&lt;&#x2F;small&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li &gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;small&gt;Occupied&lt;&#x2F;small&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br></pre></td></tr></table></figure>
+<p>示意圖：<br><img src="https://i.imgur.com/Papl7Bd.png"></p>
+<h3 id="建立座位、建立電影螢幕-依照喜好建立數量"><a href="#建立座位、建立電影螢幕-依照喜好建立數量" class="headerlink" title="建立座位、建立電影螢幕(依照喜好建立數量)"></a>建立座位、建立電影螢幕(依照喜好建立數量)</h3><blockquote>
+<p>以下是實作六個橫排八個直排的座位數量<br>隨機標示座位狀態</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;screen&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="建立總價格顯示區塊"><a href="#建立總價格顯示區塊" class="headerlink" title="建立總價格顯示區塊"></a>建立總價格顯示區塊</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> &lt;p class&#x3D;&quot;text&quot;&gt;You have selected </span><br><span class="line">&lt;!-- 為了顯示總共有選了幾個座位，所以將 0 給綁上 id&#x3D;&#39;count&#39;  --&gt;</span><br><span class="line">        &lt;span id&#x3D;&quot;count&quot;&gt;0&lt;&#x2F;span&gt; seats for a price of $</span><br><span class="line">&lt;!-- 為了顯示總共座位的票卷價格，所以將 0 給綁上 id&#x3D;&#39;total&#39;  --&gt;</span><br><span class="line">        &lt;span id&#x3D;&quot;total&quot;&gt;0&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
+<p>html 完成後示意圖：<br><img src="https://i.imgur.com/fSoMn74.png"></p>
+<hr>
+<h2 id="Css"><a href="#Css" class="headerlink" title="Css"></a>Css</h2><h3 id="選擇-Google-fonts-字體"><a href="#選擇-Google-fonts-字體" class="headerlink" title="選擇 Google fonts 字體"></a>選擇 Google fonts 字體</h3><blockquote>
+<p>選用此字體， import 入 Css</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@import</span> url(<span class="string">&#x27;https://fonts.googleapis.com/css2?family=Lato:wght@700&amp;display=swap&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*  因為沒有套入 css reset 所以都務必套入這幾行 Css    */</span></span><br><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">&#x27;Lato&#x27;</span>, sans-serif;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="body-Css-撰寫"><a href="#body-Css-撰寫" class="headerlink" title="body Css 撰寫"></a>body Css 撰寫</h3><blockquote>
+<p>水平置中寫法</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#242333</span>;</span><br><span class="line"><span class="comment">/* 將所有的 div 排列成直列  */</span></span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line"><span class="comment">/* 水平置中 */</span></span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line"><span class="comment">/*      */</span></span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">&#x27;Lato&#x27;</span>, sans-serif;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="select-下拉式選單加上樣式"><a href="#select-下拉式選單加上樣式" class="headerlink" title="select 下拉式選單加上樣式"></a>select 下拉式選單加上樣式</h3><blockquote>
+<p>-webkit-appearance，使用系統預設的外觀。<br>-webkit-appearance: none，去除瀏覽器的預設樣式。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.movie-container</span> select &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span> <span class="number">15px</span> <span class="number">5px</span> <span class="number">15px</span>;</span><br><span class="line"><span class="comment">/*   注意    */</span></span><br><span class="line">    -moz-appearance: none;</span><br><span class="line">    -webkit-appearance: none;</span><br><span class="line">    appearance: none;</span><br><span class="line"><span class="comment">/*      */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="加上座位樣式"><a href="#加上座位樣式" class="headerlink" title="加上座位樣式"></a>加上座位樣式</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 1. 調整座位大小、間距以及背景顏色 */</span></span><br><span class="line"><span class="selector-class">.seat</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#444451</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">15px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">3px</span>;</span><br><span class="line">    <span class="attribute">border-top-left-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-top-right-radius</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 2. 讓座位變成橫排 */</span></span><br><span class="line"><span class="selector-class">.row</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="單獨修改三種座位樣式的個別顏色"><a href="#單獨修改三種座位樣式的個別顏色" class="headerlink" title="單獨修改三種座位樣式的個別顏色"></a>單獨修改三種座位樣式的個別顏色</h4><blockquote>
+<p>因為只有 <strong>‘尚未有空位’</strong> 以及 <strong>‘座位已被預訂’</strong> 要特定挑出來<br>只需要修改這兩種顏色</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.seat</span><span class="selector-class">.selected</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#6feaf6</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.seat</span><span class="selector-class">.occupied</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="將座位與其他座位空出距離-看起來像是有走道的樣子"><a href="#將座位與其他座位空出距離-看起來像是有走道的樣子" class="headerlink" title="將座位與其他座位空出距離(看起來像是有走道的樣子)"></a>將座位與其他座位空出距離(看起來像是有走道的樣子)</h4><blockquote>
+<p>實作：前兩排跟後兩排各有一個走道</p>
+</blockquote>
+<ol>
+<li>nth-child()：當選取的元素中間有混雜其他元素，</li>
+</ol>
+<p><strong>像是<code>&lt;hr&gt;</code>，在 nth-child 會將其他元素一起做計算</strong><br>2. nth-of-type 就較為單純，只會計算選取的元素，<br>例如選擇<code>&lt;div&gt;</code>，就只會選取<code>&lt;div&gt;</code>。</p>
+<blockquote>
+</blockquote>
+<ol start="3">
+<li><a href="https://amyhuang-82.medium.com/css%E7%AD%86%E8%A8%98-nth-child%E5%88%B0%E5%BA%95%E6%98%AF%E5%93%AA%E5%80%8B%E5%B0%8F%E5%AD%A9-112a33ad9479">nth-child()詳細解說</a></li>
+</ol>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.seat</span><span class="selector-pseudo">:nth-of-type</span>(<span class="number">2</span>) &#123;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.seat</span><span class="selector-pseudo">:nth-last-of-type</span>(<span class="number">2</span>) &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/2CYxFNy.png"></p>
+<h4 id="讓箭頭滑到座位時，變成手指圖示以及放大-提升使用者體驗"><a href="#讓箭頭滑到座位時，變成手指圖示以及放大-提升使用者體驗" class="headerlink" title="讓箭頭滑到座位時，變成手指圖示以及放大(提升使用者體驗)"></a>讓箭頭滑到座位時，變成手指圖示以及放大(提升使用者體驗)</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.seat</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.occupied</span>)<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line"><span class="comment">/*  放大 1.2 倍    */</span></span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>這時做完會發現’票卷顯示的座位’滑到時也會大，也會變成手指頭滑鼠</strong><br>所以要將’票卷顯示的座位’設定為不放大，手指頭也要去除掉，所以設定為 <code>cursor: pointer;</code></p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.showcase</span> <span class="selector-class">.seat</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.occupied</span>)<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="將票卷顯示列加上樣式"><a href="#將票卷顯示列加上樣式" class="headerlink" title="將票卷顯示列加上樣式"></a>將票卷顯示列加上樣式</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.showcase</span> &#123;</span><br><span class="line"><span class="comment">/* 背景半透明 */</span></span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.1</span>);</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span> <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#777</span>;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line"><span class="comment">/*  讓彼此前方都有個空格    */</span></span><br><span class="line">    <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.showcase</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line"><span class="comment">/* 將票卷圖案以及狀態列變為同一列 */</span></span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.showcase</span> <span class="selector-tag">li</span> small &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">2px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/Oj7uMhu.png"></p>
+<h3 id="電影螢幕加上樣式"><a href="#電影螢幕加上樣式" class="headerlink" title="電影螢幕加上樣式"></a>電影螢幕加上樣式</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line"><span class="comment">/* perspective 語法為立體，數字越大越立體 */</span></span><br><span class="line">    <span class="attribute">perspective</span>: <span class="number">1000px</span>;</span><br><span class="line"><span class="comment">/* 讓螢幕離座位遠一點    */</span></span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">30px</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.screen</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">15px</span> <span class="number">0</span>;</span><br><span class="line"><span class="comment">/* 翻轉      */</span></span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotateX</span>(-<span class="number">45deg</span>);</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">3px</span> <span class="number">10px</span> <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.7</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateX()">rotateX() MDN</a></p>
+<h3 id="加總文字上樣式"><a href="#加總文字上樣式" class="headerlink" title="加總文字上樣式"></a>加總文字上樣式</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-class">.text</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">0px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span><span class="selector-class">.text</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#6feaf6</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Css &amp; HTML 完成圖：</p>
+<p><img src="https://i.imgur.com/0e6WJ6l.png"></p>
+<hr>
+<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><h3 id="綁定元素"><a href="#綁定元素" class="headerlink" title="綁定元素"></a>綁定元素</h3><ol>
+<li>const 宣告變數只能一次，不能被更動</li>
+<li>ticketPrice 不能用 const 宣告，因為 value 之後會更動，所以改用 let</li>
+<li>parseInt為轉換型別語法，將字串轉為數字，也可以使用 +。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> container = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.container&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> seats = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.row .seat:not(.occupied)&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> count = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;count&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> total = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;total&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> movieSelect = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;movie&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> ticketPrice = +movieSelect.value;</span><br></pre></td></tr></table></figure>
+
+<h3 id="設定事件監聽"><a href="#設定事件監聽" class="headerlink" title="設定事件監聽"></a>設定事件監聽</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 點擊後讀取點擊的 container 裡的元素</span></span><br><span class="line">container.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e.target);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="實作當空位被點選時，變成被選擇的顏色"><a href="#實作當空位被點選時，變成被選擇的顏色" class="headerlink" title="實作當空位被點選時，變成被選擇的顏色"></a>實作當空位被點選時，變成被選擇的顏色</h3><ol>
+<li>當選到的空位不是<code>.occupied</code>時，加上<code>selected</code>的 class </li>
+<li>使用 if 判斷式來辨別，按到的是空位條件為 (是空位以及不是被<code>.occupied</code>)<br>true 的話使用<code>e.target.classList.toggle</code>可以打開或是關閉(像是電燈開關)，</li>
+<li><a href="http://www.w3big.com/zh-TW/jsref/prop-element-classlist.html"> classList 詳細解說 </a></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">container.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">        e.target.classList.contains(<span class="string">&#x27;seat&#x27;</span>) &amp;&amp;</span><br><span class="line">        !e.target.classList.contains(<span class="string">&#x27;occupied&#x27;</span>)</span><br><span class="line">    ) &#123;</span><br><span class="line">        e.target.classList.toggle(<span class="string">&#x27;selected&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="實作動態調整座位數與價錢"><a href="#實作動態調整座位數與價錢" class="headerlink" title="實作動態調整座位數與價錢"></a>實作動態調整座位數與價錢</h3><blockquote>
+<p>NodeList </p>
+</blockquote>
+<p>會經由 <code>querySelectorAll()</code>,<code>childNodes</code> 產生<br>HTMLCollection 會經由 <code>getElementsByTagName()</code>,<code>children</code> 產生<br>這兩種皆為類陣列,無法使用陣列型別的 method ,但仍可使用 <strong>索引存取內容</strong></p>
+<p><a href="https://ithelp.ithome.com.tw/articles/10211876">NodeList 詳細解說</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*  情境  */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 點選座位後，讀取到NodeList[]</span></span><br><span class="line"><span class="keyword">const</span> selectedSeats = <span class="built_in">document</span>.querySelectorAll(<span class="string">&quot;.row .seat.selected&quot;</span>);</span><br><span class="line"><span class="comment">// 轉換成1,2,3,4</span></span><br><span class="line"><span class="keyword">const</span> selectedSeatsCount = selectedSeats.length;</span><br><span class="line"><span class="comment">// 將讀取到的座位數量放到count變數裡</span></span><br><span class="line">count.innerText = selectedSeatsCount;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>新增 function<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Update total and count</span></span><br><span class="line">  <span class="keyword">const</span> updateSelectedCount = (<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">const</span> selectedSeats = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.row .seat.selected&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> selectedSeatsCount = selectedSeats.length</span><br><span class="line">      count.innerText = selectedSeatsCount</span><br><span class="line">      total.innerText = selectedSeatsCount * ticketPrice</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">container.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    e.target.classList.contains(<span class="string">&quot;seat&quot;</span>) &amp;&amp; !e.target.classList.contains(<span class="string">&quot;occupied&quot;</span>)</span><br><span class="line">  ) &#123;</span><br><span class="line">    e.target.classList.toggle(<span class="string">&quot;selected&quot;</span>);</span><br><span class="line">    <span class="comment">// if 判定為 true 後來執行此計算價格 function</span></span><br><span class="line">    updateSelectedCount();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="實作動態更換電影時，動態更換價格"><a href="#實作動態更換電影時，動態更換價格" class="headerlink" title="實作動態更換電影時，動態更換價格"></a>實作動態更換電影時，動態更換價格</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Update total and count</span></span><br><span class="line">  <span class="keyword">const</span> updateSelectedCount = (<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">const</span> selectedSeats = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.row .seat.selected&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> selectedSeatsCount = selectedSeats.length</span><br><span class="line">      count.innerText = selectedSeatsCount</span><br><span class="line">      total.innerText = selectedSeatsCount * ticketPrice</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Movie select event</span></span><br><span class="line">movieSelect.addEventListener(<span class="string">&#x27;change&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span>&#123;</span><br><span class="line">    ticketPrice = <span class="built_in">parseInt</span>(e.target.value)</span><br><span class="line"></span><br><span class="line">    updateSelectedCount()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="儲存被點選的座位位置"><a href="#儲存被點選的座位位置" class="headerlink" title="儲存被點選的座位位置"></a>儲存被點選的座位位置</h3><blockquote>
+<p><code>[…arr]</code> 展開運算子。</p>
+<p> ES6 中， “…” 的關鍵字<br> 這個關鍵字在不同時間點有不同的效果，<br>有些時候它會被當作展開運算子  (spread operator) 使用，<br>有時候則是被當作其餘運算子（rest operator）使用</p>
+<p>展開運算子，是把許多的 value 轉換成一個新的陣列，<br>而展開運算子則是可以把陣列中的元素取出。</p>
+</blockquote>
+<p><a href="https://hackmd.io/@uOQ-3fQDQBu7CciMuKIplg/Destructuring_Assignment">解構賦值 Destructuring Assignment 筆記</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Example ...arr */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">const</span> arr2 = [...arr1,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr2)</span><br><span class="line"><span class="comment">// arr2 = [1, 2, 3, 4, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">const</span> arr2 = [...arr1,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">const</span> arr3 = arr2.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item * <span class="number">2</span>;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(arr3)</span><br><span class="line"><span class="comment">// arr3 = [2, 4, 6, 8, 10]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>建立 updateSelectedCount function </li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">const</span> updateSelectedCount = (<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">const</span> selectedSeats = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.row .seat.selected&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 將藍色座位選取後出現的 nodeList 轉換成 array (Copy seleted seats into array)</span></span><br><span class="line"><span class="comment">// 使用 map 方法印出 array (Map through array)</span></span><br><span class="line"><span class="comment">// 並且使用 indexOf 方法回傳 seat 的索引 (return a new array indexes)</span></span><br><span class="line">      <span class="keyword">const</span> seatsIndex = [...selectedSeats].map(( <span class="function"><span class="params">seat</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> [...seats].indexOf(seat)</span><br><span class="line">      &#125;))</span><br><span class="line"><span class="comment">// 取得座位的位置 ex:[0,1,7,32]</span></span><br><span class="line">      <span class="built_in">console</span>.log(seatsIndex)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> selectedSeatsCount = selectedSeats.length</span><br><span class="line"><span class="comment">// How many seats you clicked</span></span><br><span class="line">      count.innerText = selectedSeatsCount</span><br><span class="line">      total.innerText = selectedSeatsCount * ticketPrice</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-Local-Storage-存在瀏覽器裡"><a href="#使用-Local-Storage-存在瀏覽器裡" class="headerlink" title="使用 Local Storage 存在瀏覽器裡"></a>使用 Local Storage 存在瀏覽器裡</h3><blockquote>
+<p>Google 開發工具裡的 Application 裡面查看儲存的座位陣列</p>
+</blockquote>
+<p><code>locatStorage.setItem(key,value)</code> 語法，可以將資料寫進瀏覽器裡，<br>第一個值是 key 的屬性名，第二個值就是相對應的 value</p>
+<p>當在 Clent 端操作的 JavaScript 物件要傳遞給 Server 端時，<br>使用 <code>JSON.stringify()</code>將物件（或陣列，甚至是原始型別）序列化為一個 JSON 字串，然後將這個 JSON 字串傳送給 Server 端。</p>
+<p><a href="https://cythilya.github.io/2015/05/09/javascript-json-parse-stringify/">JSON.stringify 詳細解說</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 加在updateSelectedCount Function裡</span></span><br><span class="line"><span class="built_in">localStorage</span>.setItem(<span class="string">&quot;selectedSeats&quot;</span>, <span class="built_in">JSON</span>.stringify(seatsIndex));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可以在Application裡面查看，儲存的 selectedMovieIndex，selectedMoviePrice 陣列。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Save selected movie index and price</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> setMovieData = (<span class="function">(<span class="params">movieIndex,moviePrice</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">localStorage</span>.setItem(<span class="string">&#x27;selectedMovieIndex&#x27;</span>,movieIndex)</span><br><span class="line">    <span class="built_in">localStorage</span>.setItem(<span class="string">&#x27;selectedMoviePrice&#x27;</span>,moviePrice)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="從Localhost-取資料，使得點選過後的位置可以填充UI"><a href="#從Localhost-取資料，使得點選過後的位置可以填充UI" class="headerlink" title="從Localhost 取資料，使得點選過後的位置可以填充UI"></a>從Localhost 取資料，使得點選過後的位置可以填充UI</h3><ol>
+<li>回傳 -1 為，陣列內沒有這個 value 時會回傳索引值。<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr2 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr2.indexOf(<span class="number">100</span>))</span><br><span class="line"><span class="comment">// -1</span></span><br></pre></td></tr></table></figure></li>
+<li><code>Json.parse</code>將字串轉換成陣列或物件的用法。</li>
+<li>把資料存進瀏覽器後，要取出來的話要用 getItem 語法</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Get data from localstorage and populate UI</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">populateUI</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 使用getItem取得要使用的key，為上方設定的&#x27;selectedSeats&#x27;，並指派變數selectedSeats。</span></span><br><span class="line">  <span class="comment">// 使用parse把JSON資料轉換成array</span></span><br><span class="line">  <span class="keyword">const</span> selectedSeats = <span class="built_in">JSON</span>.parse(<span class="built_in">localStorage</span>.getItem(<span class="string">&quot;selectedSeats&quot;</span>));</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 判斷讓藍色座椅是否繼續留著</span></span><br><span class="line">  <span class="comment">// 要使用localstorage裡面儲存的資料判斷是否符合。</span></span><br><span class="line">  <span class="keyword">if</span> (selectedSeats !== <span class="literal">null</span> &amp;&amp; selectedSeats.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  </span><br><span class="line">   <span class="comment">// 將所有座位使用forEach一個個印出</span></span><br><span class="line">   <span class="comment">// 並且判斷每個座位的index號碼是否跟selectedSeats的一樣</span></span><br><span class="line">   <span class="comment">// 如果相同則執行加上.selected</span></span><br><span class="line">    seats.forEach(<span class="function">(<span class="params">seat, index</span>) =&gt;</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// -1 就是 udefined</span></span><br><span class="line">      <span class="keyword">if</span> (selectedSeats.indexOf(index) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">        seat.classList.add(<span class="string">&quot;selected&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// 判斷selectedMovieIndex是否為空</span></span><br><span class="line">  <span class="comment">// 不為空則賦值給selectedMovieIndex下拉式選單選取的電影index</span></span><br><span class="line">  <span class="keyword">const</span> selectedMovieIndex = <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;selectedMovieIndex&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> (selectedMovieIndex !== <span class="literal">null</span>) &#123;</span><br><span class="line">    movieSelect.selectedIndex = selectedMovieIndex;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>最後在整個JS最下方呼叫一次updateSelectedCount() 函式，這樣重整網頁時，不需經過事件觸發，直接更新下方文字敘述。</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+        <category>作品集</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>作品集</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Music Player</title>
     <url>/2021/04/07/Music%20Player/</url>
     <content><![CDATA[<h1 id="Music-Player"><a href="#Music-Player" class="headerlink" title="Music Player"></a>Music Player</h1><h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><p>Music Player 比較著多在 CSS 的教學，因此 CSS 部分會比較多紀錄。</p>
@@ -2290,137 +2421,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Movie Seat Booking</title>
-    <url>/2021/04/07/Movie%20Seat%20Booking/</url>
-    <content><![CDATA[<h1 id="Movie-Seat-Booking"><a href="#Movie-Seat-Booking" class="headerlink" title="Movie Seat Booking"></a>Movie Seat Booking</h1><h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a><a href="https://michael0520.github.io/Movie-Seat-Booking/index.html">Demo</a></h2><h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><h3 id="建立電影選單"><a href="#建立電影選單" class="headerlink" title="建立電影選單"></a>建立電影選單</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;movie-container&quot;&gt;</span><br><span class="line">    &lt;label&gt;Pick a movie&lt;&#x2F;label&gt;</span><br><span class="line">    &lt;select id&#x3D;&quot;movie&quot;&gt;</span><br><span class="line">      &lt;option value&#x3D;&quot;10&quot;&gt;Avengers: Endgame ($10)&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&quot;12&quot;&gt;Joker ($12)&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&quot;8&quot;&gt;Toy Story 4 ($8)&lt;&#x2F;option&gt;</span><br><span class="line">      &lt;option value&#x3D;&quot;9&quot;&gt;The Lion King ($9)&lt;&#x2F;option&gt;</span><br><span class="line">    &lt;&#x2F;select&gt;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<p>示意圖：<br><img src="https://i.imgur.com/pL3DdEc.png" alt="示意圖"></p>
-<h3 id="建立座位狀態標示"><a href="#建立座位狀態標示" class="headerlink" title="建立座位狀態標示"></a>建立座位狀態標示</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;ul class&#x3D;&quot;showcase&quot;&gt;</span><br><span class="line">      &lt;li &gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;small&gt;N&#x2F;A&lt;&#x2F;small&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li &gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;seat selected&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;small&gt;Selected&lt;&#x2F;small&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">      &lt;li &gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;small&gt;Occupied&lt;&#x2F;small&gt;</span><br><span class="line">      &lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br></pre></td></tr></table></figure>
-<p>示意圖：<br><img src="https://i.imgur.com/Papl7Bd.png"></p>
-<h3 id="建立座位、建立電影螢幕-依照喜好建立數量"><a href="#建立座位、建立電影螢幕-依照喜好建立數量" class="headerlink" title="建立座位、建立電影螢幕(依照喜好建立數量)"></a>建立座位、建立電影螢幕(依照喜好建立數量)</h3><blockquote>
-<p>以下是實作六個橫排八個直排的座位數量<br>隨機標示座位狀態</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class&#x3D;&quot;screen&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat occupied&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">          &lt;div class&#x3D;&quot;seat&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="建立總價格顯示區塊"><a href="#建立總價格顯示區塊" class="headerlink" title="建立總價格顯示區塊"></a>建立總價格顯示區塊</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> &lt;p class&#x3D;&quot;text&quot;&gt;You have selected </span><br><span class="line">&lt;!-- 為了顯示總共有選了幾個座位，所以將 0 給綁上 id&#x3D;&#39;count&#39;  --&gt;</span><br><span class="line">        &lt;span id&#x3D;&quot;count&quot;&gt;0&lt;&#x2F;span&gt; seats for a price of $</span><br><span class="line">&lt;!-- 為了顯示總共座位的票卷價格，所以將 0 給綁上 id&#x3D;&#39;total&#39;  --&gt;</span><br><span class="line">        &lt;span id&#x3D;&quot;total&quot;&gt;0&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;&#x2F;p&gt;</span><br></pre></td></tr></table></figure>
-<p>html 完成後示意圖：<br><img src="https://i.imgur.com/fSoMn74.png"></p>
-<hr>
-<h2 id="Css"><a href="#Css" class="headerlink" title="Css"></a>Css</h2><h3 id="選擇-Google-fonts-字體"><a href="#選擇-Google-fonts-字體" class="headerlink" title="選擇 Google fonts 字體"></a>選擇 Google fonts 字體</h3><blockquote>
-<p>選用此字體， import 入 Css</p>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="keyword">@import</span> url(<span class="string">&#x27;https://fonts.googleapis.com/css2?family=Lato:wght@700&amp;display=swap&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*  因為沒有套入 css reset 所以都務必套入這幾行 Css    */</span></span><br><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">&#x27;Lato&#x27;</span>, sans-serif;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="body-Css-撰寫"><a href="#body-Css-撰寫" class="headerlink" title="body Css 撰寫"></a>body Css 撰寫</h3><blockquote>
-<p>水平置中寫法</p>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#242333</span>;</span><br><span class="line"><span class="comment">/* 將所有的 div 排列成直列  */</span></span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">flex-direction</span>: column;</span><br><span class="line"><span class="comment">/* 水平置中 */</span></span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line"><span class="comment">/*      */</span></span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">&#x27;Lato&#x27;</span>, sans-serif;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="select-下拉式選單加上樣式"><a href="#select-下拉式選單加上樣式" class="headerlink" title="select 下拉式選單加上樣式"></a>select 下拉式選單加上樣式</h3><blockquote>
-<p>-webkit-appearance，使用系統預設的外觀。<br>-webkit-appearance: none，去除瀏覽器的預設樣式。</p>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.movie-container</span> select &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span> <span class="number">15px</span> <span class="number">5px</span> <span class="number">15px</span>;</span><br><span class="line"><span class="comment">/*   注意    */</span></span><br><span class="line">    -moz-appearance: none;</span><br><span class="line">    -webkit-appearance: none;</span><br><span class="line">    appearance: none;</span><br><span class="line"><span class="comment">/*      */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="加上座位樣式"><a href="#加上座位樣式" class="headerlink" title="加上座位樣式"></a>加上座位樣式</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 1. 調整座位大小、間距以及背景顏色 */</span></span><br><span class="line"><span class="selector-class">.seat</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#444451</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">12px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">15px</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">3px</span>;</span><br><span class="line">    <span class="attribute">border-top-left-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-top-right-radius</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 2. 讓座位變成橫排 */</span></span><br><span class="line"><span class="selector-class">.row</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="單獨修改三種座位樣式的個別顏色"><a href="#單獨修改三種座位樣式的個別顏色" class="headerlink" title="單獨修改三種座位樣式的個別顏色"></a>單獨修改三種座位樣式的個別顏色</h4><blockquote>
-<p>因為只有 <strong>‘尚未有空位’</strong> 以及 <strong>‘座位已被預訂’</strong> 要特定挑出來<br>只需要修改這兩種顏色</p>
-</blockquote>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.seat</span><span class="selector-class">.selected</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#6feaf6</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.seat</span><span class="selector-class">.occupied</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="將座位與其他座位空出距離-看起來像是有走道的樣子"><a href="#將座位與其他座位空出距離-看起來像是有走道的樣子" class="headerlink" title="將座位與其他座位空出距離(看起來像是有走道的樣子)"></a>將座位與其他座位空出距離(看起來像是有走道的樣子)</h4><blockquote>
-<p>實作：前兩排跟後兩排各有一個走道</p>
-</blockquote>
-<ol>
-<li>nth-child()：當選取的元素中間有混雜其他元素，</li>
-</ol>
-<p><strong>像是<code>&lt;hr&gt;</code>，在 nth-child 會將其他元素一起做計算</strong><br>2. nth-of-type 就較為單純，只會計算選取的元素，<br>例如選擇<code>&lt;div&gt;</code>，就只會選取<code>&lt;div&gt;</code>。</p>
-<blockquote>
-</blockquote>
-<ol start="3">
-<li><a href="https://amyhuang-82.medium.com/css%E7%AD%86%E8%A8%98-nth-child%E5%88%B0%E5%BA%95%E6%98%AF%E5%93%AA%E5%80%8B%E5%B0%8F%E5%AD%A9-112a33ad9479">nth-child()詳細解說</a></li>
-</ol>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.seat</span><span class="selector-pseudo">:nth-of-type</span>(<span class="number">2</span>) &#123;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.seat</span><span class="selector-pseudo">:nth-last-of-type</span>(<span class="number">2</span>) &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">18px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/2CYxFNy.png"></p>
-<h4 id="讓箭頭滑到座位時，變成手指圖示以及放大-提升使用者體驗"><a href="#讓箭頭滑到座位時，變成手指圖示以及放大-提升使用者體驗" class="headerlink" title="讓箭頭滑到座位時，變成手指圖示以及放大(提升使用者體驗)"></a>讓箭頭滑到座位時，變成手指圖示以及放大(提升使用者體驗)</h4><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.seat</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.occupied</span>)<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line"><span class="comment">/*  放大 1.2 倍    */</span></span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1.2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>這時做完會發現’票卷顯示的座位’滑到時也會大，也會變成手指頭滑鼠</strong><br>所以要將’票卷顯示的座位’設定為不放大，手指頭也要去除掉，所以設定為 <code>cursor: pointer;</code></p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.showcase</span> <span class="selector-class">.seat</span><span class="selector-pseudo">:not</span>(<span class="selector-class">.occupied</span>)<span class="selector-pseudo">:hover</span> &#123;</span><br><span class="line">    <span class="attribute">cursor</span>: pointer;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="將票卷顯示列加上樣式"><a href="#將票卷顯示列加上樣式" class="headerlink" title="將票卷顯示列加上樣式"></a>將票卷顯示列加上樣式</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.showcase</span> &#123;</span><br><span class="line"><span class="comment">/* 背景半透明 */</span></span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0.1</span>);</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">5px</span> <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#777</span>;</span><br><span class="line">    <span class="attribute">list-style</span>: none;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line"><span class="comment">/*  讓彼此前方都有個空格    */</span></span><br><span class="line">    <span class="attribute">justify-content</span>: space-between;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.showcase</span> <span class="selector-tag">li</span> &#123;</span><br><span class="line"><span class="comment">/* 將票卷圖案以及狀態列變為同一列 */</span></span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span> <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.showcase</span> <span class="selector-tag">li</span> small &#123;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">2px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.imgur.com/Oj7uMhu.png"></p>
-<h3 id="電影螢幕加上樣式"><a href="#電影螢幕加上樣式" class="headerlink" title="電影螢幕加上樣式"></a>電影螢幕加上樣式</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line"><span class="comment">/* perspective 語法為立體，數字越大越立體 */</span></span><br><span class="line">    <span class="attribute">perspective</span>: <span class="number">1000px</span>;</span><br><span class="line"><span class="comment">/* 讓螢幕離座位遠一點    */</span></span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">30px</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.screen</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">70px</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">15px</span> <span class="number">0</span>;</span><br><span class="line"><span class="comment">/* 翻轉      */</span></span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">rotateX</span>(-<span class="number">45deg</span>);</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">3px</span> <span class="number">10px</span> <span class="built_in">rgba</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">0.7</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/rotateX()">rotateX() MDN</a></p>
-<h3 id="加總文字上樣式"><a href="#加總文字上樣式" class="headerlink" title="加總文字上樣式"></a>加總文字上樣式</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">p</span><span class="selector-class">.text</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">5px</span> <span class="number">0px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span><span class="selector-class">.text</span> <span class="selector-tag">span</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#6feaf6</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Css &amp; HTML 完成圖：</p>
-<p><img src="https://i.imgur.com/0e6WJ6l.png"></p>
-<hr>
-<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><h3 id="綁定元素"><a href="#綁定元素" class="headerlink" title="綁定元素"></a>綁定元素</h3><ol>
-<li>const 宣告變數只能一次，不能被更動</li>
-<li>ticketPrice 不能用 const 宣告，因為 value 之後會更動，所以改用 let</li>
-<li>parseInt為轉換型別語法，將字串轉為數字，也可以使用 +。</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> container = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.container&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> seats = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.row .seat:not(.occupied)&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> count = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;count&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> total = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;total&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> movieSelect = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;movie&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> ticketPrice = +movieSelect.value;</span><br></pre></td></tr></table></figure>
-
-<h3 id="設定事件監聽"><a href="#設定事件監聽" class="headerlink" title="設定事件監聽"></a>設定事件監聽</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 點擊後讀取點擊的 container 裡的元素</span></span><br><span class="line">container.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e.target);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="實作當空位被點選時，變成被選擇的顏色"><a href="#實作當空位被點選時，變成被選擇的顏色" class="headerlink" title="實作當空位被點選時，變成被選擇的顏色"></a>實作當空位被點選時，變成被選擇的顏色</h3><ol>
-<li>當選到的空位不是<code>.occupied</code>時，加上<code>selected</code>的 class </li>
-<li>使用 if 判斷式來辨別，按到的是空位條件為 (是空位以及不是被<code>.occupied</code>)<br>true 的話使用<code>e.target.classList.toggle</code>可以打開或是關閉(像是電燈開關)，</li>
-<li><a href="http://www.w3big.com/zh-TW/jsref/prop-element-classlist.html"> classList 詳細解說 </a></li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">container.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (</span><br><span class="line">        e.target.classList.contains(<span class="string">&#x27;seat&#x27;</span>) &amp;&amp;</span><br><span class="line">        !e.target.classList.contains(<span class="string">&#x27;occupied&#x27;</span>)</span><br><span class="line">    ) &#123;</span><br><span class="line">        e.target.classList.toggle(<span class="string">&#x27;selected&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="實作動態調整座位數與價錢"><a href="#實作動態調整座位數與價錢" class="headerlink" title="實作動態調整座位數與價錢"></a>實作動態調整座位數與價錢</h3><blockquote>
-<p>NodeList </p>
-</blockquote>
-<p>會經由 <code>querySelectorAll()</code>,<code>childNodes</code> 產生<br>HTMLCollection 會經由 <code>getElementsByTagName()</code>,<code>children</code> 產生<br>這兩種皆為類陣列,無法使用陣列型別的 method ,但仍可使用 <strong>索引存取內容</strong></p>
-<p><a href="https://ithelp.ithome.com.tw/articles/10211876">NodeList 詳細解說</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*  情境  */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 點選座位後，讀取到NodeList[]</span></span><br><span class="line"><span class="keyword">const</span> selectedSeats = <span class="built_in">document</span>.querySelectorAll(<span class="string">&quot;.row .seat.selected&quot;</span>);</span><br><span class="line"><span class="comment">// 轉換成1,2,3,4</span></span><br><span class="line"><span class="keyword">const</span> selectedSeatsCount = selectedSeats.length;</span><br><span class="line"><span class="comment">// 將讀取到的座位數量放到count變數裡</span></span><br><span class="line">count.innerText = selectedSeatsCount;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>新增 function<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Update total and count</span></span><br><span class="line">  <span class="keyword">const</span> updateSelectedCount = (<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">const</span> selectedSeats = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.row .seat.selected&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> selectedSeatsCount = selectedSeats.length</span><br><span class="line">      count.innerText = selectedSeatsCount</span><br><span class="line">      total.innerText = selectedSeatsCount * ticketPrice</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">container.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (</span><br><span class="line">    e.target.classList.contains(<span class="string">&quot;seat&quot;</span>) &amp;&amp; !e.target.classList.contains(<span class="string">&quot;occupied&quot;</span>)</span><br><span class="line">  ) &#123;</span><br><span class="line">    e.target.classList.toggle(<span class="string">&quot;selected&quot;</span>);</span><br><span class="line">    <span class="comment">// if 判定為 true 後來執行此計算價格 function</span></span><br><span class="line">    updateSelectedCount();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="實作動態更換電影時，動態更換價格"><a href="#實作動態更換電影時，動態更換價格" class="headerlink" title="實作動態更換電影時，動態更換價格"></a>實作動態更換電影時，動態更換價格</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Update total and count</span></span><br><span class="line">  <span class="keyword">const</span> updateSelectedCount = (<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">const</span> selectedSeats = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.row .seat.selected&#x27;</span>)</span><br><span class="line">      <span class="keyword">const</span> selectedSeatsCount = selectedSeats.length</span><br><span class="line">      count.innerText = selectedSeatsCount</span><br><span class="line">      total.innerText = selectedSeatsCount * ticketPrice</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// Movie select event</span></span><br><span class="line">movieSelect.addEventListener(<span class="string">&#x27;change&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span>&#123;</span><br><span class="line">    ticketPrice = <span class="built_in">parseInt</span>(e.target.value)</span><br><span class="line"></span><br><span class="line">    updateSelectedCount()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="儲存被點選的座位位置"><a href="#儲存被點選的座位位置" class="headerlink" title="儲存被點選的座位位置"></a>儲存被點選的座位位置</h3><blockquote>
-<p><code>[…arr]</code> 展開運算子。</p>
-<p> ES6 中， “…” 的關鍵字<br> 這個關鍵字在不同時間點有不同的效果，<br>有些時候它會被當作展開運算子  (spread operator) 使用，<br>有時候則是被當作其餘運算子（rest operator）使用</p>
-<p>展開運算子，是把許多的 value 轉換成一個新的陣列，<br>而展開運算子則是可以把陣列中的元素取出。</p>
-</blockquote>
-<p><a href="https://hackmd.io/@uOQ-3fQDQBu7CciMuKIplg/Destructuring_Assignment">解構賦值 Destructuring Assignment 筆記</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* Example ...arr */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">const</span> arr2 = [...arr1,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr2)</span><br><span class="line"><span class="comment">// arr2 = [1, 2, 3, 4, 5]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> arr1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">const</span> arr2 = [...arr1,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="keyword">const</span> arr3 = arr2.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> item * <span class="number">2</span>;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(arr3)</span><br><span class="line"><span class="comment">// arr3 = [2, 4, 6, 8, 10]</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>建立 updateSelectedCount function </li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">const</span> updateSelectedCount = (<span class="function">()=&gt;</span>&#123;</span><br><span class="line">      <span class="keyword">const</span> selectedSeats = <span class="built_in">document</span>.querySelectorAll(<span class="string">&#x27;.row .seat.selected&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 將藍色座位選取後出現的 nodeList 轉換成 array (Copy seleted seats into array)</span></span><br><span class="line"><span class="comment">// 使用 map 方法印出 array (Map through array)</span></span><br><span class="line"><span class="comment">// 並且使用 indexOf 方法回傳 seat 的索引 (return a new array indexes)</span></span><br><span class="line">      <span class="keyword">const</span> seatsIndex = [...selectedSeats].map(( <span class="function"><span class="params">seat</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">return</span> [...seats].indexOf(seat)</span><br><span class="line">      &#125;))</span><br><span class="line"><span class="comment">// 取得座位的位置 ex:[0,1,7,32]</span></span><br><span class="line">      <span class="built_in">console</span>.log(seatsIndex)</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> selectedSeatsCount = selectedSeats.length</span><br><span class="line"><span class="comment">// How many seats you clicked</span></span><br><span class="line">      count.innerText = selectedSeatsCount</span><br><span class="line">      total.innerText = selectedSeatsCount * ticketPrice</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用-Local-Storage-存在瀏覽器裡"><a href="#使用-Local-Storage-存在瀏覽器裡" class="headerlink" title="使用 Local Storage 存在瀏覽器裡"></a>使用 Local Storage 存在瀏覽器裡</h3><blockquote>
-<p>Google 開發工具裡的 Application 裡面查看儲存的座位陣列</p>
-</blockquote>
-<p><code>locatStorage.setItem(key,value)</code> 語法，可以將資料寫進瀏覽器裡，<br>第一個值是 key 的屬性名，第二個值就是相對應的 value</p>
-<p>當在 Clent 端操作的 JavaScript 物件要傳遞給 Server 端時，<br>使用 <code>JSON.stringify()</code>將物件（或陣列，甚至是原始型別）序列化為一個 JSON 字串，然後將這個 JSON 字串傳送給 Server 端。</p>
-<p><a href="https://cythilya.github.io/2015/05/09/javascript-json-parse-stringify/">JSON.stringify 詳細解說</a></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 加在updateSelectedCount Function裡</span></span><br><span class="line"><span class="built_in">localStorage</span>.setItem(<span class="string">&quot;selectedSeats&quot;</span>, <span class="built_in">JSON</span>.stringify(seatsIndex));</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>可以在Application裡面查看，儲存的 selectedMovieIndex，selectedMoviePrice 陣列。</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//Save selected movie index and price</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> setMovieData = (<span class="function">(<span class="params">movieIndex,moviePrice</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">localStorage</span>.setItem(<span class="string">&#x27;selectedMovieIndex&#x27;</span>,movieIndex)</span><br><span class="line">    <span class="built_in">localStorage</span>.setItem(<span class="string">&#x27;selectedMoviePrice&#x27;</span>,moviePrice)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="從Localhost-取資料，使得點選過後的位置可以填充UI"><a href="#從Localhost-取資料，使得點選過後的位置可以填充UI" class="headerlink" title="從Localhost 取資料，使得點選過後的位置可以填充UI"></a>從Localhost 取資料，使得點選過後的位置可以填充UI</h3><ol>
-<li>回傳 -1 為，陣列內沒有這個 value 時會回傳索引值。<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> arr2 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr2.indexOf(<span class="number">100</span>))</span><br><span class="line"><span class="comment">// -1</span></span><br></pre></td></tr></table></figure></li>
-<li><code>Json.parse</code>將字串轉換成陣列或物件的用法。</li>
-<li>把資料存進瀏覽器後，要取出來的話要用 getItem 語法</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Get data from localstorage and populate UI</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">populateUI</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 使用getItem取得要使用的key，為上方設定的&#x27;selectedSeats&#x27;，並指派變數selectedSeats。</span></span><br><span class="line">  <span class="comment">// 使用parse把JSON資料轉換成array</span></span><br><span class="line">  <span class="keyword">const</span> selectedSeats = <span class="built_in">JSON</span>.parse(<span class="built_in">localStorage</span>.getItem(<span class="string">&quot;selectedSeats&quot;</span>));</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 判斷讓藍色座椅是否繼續留著</span></span><br><span class="line">  <span class="comment">// 要使用localstorage裡面儲存的資料判斷是否符合。</span></span><br><span class="line">  <span class="keyword">if</span> (selectedSeats !== <span class="literal">null</span> &amp;&amp; selectedSeats.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">  </span><br><span class="line">   <span class="comment">// 將所有座位使用forEach一個個印出</span></span><br><span class="line">   <span class="comment">// 並且判斷每個座位的index號碼是否跟selectedSeats的一樣</span></span><br><span class="line">   <span class="comment">// 如果相同則執行加上.selected</span></span><br><span class="line">    seats.forEach(<span class="function">(<span class="params">seat, index</span>) =&gt;</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// -1 就是 udefined</span></span><br><span class="line">      <span class="keyword">if</span> (selectedSeats.indexOf(index) &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">        seat.classList.add(<span class="string">&quot;selected&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// 判斷selectedMovieIndex是否為空</span></span><br><span class="line">  <span class="comment">// 不為空則賦值給selectedMovieIndex下拉式選單選取的電影index</span></span><br><span class="line">  <span class="keyword">const</span> selectedMovieIndex = <span class="built_in">localStorage</span>.getItem(<span class="string">&quot;selectedMovieIndex&quot;</span>);</span><br><span class="line">  <span class="keyword">if</span> (selectedMovieIndex !== <span class="literal">null</span>) &#123;</span><br><span class="line">    movieSelect.selectedIndex = selectedMovieIndex;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>最後在整個JS最下方呼叫一次updateSelectedCount() 函式，這樣重整網頁時，不需經過事件觸發，直接更新下方文字敘述。</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-        <category>作品集</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>作品集</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>New Year Countdown</title>
     <url>/2021/04/07/New%20Year%20Countdown/</url>
     <content><![CDATA[<h1 id="New-Year-Countdown"><a href="#New-Year-Countdown" class="headerlink" title="New Year Countdown`"></a>New Year Countdown`</h1><h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><ul>
@@ -2551,6 +2551,20 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;10&quot;</span>)           <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;10.33&quot;</span>)        <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;34 45 66&quot;</span>)     <span class="comment">// 34</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot; 60 &quot;</span>)         <span class="comment">// 60</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;40 years&quot;</span>)     <span class="comment">// 40</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;He was 40&quot;</span>)    <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&#x27;010&#x27;</span>)          <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="number">010</span>)            <span class="comment">// 8 開頭為 0 的 Number 型別會被當作八進制帶入 (參考補充)</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;10&quot;</span>,<span class="number">10</span>)        <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;010&quot;</span>)          <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;10&quot;</span>,<span class="number">8</span>)         <span class="comment">// 8</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;0x10&quot;</span>)         <span class="comment">// 16</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">&quot;10&quot;</span>,<span class="number">16</span>)        <span class="comment">// 16</span></span><br></pre></td></tr></table></figure>
 
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Pseudo code 虛擬碼實作練習</title>
+    <url>/2021/04/28/Pseudo-code-%E8%99%9B%E6%93%AC%E7%A2%BC%E5%AF%A6%E4%BD%9C%E7%B7%B4%E7%BF%92/</url>
+    <content><![CDATA[<h2 id="實作練習"><a href="#實作練習" class="headerlink" title="實作練習"></a>實作練習</h2><p>CodePen:</p>
+<iframe height="265" style="width: 100%;" scrolling="no" title="Pseudo code Practice" src="https://codepen.io/michael-luo/embed/VwPNGjq?height=265&theme-id=dark&default-tab=js,result" frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href='https://codepen.io/michael-luo/pen/VwPNGjq'>Pseudo code Practice</a> by Michael Luo
 ]]></content>
       <categories>
         <category>JavaScript</category>
@@ -2827,55 +2841,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Underscore.js 常用方法總結</title>
-    <url>/2021/04/07/Underscore.js%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E7%B8%BD%E7%B5%90/</url>
-    <content><![CDATA[<h1 id="Underscore-js-常用方法總結"><a href="#Underscore-js-常用方法總結" class="headerlink" title="Underscore.js 常用方法總結"></a>Underscore.js 常用方法總結</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Underscore.js 是一個很精幹的資料庫，<strong>壓縮後只有4KB</strong>。<br>它提供了幾十種函數語言程式設計的方法，大大方便了 Javascript 的程式設計。<br>MVC 框架 backbone.js 就是基於這個庫。</p>
-<p>它定義了一個下劃線 物件，函式庫的所有方法都屬於這個物件。<br>這些方法大致上可以分成：</p>
-<ol>
-<li>集合（collection）</li>
-<li>陣列（array）</li>
-<li>函式（function）</li>
-<li>物件（object）和工具（utility）五大類。</li>
-</ol>
-<h2 id="安裝環境"><a href="#安裝環境" class="headerlink" title="安裝環境"></a>安裝環境</h2><h3 id="node-js下安裝"><a href="#node-js下安裝" class="headerlink" title="node.js下安裝"></a>node.js下安裝</h3><p>Underscore.js 不僅可以用於瀏覽器環境，還可以用於 node.js。安裝命令如下：<br>複製程式碼 程式碼如下:</p>
-<p><code>npm install underscore</code></p>
-<p>但是，node.js 不能直接使用 <code>_</code> 作為變數名，因此要用下面的方法使用 underscore.js。<br>複製程式碼 程式碼如下:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> u = <span class="built_in">require</span>(“underscore”);</span><br></pre></td></tr></table></figure>
-
-<h3 id="CDN-引入"><a href="#CDN-引入" class="headerlink" title="CDN 引入"></a>CDN 引入</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.12.0/underscore-min.js&quot;</span> integrity=<span class="string">&quot;sha512-BDXGXSvYeLxaldQeYJZVWXJmkisgMlECofWFXKpWwXnfcp/R708nrs/BtNLH5cb/5TE7aeYRTDBRXu6kRL4VeQ==&quot;</span> crossorigin=<span class="string">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<h2 id="method"><a href="#method" class="headerlink" title="method"></a>method</h2><p>與集合有關的方法</p>
-<p>Javascript 語言的資料集合，<strong>包括兩種結構：陣列和物件</strong>。以下的方法同時適用於這兩種結構。</p>
-<ul>
-<li><code>map()</code></li>
-</ul>
-<p>該方法對集合的每個成員依次進行某種操作，將返回的值依次存入一個新的陣列。<br>複製程式碼 程式碼如下:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.map([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123; <span class="keyword">return</span> num * <span class="number">3</span>; &#125;);  <span class="comment">// [3, 6, 9] </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.map(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">num, key</span>)</span>&#123; <span class="keyword">return</span> num * <span class="number">3</span>; &#125;);  <span class="comment">// [3, 6, 9]</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><code>each()</code></li>
-</ul>
-<p>該方法與map類似，<br>依次對集合的每個成員進行某種操作，但是不返回值。<br>複製程式碼 程式碼如下:</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.each([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], alert);    </span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.each(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;, alert);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>reduce</li>
-</ul>
-<p>該方法依次對集合的每個成員進行某種操作，然後將操作結果累計在某一個初始值之上，全部操作結束之後，返回累計的值。</p>
-<p>該方法接受三個引數。第一個引數是被處理的集合，第二個引數是對每個成員進行操作的函式，第三個引數是累計用的變數。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.reduce([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">memo, num</span>)</span>&#123; <span class="keyword">return</span> memo num; &#125;, <span class="number">0</span>);  <span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.reduce(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;), <span class="function"><span class="keyword">function</span>(<span class="params">num, key</span>)</span>&#123; <span class="keyword">return</span> &#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>reduce方法的第二個引數是操作函式，它本身又接受兩個引數，第一個是累計用的變數，第二個是集合每個成員的值。</p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Typing Game</title>
     <url>/2021/04/07/Typing%20Game/</url>
     <content><![CDATA[<h1 id="Typing-Game"><a href="#Typing-Game" class="headerlink" title="Typing Game"></a>Typing Game</h1><h2 id="學習到的知識點"><a href="#學習到的知識點" class="headerlink" title="學習到的知識點"></a>學習到的知識點</h2><h3 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h3><ul>
@@ -3026,6 +2991,55 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>作品集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Underscore.js 常用方法總結</title>
+    <url>/2021/04/07/Underscore.js%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%E7%B8%BD%E7%B5%90/</url>
+    <content><![CDATA[<h1 id="Underscore-js-常用方法總結"><a href="#Underscore-js-常用方法總結" class="headerlink" title="Underscore.js 常用方法總結"></a>Underscore.js 常用方法總結</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Underscore.js 是一個很精幹的資料庫，<strong>壓縮後只有4KB</strong>。<br>它提供了幾十種函數語言程式設計的方法，大大方便了 Javascript 的程式設計。<br>MVC 框架 backbone.js 就是基於這個庫。</p>
+<p>它定義了一個下劃線 物件，函式庫的所有方法都屬於這個物件。<br>這些方法大致上可以分成：</p>
+<ol>
+<li>集合（collection）</li>
+<li>陣列（array）</li>
+<li>函式（function）</li>
+<li>物件（object）和工具（utility）五大類。</li>
+</ol>
+<h2 id="安裝環境"><a href="#安裝環境" class="headerlink" title="安裝環境"></a>安裝環境</h2><h3 id="node-js下安裝"><a href="#node-js下安裝" class="headerlink" title="node.js下安裝"></a>node.js下安裝</h3><p>Underscore.js 不僅可以用於瀏覽器環境，還可以用於 node.js。安裝命令如下：<br>複製程式碼 程式碼如下:</p>
+<p><code>npm install underscore</code></p>
+<p>但是，node.js 不能直接使用 <code>_</code> 作為變數名，因此要用下面的方法使用 underscore.js。<br>複製程式碼 程式碼如下:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> u = <span class="built_in">require</span>(“underscore”);</span><br></pre></td></tr></table></figure>
+
+<h3 id="CDN-引入"><a href="#CDN-引入" class="headerlink" title="CDN 引入"></a>CDN 引入</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.12.0/underscore-min.js&quot;</span> integrity=<span class="string">&quot;sha512-BDXGXSvYeLxaldQeYJZVWXJmkisgMlECofWFXKpWwXnfcp/R708nrs/BtNLH5cb/5TE7aeYRTDBRXu6kRL4VeQ==&quot;</span> crossorigin=<span class="string">&quot;anonymous&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="method"><a href="#method" class="headerlink" title="method"></a>method</h2><p>與集合有關的方法</p>
+<p>Javascript 語言的資料集合，<strong>包括兩種結構：陣列和物件</strong>。以下的方法同時適用於這兩種結構。</p>
+<ul>
+<li><code>map()</code></li>
+</ul>
+<p>該方法對集合的每個成員依次進行某種操作，將返回的值依次存入一個新的陣列。<br>複製程式碼 程式碼如下:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.map([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123; <span class="keyword">return</span> num * <span class="number">3</span>; &#125;);  <span class="comment">// [3, 6, 9] </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.map(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">num, key</span>)</span>&#123; <span class="keyword">return</span> num * <span class="number">3</span>; &#125;);  <span class="comment">// [3, 6, 9]</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>each()</code></li>
+</ul>
+<p>該方法與map類似，<br>依次對集合的每個成員進行某種操作，但是不返回值。<br>複製程式碼 程式碼如下:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.each([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], alert);    </span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.each(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;, alert);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>reduce</li>
+</ul>
+<p>該方法依次對集合的每個成員進行某種操作，然後將操作結果累計在某一個初始值之上，全部操作結束之後，返回累計的值。</p>
+<p>該方法接受三個引數。第一個引數是被處理的集合，第二個引數是對每個成員進行操作的函式，第三個引數是累計用的變數。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// array</span></span><br><span class="line">_.reduce([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">memo, num</span>)</span>&#123; <span class="keyword">return</span> memo num; &#125;, <span class="number">0</span>);  <span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// object</span></span><br><span class="line">_.reduce(&#123;<span class="attr">one</span> : <span class="number">1</span>, <span class="attr">two</span> : <span class="number">2</span>, <span class="attr">three</span> : <span class="number">3</span>&#125;), <span class="function"><span class="keyword">function</span>(<span class="params">num, key</span>)</span>&#123; <span class="keyword">return</span> &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>reduce方法的第二個引數是操作函式，它本身又接受兩個引數，第一個是累計用的變數，第二個是集合每個成員的值。</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -3217,72 +3231,6 @@
       </tags>
   </entry>
   <entry>
-    <title>JavaScript async (非同步) , sync (同步)</title>
-    <url>/2021/04/07/async%20(%E9%9D%9E%E5%90%8C%E6%AD%A5)%20,%20sync%20(%E5%90%8C%E6%AD%A5)/</url>
-    <content><![CDATA[<p>上篇<a href="https://hackmd.io/2q-URsBTTOS3doStyuSTbw">Promise</a></p>
-<h2 id="生活範例："><a href="#生活範例：" class="headerlink" title="生活範例："></a>生活範例：</h2><ul>
-<li>async(非同步) : </li>
-</ul>
-<ol>
-<li>去醫院掛號</li>
-<li>等護士叫，可以先去上廁所</li>
-<li>護士叫了，我在過去</li>
-</ol>
-<ul>
-<li>sync(同步) :</li>
-</ul>
-<ol>
-<li>去醫院掛號</li>
-<li>在櫃檯等，等到護士說好了</li>
-<li>我才能去上廁所</li>
-</ol>
-<h1 id="實作解析："><a href="#實作解析：" class="headerlink" title="實作解析："></a>實作解析：</h1><p><a href="https://codesandbox.io/s/hw2-function-mouxianwang-6904-zuoyejiexiforked-j70zb?file=/src/index.js">撈取資料實作範例</a><br>另一個 Js 檔案(utils.js 是資料庫)</p>
-<hr>
-<h3 id="try-catch-捕捉錯誤"><a href="#try-catch-捕捉錯誤" class="headerlink" title="try()catch() 捕捉錯誤"></a>try()catch() 捕捉錯誤</h3><p>語法：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> (用鑰匙開門)&#123;</span><br><span class="line"></span><br><span class="line">  小妹用自己鑰匙開自己房門成功</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">catch</span>()&#123;</span><br><span class="line"></span><br><span class="line">  小妹用哥哥鑰匙開自己房門失敗</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// foo 透過 async 回傳會得到一個 foo()</span></span><br><span class="line"><span class="comment">// foo() 是一個 promise</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> foo = <span class="keyword">async</span>()=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">    a:<span class="number">1</span>,</span><br><span class="line">    b:<span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. promise 版本</span></span><br><span class="line"></span><br><span class="line">foo().then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span>=&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. async 版本</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span>()=&gt;&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> data2 = <span class="keyword">await</span> foo ()</span><br><span class="line">    &#125;<span class="keyword">catch</span>(error)&#123;</span><br><span class="line">        <span class="keyword">return</span>(error)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<hr>
-<h3 id="小叮嚀："><a href="#小叮嚀：" class="headerlink" title="小叮嚀："></a>小叮嚀：</h3><ol>
-<li><p><strong>.then().catch()是Promise的用法，<br>async 沒有 .then().catch()，<br>所以只好用 try() catch() 來捕捉錯誤</strong></p>
-</li>
-<li><p><strong>await(等待)，外層一定要有 async(非同步)包裹著</strong></p>
-</li>
-</ol>
-<hr>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript addEventListener 事件監聽</title>
-    <url>/2021/04/07/addEventListener%20%E4%BA%8B%E4%BB%B6%E7%9B%A3%E8%81%BD/</url>
-    <content><![CDATA[<h1 id="addEventListener-事件監聽"><a href="#addEventListener-事件監聽" class="headerlink" title="addEventListener 事件監聽"></a>addEventListener 事件監聽</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> elBody = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.body&#x27;</span>);</span><br><span class="line">elBody.addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">&#x27;body&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;body&#x27;</span>);</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// false (事件氣泡 - event Bubbling) - 從指定元素往外找</span></span><br><span class="line"><span class="comment">// true (事件捕捉 - event capturing) - 從最外面找到指定元素</span></span><br></pre></td></tr></table></figure>
-<p>demo: <a href="https://codepen.io/michael-luo/pen/eYzBJBr">https://codepen.io/michael-luo/pen/eYzBJBr</a></p>
-<ul>
-<li><p>中止冒泡 stopPropagation<br>demo: <a href="https://codepen.io/michael-luo/pen/pobRWQG">https://codepen.io/michael-luo/pen/pobRWQG</a></p>
-</li>
-<li><p>preventDefault 取消預設觸發<br>demo: <a href="https://codepen.io/michael-luo/pen/zYBNPQd?editors=1111">https://codepen.io/michael-luo/pen/zYBNPQd?editors=1111</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Youtube Data API - Search Engine</title>
     <url>/2021/04/07/Youtube%20Data%20API%20-%20Search%20Engine/</url>
     <content><![CDATA[<h2 id="Create-API-key"><a href="#Create-API-key" class="headerlink" title="Create API key"></a>Create API key</h2><p>ref : <a href="https://console.cloud.google.com/?hl=zh-TW">Google Cloud Platform</a></p>
@@ -3357,6 +3305,72 @@
       </categories>
       <tags>
         <tag>作品集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript addEventListener 事件監聽</title>
+    <url>/2021/04/07/addEventListener%20%E4%BA%8B%E4%BB%B6%E7%9B%A3%E8%81%BD/</url>
+    <content><![CDATA[<h1 id="addEventListener-事件監聽"><a href="#addEventListener-事件監聽" class="headerlink" title="addEventListener 事件監聽"></a>addEventListener 事件監聽</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> elBody = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;.body&#x27;</span>);</span><br><span class="line">elBody.addEventListener(<span class="string">&#x27;click&#x27;</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  alert(<span class="string">&#x27;body&#x27;</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;body&#x27;</span>);</span><br><span class="line">&#125;,<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// false (事件氣泡 - event Bubbling) - 從指定元素往外找</span></span><br><span class="line"><span class="comment">// true (事件捕捉 - event capturing) - 從最外面找到指定元素</span></span><br></pre></td></tr></table></figure>
+<p>demo: <a href="https://codepen.io/michael-luo/pen/eYzBJBr">https://codepen.io/michael-luo/pen/eYzBJBr</a></p>
+<ul>
+<li><p>中止冒泡 stopPropagation<br>demo: <a href="https://codepen.io/michael-luo/pen/pobRWQG">https://codepen.io/michael-luo/pen/pobRWQG</a></p>
+</li>
+<li><p>preventDefault 取消預設觸發<br>demo: <a href="https://codepen.io/michael-luo/pen/zYBNPQd?editors=1111">https://codepen.io/michael-luo/pen/zYBNPQd?editors=1111</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript async (非同步) , sync (同步)</title>
+    <url>/2021/04/07/async%20(%E9%9D%9E%E5%90%8C%E6%AD%A5)%20,%20sync%20(%E5%90%8C%E6%AD%A5)/</url>
+    <content><![CDATA[<p>上篇<a href="https://hackmd.io/2q-URsBTTOS3doStyuSTbw">Promise</a></p>
+<h2 id="生活範例："><a href="#生活範例：" class="headerlink" title="生活範例："></a>生活範例：</h2><ul>
+<li>async(非同步) : </li>
+</ul>
+<ol>
+<li>去醫院掛號</li>
+<li>等護士叫，可以先去上廁所</li>
+<li>護士叫了，我在過去</li>
+</ol>
+<ul>
+<li>sync(同步) :</li>
+</ul>
+<ol>
+<li>去醫院掛號</li>
+<li>在櫃檯等，等到護士說好了</li>
+<li>我才能去上廁所</li>
+</ol>
+<h1 id="實作解析："><a href="#實作解析：" class="headerlink" title="實作解析："></a>實作解析：</h1><p><a href="https://codesandbox.io/s/hw2-function-mouxianwang-6904-zuoyejiexiforked-j70zb?file=/src/index.js">撈取資料實作範例</a><br>另一個 Js 檔案(utils.js 是資料庫)</p>
+<hr>
+<h3 id="try-catch-捕捉錯誤"><a href="#try-catch-捕捉錯誤" class="headerlink" title="try()catch() 捕捉錯誤"></a>try()catch() 捕捉錯誤</h3><p>語法：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> (用鑰匙開門)&#123;</span><br><span class="line"></span><br><span class="line">  小妹用自己鑰匙開自己房門成功</span><br><span class="line">  </span><br><span class="line">&#125; <span class="keyword">catch</span>()&#123;</span><br><span class="line"></span><br><span class="line">  小妹用哥哥鑰匙開自己房門失敗</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// foo 透過 async 回傳會得到一個 foo()</span></span><br><span class="line"><span class="comment">// foo() 是一個 promise</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> foo = <span class="keyword">async</span>()=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">    a:<span class="number">1</span>,</span><br><span class="line">    b:<span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. promise 版本</span></span><br><span class="line"></span><br><span class="line">foo().then(<span class="function">(<span class="params">data</span>)=&gt;</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;).catch(<span class="function"><span class="params">error</span>=&gt;</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. async 版本</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span>()=&gt;&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> data2 = <span class="keyword">await</span> foo ()</span><br><span class="line">    &#125;<span class="keyword">catch</span>(error)&#123;</span><br><span class="line">        <span class="keyword">return</span>(error)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<hr>
+<h3 id="小叮嚀："><a href="#小叮嚀：" class="headerlink" title="小叮嚀："></a>小叮嚀：</h3><ol>
+<li><p><strong>.then().catch()是Promise的用法，<br>async 沒有 .then().catch()，<br>所以只好用 try() catch() 來捕捉錯誤</strong></p>
+</li>
+<li><p><strong>await(等待)，外層一定要有 async(非同步)包裹著</strong></p>
+</li>
+</ol>
+<hr>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -3856,6 +3870,51 @@
       </tags>
   </entry>
   <entry>
+    <title>網站開發流程</title>
+    <url>/2021/04/07/%E7%B6%B2%E7%AB%99%E9%96%8B%E7%99%BC%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<h2 id="User-Story-使用者故事"><a href="#User-Story-使用者故事" class="headerlink" title="User Story 使用者故事"></a>User Story 使用者故事</h2><h3 id="首頁"><a href="#首頁" class="headerlink" title="首頁"></a>首頁</h3><ul>
+<li>使用者進入首頁後，可以看到新年促銷(全館八折</li>
+<li>使用者可以在首頁按到『更多產品』</li>
+<li>使用者可以在導覽列，看到新品上架的選項。</li>
+<li>當使用者點擊到新品上架時，會跳轉到新品頁面。</li>
+<li><img src="https://i.imgur.com/iyJzi7D.png"></li>
+</ul>
+<h3 id="新品上架"><a href="#新品上架" class="headerlink" title="新品上架"></a>新品上架</h3><p><img src="https://i.imgur.com/sqGEJoP.png"></p>
+<h2 id="現代工作流程"><a href="#現代工作流程" class="headerlink" title="現代工作流程"></a>現代工作流程</h2><h3 id="設計師愛用軟體"><a href="#設計師愛用軟體" class="headerlink" title="設計師愛用軟體"></a>設計師愛用軟體</h3><ul>
+<li>Sketch (Mac only) -&gt; Zeplin</li>
+<li>Adobe XD -&gt;</li>
+<li>Photoshop -&gt;</li>
+</ul>
+<p><strong>- Figma -&gt; 最新最火紅的軟體</strong></p>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><ol>
+<li>設計專注設計</li>
+<li>網頁上有一個方便跟工程師討論的設計稿，降低溝通成本</li>
+</ol>
+<p>但是，也有可能，需要看圖直接實作</p>
+<h3 id="Wireframe-Mockup-Prototype"><a href="#Wireframe-Mockup-Prototype" class="headerlink" title="Wireframe Mockup Prototype"></a>Wireframe Mockup Prototype</h3><p><strong>Prototype -&gt; 原型</strong></p>
+<blockquote>
+<p>development 開發環境<br>開發完成後，經過 QA 測試、PM 測試無誤後，<br>部署(deploy) 到伺服器(server) 上<br>測試經過沒問題，就會上線到 production (產品)</p>
+</blockquote>
+<p>PM(project manager)<br>PM(product manager)</p>
+<h3 id="voicetube-英文學習網站-的產品分析"><a href="#voicetube-英文學習網站-的產品分析" class="headerlink" title="voicetube (英文學習網站) 的產品分析"></a>voicetube (英文學習網站) 的產品分析</h3><ol>
+<li>youtube 即時中英字幕</li>
+<li>字典</li>
+<li>voicetube hero</li>
+</ol>
+<h2 id="分工"><a href="#分工" class="headerlink" title="分工"></a>分工</h2><ul>
+<li>PM (<strong>確定需求</strong>)</li>
+<li>設計師 (<strong>設計畫面</strong>)</li>
+<li>前端工程師 (<strong>把版切出來，並且實作 JS 效果</strong>)</li>
+</ul>
+]]></content>
+      <categories>
+        <category>技術社群</category>
+      </categories>
+      <tags>
+        <tag>技術社群</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>初次實作表單驗證</title>
     <url>/2021/04/07/%E8%A1%A8%E5%96%AE%E9%A9%97%E8%AD%89/</url>
     <content><![CDATA[<ol>
@@ -3919,51 +3978,6 @@
       </categories>
       <tags>
         <tag>作品集</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>網站開發流程</title>
-    <url>/2021/04/07/%E7%B6%B2%E7%AB%99%E9%96%8B%E7%99%BC%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<h2 id="User-Story-使用者故事"><a href="#User-Story-使用者故事" class="headerlink" title="User Story 使用者故事"></a>User Story 使用者故事</h2><h3 id="首頁"><a href="#首頁" class="headerlink" title="首頁"></a>首頁</h3><ul>
-<li>使用者進入首頁後，可以看到新年促銷(全館八折</li>
-<li>使用者可以在首頁按到『更多產品』</li>
-<li>使用者可以在導覽列，看到新品上架的選項。</li>
-<li>當使用者點擊到新品上架時，會跳轉到新品頁面。</li>
-<li><img src="https://i.imgur.com/iyJzi7D.png"></li>
-</ul>
-<h3 id="新品上架"><a href="#新品上架" class="headerlink" title="新品上架"></a>新品上架</h3><p><img src="https://i.imgur.com/sqGEJoP.png"></p>
-<h2 id="現代工作流程"><a href="#現代工作流程" class="headerlink" title="現代工作流程"></a>現代工作流程</h2><h3 id="設計師愛用軟體"><a href="#設計師愛用軟體" class="headerlink" title="設計師愛用軟體"></a>設計師愛用軟體</h3><ul>
-<li>Sketch (Mac only) -&gt; Zeplin</li>
-<li>Adobe XD -&gt;</li>
-<li>Photoshop -&gt;</li>
-</ul>
-<p><strong>- Figma -&gt; 最新最火紅的軟體</strong></p>
-<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><ol>
-<li>設計專注設計</li>
-<li>網頁上有一個方便跟工程師討論的設計稿，降低溝通成本</li>
-</ol>
-<p>但是，也有可能，需要看圖直接實作</p>
-<h3 id="Wireframe-Mockup-Prototype"><a href="#Wireframe-Mockup-Prototype" class="headerlink" title="Wireframe Mockup Prototype"></a>Wireframe Mockup Prototype</h3><p><strong>Prototype -&gt; 原型</strong></p>
-<blockquote>
-<p>development 開發環境<br>開發完成後，經過 QA 測試、PM 測試無誤後，<br>部署(deploy) 到伺服器(server) 上<br>測試經過沒問題，就會上線到 production (產品)</p>
-</blockquote>
-<p>PM(project manager)<br>PM(product manager)</p>
-<h3 id="voicetube-英文學習網站-的產品分析"><a href="#voicetube-英文學習網站-的產品分析" class="headerlink" title="voicetube (英文學習網站) 的產品分析"></a>voicetube (英文學習網站) 的產品分析</h3><ol>
-<li>youtube 即時中英字幕</li>
-<li>字典</li>
-<li>voicetube hero</li>
-</ol>
-<h2 id="分工"><a href="#分工" class="headerlink" title="分工"></a>分工</h2><ul>
-<li>PM (<strong>確定需求</strong>)</li>
-<li>設計師 (<strong>設計畫面</strong>)</li>
-<li>前端工程師 (<strong>把版切出來，並且實作 JS 效果</strong>)</li>
-</ul>
-]]></content>
-      <categories>
-        <category>技術社群</category>
-      </categories>
-      <tags>
-        <tag>技術社群</tag>
       </tags>
   </entry>
   <entry>
