@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-Tw">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dinosaurLogo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dinosaurLogo.png">
+  <link rel="mask-icon" href="/images/dinosaurLogo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"michael0520.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","Pisces | Gemini":240,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="this 是函式執行時所屬的物件，其值是在執行時期做綁定，可大致歸納為四個規則以供判斷">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript-this">
+<meta property="og:url" content="https://michael0520.github.io/2021/05/13/JavaScript-this/index.html">
+<meta property="og:site_name" content="Michael">
+<meta property="og:description" content="this 是函式執行時所屬的物件，其值是在執行時期做綁定，可大致歸納為四個規則以供判斷">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://i.imgur.com/4wfSKGc.png">
+<meta property="og:image" content="https://i.imgur.com/sZpkdAI.png">
+<meta property="article:published_time" content="2021-05-12T21:48:13.000Z">
+<meta property="article:modified_time" content="2021-05-12T21:50:21.924Z">
+<meta property="article:author" content="Michael">
+<meta property="article:tag" content="JavaScirpt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/4wfSKGc.png">
+
+<link rel="canonical" href="https://michael0520.github.io/2021/05/13/JavaScript-this/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Tw'
+  };
+</script>
+
+  <title>JavaScript-this | Michael</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Michael</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端菜鳥</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Tw">
+    <link itemprop="mainEntityOfPage" href="https://michael0520.github.io/2021/05/13/JavaScript-this/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://octodex.github.com/images/dinotocat.png">
+      <meta itemprop="name" content="Michael">
+      <meta itemprop="description" content="人人有功練">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Michael">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript-this
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-05-13 05:48:13 / Modified: 05:50:21" itemprop="dateCreated datePublished" datetime="2021-05-13T05:48:13+08:00">2021-05-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2021/05/13/JavaScript-this/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/05/13/JavaScript-this/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+            <div class="post-description">this 是函式執行時所屬的物件，其值是在執行時期做綁定，可大致歸納為四個規則以供判斷</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="JavaScript-this"><a href="#JavaScript-this" class="headerlink" title="[JavaScript] this"></a>[JavaScript] this</h1><p><img src="https://i.imgur.com/4wfSKGc.png"></p>
+<h2 id="this-是什麼？"><a href="#this-是什麼？" class="headerlink" title="this 是什麼？"></a>this 是什麼？</h2><p><img src="https://i.imgur.com/sZpkdAI.png"></p>
+<blockquote>
+<p>圖片來源：<a target="_blank" rel="noopener" href="http://www.explodingdog.com/title/whatisthemeaningofthis.html">What is this meaning of this?</a></p>
+</blockquote>
+<p>this 是函式執行時所屬的物件，其值是在執行時期做綁定，可大致歸納為四個規則以供判斷</p>
+<h2 id="判斷-this-的四個規則"><a href="#判斷-this-的四個規則" class="headerlink" title="判斷 this 的四個規則"></a>判斷 this 的四個規則</h2><p>this 的值可用四種規則判斷：</p>
+<ol>
+<li>預設綁定</li>
+<li>隱含綁定</li>
+<li>明確綁定</li>
+<li>new 綁定</li>
+</ol>
+<h2 id="預設綁定（Default-Binding）"><a href="#預設綁定（Default-Binding）" class="headerlink" title="預設綁定（Default Binding）"></a>預設綁定（Default Binding）</h2><p>當其他規則都不適用時，意即不屬於任何物件的方法、沒有使用 bind、call、apply 或 new，<br>就套用預設綁定，此時 this 的值就是預設值全域物件，在瀏覽器環境底下是 window。</p>
+<h3 id="範例1"><a href="#範例1" class="headerlink" title="範例1"></a>範例1</h3><p>sayHello 不是某個物件的方法，也沒有使用 bind、call、apply 或 new，<br>因此 this 的值即 window。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(); <span class="comment">// Window</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="範例2"><a href="#範例2" class="headerlink" title="範例2"></a>範例2</h3><p>在函式 sayHello 內嘗試印出 <code>this.hello</code>，<br>由於此時 this 的值是 window，因此等同於查找 <code>window.hello</code> 的值，<br>就會找到在全域範疇所定義的 hello 了，最後就會印出「Hello World」。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.hello);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hello = <span class="string">&#x27;Hello World&#x27;</span>;</span><br><span class="line">sayHello(); <span class="comment">// Hello World</span></span><br></pre></td></tr></table></figure>
+
+<div class="note warning">
+            <p>若在函式內使用 <code>&#39;use strict&#39;</code> 宣告成嚴格模式，<br>則 this 的值會改為 undefined，而非原本預設的全域物件 window。</p>
+          </div>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHello</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">  &#x27;use strict&#x27;</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHello(); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="嚴格模式（Strict-Mode）"><a href="#嚴格模式（Strict-Mode）" class="headerlink" title="嚴格模式（Strict Mode）"></a>嚴格模式（Strict Mode）</h2><p>在上一個例子中，<br>我們看到了由於在函式內使用<code>&#39;use strict&#39;</code> 宣告成嚴格模式，this 的值改為 undefined，<br>而非原本預設的全域物件 window，那麼，</p>
+<p>什麼是「嚴格模式」呢？</p>
+<blockquote>
+<p>Javascript 是一種很自由的語言，<br>但也正因如此，不嚴謹的寫法是被允許的。Strict Mode 是在 ES5 新增的，<br>只要加上了 “use strict” 這段文字，JS 引擎就會用嚴格的標準來讀你的 code，<br>避免你寫出不穩定或不夠嚴謹的 code。</p>
+</blockquote>
+<p>一言以蔽之：讓你的 Javascript 更安全。</p>
+<h3 id="範例1-1"><a href="#範例1-1" class="headerlink" title="範例1"></a>範例1</h3><p>在未宣告變數而賦值的狀況下，會無預警的產生一個全域變數，<br>但若使用嚴格模式（’use strict’）則會禁止這行為外，還會報錯，告知開發者變數尚未被定義。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line">name = <span class="string">&quot;Michael&quot;</span>; <span class="comment">// Uncaught ReferenceError: name is not defined</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="隱含綁定（Implicit-Binding）"><a href="#隱含綁定（Implicit-Binding）" class="headerlink" title="隱含綁定（Implicit Binding）"></a>隱含綁定（Implicit Binding）</h2><p>當函式為物件的方法（method）時，在執行階段 this 就會被綁定至該物件。</p>
+<p>範例如下，函式 prompt 為物件 user 的方法，在執行階段 this 被綁至 user，<br>因此 console 時會到 user 查找其屬性 name。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Michael&#x27;</span>,</span><br><span class="line">  sayHi: prompt,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">prompt</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">user.sayHi(); <span class="comment">// &#x27;Michael&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+<div class="note warning">
+            <p>只有最頂層（或說是最終層）的物件才是有用的。<br>如下，prompt 的 this 是最終層的物件 anotherUser。</p>
+          </div>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> anotherUser = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Not Michael!&#x27;</span>,</span><br><span class="line">  sayHi: prompt,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Michael&#x27;</span>,</span><br><span class="line">  anotherUser: anotherUser,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">prompt</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">user.anotherUser.sayHi(); <span class="comment">// &#x27;Not Michael!&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="隱含的失去（Implicitly-Lost）"><a href="#隱含的失去（Implicitly-Lost）" class="headerlink" title="隱含的失去（Implicitly Lost）"></a>隱含的失去（Implicitly Lost）</h3><p>隱含綁定也同時會有「隱含失去」的問題-隱含失去是指函式失去綁定的物件，<br>退回到預設綁定的狀態，意即 this 是全域物件 window 或嚴格模式下的 undefined。</p>
+<ul>
+<li><p>什麼時候會造成隱含的失去呢？</p>
+<ul>
+<li>函式只是另一個函式的參考。</li>
+<li>參數傳遞中的 callback。</li>
+<li>DOM element 的事件綁定（event binding）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="範例1-函式是另一個函式的參考"><a href="#範例1-函式是另一個函式的參考" class="headerlink" title="範例1 :函式是另一個函式的參考"></a>範例1 :函式是另一個函式的參考</h4><p>bar 是 <code>obj.foo</code> 的參考，<br>並且 bar 的呼叫地點是在全域範疇，因此會套用”預設綁定”的規則。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: MyName,</span><br><span class="line">  foo: foo,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = obj.foo;</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;Michael, global&#x27;</span>;</span><br><span class="line">bar(); <span class="comment">// &#x27;Michael, global&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="更多資訊可參考下文的間接參考部份。"><a href="#更多資訊可參考下文的間接參考部份。" class="headerlink" title="更多資訊可參考下文的間接參考部份。"></a>更多資訊可參考下文的<a href="https://">間接參考</a>部份。</h2><h4 id="範例2-參數傳遞中的-callback"><a href="#範例2-參數傳遞中的-callback" class="headerlink" title="範例2 :參數傳遞中的 callback"></a>範例2 :參數傳遞中的 callback</h4><p>範例如下，<code>doFoo(fn)</code> 的 fn 依舊是 <code>obj.foo</code> 的參考，<br>並且 fn 的呼叫地點是在全域範疇，因此會套用 ==”預設綁定”== 的規則。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doFoo</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  fn();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&quot;MyName&quot;</span>,</span><br><span class="line">  foo: foo,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;Michael, global&#x27;</span>;</span><br><span class="line"></span><br><span class="line">doFoo(obj.foo); <span class="comment">// &#x27;Michael, global&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="範例-3：DOM-element-的事件綁定"><a href="#範例-3：DOM-element-的事件綁定" class="headerlink" title="範例 3：DOM element 的事件綁定"></a>範例 3：DOM element 的事件綁定</h4><p>事件中的 callback 的 this 是觸發事件的元素（DOM element）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button id&#x3D;&quot;button&quot;&gt;Click Me!&lt;&#x2F;button&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>點擊按鈕「Click Me!」 後，console 出目前 this 的值。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;button&#x27;</span>);</span><br><span class="line"></span><br><span class="line">el.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>); <span class="comment">// &quot;&lt;button id=&#x27;button&#x27;&gt;Click Me!&lt;/button&gt;&quot;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>關於解法…<br>雖然說 this 有可能會無預警的失去了原先預期綁定的 this 的值，<br>但我們還是可以經由一些方法強制綁定，例如，使用 ==call、apply、bind==，<br>明確指出要綁定給 this 的物件，又或者，<br>可使用<a href="https://">軟綁定</a>當 this 退化為全域物件時就給予預設值。</p>
+</blockquote>
+<h2 id="明確綁定（Explicit-Binding）"><a href="#明確綁定（Explicit-Binding）" class="headerlink" title="明確綁定（Explicit Binding）"></a>明確綁定（Explicit Binding）</h2><p>使用 call、apply、bind，明確指出要綁定給 this 的物件。</p>
+<h3 id="call"><a href="#call" class="headerlink" title="call"></a>call</h3><p>將第一個參數設定為函式內的 context，意即設定第一個參數為函式內 this 的值。<br>與 apply 的差異只在於傳參數的方法 - call 將參數一一傳入，而 apply 將參數使用陣列傳入。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cat = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Doraemon&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&#x27;shiba&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Hello, I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;My number is &#x27;</span> + num);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHi.call(cat, <span class="string">&#x27;1&#x27;</span>);</span><br><span class="line">sayHi.call(dog, <span class="string">&#x27;2&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// console</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;Hello, I am Doraemon&#x27;</span>;</span><br><span class="line"><span class="string">&#x27;My number is 1&#x27;</span>;</span><br><span class="line"><span class="string">&#x27;Hello, I am shiba&#x27;</span>;</span><br><span class="line"><span class="string">&#x27;My number is 2&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="apply"><a href="#apply" class="headerlink" title="apply"></a>apply</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cat = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Doraemon&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&#x27;shiba&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Hello, I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;My number is &#x27;</span> + args[<span class="number">0</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHi.apply(cat, [<span class="string">&#x27;1&#x27;</span>]);</span><br><span class="line">sayHi.apply(dog, [<span class="string">&#x27;2&#x27;</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// console</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;Hello, I am Doraemon&#x27;</span>;</span><br><span class="line"><span class="string">&#x27;My number is 1&#x27;</span>;</span><br><span class="line"><span class="string">&#x27;Hello, I am shiba&#x27;</span>;</span><br><span class="line"><span class="string">&#x27;My number is 2&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="bind-常用"><a href="#bind-常用" class="headerlink" title="bind (常用)"></a>bind (常用)</h3><p>在執行函式前，綁定要指定的物件，這樣 this 就會是這個物件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> cat = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Doraemon&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> dog = &#123;</span><br><span class="line">  name: <span class="string">&#x27;shiba&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;Hello, I am &#x27;</span> + <span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sayHi.bind(cat)(); <span class="comment">// &quot;Hello, I am Doraemon&quot;</span></span><br><span class="line">sayHi.bind(dog)(); <span class="comment">// &quot;Hello, I am shiba&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  msg = <span class="string">&#x27;Hello!&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.msg);</span><br><span class="line">&#125;.bind(obj), <span class="number">2000</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="硬綁定（Hard-Binding）"><a href="#硬綁定（Hard-Binding）" class="headerlink" title="硬綁定（Hard Binding）"></a>硬綁定（Hard Binding）</h3><p>硬綁定是指使用 ==bind== 寫死要綁定的物件，可避免函式呼叫時退回到預設綁定。</p>
+<p>如下，這裡有一個簡易的綁定 this 的 helper，用來寫死要綁定的物件 obj。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">today</span>(<span class="params">day</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.todayNumber.day);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.todayNumber + day;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 簡易的綁定 this 的 helper</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span>(<span class="params">fn, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> fn.apply(obj, <span class="built_in">arguments</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  todayNumber: <span class="number">2</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = bind(today, obj);</span><br><span class="line"><span class="keyword">var</span> b = bar(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (b) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">    <span class="built_in">console</span>.log(b);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;Today is Wednesday&quot;</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">    <span class="built_in">console</span>.log(b);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;Today is  Friday&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// 5</span></span><br><span class="line"><span class="comment">// Today is Friday</span></span><br></pre></td></tr></table></figure>
+
+<p>在<code>bind(today, obj)</code> 中，</p>
+<ol>
+<li>將 today 的 this 強制指定為 obj，並將結果指定給 bar，</li>
+<li>因此當執行 <code>bar(3)</code> 時，<code>this.todayNumber</code> 對 obj 查找屬性 todayNumber（找到為 2，並非退回到全域範疇），</li>
+<li>且加上傳入的數字 3，</li>
+<li>而得到結果 b 為 5。</li>
+</ol>
+<p>call、apply、bind 適用情境與方法，整理如下。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>bind</th>
+<th>call</th>
+<th>apply</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>適用狀況</td>
+<td>函數在執行前先綁定物件做為</td>
+<td>context 較常變動的場景。依照呼叫時的需要帶入不同的物件作為該 function 的 this。在呼叫的當下就立即執行。</td>
+<td>與 call 相同</td>
+</tr>
+<tr>
+<td>傳參數的方式</td>
+<td>代入指定的物件做為 context</td>
+<td>參數需要一個一個指定 func.call( context, arg1, arg2, … )</td>
+<td>參數使用陣列傳入 func.apply( context, [ arg1, arg2, … ])</td>
+</tr>
+</tbody></table>
+<h3 id="API-呼叫的情境（API-Call-“Contexts”）"><a href="#API-呼叫的情境（API-Call-“Contexts”）" class="headerlink" title="API 呼叫的情境（API Call “Contexts”）"></a>API 呼叫的情境（API Call “Contexts”）</h3><p>許多函式庫的函式都會提供一個參數作為綁定的物件，<br>這個參數通常稱為情境參數（context argument），<br>目的是讓開發者不必再使用 bind 來綁定 this 的值。</p>
+<p>如下，forEach 傳入兩個參數，分別是要執行的 callback foo 和情境參數 obj，<br>因此 <code>console.log</code> 中的 this 就是 obj</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">el</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(el, <span class="built_in">this</span>.id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  id: <span class="string">&#x27;Michael&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].forEach(foo, obj); <span class="comment">// 1 Michael  2 Michael  3 Michael</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="new-綁定"><a href="#new-綁定" class="headerlink" title="new 綁定"></a>new 綁定</h2><p>this 會指向 new 出來的物件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myName</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;Hi, I am &quot;</span> + name);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span> === handsomeGuy);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> handsomeGuy = <span class="keyword">new</span> myName(<span class="string">&quot;Michael&quot;</span>);</span><br><span class="line"></span><br><span class="line">handsomeGuy.sayHi();</span><br><span class="line"><span class="comment">// &quot;Hi, I am Michael&quot;</span></span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>如何利用以上的規則決定 this 的值呢？規則套用的優先順序，由高至低排列如下</p>
+<ul>
+<li>new 綁定</li>
+<li>明確綁定</li>
+<li>隱含綁定</li>
+<li>預設綁定</li>
+</ul>
+<h2 id="軟綁定-Soft-Binding"><a href="#軟綁定-Soft-Binding" class="headerlink" title="軟綁定(Soft Binding)"></a>軟綁定(Soft Binding)</h2><p>當 this 退化成全域物件時，是否可給定預設值？</p>
+<p>硬綁定可避免函式呼叫時不小心退回到預設綁定狀態，<br>但也減低了設定 this 的值的彈性。</p>
+<p>因此，這裡提出一個解法，讓函式能經由隱含綁定或明確綁定的方式設定 this 的值，<br>而當 this 退化成全域物件時，又能給予一個預設值而非全域物件，<br>這種不寫死而動態設定預設值的方式，稱之為「軟綁定」。</p>
+<p>可以建立一個工具來達到軟綁定的目的:<br>若 this 是 global、window 或 undefined 就給予預設值。</p>
+<p>:bug: ==但範例尚未實作成功==</p>
+<blockquote>
+<p>之後回來補上</p>
+</blockquote>
+<h2 id="語彙的-this（Lexical-this）"><a href="#語彙的-this（Lexical-this）" class="headerlink" title="語彙的 this（Lexical this）"></a>語彙的 this（Lexical this）</h2><p>所謂的「語彙的 this」是指 this 的值不適用於以上提到的四種規則來做判斷，而是回歸到<a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10206984">語彙範疇</a>的查找，<br> this 的值並非源自執行時的綁定，<br> 而是定義時包含它的範疇或全域範疇，是無法被覆寫的，<br> 這裡即將要提到的用箭頭函數（arrow function） 來綁定 this 的值就是這樣的狀況。</p>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;Apple&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Michael&#x27;</span>,</span><br><span class="line">  sayHi: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Hi, I am <span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>`</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj.sayHi(); <span class="comment">// Hi, I am Michael</span></span><br><span class="line"><span class="built_in">setTimeout</span>(obj.sayHi, <span class="number">1000</span>); <span class="comment">// Hi, I am Apple</span></span><br></pre></td></tr></table></figure>
+
+<p>其中，我們可以看到 <code>obj.sayHi()</code> 印出預期的「Hi, I am Michael」，<br>但 <code>setTimeout(obj.sayHi, 1000)</code> 卻因為上面提過的隱含的失去中的==函式是另一個函式==的參考而失去了原先 this 的綁定。</p>
+<p>先來談一些常用的改變 this 的方法…</p>
+<p>透過變數儲存目前 this 的值。<br>使用 bind、call 或 apply，綁定特定的物件作為 this 的值。<br>透過變數儲存目前 this 的值…這其實不算是「改變」，只能說是「保留」。如果希望存取到外部的 this，可用一個變數 <code>_this</code> 儲存起來，稍後再用。</p>
+<p>修改上面範例如下，一秒後的確是印出「Hi, I am Michael」。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Michael&#x27;</span>,</span><br><span class="line">  sayHi: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _this = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`Hi, I am <span class="subst">$&#123;_this.name&#125;</span>`</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj.sayHi(); <span class="comment">// Hi, I am Michael</span></span><br></pre></td></tr></table></figure>
+
+<p>當然我們也可以用 bind、call 或 apply 來綁定特定的物件作為 this 的值。關於 bind、call 或 apply 的範例可參考上方提過的==明確綁定==的部份。</p>
+<p>修改上例如下，一秒後的確是印出「Hi, I am Michael」。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Michael&#x27;</span>,</span><br><span class="line">  sayHi: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(</span><br><span class="line">      <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`Hi, I am <span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>`</span>);</span><br><span class="line">      &#125;.bind(<span class="built_in">this</span>),</span><br><span class="line">      <span class="number">1000</span>,</span><br><span class="line">    );</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj.sayHi(); <span class="comment">// Hi, I am Michael</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="箭頭函數快速綁定"><a href="#箭頭函數快速綁定" class="headerlink" title="箭頭函數快速綁定"></a>箭頭函數快速綁定</h3><p>既然箭頭函數會自動綁定所在範疇，那也就可以這麼修改了…經由箭頭函數就會把 this 綁在 obj 上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  name: <span class="string">&#x27;Michael&#x27;</span>,</span><br><span class="line">  sayHi: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`Hi, I am <span class="subst">$&#123;<span class="built_in">this</span>.name&#125;</span>`</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">obj.sayHi(); <span class="comment">// Hi, I am Michael</span></span><br></pre></td></tr></table></figure>
+
+<p>:imp: 但箭頭函數並不是一個所有狀況都適用的超級無敵通用解…</p>
+<p>箭頭函數不適用於…</p>
+<ul>
+<li>箭頭函數會將 this 強制綁定為執行環境。因此，若不希望 this 被綁定為執行環境，基本上都是不適用的，不需要為了少寫幾個字而硬要使用箭頭函數。</li>
+<li>箭頭函數內的 callback 是匿名的，匿名函式的缺點請看<a target="_blank" rel="noopener" href="https://cythilya.github.io/2018/10/19/function-vs-block-scope/#%E5%8C%BF%E5%90%8D-vs-%E5%85%B7%E5%90%8Danonymous-vs-named">這裡</a>。</li>
+</ul>
+<p>更多關於箭頭函式的 this，可參考<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Arrow_functions#this_%E4%B8%8D%E5%88%86%E5%AE%B6">這裡</a>。</p>
+<h2 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://kuro.tw/posts/2017/10/12/What-is-THIS-in-JavaScript-%E4%B8%8A/">What’s THIS in JavaScript ? [上]</a></li>
+<li><a target="_blank" rel="noopener" href="https://kuro.tw/posts/2017/10/17/What-s-THIS-in-JavaScript-%E4%B8%AD/">What’s THIS in JavaScript ? [中]</a></li>
+<li><a target="_blank" rel="noopener" href="https://kuro.tw/posts/2017/10/20/What-is-THIS-in-JavaScript-%E4%B8%8B/">What’s THIS in JavaScript ? [下]</a></li>
+<li><a target="_blank" rel="noopener" href="https://cythilya.github.io/2018/10/23/this/">你懂 JavaScript 嗎？#16 this</a></li>
+<li><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10206984">Day16 - 語彙範疇</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScirpt/" rel="tag"># JavaScirpt</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/04/29/%E5%AD%B8%E7%BF%92%E5%9F%BA%E7%A4%8E-Presudo-Code/" rel="prev" title="學習基礎 Presudo Code">
+      <i class="fa fa-chevron-left"></i> 學習基礎 Presudo Code
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-this"><span class="nav-number">1.</span> <span class="nav-text">[JavaScript] this</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#this-%E6%98%AF%E4%BB%80%E9%BA%BC%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">this 是什麼？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%B7-this-%E7%9A%84%E5%9B%9B%E5%80%8B%E8%A6%8F%E5%89%87"><span class="nav-number">1.2.</span> <span class="nav-text">判斷 this 的四個規則</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A0%90%E8%A8%AD%E7%B6%81%E5%AE%9A%EF%BC%88Default-Binding%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">預設綁定（Default Binding）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B1"><span class="nav-number">1.3.1.</span> <span class="nav-text">範例1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B2"><span class="nav-number">1.3.2.</span> <span class="nav-text">範例2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9A%B4%E6%A0%BC%E6%A8%A1%E5%BC%8F%EF%BC%88Strict-Mode%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">嚴格模式（Strict Mode）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B1-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">範例1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9A%B1%E5%90%AB%E7%B6%81%E5%AE%9A%EF%BC%88Implicit-Binding%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">隱含綁定（Implicit Binding）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9A%B1%E5%90%AB%E7%9A%84%E5%A4%B1%E5%8E%BB%EF%BC%88Implicitly-Lost%EF%BC%89"><span class="nav-number">1.5.1.</span> <span class="nav-text">隱含的失去（Implicitly Lost）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B1-%E5%87%BD%E5%BC%8F%E6%98%AF%E5%8F%A6%E4%B8%80%E5%80%8B%E5%87%BD%E5%BC%8F%E7%9A%84%E5%8F%83%E8%80%83"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">範例1 :函式是另一個函式的參考</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A%E8%B3%87%E8%A8%8A%E5%8F%AF%E5%8F%83%E8%80%83%E4%B8%8B%E6%96%87%E7%9A%84%E9%96%93%E6%8E%A5%E5%8F%83%E8%80%83%E9%83%A8%E4%BB%BD%E3%80%82"><span class="nav-number">1.6.</span> <span class="nav-text">更多資訊可參考下文的間接參考部份。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B2-%E5%8F%83%E6%95%B8%E5%82%B3%E9%81%9E%E4%B8%AD%E7%9A%84-callback"><span class="nav-number">1.6.0.1.</span> <span class="nav-text">範例2 :參數傳遞中的 callback</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B-3%EF%BC%9ADOM-element-%E7%9A%84%E4%BA%8B%E4%BB%B6%E7%B6%81%E5%AE%9A"><span class="nav-number">1.6.0.2.</span> <span class="nav-text">範例 3：DOM element 的事件綁定</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%98%8E%E7%A2%BA%E7%B6%81%E5%AE%9A%EF%BC%88Explicit-Binding%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">明確綁定（Explicit Binding）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#call"><span class="nav-number">1.7.1.</span> <span class="nav-text">call</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apply"><span class="nav-number">1.7.2.</span> <span class="nav-text">apply</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bind-%E5%B8%B8%E7%94%A8"><span class="nav-number">1.7.3.</span> <span class="nav-text">bind (常用)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AC%E7%B6%81%E5%AE%9A%EF%BC%88Hard-Binding%EF%BC%89"><span class="nav-number">1.7.4.</span> <span class="nav-text">硬綁定（Hard Binding）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API-%E5%91%BC%E5%8F%AB%E7%9A%84%E6%83%85%E5%A2%83%EF%BC%88API-Call-%E2%80%9CContexts%E2%80%9D%EF%BC%89"><span class="nav-number">1.7.5.</span> <span class="nav-text">API 呼叫的情境（API Call “Contexts”）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#new-%E7%B6%81%E5%AE%9A"><span class="nav-number">1.8.</span> <span class="nav-text">new 綁定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B8%BD%E7%B5%90"><span class="nav-number">1.9.</span> <span class="nav-text">總結</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BB%9F%E7%B6%81%E5%AE%9A-Soft-Binding"><span class="nav-number">1.10.</span> <span class="nav-text">軟綁定(Soft Binding)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AA%9E%E5%BD%99%E7%9A%84-this%EF%BC%88Lexical-this%EF%BC%89"><span class="nav-number">1.11.</span> <span class="nav-text">語彙的 this（Lexical this）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AF%84%E4%BE%8B"><span class="nav-number">1.11.1.</span> <span class="nav-text">範例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%AD%E9%A0%AD%E5%87%BD%E6%95%B8%E5%BF%AB%E9%80%9F%E7%B6%81%E5%AE%9A"><span class="nav-number">1.11.2.</span> <span class="nav-text">箭頭函數快速綁定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%83%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">1.12.</span> <span class="nav-text">參考文章</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Michael"
+      src="https://octodex.github.com/images/dinotocat.png">
+  <p class="site-author-name" itemprop="name">Michael</p>
+  <div class="site-description" itemprop="description">人人有功練</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Michael0520" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Michael0520" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:po2319987@gmail.com" title="E-Mail → mailto:po2319987@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/luo.z.ming.5" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;luo.z.ming.5" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">若要轉載文章，麻煩請保留原作者名稱與原始連結。</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://Michaelhexo.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://michael0520.github.io/2021/05/13/JavaScript-this/";
+    this.page.identifier = "2021/05/13/JavaScript-this/";
+    this.page.title = "JavaScript-this";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://Michaelhexo.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+    </div>
+</body>
+</html>
