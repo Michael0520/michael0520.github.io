@@ -217,7 +217,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-05-18 10:54:04 / Modified: 10:55:20" itemprop="dateCreated datePublished" datetime="2021-05-18T10:54:04+08:00">2021-05-18</time>
+              <time title="Created: 2021-05-18 10:54:04 / Modified: 10:57:20" itemprop="dateCreated datePublished" datetime="2021-05-18T10:54:04+08:00">2021-05-18</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,122 +258,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>5/17 週一 </p>
-<ul>
-<li><input checked="" disabled="" type="checkbox"> 補看昨天直播影片 </li>
-<li><input checked="" disabled="" type="checkbox"> 期末專題選題目 <ul>
-<li> <a target="_blank" rel="noopener" href="https://9floor.co/">租房網站</a></li>
-</ul>
-</li>
-<li><input checked="" disabled="" type="checkbox"> 開始進行需求分析 <ul>
-<li>首頁輪播式照片 (swipper 套件)</li>
-<li>因為無會員登入功能，所以將預訂需求改為表單填寫，因此要做”表單驗證”功能</li>
-<li>搜尋功能<ul>
-<li>城市搜尋(ex:台北市)</li>
-<li>房型搜尋(ex:四人房，雙人房)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Data-排列"><a href="#Data-排列" class="headerlink" title="Data 排列"></a>Data 排列</h2><ul>
-<li>城市 city(Taipei)<ul>
-<li>旅館名稱 hotelId(101)<ul>
-<li>特色 feature(高樓)<ul>
-<li>memberId(A,B,C,D)<ul>
-<li>房型 roomlist(套房)</li>
-<li>價格 dollars</li>
-<li>狀態 status (招募中 true,已招募 false)<h2 id="Pages-元件"><a href="#Pages-元件" class="headerlink" title="Pages 元件"></a>Pages 元件</h2>每個 Page 固定有的元件</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ol>
-<li>左上方 <code>&lt;LogoButton&gt;</code>，<code>click()</code> 會回到 homePage</li>
-<li>頁面按照此排列渲染:<ul>
-<li>navbar 下拉式選單<ul>
-<li>  順序：Logo =&gt; Booking =&gt; About =&gt; Service</li>
-<li>動態麵包屑 =&gt; <code>click()</code> 麵包屑會到點選的分頁</li>
-</ul>
-</li>
-<li> 輪播 bannerSection( swipper 套件)</li>
-<li>mainSection</li>
-<li> footer</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
-<li>homePage<ul>
-<li>bannerSection:<ul>
-<li>進入頁面是<a href="homeImages.png">滿版圖片</a></li>
-<li><code>&lt;h1&gt;title</code> 下方有個 開始搜尋 <code>&lt;button&gt;</code> 可以跳轉到 bookingPage</li>
-</ul>
-</li>
-<li>mainSection (房件渲染):<ul>
-<li>熱門物件 SecondBannerSeciton(swipper)- <blockquote>
-<p> JS 動態輪播更新，更新圖片以及內容文字:</p>
-</blockquote>
-<ul>
-<li>兩個 <code>&lt;button&gt;</code> <ul>
-<li>搜尋物件：跳轉到 https:/Booking/${id}</li>
-<li>服務詳情：跳轉到 servicePage</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>一般物件 <ul>
-<li>多類型 RWD 排列:<ul>
-<li><code>&lt;mediumSection class=&quot;col-sm col-large-2&quot;&gt;</code></li>
-<li><code>&lt;smallSection class=&quot;col-sm-1 col-md-2 col-large-3&quot;&gt;</code></li>
-</ul>
-</li>
-<li>基本資訊欄位:<ul>
-<li>旅館名字：<code>$&#123;data.city.hotelId&#125;</code></li>
-<li>特色：<code>$&#123;data.city.hotelId.feature&#125;</code></li>
-<li>房型：<code>$&#123;data.city.hotelId.memberId.roomlist&#125;</code></li>
-<li>價格：<code>$&#123;data.city.hotelId.memberId.dollars&#125;</code></li>
-<li>狀態：<code>$&#123;data.city.hotelId.memberId.status&#125;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>serviesPage<ul>
-<li> 固定使用卡片樣式來渲染出所提供的服務內容 <a href="/FireShot_Capture_027_-_9floor_%E7%8E%96%E6%A8%93%EF%BD%9C%E5%85%B1%E7%94%9F%E7%A9%BA%E9%96%93%EF%BD%9C%E7%8E%96%E6%A8%93%E7%92%9E%E5%9C%92_-_9floor_co.png">頁面預覽</a> </li>
-<li> footer 上方有個<code>&lt;contactSection&gt;</code> 跳轉到 表單驗證 Page</li>
-</ul>
-</li>
-<li>aboutPage<ul>
-<li><a href="FireShot_Capture_021_-_9floor_%E7%8E%96%E6%A8%93%EF%BD%9C%E5%85%B1%E7%94%9F%E7%A9%BA%E9%96%93%EF%BD%9C%E7%8E%96%E6%A8%93%E7%92%9E%E5%9C%92_-_9floor_co.png">頁面預覽</a></li>
-</ul>
-</li>
-<li>bookingPage<ul>
-<li><code>&lt;room-listSection&gt;</code><ul>
-<li>跟 homePage 使用相同的 <code>&lt;mainSection&gt;</code></li>
-</ul>
-</li>
-<li><code>&lt;room-filter&gt;</code><blockquote>
-<p>JS 判斷條件</p>
-</blockquote>
-<ul>
-<li>城市 <code>$&#123;data.city&#125;</code></li>
-<li>房型 <code>$&#123;data.city.hotelId.memberId.roomlist&#125;</code></li>
-<li>價格 <code>$&#123;data.city.hotelId.memberId.dollars&#125;</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
+          <p>將 Final Project 規劃版面以及需求分析的紀錄。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/18/Final-Project-%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
